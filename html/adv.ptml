@@ -1,0 +1,78 @@
+html:
+    head:
+       meta charset='utf-8'; 
+       link rel='stylesheet' href='style.css';
+       link rel='stylesheet' href='黑科技\jquery.mCustomScrollbar.css' type='text/css';     #美化滚动条
+       script src='黑科技\qwebchannel.js':
+       script src='黑科技\jquery-3.1.1.min.js':
+       script src='黑科技\jquery-ui.min.js':
+       script src='黑科技\jquery.mCustomScrollbar.js':      #美化滚动条
+       script src='黑科技\逐字打印.js':
+       script src='黑科技\jquery.mousewheel.js':         #检测滚轮
+       script src='gal.js':
+       script src='ctrl.js':
+
+    style#style:        # js用來表現動畫的……
+
+    body oncontextmenu='window.event.returnValue=false;':
+        # 视频播放
+        video width="1366" height="768" src="" autoplay="autoplay":
+
+        # 背景音乐
+        audio autoplay='' loop='' src='':      
+
+        # 有鬼的配置面板
+        div#config:     
+            div.option: 
+                全屏: (不让你调)
+            div.option: 
+                文字速度: (不让你调)
+            div.option: 
+                自动模式速度: (不让你调)
+            div.option: 
+                对话框透明度: (不让你调)
+            div.option: 
+                菜单栏自动收起: (不让你调)
+            div.option: 
+                BGM音量: (不让你调)
+            div.option: 
+                效果音量: (不让你调)
+            div.option: 
+                总体音量: (不让你调)
+            div.option: 
+                文字缩进: (不让你调)
+            button onclick="exit_config()" style='position:absolute;bottom:0;':
+                应用设定并返回
+        
+        #功能按钮块
+        div#tool:           
+            button onclick='send("存檔")': 
+                Save       
+            button onclick='send("讀檔")': 
+                Load
+            button onclick='skip()': 
+                Skip
+            button onclick='auto()':            #这个没做
+                Auto     
+            button onclick='log()': 
+                log
+            button onclick='config()':
+                config
+            button onclick='send("退出")':
+                exit
+
+        #adv表现块
+        div#tot onclick='left_click()' oncontextmenu='right_click()':     
+            div#cover:                                #覆盖层
+            div#choice:                             #选项
+                选项                           
+            div#bg:                                  #背景
+            div#ch:                                  #立绘
+            div.scroll:
+                div#history:                 #對話歷史
+
+            div#dialog:                         #对话框                 
+                div#name:            #名字
+                div#word:           #话语
+                div#dialog_bg:
+                div#name_bg:

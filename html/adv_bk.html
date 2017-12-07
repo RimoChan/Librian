@@ -1,0 +1,65 @@
+<html>
+<head>
+	<meta charset='utf-8'> 
+	<link rel='stylesheet' href='style.css'>
+	<link rel='stylesheet' href='黑科技\jquery.mCustomScrollbar.css'  type='text/css' /><!--美化滚动条-->
+	<script src='黑科技\qwebchannel.js'></script>
+	<script src='黑科技\jquery-3.1.1.min.js'></script>
+	<script src='黑科技\jquery-ui.min.js'></script>
+	<script src='黑科技\jquery.mCustomScrollbar.js'></script><!--美化滚动条-->
+	<script src='黑科技\逐字打印.js'></script>
+	<script src='黑科技\jquery.mousewheel.js'></script><!-- 检测滚轮-->
+	<script src='gal.js'></script>
+	<script src='ctrl.js'></script>
+</head>
+
+<style id='style'></style>
+
+<body oncontextmenu='window.event.returnValue=false;'>
+
+	<video width="1366" height="768" src="" autoplay="autoplay"></video>	<!--视频播放-->
+	<audio autoplay='' loop='' src=''></audio>		<!--背景音乐-->
+	
+	<div id="config">		<!-- 妈的有鬼 -->
+		<div class='option'>全屏: (不让你调)</div>
+		<div class='option'>文字速度: (不让你调)</div>
+		<div class='option'>自动模式速度: (不让你调)</div>
+		<div class='option'>对话框透明度: (不让你调)</div>
+		<div class='option'>菜单栏自动收起: (不让你调)</div>
+		<div class='option'>BGM音量: (不让你调)</div>
+		<div class='option'>效果音量: (不让你调)</div>
+		<div class='option'>总体音量: (不让你调)</div>
+		<div class='option'>文字缩进: (不让你调)</div>
+		<button onclick="exit_config()" style='position:absolute;bottom:0;'>应用设定并返回</button>
+	</div>
+	
+	
+	<div id='tool'>		<!--功能按钮块-->
+		<button onclick="send('存檔')">Save</button>		
+		<button onclick="send('讀檔')">Load</button>
+		<button onclick="skip()">Skip</button>
+		<button onclick="auto()">Auto</button>	<!-- 这个没做 -->
+		<button onclick="log()">log</button>
+		<button onclick="config()">config</button>
+		<button onclick="send('退出')">exit</button>
+	</div>	
+
+	
+	<div id='tot' onclick='left_click()' oncontextmenu='right_click()'>		<!--adv表现块-->
+		<div id='cover'></div>								<!--覆盖层-->
+		<div id='choice'>选项</div>								<!--选项-->
+		<div id='bg'></div>										<!--背景-->
+		<div id='ch'></div>										<!--立绘-->
+		<div class='scroll'><div id='history'></div></div>		<!--对话记录-->
+		<div class='down'>										<!--下方定位框-->
+			<div id='dialog'>												<!--对话框-->
+				<div id='name'></div>														<!--名字-->
+				<div id='word'></div>														<!--话语-->
+				<div id='dialog_bg'></div>											
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+</html>

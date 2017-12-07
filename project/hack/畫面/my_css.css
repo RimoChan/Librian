@@ -1,0 +1,28 @@
+﻿#dialog_bg,#name_bg{
+	position:fixed;
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	background:none;
+	background-size: cover;
+	z-index:-1;
+	opacity:0.75;
+}
+#dialog_bg{
+    background-image: url(話背景.png);
+}
+#name_bg{
+    background-image: url(名背景.png);
+}
+
+#tot{
+	cursor:url("星際2.cur"),auto;
+}
+
+#ch{
+	top:0;
+	left:350;
+	height:768;
+	width:768
+}

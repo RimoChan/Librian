@@ -1,0 +1,174 @@
+﻿body{
+	margin:0;
+	padding:0;
+	font-family:'微软雅黑';
+	background:#000;
+	-webkit-user-select:none;
+	color:#fff;
+	overflow:hidden;
+}
+
+div{
+	margin:0;
+	padding:0;
+}
+
+video{
+	position:absolute;
+	z-index:999;
+	display:None;
+}
+
+#config{
+	width:100%;
+	height:100%;
+	position:absolute;
+	z-index:998;
+	background:#660;
+	display:None;
+}
+
+.option{
+	font-size:20;
+}
+
+#bg{	
+	width:100%;
+	height:100%;
+	position:absolute;
+	z-index:-10;
+	background-size: cover;
+}
+#tot{
+	width:1366;
+	height:768;
+	position:relative;
+	margin:0;
+	overflow:hidden;
+	cursor:url(static/mouse1.cur),auto;
+}
+#cover{
+	width:1366;
+	height:768;
+	position:absolute;
+	background-size: cover;
+	z-index:99;
+	display:none;
+}
+
+#dialog{
+	width:1000;
+	height:189;
+	color:#fff;
+	font-size:24;
+	margin:0 auto;
+	/*border-radius: 10px;*/
+	text-shadow:2px 2px 1px #000;
+
+	position:fixed;
+	bottom:0;
+	left:185;
+}
+#word{
+	position:absolute;
+	top:59;
+	z-index: 10;
+}
+#name{
+	position:absolute;
+	top:0;
+	left:80;
+	z-index: 10;
+}
+
+#name_bg{
+	display:none;
+}
+
+#dialog_bg{
+	width:100%;
+	height:100%;
+    background: rgba(0,0,0,0.4);
+	z-index:-1;
+}
+
+#choice{
+	position:absolute;
+	height:220;
+	width:480;
+	left:400;
+	top:200;
+	padding:20;
+	color:#fff;
+	font-size:27;
+	border-radius: 10px;
+	z-index:20;
+	display:None;
+}
+
+button{
+	background:rgba(55,55,55,0.6);
+	color:#fff;
+    border:1px solid #fff;
+	display:block;
+	font-size:26;
+	font-family:'微软雅黑';
+	width:90%;
+	margin:20;
+}   
+
+#tool{	
+	width:420;
+	height:25;
+	right:0;
+	bottom:0;
+	position:absolute;
+	z-index:10;
+	background:rgba(111,111,111,0.5);
+}
+#tool > button{
+	display:inline;
+	font-size:13;
+	width:55;
+	margin:0;
+}
+
+#history{
+	font-size:27;
+	width:900;
+	padding:20 20 120 20;
+	color:#fff;
+	margin:0 auto;
+	border-radius: 10px;
+	z-index:10;
+}
+
+.scroll{
+	display:none;
+	background:rgba(0,0,0,0.65);
+	width:900;
+	height:768;
+	position:absolute;
+	left:233;
+}
+
+#ch{
+	position:absolute;
+	top:0;
+	left:183;
+	width:1000;
+	height:1500;
+	background-image:url(/ch/.png);
+	background-size:cover;
+	z-index:-2;
+}
+#cache{
+	height:0;
+	overflow:hidden;
+}
+#test{
+	background:#777;
+	height:150;
+	width:150;
+	overflow:auto;
+}
