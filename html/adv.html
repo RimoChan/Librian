@@ -23,83 +23,85 @@
     <style id="style">
     </style>
     <body oncontextmenu='window.event.returnValue=false;'>
-        <video width="1366" height="768" src="" autoplay="autoplay">
-        </video>
-        <audio autoplay='' loop='' src=''>
-        </audio>
-        <div id="config">
-            <div class="option">
-                全屏: (不让你调)
-            </div>
-            <div class="option">
-                文字速度: (不让你调)
-            </div>
-            <div class="option">
-                自动模式速度: (不让你调)
-            </div>
-            <div class="option">
-                对话框透明度: (不让你调)
-            </div>
-            <div class="option">
-                菜单栏自动收起: (不让你调)
-            </div>
-            <div class="option">
-                BGM音量: (不让你调)
-            </div>
-            <div class="option">
-                效果音量: (不让你调)
-            </div>
-            <div class="option">
-                总体音量: (不让你调)
-            </div>
-            <div class="option">
-                文字缩进: (不让你调)
-            </div>
-            <button onclick="exit_config()" style='position:absolute;bottom:0;'>
-                应用设定并返回
-            </button>
-        </div>
-        <div id="tool">
-            <button onclick='send("存檔")'>
-                Save
-            </button>
-            <button onclick='send("讀檔")'>
-                Load
-            </button>
-            <button onclick='skip()'>
-                Skip
-            </button>
-            <button onclick='auto()'>
-                Auto
-            </button>
-            <button onclick='log()'>
-                log
-            </button>
-            <button onclick='config()'>
-                config
-            </button>
-            <button onclick='send("退出")'>
-                exit
-            </button>
-        </div>
-        <div id="tot" onclick='left_click()' oncontextmenu='right_click()'>
-            <div id="cover">
-            </div>
-            <div id="choice">
-                选项
-            </div>
-            <div id="bg">
-            </div>
-            <div id="ch">
-            </div>
-            <div class="scroll">
-                <div id="history">
+        <div id="总画面">
+            <video width="1366" height="768" src="" autoplay="autoplay">
+            </video>
+            <audio autoplay='' loop='' src=''>
+            </audio>
+            <div id="config">
+                <div class="option">
+                    全屏: (不让你调)
                 </div>
-            </div>
-            <div id="dialog">
-                <div id="name">
+                <div class="option">
+                    文字速度: (不让你调)
                 </div>
-                <div id="word">
+                <div class="option">
+                    自动模式速度: (不让你调)
+                </div>
+                <div class="option">
+                    对话框透明度: (不让你调)
+                </div>
+                <div class="option">
+                    菜单栏自动收起: (不让你调)
+                </div>
+                <div class="option">
+                    BGM音量: (不让你调)
+                </div>
+                <div class="option">
+                    效果音量: (不让你调)
+                </div>
+                <div class="option">
+                    总体音量: (不让你调)
+                </div>
+                <div class="option">
+                    文字缩进: (不让你调)
+                </div>
+                <button onclick="exit_config()" style='position:absolute;bottom:0;'>
+                    应用设定并返回
+                </button>
+            </div>
+            <div id="tool">
+                <button onclick='send("存檔")'>
+                    Save
+                </button>
+                <button onclick='send("讀檔")'>
+                    Load
+                </button>
+                <button onclick='skip()'>
+                    Skip
+                </button>
+                <button onclick='auto()'>
+                    Auto
+                </button>
+                <button onclick='log()'>
+                    log
+                </button>
+                <button onclick='config()'>
+                    config
+                </button>
+                <button onclick='send("退出")'>
+                    exit
+                </button>
+            </div>
+            <div id="tot" onclick='left_click()' oncontextmenu='right_click()'>
+                <div id="cover">
+                </div>
+                <div id="choice">
+                    选项
+                </div>
+                <div id="bg">
+                </div>
+                <div id="ch">
+                </div>
+                <div class="scroll">
+                    <div id="history">
+                    </div>
+                </div>
+                <div id="dialog">
+                    <div id="name">
+                    </div>
+                    <div id="word">
+                    </div>
                 </div>
                 <div id="dialog_bg">
                 </div>

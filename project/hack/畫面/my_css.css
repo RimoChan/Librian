@@ -1,19 +1,19 @@
 ﻿#dialog_bg,#name_bg{
-	position:fixed;
+	position:absolute;
 	top:0;
 	left:0;
 	height:100%;
 	width:100%;
-	background:none;
-	background-size: cover;
 	z-index:-1;
 	opacity:0.75;
 }
 #dialog_bg{
-    background-image: url(話背景.png);
+    background: url(話背景.png);
+	background-size: cover;
 }
 #name_bg{
-    background-image: url(名背景.png);
+    background: url(名背景.png);
+	background-size: cover;
 }
 
 #tot{

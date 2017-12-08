@@ -12,7 +12,7 @@ var a=new QWebChannel(qt.webChannelTransport, function (channel) {
 
 
 $(function() {
-	setTimeout(function(){send('同步路徑')},300)
+	setTimeout(function(){send('初始化')},300)
 });
 
 
@@ -22,6 +22,9 @@ function 準備工作(){
 		type: "text/css",
 		href: path+自定css
 	}).appendTo("head");
+	$('#总画面').css('width',解析度[0])
+	$('#总画面').css('height',解析度[1])
+	if(邊界) $('div').css('border','1px solid #22f');
 	change_img('cover','url(static/None.png)',0);
 	change_img('bg','url(static/None.png)',0);
 	change_img('ch','url(static/.png)',0);

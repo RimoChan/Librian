@@ -23,8 +23,15 @@ class 山彥(QObject):
         elif 令=='步進更新':
             讀者.步進()
             更新()
-        elif 令=='同步路徑':
-            js('path="../%s/"; 自定css="%s"; link_on=true; 準備工作();' % (工程路徑,配置['自定css']))
+        elif 令=='初始化':
+            js('''path="../%s/"; 
+                  自定css="%s";
+                  解析度=%s;
+                  邊界=%d;
+                  link_on=true; 
+                  準備工作();
+               ''' 
+                    % (工程路徑,配置['自定css'],配置['主解析度'],配置['顯示繪圖邊界']))
         elif 令=='存檔':
             讀者.存檔('%s/save_data/save_1.dat' %工程路徑)
         elif 令=='讀檔':
@@ -85,8 +92,11 @@ class gal窗口(QWebEngineView):
 
     def resizeEvent(self,ev):
         self.頁面.setZoomFactor(min(self.width()/配置['主解析度'][0],self.height()/配置['主解析度'][1]))
+
+    # 媽的到底怎麼固定比例……
+    def 不用的resizeEvent(self,ev):
+        self.頁面.setZoomFactor(min(self.width()/配置['主解析度'][0],self.height()/配置['主解析度'][1]))
         if self.全屏: return
-        # 媽的到底怎麼固定比例……
         比例=配置['主解析度'][0]/配置['主解析度'][1]
         w,h=ev.size().width() , ev.size().height()
         try:
