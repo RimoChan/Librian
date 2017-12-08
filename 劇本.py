@@ -7,9 +7,9 @@ from 環境 import 配置,工程路徑
 class 讀者():
     def __init__(self):
         self.劇本棧=[open('%s/play/%s' %(工程路徑,配置['劇本入口']),encoding='utf-8')]
+        self.箱庭={'goto':self.跳轉, 'push':self.棧跳轉, 'choice':self.產生選項}
         self.重置()
         self.步進()
-        self.箱庭={'goto':self.跳轉, 'push':self.棧跳轉, 'choice':self.產生選項}
 
     @property
     def 劇本文件(self):
