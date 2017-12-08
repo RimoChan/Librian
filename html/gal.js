@@ -1,4 +1,4 @@
-﻿//與後端的通信器
+//與後端的通信器
 link_on=true;	//保證同時只有一個通信
 var a=new QWebChannel(qt.webChannelTransport, function (channel) {
 	window.handler = channel.objects.handler;;
