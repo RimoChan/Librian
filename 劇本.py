@@ -1,8 +1,7 @@
 import sys
-import json
-import pickle
-import re
-import shlex
+import logging
+import json, pickle
+import re, shlex
 from 環境 import 配置,工程路徑
 
 class 讀者():
@@ -93,9 +92,9 @@ class 讀者():
                 s=s[:-1]+'\n'+self.有效次行()
             if s:
                 try:
-                    print('從%s中取到了 `%s` 。'%(self.劇本文件.name.split('/')[-1],s))
+                    logging.debug('從%s中取到了 `%s` 。'%(self.劇本文件.name.split('/')[-1],s))
                 except:
-                    print('有unicode字元……')
+                    logging.debug('有unicode字元……')
                 return s 
         
     def 重置(self): 
@@ -118,7 +117,7 @@ class 讀者():
             else:
                 cut=text[3:]
             self.重置()
-            print('章節: %s'% cut )
+            logging.debug('章節: %s'% cut )
             self.info=('cut', cut )
         elif text[0]=='#':
             參數 = shlex.split(text[1:])

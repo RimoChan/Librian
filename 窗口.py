@@ -3,6 +3,7 @@ from PyQt5.QtWebEngineWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtWebChannel import QWebChannel
 from PyQt5.QtGui import *
+import logging
 import json
 
 from 劇本 import 讀者
@@ -16,7 +17,7 @@ class 山彥(QObject):
 
     @pyqtSlot(str)
     def rec(self,令):
-        print('\n'+令)
+        logging.debug(令)
         if 令=='更新':
             更新()
         elif 令=='步進更新':
@@ -35,7 +36,7 @@ class 山彥(QObject):
             t=讀者.選項[int(令)][1]
             讀者.選項=()
             t()
-            print('選擇了「%s」。'%令)
+            logging.debug('選擇了「%s」。'%令)
             讀者.步進()
             更新()
                 
@@ -100,7 +101,6 @@ class gal窗口(QWebEngineView):
                 self.setMinimumWidth(300*比例)
                 self.setMinimumHeight(300)
         except BaseException as e:
-            # print(e)
             None
         self.w,self.h=self.width(),self.height()
 
