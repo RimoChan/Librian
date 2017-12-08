@@ -5,12 +5,14 @@ from PyQt5.QtWebChannel import QWebChannel
 from PyQt5.QtGui import *
 import time, threading
 import os,sys
+import logging
+
 
 from 環境 import 配置,工程路徑
 try:
     os.mkdir('%s/save_data' %工程路徑)
 except:
-    print('已有存檔。')
+    logging.debug('已有存檔。')
 
 app = QApplication([])
 
