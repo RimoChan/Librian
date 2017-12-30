@@ -1,0 +1,37 @@
+#py
+import time, threading
+#endpy
+
+pandaye 「自动更新剧本！」
+pandaye 「可以在线更新你发布的剧本起到连载的作用2333。」
+pandaye 「比如说你可以把剧本放在github上，然后这个帮你的读者每次自动把剧本拉回来。因为git是版本控制系统所以没问题。还可以用作公告板23333。」
+pandaye 「对了，写小黄文的原则上还是会被查封的，因为github条款写了不能放H的东西啦2333」
+pandaye 「还有就是，这只是一个异步通信的示例，因此并不会改变你的本地文件。点一下来开始大约持续5秒的更新！」
+
+#py
+更新完成=False
+
+def 更新():
+
+    time.sleep(5)
+    #连接到你自己的发布地址
+
+    goto(lable='#更新完了')
+
+    import 窗口,劇本
+    劇本.讀者.步進()
+    窗口.更新()
+
+t = threading.Thread(target=更新)
+t.setDaemon(True)
+t.start()
+#endpy
+
+#back
+pandaye 「更新还没有结束，更新完了时无需点击会自动进入下一句。」
+#py
+goto(lable='#back')
+#endpy
+
+#更新完了
+pandaye 「更新完了。」

@@ -1,0 +1,100 @@
+﻿<head>
+	<script src='/html/黑科技/qwebchannel.js'></script>
+	<script src='/html/title_js.js'></script>
+</head>
+
+<style>
+body {
+	margin:0;
+	padding:0;
+	font-size:20;
+	font-family:'微软雅黑';
+	overflow:hidden;
+	-webkit-user-select:none;
+}
+.main {
+	position:absolute;
+	top:30;
+	right:50;
+}
+.img{
+	position:absolute;
+	height:100%;
+	margin:0;
+	padding:0;
+}
+
+.左{
+	width:1366;
+	background:url('title.jpg');
+	background-size:cover;
+}
+.右{
+	left:930;
+	width:436;
+	background:url('0.png');
+	background-size:cover;
+}
+
+h1{
+	font-family:'楷体';
+	font-size:50;
+}
+h3{
+	font-family:'楷体';
+}
+a{
+	font-size:30;
+	display:block;
+	color:#000;
+	text-decoration:none;
+	transition:color 0.35s;
+}
+a:hover{
+	color:#225;
+}
+.option{
+	margin:25 0;
+	height:55;
+	background:url('q.png');
+	background-size:100% 100%;
+	text-align:center;
+}
+</style>
+
+<body>
+	
+	<div class='img 左'></div>
+	<div class='img 右'></div>
+	<div class='main'>
+		<h1>東方素材測試</h1>
+		<h3 style='position:relative;top:-35;left:60;'>- 靈夢good！(意義不明) -</h3>
+		
+		<br/>
+	
+		<div class='option'>
+			<a href='file:///html/adv.html'>開始遊戲</a>
+		</div>
+		
+		<div class='option'>
+			<a href='javascript:game_continue()'>繼續遊戲(會崩潰別點)</a>
+		</div>
+		
+		<div class='option'>
+			<a href='javascript:extra()'>放映室 (……)</a>
+		</div>
+		
+		<div class='option'>
+			<a href='javascript:setting()'>設定 (假的)</a>
+		</div>		
+		
+		<div class='option'>
+			<a href='javascript:send("退出")'>退出</a>
+		</div>
+
+		
+	</div>
+	<audio src='../bgm/01.遍参.ogg' autoplay='autoplay'/>
+	
+	
+</body>

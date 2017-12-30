@@ -50,10 +50,6 @@ function predeal(data){
 		data.bg='url('+path+'img/'+data.bg+')';
 	if(data.bgm!='None')
 		data.bgm=path+'bgm/'+data.bgm;
-	if(data.ch)
-		data.ch='url('+path+'ch/'+data.ch+'.png)';
-	else
-		data.ch='url(static/no_ch.png)'
 	if(data.name!='') {
 		data.name='【'+data.name+'】';
 		$('#name_bg').fadeIn(200);
@@ -121,7 +117,7 @@ function deal_info(info){
 
 //改變立繪
 function change_ch(text){
-	change_img('ch',text,0.4);
+	$('#ch').html(text)
 }	
 //改變背景
 function change_bg(text){

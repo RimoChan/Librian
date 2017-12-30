@@ -14,6 +14,7 @@ function right_click() {
 	window.event.returnValue = false;
 	$('#dialog').toggle(250);
 	$('.scroll').hide(200);
+	$('#dialog_bg').fadeToggle(250);
 }
 
 //左键功能
@@ -23,7 +24,8 @@ function left_click() {
 		return;
 	if ($('#dialog').is(':hidden')) {
 		$('.scroll').hide(200);
-		$('#dialog').show(250)
+		$('#dialog').show(250);
+		$('#dialog_bg').fadeIn(250);
 	} else {
 		if(待打印文字){
 			e=$('#word')

@@ -1,12 +1,17 @@
 import sys
+import os
 import logging
-import json, pickle
+import json
+import pickle
 import re, shlex
+import yaml
+
 from 環境 import 配置,工程路徑
+import 鏡頭
 
 class 讀者():
     def __init__(self):
-        self.劇本棧=[open('%s/play/%s' %(工程路徑,配置['劇本入口']),encoding='utf-8')]
+        self.劇本棧=[open('%s/%s' %(工程路徑,配置['劇本入口']),encoding='utf-8')]
         self.箱庭={'goto':self.跳轉, 'push':self.棧跳轉, 'choice':self.產生選項}
         self.重置()
         self.步進()
@@ -17,11 +22,11 @@ class 讀者():
     def 次行(self):
         return self.劇本文件.readline()
     @property
-    def 當前狀態(self):    
+    def 當前狀態(self):
         return {'info':self.info,
                 'word':self.word,
                 'name':self.name,
-                'ch'  :self.ch,
+                'ch'  :鏡頭.查詢(self.ch).轉html(),
                 'bg'  :self.bg,
                 'bgm' :self.bgm,
                 'cg'  :self.cg,
@@ -56,13 +61,15 @@ class 讀者():
 
 #——————————————————————————————————————————————
 #劇本控制(箱庭內可調用)
-    def 跳轉(self,path=None,lable=None):
+    def 跳轉(self,path=None,lable=None,彈=True):
+        現名=self.劇本文件.name
         if path==None:
-            path=self.劇本文件.name
+            path=現名
         else:
-            path='%s/play/%s' %(工程路徑,path)
-
-        self.劇本棧.pop()   
+            path='%s/%s' %(os.path.dirname(現名),path)
+        
+        if 彈: 
+            self.劇本棧.pop()
         self.劇本棧.append(open(path,encoding='utf-8'))
         if lable:
             while True:
@@ -71,8 +78,7 @@ class 讀者():
                     break
 
     def 棧跳轉(self,path=None,lable=None):
-        self.劇本棧.append('Nothing')
-        self.跳轉(path,lable)
+        self.跳轉(path,lable,彈=False)
 
     def 產生選項(self,*d):
         d=[(i[0],i[1]) for i in d]
@@ -95,7 +101,7 @@ class 讀者():
                     logging.debug('從%s中取到了 `%s` 。'%(self.劇本文件.name.split('/')[-1],s))
                 except:
                     logging.debug('有unicode字元……')
-                return s 
+                return s
         
     def 重置(self): 
         self.info=''
@@ -104,7 +110,8 @@ class 讀者():
         self.ch=''
         self.bg=''
         self.bgm=''
-        self.cg=None    
+        self.face=''
+        self.cg=None
         self.選項=()
         
     def 步進(self):    
@@ -132,16 +139,23 @@ class 讀者():
             if f=='py':  self.進入py模式()
             if not self.選項:
                 self.步進()
+        elif text[0]=='+':
+            d=yaml.load(text[1:])
+            鏡頭.鏡頭(d)
+            if not self.選項:
+                self.步進()
         else:
             匹配結果 = re.search(配置['對話模式'], text) 
             if 匹配結果:
                 d=匹配結果.groupdict()
                 self.word = d['語']
                 self.ch   = d['名']
+                鏡頭.顏對應[self.ch]=d['顏']
                 self.name = d['代'] or d['名']
             else:
                 self.word = text
                 self.ch   = ''
+                self.name = ''
             
     def 進入py模式(self):
         tot=''

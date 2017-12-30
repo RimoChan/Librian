@@ -75,5 +75,6 @@ html:
                 div#dialog:                         #对话框                 
                     div#name:            #名字
                     div#word:           #话语
+
                 div#dialog_bg:
-                div#name_bg:
+                    div#name_bg:

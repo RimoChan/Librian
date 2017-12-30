@@ -1,0 +1,8 @@
+#back
+pandaye 「1」
+#111
+#222
+pandaye 「2」
+#py
+goto(lable='#back')
+#endpy

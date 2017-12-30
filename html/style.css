@@ -155,13 +155,10 @@ button{
 }
 
 #ch{
-	position:absolute;
+	position:fixed;
 	top:0;
-	left:183;
-	width:1000;
-	height:1500;
-	background-image:url(/ch/.png);
-	background-size:cover;
+	left:0;
+	background:#777;
 	z-index:-2;
 }
 #cache{
