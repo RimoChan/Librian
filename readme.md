@@ -43,6 +43,6 @@ Librian的擴展功能非常強大！
 (媽的用了psd_tools以後打包不支持了……不知道怎麼辦)
 
 + python3
-+ pip install pyqt5, pyyaml
++ pip install pyqt5 pyyaml psd_tools pillow
 + python3 Librian.py
 
