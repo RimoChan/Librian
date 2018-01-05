@@ -141,7 +141,7 @@ class 讀者():
                 self.步進()
         elif text[0]=='+':
             d=yaml.load(text[1:])
-            鏡頭.鏡頭(d)
+            鏡頭.生成鏡頭(d)
             if not self.選項:
                 self.步進()
         else:
@@ -152,6 +152,7 @@ class 讀者():
                 self.ch   = d['名']
                 鏡頭.顏對應[self.ch]=d['顏']
                 self.name = d['代'] or d['名']
+                logging.debug([d['名'],d['代'],d['顏'],d['語']].__str__())
             else:
                 self.word = text
                 self.ch   = ''
