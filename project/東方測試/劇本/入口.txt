@@ -1,5 +1,5 @@
-#BGM 02.少女綺想曲～Capriccio.ogg
-#BG 博麗神社.jpg
+> BGM 02.少女綺想曲～Capriccio.ogg
+> BG 博麗神社.jpg
 
 + [靈夢]
 清晨，博麗神社。

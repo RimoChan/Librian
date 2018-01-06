@@ -1,14 +1,15 @@
-#py
+> py
 import os
 now_path='d:/'
-#endpy
+> endpy
 
 pandaye 「这个剧本(大概)可以管理你的文件。可以看你的D盘。」
 pandaye 「这只是一个简单的样例以至于它只有10行python代码。」
 pandaye 「点击来进入对应的文件夹。(普通文件不会显示)」
 
 #back
-#py
+
+> py
 def f(i):
     def f():
         global now_path
@@ -17,8 +18,8 @@ def f(i):
 a=[i for i in os.listdir(now_path) if os.path.isdir(now_path+i)] 
 d=[(i,f(i)) for i in ['..']+a[:6]]+[('不看了',lambda: goto(lable='#end'))]
 choice(*d)
-#endpy
+> endpy
 
-#py
+> py
 goto(lable='#back')
-#endpy
+> endpy

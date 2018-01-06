@@ -2,7 +2,7 @@ import os
 
 import yaml
 from psd_tools import PSDImage
-import pillow
+import PIL
 
 def 拆包(文件名):
     psd = PSDImage.load(文件名)

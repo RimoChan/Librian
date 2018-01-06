@@ -9,6 +9,39 @@ import yaml
 from 環境 import 配置,工程路徑
 import 鏡頭
 
+def 硬命令(s):
+    return 命令('>'+s)
+class 命令():
+    def __new__(cls,s):
+        if s[0]!='>':
+            return None
+        return super().__new__(cls)
+    def __init__(self,text):
+        t=shlex.split(text[1:])
+        self.方法=t[0]
+        self.參數=t[1:]
+    def __str__(self):
+        return '[命令]%s(%s)'%(self.方法,', '.join(self.參數))
+    def __eq__(self,b):
+        return self.__str__()==b.__str__()
+    def 執行(self,讀者):
+        方法=eval('self.'+self.方法)
+        方法(*([讀者]+self.參數))
+
+    #——————————————————————————————
+    def py(self,讀者):
+        讀者.進入py模式()
+    def BG(self,讀者,bg):
+        讀者.bg=bg
+    def BGM(self,讀者,bgm):
+        讀者.bgm=bgm
+    def CG(self,讀者,cg):
+        讀者.cg=cg
+    def VIDEO(self,讀者,v):
+        讀者.重置()
+        讀者.info=('video',v)
+
+
 class 讀者():
     def __init__(self):
         self.劇本棧=[open('%s/%s' %(工程路徑,配置['劇本入口']),encoding='utf-8')]
@@ -87,7 +120,7 @@ class 讀者():
 #——————————————————————————————————————————————
     def 有效次行(self):    #獲得劇本一行字
         if not self.劇本棧:
-            return '【所有的劇本都結束了】'
+            return '<small>【所有的劇本都結束了】</small>'
         while True:
             text=self.次行()
             if text=='':
@@ -97,10 +130,7 @@ class 讀者():
             if s and s[-1]=='\\':
                 s=s[:-1]+'\n'+self.有效次行()
             if s:
-                try:
-                    logging.debug('從%s中取到了 `%s` 。'%(self.劇本文件.name.split('/')[-1],s))
-                except:
-                    logging.debug('有unicode字元……')
+                logging.debug('從%s中取到了 `%s` 。'%(self.劇本文件.name.split('/')[-1],s))
                 return s
         
     def 重置(self): 
@@ -118,7 +148,12 @@ class 讀者():
         if self.選項: return
         self.info=''
         text=self.有效次行()
-        if text[:3]=='###':
+        令=命令(text)
+        if 令:
+            令.執行(self)
+            if not self.選項:
+                self.步進()
+        elif text[:3]=='###':
             if text[3]=='#':
                 cut='cut.jpg'
             else:
@@ -127,23 +162,11 @@ class 讀者():
             logging.debug('章節: %s'% cut )
             self.info=('cut', cut )
         elif text[0]=='#':
-            參數 = shlex.split(text[1:])
-            f=參數[0]
-            if f=='VIDEO':
-                self.重置()
-                self.info=('video',參數[2])
-                return
-            if f=='BG':  self.bg =參數[1]
-            if f=='BGM': self.bgm=參數[1]
-            if f=='CG':  self.cg =參數[1]
-            if f=='py':  self.進入py模式()
-            if not self.選項:
-                self.步進()
+            self.步進()
         elif text[0]=='+':
             d=yaml.load(text[1:])
             鏡頭.生成鏡頭(d)
-            if not self.選項:
-                self.步進()
+            self.步進()
         else:
             匹配結果 = re.search(配置['對話模式'], text) 
             if 匹配結果:
@@ -155,14 +178,14 @@ class 讀者():
                 logging.debug([d['名'],d['代'],d['顏'],d['語']].__str__())
             else:
                 self.word = text
-                self.ch   = ''
+                # self.ch   = ''
                 self.name = ''
             
     def 進入py模式(self):
         tot=''
         while True:
             s=self.次行()
-            if s[:6]=='#endpy': break
+            if 命令(s)==硬命令('endpy'): break
             tot+=s
         exec(tot,self.箱庭)
 
