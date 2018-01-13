@@ -1,4 +1,5 @@
 import os
+import logging
 
 import yaml
 from 環境 import 配置,工程路徑
@@ -17,7 +18,12 @@ def 生成html(包,衣=None,顏=None,位置=(0,0)):
     位置=tuple(位置)
 
     if not os.path.isdir('%s/%s'%(立繪路徑,包)):
-        psd拆包.拆包('%s/%s.psd'%(立繪路徑,包))
+        try:
+            包名='%s/%s.psd'%(立繪路徑,包)
+            psd拆包.拆包(包名)
+        except:
+            logging.warning('拆包「%s」時出錯了' % 包名)
+            return '' 
     with open('%s/%s/位置.yaml'%(立繪路徑,包),encoding='utf8') as f:
         d=yaml.load(f)
     人物=映射[包]

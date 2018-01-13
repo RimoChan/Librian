@@ -33,14 +33,13 @@ class 命令():
         讀者.進入py模式()
     def BG(self,讀者,bg):
         讀者.bg=bg
-    def BGM(self,讀者,bgm):
-        讀者.bgm=bgm
-    def CG(self,讀者,cg):
+    def BGM(self,讀者,bgm,音量=1):
+        讀者.bgm=bgm,音量
+    def CG(self,讀者,cg=None):
         讀者.cg=cg
     def VIDEO(self,讀者,v):
         讀者.重置()
         讀者.info=('video',v)
-
 
 class 讀者():
     def __init__(self):
@@ -139,9 +138,9 @@ class 讀者():
         self.name=''
         self.ch=''
         self.bg=''
-        self.bgm=''
+        self.bgm=('',1)
         self.face=''
-        self.cg=None
+        self.cg=''
         self.選項=()
         
     def 步進(self):    
@@ -166,6 +165,9 @@ class 讀者():
         elif text[0]=='+':
             d=yaml.load(text[1:])
             鏡頭.生成鏡頭(d)
+            self.步進()
+        elif text[0]=='-': 
+            鏡頭.解除鏡頭(yaml.load(text[1:]))
             self.步進()
         else:
             匹配結果 = re.search(配置['對話模式'], text) 

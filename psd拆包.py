@@ -6,7 +6,7 @@ import PIL
 
 def 拆包(文件名):
     psd = PSDImage.load(文件名)
-    前名=文件名[:-4] +'/' #什麼鬼2333
+    前名=文件名[:-4] +'/' #網頁路徑問題的patch……什麼鬼2333
     print(前名)
     d={}
     def 記錄(層,path=''):

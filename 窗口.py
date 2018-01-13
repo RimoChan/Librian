@@ -8,6 +8,12 @@ import json
 
 from 劇本 import 讀者
 from 環境 import 配置,工程路徑
+
+
+def js(code):
+    主窗口.頁面.runJavaScript(code)
+def 更新():
+    js('state_Change(%s)' % json.dumps(讀者.當前狀態))
 #————————————————————————————
 #接受gui回傳的資訊
 class 山彥(QObject):
@@ -114,10 +120,5 @@ class gal窗口(QWebEngineView):
             None
         self.w,self.h=self.width(),self.height()
 
-def js(code):
-    主窗口.頁面.runJavaScript(code)
-
-def 更新():
-    js('state_Change(%s)' % json.dumps(讀者.當前狀態))
     
 主窗口 = gal窗口()

@@ -67,6 +67,7 @@ html:
                 div#cover:                                #覆盖层
                 div#choice:                             #选项
                     选项                           
+                div#cg:                                  #CG
                 div#bg:                                  #背景
                 div#ch:                                  #立绘
                 div.scroll:

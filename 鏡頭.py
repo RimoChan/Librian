@@ -34,3 +34,5 @@ def 生成鏡頭(x):
         for i in range(len(x)):
             a[x[i]]=m[i]
         return 鏡頭(a)
+def 解除鏡頭(人):
+    鏡頭對應[人]=空鏡頭

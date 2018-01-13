@@ -32,6 +32,7 @@ function 準備工作(){
 	if(邊界) $('div').css('border','1px solid #22f');
 	change_img('cover','url(static/None.png)',0);
 	change_img('bg','url(static/None.png)',0);
+	change_img('cg','url(static/None.png)',0);
 	change_img('ch','url(static/.png)',0);
 	update()
 }
@@ -49,12 +50,17 @@ function update(){
 
 //信息預處理
 function predeal(data){
-	if(data.bg=='')
+	if(!data.bg)
 		data.bg='url(static/None.png)';
 	else
 		data.bg='url('+path+'img/'+data.bg+')';
-	if(data.bgm!='None')
-		data.bgm=path+'bgm/'+data.bgm;
+	if(!data.cg)
+		data.cg='url(static/None.png)';
+	else
+		data.cg='url('+path+'img/'+data.cg+')';
+
+	if(data.bgm[0]!='None')
+		data.bgm[0]=path+'bgm/'+data.bgm[0];
 	if(data.name!='') {
 		data.name='【'+data.name+'】';
 		$('#name_bg').fadeIn(200);
@@ -73,11 +79,12 @@ function state_Change( data ) {
 	}
 	if(data.info)
 		deal_info(data.info);
-	change_ch(data.ch);
-	change_bg(data.bg);
-	change_bgm(data.bgm);
-	change_name(data.name);
-	change_word(data.word)
+	換cg(data.cg);
+	換bg(data.bg);
+	換立繪(data.ch);
+	換bgm(data.bgm);
+	換人名(data.name);
+	換對話(data.word);
 }
 
 //處理選項
@@ -120,37 +127,50 @@ function deal_info(info){
 	}
 }
 
+現在cg='None'
+function 換cg(cg){
+	if(cg===現在cg)
+		return;
+	現在cg=cg
+	change_img('cg',cg,1);
+}
+
 //改變立繪
-function change_ch(text){
+function 換立繪(text){
 	$('#ch').html(text)
 }	
-//改變背景
-function change_bg(text){
-	if(text===$('#bg').css('background-image')) return;
-	change_img('bg',text,2.4);
+
+現在bg='None'
+function 換bg(bg){
+	if(bg===現在bg)
+		return;
+	現在bg=bg
+	change_img('bg',bg,1.4);
 }
+
 //改變名字
-function change_name(text) {
+function 換人名(text) {
 	$('#name').html(text);
 	$('#history').append(text+'<br/>');
 }
 //改變文本
-function change_word(text) {
+function 換對話(text) {
 	// $('#word').lbyl( { content:text, speed:22, type:'fade', fadeSpeed:85 } );
 	$('#word').逐字打印(text);
 	$('#history').append(text+'<br/><br/>');
 }
 //改變背景音樂
-function change_bgm(text){
+function 換bgm(bgm){
+	var 曲名=bgm[0],音量=bgm[1];
 	var au=$('audio');
-	if(text===au.attr('src')) return;
-	if(text=='None'){
+	if(曲名===au.attr('src')) return;
+	if(曲名=='None'){
 		au.animate({volume: 0}, 1000);
-		setTimeout( (function(){ au.attr('src',text); }) , 1000);
-		return
+		setTimeout( (function(){ au.attr('src','None'); }) , 1000);
+	}else{
+		au.animate({volume: 音量}, 0);
+		au.attr('src',曲名);
 	}
-	au.animate({volume: 1}, 0);
-	au.attr('src',text);
 }
 //改變圖像，通用，bg和ch都會用到
 function change_img(dst,img_b,time){
