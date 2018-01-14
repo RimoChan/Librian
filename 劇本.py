@@ -176,17 +176,25 @@ class 讀者():
             鏡頭.解除鏡頭(yaml.load(text[1:]))
             self.步進()
         else:
-            匹配結果 = re.search(配置['對話模式'], text) 
-            if 匹配結果:
-                d=匹配結果.groupdict()
+            通常結果 = re.search(配置['對話模式']['通常'], text)
+            隱式結果 = re.search(配置['對話模式']['隱式'], text)
+            if 通常結果:
+                d=通常結果.groupdict()
+                鏡頭.顏對應[d['名']]=d['顏']
+                if 鏡頭.查詢(d['名']) and self.ch!=d['名']:
+                    self.ch = d['名']
                 self.word = d['語']
-                self.ch   = d['名']
-                鏡頭.顏對應[self.ch]=d['顏']
                 self.name = d['代'] or d['名']
                 logging.debug([d['名'],d['代'],d['顏'],d['語']].__str__())
+            elif 隱式結果:
+                d=隱式結果.groupdict()
+                鏡頭.顏對應[d['名']]=d['顏']
+                if 鏡頭.查詢(d['名']) and self.ch!=d['名']:
+                    self.ch = d['名']
+                logging.debug([d['名'],d['代'],d['顏']].__str__())
+                self.步進()
             else:
                 self.word = text
-                # self.ch   = ''
                 self.name = ''
             
     def 進入py模式(self):

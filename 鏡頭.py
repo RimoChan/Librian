@@ -16,6 +16,9 @@ class 鏡頭:
         for 人 in self.所有位置:
             tot+=生成html(人,衣對應.get(人),顏對應.get(人),self.所有位置[人])
         return tot
+    def __bool__(self):
+        return bool(self.所有位置)
+        
 空鏡頭=鏡頭({})
 
 def 查詢(人):
@@ -36,3 +39,7 @@ def 生成鏡頭(x):
         return 鏡頭(a)
 def 解除鏡頭(人):
     鏡頭對應[人]=空鏡頭
+
+if __name__=='__main__':
+    print(bool(查詢('潘大爺')))
+    print(bool(空鏡頭))
