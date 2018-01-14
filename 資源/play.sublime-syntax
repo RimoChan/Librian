@@ -48,20 +48,15 @@ contexts:
               pop: true
         - match: '$'
           pop: true
-    
-  # 對話:
-    # - match: ^\w+(|.+)? (\(\w+\))?「.*」$
-      # scope: string
-
 
   對話:
-    - match: '^\S+ '
+    - match: (^\S+(?=(\|\S)? (\(\S+\))?(「\S+」)?$))
       scope: entity.name.tag
       push:
         - match: '\('
           scope: punctuation
           push:
-            - meta_scope: entity.name.tag
+            - meta_scope: entity.other.attribute-name
             - match: '\)'
               scope: punctuation
               pop: true
@@ -81,6 +76,7 @@ contexts:
     - match: '^[+-]'
       scope: punctuation
       push:
+        - meta_scope: variable.parameter
         - match: $\n?
           pop: true
 
