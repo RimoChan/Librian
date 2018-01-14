@@ -12,14 +12,17 @@ var a=new QWebChannel(qt.webChannelTransport, function (channel) {
 
 
 $(function() {
+	初始化()
+});
+
+function 初始化(){
 	try{
         send('初始化');
     }
     catch(err){
         setTimeout(初始化,35)
     }
-});
-
+}
 
 function 準備工作(){
 	$("<link>")
