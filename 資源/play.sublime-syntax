@@ -1,0 +1,109 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+file_extensions:
+  - play
+scope: source.example-c
+
+contexts:
+  # The prototype context is prepended to all contexts but those setting
+  # meta_include_prototype: false.
+  prototype:
+    - include: 嵌入
+    - include: 註釋
+    - include: 關鍵字
+    - include: 功能
+    - include: 鏡頭
+
+  main:
+    # The main context is the initial starting point of our syntax.
+    # Include other contexts from here (or specify them directly).
+    - include: 對話
+    - include: 旁白
+
+
+  關鍵字:
+    - match: '\b(if|else|for|while)\b'
+      scope: keyword.control.example-c
+
+
+  註釋:
+    - match: '#'
+      scope: punctuation.definition.comment.example-c
+      push:
+        - meta_scope: comment.line.double-slash.example-c
+        - match: $\n?
+          pop: true
+
+  功能:
+    - match: '>'
+      scope: punctuation
+      push:
+        - match: '\w+\b'
+          scope: variable.function
+          push:
+            - meta_include_prototype: true
+            - meta_scope: variable.parameter
+            - match: '$'
+              pop: true
+        - match: '$'
+          pop: true
+    
+  # 對話:
+    # - match: ^\w+(|.+)? (\(\w+\))?「.*」$
+      # scope: string
+
+
+  對話:
+    - match: '^\S+ '
+      scope: entity.name.tag
+      push:
+        - match: '\('
+          scope: punctuation
+          push:
+            - meta_scope: entity.name.tag
+            - match: '\)'
+              scope: punctuation
+              pop: true
+
+        - match: '「'
+          scope: punctuation
+          push:
+            - meta_scope: string
+            - match: '」'
+              scope: punctuation
+              pop: true
+
+        - match: '$'
+          pop: true
+
+  鏡頭:
+    - match: '^[+-]'
+      scope: punctuation
+      push:
+        - match: $\n?
+          pop: true
+
+  旁白:
+    - match: ^.+$
+      scope: text.plain
+
+  嵌入:
+    # - match: '> *py'
+    - match: '> *py'
+      scope: support.function
+      push:
+        - match: '> *endpy'
+          scope: support.function
+          pop: true
+
+        - match: '\s*'
+          push:
+            - include: 'scope:source.python'
+          with_prototype:
+             - match: '(?=(> *endpy))'
+               pop: true
+
+    
+    
+    
