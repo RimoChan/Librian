@@ -40,6 +40,11 @@ class 命令():
     def VIDEO(self,讀者,v):
         讀者.重置()
         讀者.info=('video',v)
+    def WRAP(self,讀者,*li):
+        包=lambda x: (lambda:讀者.棧跳轉(*x[1:]))
+        li=[yaml.load(i) for i in li]
+        li=[(i[0],包(i)) for i in li]
+        讀者.產生選項(*li)
 
 class 讀者():
     def __init__(self):
@@ -92,10 +97,10 @@ class 讀者():
         self.cg  =info['cg']
 
 #——————————————————————————————————————————————
-#劇本控制(箱庭內可調用)
+#劇本控制
     def 跳轉(self,path=None,lable=None,彈=True):
         現名=self.劇本文件.name
-        if path==None:
+        if not path:
             path=現名
         else:
             path='%s/%s' %(os.path.dirname(現名),path)
@@ -110,6 +115,7 @@ class 讀者():
                     break
 
     def 棧跳轉(self,path=None,lable=None):
+        print(path,lable)
         self.跳轉(path,lable,彈=False)
 
     def 產生選項(self,*d):

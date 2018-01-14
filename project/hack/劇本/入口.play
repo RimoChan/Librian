@@ -8,12 +8,7 @@ pandaye 「其实第一个已经看过了，标题界面被跳过了2333。」
 #back
 pandaye 「接下来要看哪个呢？」
 
->py
-choice(
-    ('文件管理器',lambda: push('文件管理器.play')),
-    ('联网更新剧本',lambda: push('自动更新剧本.play'))
-)
->endpy
+> WRAP [文件管理器,文件管理器.play] [联网更新剧本,自动更新剧本.play]
 
 pandaye 「感觉不错呢！」
 
