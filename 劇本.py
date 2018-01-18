@@ -32,25 +32,51 @@ class 命令():
     def py(self,讀者):
         讀者.進入py模式()
     def BG(self,讀者,bg):
-        讀者.bg=bg
+        讀者.狀態.背景=bg
     def BGM(self,讀者,bgm,音量=1):
-        讀者.bgm=bgm,音量
+        讀者.狀態.背景音樂=bgm,音量
     def CG(self,讀者,cg=None):
-        讀者.cg=cg
+        讀者.狀態.CG=cg
     def VIDEO(self,讀者,v):
-        讀者.重置()
-        讀者.info=('video',v)
+        讀者.狀態.重置()
+        讀者.狀態.額外信息=('video',v)
     def WRAP(self,讀者,*li):
         包=lambda x: (lambda:讀者.棧跳轉(*x[1:]))
         li=[yaml.load(i) for i in li]
         li=[(i[0],包(i)) for i in li]
         讀者.產生選項(*li)
 
+class 狀態():
+    def __init__(self):
+        self.額外信息=''
+        self.話語=''
+        self.名字=''
+        self.人物=''
+        self.背景=''
+        self.背景音樂=('',1)
+        self.CG=''
+        self.選項=()
+
+    def 導出(self):
+        return {'info':self.額外信息,
+                'word':self.話語,
+                'name':self.名字,
+                'ch'  :鏡頭.查詢(self.人物).轉html(),
+                'bg'  :self.背景,
+                'bgm' :self.背景音樂,
+                'cg'  :self.CG,
+                'choice' :[i[0] for i in self.選項]
+            }
+
+    def 重置(self):
+        self.__init__()
+
 class 讀者():
     def __init__(self):
         self.劇本棧=[open('%s/%s' %(工程路徑,配置['劇本入口']),encoding='utf-8')]
         self.箱庭={'goto':self.跳轉, 'push':self.棧跳轉, 'choice':self.產生選項}
-        self.重置()
+        self.狀態=狀態()
+        self.狀態.重置()
         self.步進()
 
     @property
@@ -58,28 +84,27 @@ class 讀者():
         return self.劇本棧[-1]
     def 次行(self):
         return self.劇本文件.readline()
-    @property
-    def 當前狀態(self):
-        return {'info':self.info,
-                'word':self.word,
-                'name':self.name,
-                'ch'  :鏡頭.查詢(self.ch).轉html(),
-                'bg'  :self.bg,
-                'bgm' :self.bgm,
-                'cg'  :self.cg,
-                'choice' :[i[0] for i in self.選項]
-            }
 
 #————————————————————————————
 #S/L方法
     def 存檔(self,path):
         with open(path,'wb') as f:
-            pickle.dump([self.info_dict(),[self.文件展開(i) for i in self.劇本棧]] ,f)
+            pickle.dump({'狀態':self.狀態,
+                         '衣對應':鏡頭.衣對應,
+                         '顏對應':鏡頭.顏對應,
+                         '鏡頭對應':鏡頭.鏡頭對應,
+                         '劇本棧':[self.文件展開(i) for i in self.劇本棧],
+                         }
+                         ,f)
     def 讀檔(self,path):
         with open(path,'rb') as f:
             data=pickle.load(f)
-            self.unpack_info(data[0])
-            self.劇本棧=[self.文件收縮(i) for i in data[1]]
+            鏡頭.衣對應=data['衣對應']
+            鏡頭.顏對應=data['顏對應']
+            鏡頭.鏡頭對應=data['鏡頭對應']
+            self.狀態=data['狀態']
+            self.狀態.info=('load',)
+            self.劇本棧=[self.文件收縮(i) for i in data['劇本棧']]
 
     def 文件展開(self,file):
         return [file.name,file.tell()]
@@ -87,14 +112,6 @@ class 讀者():
         f=open(file[0],encoding='utf8')
         f.seek(file[1])
         return f
-    def 信息解包(self,info):
-        self.info=info['info']
-        self.word=info['word']
-        self.name=info['name']
-        self.ch  =info['ch']
-        self.bg  =info['bg']
-        self.bgm =info['bgm']
-        self.cg  =info['cg']
 
 #——————————————————————————————————————————————
 #劇本控制
@@ -120,7 +137,7 @@ class 讀者():
 
     def 產生選項(self,*d):
         d=[(i[0],i[1]) for i in d]
-        self.選項=d
+        self.狀態.選項=d
 
 #——————————————————————————————————————————————
     def 有效次行(self):    #獲得劇本一行字
@@ -138,34 +155,23 @@ class 讀者():
                 logging.debug('從%s中取到了 `%s` 。'%(self.劇本文件.name.split('/')[-1],s))
                 return s
         
-    def 重置(self): 
-        self.info=''
-        self.word=''
-        self.name=''
-        self.ch=''
-        self.bg=''
-        self.bgm=('',1)
-        self.face=''
-        self.cg=''
-        self.選項=()
-        
     def 步進(self):    
-        if self.選項: return
-        self.info=''
+        if self.狀態.選項: return
+        self.狀態.額外信息=''
         text=self.有效次行()
         令=命令(text)
         if 令:
             令.執行(self)
-            if not self.選項:
+            if not self.狀態.選項:
                 self.步進()
         elif text[:3]=='###':
             if text[3]=='#':
                 cut='cut.jpg'
             else:
                 cut=text[3:]
-            self.重置()
+            self.狀態.重置()
             logging.debug('章節: %s'% cut )
-            self.info=('cut', cut )
+            self.狀態.額外信息=('cut', cut )
         elif text[0]=='#':
             self.步進()
         elif text[0]=='+':
@@ -181,21 +187,21 @@ class 讀者():
             if 通常結果:
                 d=通常結果.groupdict()
                 鏡頭.顏對應[d['名']]=d['顏']
-                if 鏡頭.查詢(d['名']) and self.ch!=d['名']:
-                    self.ch = d['名']
-                self.word = d['語']
-                self.name = d['代'] or d['名']
+                if 鏡頭.查詢(d['名']) and self.狀態.人物!=d['名']:
+                    self.狀態.人物 = d['名']
+                self.狀態.話語 = d['語']
+                self.狀態.名字 = d['代'] or d['名']
                 logging.debug([d['名'],d['代'],d['顏'],d['語']].__str__())
             elif 隱式結果:
                 d=隱式結果.groupdict()
                 鏡頭.顏對應[d['名']]=d['顏']
-                if 鏡頭.查詢(d['名']) and self.ch!=d['名']:
-                    self.ch = d['名']
+                if 鏡頭.查詢(d['名']) and self.狀態.人物!=d['名']:
+                    self.狀態.人物 = d['名']
                 logging.debug([d['名'],d['代'],d['顏']].__str__())
                 self.步進()
             else:
-                self.word = text
-                self.name = ''
+                self.狀態.話語 = text
+                self.狀態.名字 = ''
             
     def 進入py模式(self):
         tot=''

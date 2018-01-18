@@ -13,7 +13,7 @@ from 環境 import 配置,工程路徑
 def js(code):
     主窗口.頁面.runJavaScript(code)
 def 更新():
-    js('state_Change(%s)' % json.dumps(讀者.當前狀態))
+    js('state_Change(%s)' % json.dumps(讀者.狀態.導出()))
 #————————————————————————————
 #接受gui回傳的資訊
 class 山彥(QObject):
