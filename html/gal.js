@@ -37,17 +37,17 @@ function 準備工作(){
 	change_img('bg','url(static/None.png)',0);
 	change_img('cg','url(static/None.png)',0);
 	change_img('ch','url(static/.png)',0);
-	update()
+	更新()
 }
 
 
 //步進並更新頁面
-function go_update(){
+function 步進更新(){
 	send('步進更新');
 }
 
 //更新頁面
-function update(){
+function 更新(){
 	send('更新')
 }
 
@@ -81,7 +81,7 @@ function state_Change( data ) {
 		return
 	}
 	if(data.info)
-		deal_info(data.info);
+		處理額外信息(data.info);
 	換cg(data.cg);
 	換bg(data.bg);
 	換立繪(data.ch);
@@ -106,15 +106,14 @@ function choose(x){
 	choice_state=false
 }
 
-//處理特殊信息
-function deal_info(info){
+function 處理額外信息(info){
 	if(info[0]=='cut'){
 		left_disable=true;
 		setTimeout( (function(){ $('#cover').css('display','block');         })            , 1500);
 		setTimeout( (function(){ change_img('cover','url('+path+'img/'+info[1]+')',3);  }) , 1500);
 		setTimeout( (function(){ change_img('cover','url(static/None.png)',1); })          , 6000);
 		setTimeout( (function(){ $('#cover').css('display','none');            })          , 7000);
-		setTimeout( (function(){ go_update();                                  })          , 7500);
+		setTimeout( (function(){ 步進更新();                                  })          , 7500);
 		setTimeout( (function(){ left_disable=false;    })                                 , 8000);
 	}
 	if(info[0]=='video'){
@@ -123,11 +122,23 @@ function deal_info(info){
 		v.css('display','block');
 		v.attr('src',path+'video/'+info[1]);
 		v[0].addEventListener('ended', function () {  
-			go_update();
+			步進更新();
 			setTimeout( (function(){ v[0].style.display = 'none'; left_disable=false; }) , 500);
 		}, false);
 		v[0].play();
 	}
+    if(info[0]=='load'){
+        left_disable=true;
+        $('#总画面').fadeOut(0);
+        $('#总画面').fadeIn(1200);
+        setTimeout( (function(){ left_disable=false;    }) , 1000);
+    }
+}
+
+function 提示(x){
+    $('#提示').html(x);
+    $('#提示').fadeIn(300);
+    $('#提示').hide(1000);
 }
 
 現在cg='None'

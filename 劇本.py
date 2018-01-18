@@ -103,7 +103,7 @@ class 讀者():
             鏡頭.顏對應=data['顏對應']
             鏡頭.鏡頭對應=data['鏡頭對應']
             self.狀態=data['狀態']
-            self.狀態.info=('load',)
+            self.狀態.額外信息=('load',)
             self.劇本棧=[self.文件收縮(i) for i in data['劇本棧']]
 
     def 文件展開(self,file):

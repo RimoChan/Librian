@@ -23,8 +23,8 @@ html:
             audio autoplay='' loop='' src='':      
     
             # 有鬼的配置面板
-            div#config:     
-                div.option: 
+            div#config:
+                div.option:
                     全屏: (不让你调)
                 div.option: 
                     文字速度: (不让你调)
@@ -79,3 +79,6 @@ html:
 
                 div#dialog_bg:
                     div#name_bg:
+
+            div#提示:
+                23333

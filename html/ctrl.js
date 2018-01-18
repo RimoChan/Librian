@@ -34,7 +34,7 @@ function left_click() {
 			待打印文字=''
 		}
 		else
-			go_update();
+			步進更新();
 	}
 }
 
