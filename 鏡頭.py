@@ -31,11 +31,9 @@ def 生成鏡頭(x):
     if type(x)==dict:
         return 鏡頭(x)
     if type(x)==list:
-        a={}
         m=默認位置[len(x)]
-        # print(m)
-        for i in range(len(x)):
-            a[x[i]]=m[i]
+        a=dict(zip(x,m))
+        print(a)
         return 鏡頭(a)
 def 解除鏡頭(人):
     鏡頭對應[人]=空鏡頭

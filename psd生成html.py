@@ -10,11 +10,13 @@ import psd拆包
 立繪路徑='%s/立繪' %工程路徑
 with open('%s/映射.yaml' %立繪路徑,encoding='utf8') as f:
     映射=yaml.load(f)
-def 生成html(包,衣=None,顏=None,位置=(0,0)):
+def 生成html(包,衣=None,顏=None,位置=[0,0,1]):
     if 包=='':
         return ''
     衣=衣 or '_默認'
     顏=顏 or '_默認'
+    if len(位置)==2:
+        位置.append(1)
     位置=tuple(位置)
 
     if not os.path.isdir('%s/%s'%(立繪路徑,包)):
@@ -29,10 +31,13 @@ def 生成html(包,衣=None,顏=None,位置=(0,0)):
     人物=映射[包]
 
     tot=''
-    tot+="<div style='position:relative; left:%d; top:%d;'>\n" %位置
-    for 物件 in 人物['衣'][衣][::-1]+人物['顏'][顏][::-1]:
-        x,y=d[物件]['x'],d[物件]['y']
-        tot+=" <img src='%s/%s/%s.png' style='position:absolute; left:%d; top:%d;'/>\n" %(相對網頁路徑,包,物件,x,y)
+    tot+="<div style='position:relative; left:%d; top:%d; transform:scale(%.2f);'>\n" %位置
+    try:
+        for 物件 in 人物['衣'][衣][::-1]+人物['顏'][顏][::-1]:
+            x,y=d[物件]['x'],d[物件]['y']
+            tot+=" <img src='%s/%s/%s.png' style='position:absolute; left:%d; top:%d;'/>\n" %(相對網頁路徑,包,物件,x,y)
+    except Exception as e:
+        logging.warning('生成立繪時出錯了。'+e.__repr__())
     tot+='</div>\n'
     return tot
 
