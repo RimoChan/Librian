@@ -8,10 +8,15 @@ import psd拆包
 
 相對網頁路徑="../%s/立繪" %工程路徑
 立繪路徑='%s/立繪' %工程路徑
-with open('%s/映射.yaml' %立繪路徑,encoding='utf8') as f:
-    映射=yaml.load(f)
+try:
+    with open('%s/映射.yaml' %立繪路徑,encoding='utf8') as f:
+        映射=yaml.load(f)
+except Exception as e: 
+    logging.warning('立繪立即被停用。立繪映射加載失敗了，由於%s'%e)
+    映射=None
+
 def 生成html(包,衣=None,顏=None,位置=[0,0,1]):
-    if 包=='':
+    if 包==''or not 映射:
         return ''
     衣=衣 or '_默認'
     顏=顏 or '_默認'

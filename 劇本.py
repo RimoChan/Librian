@@ -25,8 +25,12 @@ class 命令():
     def __eq__(self,b):
         return self.__str__()==b.__str__()
     def 執行(self,讀者):
-        方法=eval('self.'+self.方法)
-        方法(*([讀者]+self.參數))
+        try:
+            方法=eval('self.'+self.方法)
+            方法(*([讀者]+self.參數))
+        except Exception as e:
+            s='%s(%s)' % (self.方法,', '.join(self.參數))
+            logging.warning('在劇本中執行方法「%s」時遇到了意外%s'%(s,e))
 
     #——————————————————————————————
     def py(self,讀者):
@@ -97,14 +101,17 @@ class 讀者():
                          }
                          ,f)
     def 讀檔(self,path):
-        with open(path,'rb') as f:
-            data=pickle.load(f)
-            鏡頭.衣對應=data['衣對應']
-            鏡頭.顏對應=data['顏對應']
-            鏡頭.鏡頭對應=data['鏡頭對應']
-            self.狀態=data['狀態']
-            self.狀態.額外信息=('load',)
-            self.劇本棧=[self.文件收縮(i) for i in data['劇本棧']]
+        try:
+            with open(path,'rb') as f:
+                data=pickle.load(f)
+                鏡頭.衣對應=data['衣對應']
+                鏡頭.顏對應=data['顏對應']
+                鏡頭.鏡頭對應=data['鏡頭對應']
+                self.狀態=data['狀態']
+                self.狀態.額外信息=('load',)
+                self.劇本棧=[self.文件收縮(i) for i in data['劇本棧']]
+        except Exception as e:
+            logging.warning('讀檔失敗……因爲%s'%e)
 
     def 文件展開(self,file):
         return [file.name,file.tell()]
@@ -132,7 +139,6 @@ class 讀者():
                     break
 
     def 棧跳轉(self,path=None,lable=None):
-        print(path,lable)
         self.跳轉(path,lable,彈=False)
 
     def 產生選項(self,*d):
