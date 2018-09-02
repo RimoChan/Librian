@@ -7,7 +7,7 @@ pandaye 「这个剧本(大概)可以管理你的文件。可以看你的D盘。
 pandaye 「这只是一个简单的样例以至于它只有10行python代码。」
 pandaye 「点击来进入对应的文件夹。(普通文件不会显示)」
 
-#back
+*back
 
 > py
 def f(i):
@@ -21,5 +21,5 @@ choice(*d)
 > endpy
 
 > py
-goto(lable='#back')
+goto(lable='back')
 > endpy

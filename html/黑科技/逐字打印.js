@@ -9,13 +9,17 @@
 			e.attr('f',e.attr('f')+待打印文字[0])
 			待打印文字=待打印文字.slice(1)
 			e.html(e.attr('f'))
-			// alert(e.attr('f'))
 			setTimeout(function () {
 				循环(e)
-			}, 35)
+			}, 25)
+		}
+		else{
+			$('#嘀').attr('src','');
 		}
 	}
-	e.fn.逐字打印 = function (n) { 
+	e.fn.逐字打印 = function (n,嘀=false) { 
+		if(嘀)
+			$('#嘀').attr('src','./static/嘀.mp3');
 		待打印文字=n
 		d = e(this)
 		d.empty()

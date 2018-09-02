@@ -170,13 +170,12 @@ class 讀者():
             令.執行(self)
             if not self.狀態.選項:
                 self.步進()
-        elif text[:3]=='###':
+        elif text[:3]=='===':
             if text[3]=='#':
                 cut='cut.jpg'
             else:
                 cut=text[3:]
-            self.狀態.重置()
-            logging.debug('章節: %s'% cut )
+            logging.debug('插入: %s'% cut )
             self.狀態.額外信息=('cut', cut )
         elif text[0]=='#':
             self.步進()

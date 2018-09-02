@@ -20,7 +20,8 @@ html:
             video width="1366" height="768" src="" autoplay="autoplay":
     
             # 背景音乐
-            audio autoplay='' loop='' src='':      
+            audio#bgm autoplay='' loop='' src='':
+            audio#嘀 autoplay='' loop='' src='': 
     
             # 有鬼的配置面板
             div#config:
@@ -64,12 +65,12 @@ html:
     
             #adv表现块
             div#tot onclick='left_click()' oncontextmenu='right_click()':     
-                div#cover:                                #覆盖层
+                div#cover:                              #覆盖层
                 div#choice:                             #选项
                     选项                           
-                div#cg:                                  #CG
-                div#bg:                                  #背景
-                div#ch:                                  #立绘
+                div#cg:                                 #CG
+                div#bg:                                 #背景
+                div#ch:                                 #立绘
                 div.scroll:
                     div#history:                 #對話歷史
     

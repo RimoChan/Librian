@@ -1,4 +1,8 @@
 import os
+import tempfile
 
-#有鬼www
-os.system('pyinstaller Librian.py --distpath ./ -Fw -i 資源/librian.ico --noupx')
+f=tempfile.NamedTemporaryFile(delete=False)
+f.write(b'import os;os.system(\'\""./python36/python.exe\"" -m Librian.py\')')
+f.close()
+
+os.system(f'pyinstaller {f.name} --name Librian.exe --distpath ./ -F -i 資源/librian.ico')

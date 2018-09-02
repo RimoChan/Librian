@@ -39,10 +39,14 @@ def 生成html(包,衣=None,顏=None,位置=[0,0,1]):
     tot+="<div style='position:relative; left:%d; top:%d; transform:scale(%.2f);'>\n" %位置
     try:
         for 物件 in 人物['衣'][衣][::-1]+人物['顏'][顏][::-1]:
-            x,y=d[物件]['x'],d[物件]['y']
-            tot+=" <img src='%s/%s/%s.png' style='position:absolute; left:%d; top:%d;'/>\n" %(相對網頁路徑,包,物件,x,y)
+            if 物件:
+                x,y=d[物件]['x'],d[物件]['y']
+                tot+=" <img src='%s/%s/%s.png' style='position:absolute; left:%d; top:%d;'/>\n" %(相對網頁路徑,包,物件,x,y)
     except Exception as e:
-        logging.warning('生成立繪時出錯了。'+e.__repr__())
+        if 配置['嚴格模式']:
+            raise e
+        else:
+            logging.warning('生成立繪時出錯了。'+e.__repr__())
     tot+='</div>\n'
     return tot
 

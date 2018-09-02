@@ -18,8 +18,10 @@ class 鏡頭:
         try:
             for 人 in self.所有位置:
                 tot+=生成html(人,衣對應.get(人),顏對應.get(人),self.所有位置[人])
-        except Exception as e:
-            logging.warning('立繪立即被停用，因爲立繪生成出現問題了%s。' %e)
+        except Exception as e:   
+            if 配置['嚴格模式']:
+                raise e    
+            logging.warning('立繪立即被停用，因爲立繪生成出現問題了「%s」。' %e.__repr__())
             self.轉html=lambda:None
         return tot
     def __bool__(self):
