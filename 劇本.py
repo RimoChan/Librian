@@ -138,8 +138,10 @@ class 讀者():
         self.劇本棧.append(self.編譯(path))
         if lable:
             while True:
-                t=self.次行()
-                if not t or t[:-1]==lable:
+                t=self.劇本文件.下一句()
+                if t is None:
+                    raise Exception(f'沒有找到躍點「{lable}」')
+                if '躍點' in t and t['躍點']==lable:
                     break
 
     def 棧跳轉(self,path=None,lable=None):
@@ -156,7 +158,7 @@ class 讀者():
         
         s=self.劇本文件.下一句()
             
-        if '註釋' in s or '空行' in s:
+        if any([i in s for i in ('註釋','空行','躍點')]):
             self.步進()
         if '函數' in s:
             命令(s).執行(self)
