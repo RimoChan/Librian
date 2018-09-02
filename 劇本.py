@@ -8,33 +8,29 @@ import yaml
 
 from 環境 import 配置,工程路徑
 import 鏡頭
+import 編譯
 
 def 硬命令(s):
     return 命令('>'+s)
 class 命令():
-    def __new__(cls,s):
-        if s[0]!='>':
-            return None
-        return super().__new__(cls)
-    def __init__(self,text):
-        t=shlex.split(text[1:])
-        self.方法=t[0]
-        self.參數=t[1:]
-    def __str__(self):
-        return '[命令]%s(%s)'%(self.方法,', '.join(self.參數))
-    def __eq__(self,b):
-        return self.__str__()==b.__str__()
+    def __init__(self,d):
+        self.函數=d['函數']
+        self.參數=[i['a'] for i in d['參數表']]
+        if '代碼' in d:
+            self.代碼=d['代碼']
     def 執行(self,讀者):
         try:
-            方法=eval('self.'+self.方法)
-            方法(*([讀者]+self.參數))
+            函數=eval('self.'+self.函數)
+            函數(*([讀者]+self.參數))
         except Exception as e:
-            s='%s(%s)' % (self.方法,', '.join(self.參數))
-            logging.warning('在劇本中執行方法「%s」時遇到了意外%s'%(s,e))
+            if 配置['嚴格模式']:
+                raise e
+            s='%s(%s)' % (self.函數,', '.join(self.參數))
+            logging.warning('在劇本中執行方法「%s」時遇到了意外%s'%(s,e.__repr__()))
 
     #——————————————————————————————
     def py(self,讀者):
-        讀者.進入py模式()
+        exec(self.代碼,讀者.箱庭)
     def BG(self,讀者,bg):
         讀者.狀態.背景=bg
     def BGM(self,讀者,bgm,音量=1):
@@ -49,6 +45,7 @@ class 命令():
         li=[yaml.load(i) for i in li]
         li=[(i[0],包(i)) for i in li]
         讀者.產生選項(*li)
+
 
 class 狀態():
     def __init__(self):
@@ -74,21 +71,35 @@ class 狀態():
 
     def 重置(self):
         self.__init__()
+        
+class 劇本():
+    def __init__(self,內容,名):
+        self.內容=內容
+        self.指針=0
+        self.名=名
+    def 下一句(self):
+        if self.指針>=len(self.內容):
+            return None
+        r=self.內容[self.指針]
+        self.指針+=1
+        return r
 
 class 讀者():
     def __init__(self):
-        self.劇本棧=[open('%s/%s' %(工程路徑,配置['劇本入口']),encoding='utf-8')]
+        self.劇本棧=[self.編譯(f'{工程路徑}/{配置["劇本入口"]}')]
         self.箱庭={'goto':self.跳轉, 'push':self.棧跳轉, 'choice':self.產生選項}
         self.狀態=狀態()
         self.狀態.重置()
         self.步進()
 
+    def 編譯(self,s):
+        f=open(s,encoding='utf-8')
+        return 劇本(編譯.編譯(f),s)
+
     @property
     def 劇本文件(self):
         return self.劇本棧[-1]
-    def 次行(self):
-        return self.劇本文件.readline()
-
+        
 #————————————————————————————
 #S/L方法
     def 存檔(self,path):
@@ -97,7 +108,7 @@ class 讀者():
                          '衣對應':鏡頭.衣對應,
                          '顏對應':鏡頭.顏對應,
                          '鏡頭對應':鏡頭.鏡頭對應,
-                         '劇本棧':[self.文件展開(i) for i in self.劇本棧],
+                         '劇本棧':self.劇本棧,
                          }
                          ,f)
     def 讀檔(self,path):
@@ -109,21 +120,14 @@ class 讀者():
                 鏡頭.鏡頭對應=data['鏡頭對應']
                 self.狀態=data['狀態']
                 self.狀態.額外信息=('load',)
-                self.劇本棧=[self.文件收縮(i) for i in data['劇本棧']]
+                self.劇本棧=data['劇本棧']
         except Exception as e:
             logging.warning('讀檔失敗……因爲%s'%e)
-
-    def 文件展開(self,file):
-        return [file.name,file.tell()]
-    def 文件收縮(self,file):
-        f=open(file[0],encoding='utf8')
-        f.seek(file[1])
-        return f
 
 #——————————————————————————————————————————————
 #劇本控制
     def 跳轉(self,path=None,lable=None,彈=True):
-        現名=self.劇本文件.name
+        現名=self.劇本文件.名
         if not path:
             path=現名
         else:
@@ -131,7 +135,7 @@ class 讀者():
         
         if 彈: 
             self.劇本棧.pop()
-        self.劇本棧.append(open(path,encoding='utf-8'))
+        self.劇本棧.append(self.編譯(path))
         if lable:
             while True:
                 t=self.次行()
@@ -146,75 +150,52 @@ class 讀者():
         self.狀態.選項=d
 
 #——————————————————————————————————————————————
-    def 有效次行(self):    #獲得劇本一行字
-        if not self.劇本棧:
-            return '<small>【所有的劇本都結束了】</small>'
-        while True:
-            text=self.次行()
-            if text=='':
-                self.劇本棧.pop()
-                return self.有效次行()
-            s=text.replace('\r','').replace('\n','').replace('\ufeff','')
-            if s and s[-1]=='\\':
-                s=s[:-1]+'\n'+self.有效次行()
-            if s:
-                logging.debug('從%s中取到了 `%s` 。'%(self.劇本文件.name.split('/')[-1],s))
-                return s
-        
     def 步進(self):    
         if self.狀態.選項: return
         self.狀態.額外信息=''
-        text=self.有效次行()
-        令=命令(text)
-        if 令:
-            令.執行(self)
+        
+        s=self.劇本文件.下一句()
+            
+        if '註釋' in s or '空行' in s:
+            self.步進()
+        if '函數' in s:
+            命令(s).執行(self)
             if not self.狀態.選項:
                 self.步進()
-        elif text[:3]=='===':
-            if text[3]=='#':
-                cut='cut.jpg'
-            else:
-                cut=text[3:]
-            logging.debug('插入: %s'% cut )
-            self.狀態.額外信息=('cut', cut )
-        elif text[0]=='#':
-            self.步進()
-        elif text[0]=='+':
-            d=yaml.load(text[1:])
-            鏡頭.生成鏡頭(d)
-            self.步進()
-        elif text[0]=='-': 
-            鏡頭.解除鏡頭(yaml.load(text[1:]))
-            self.步進()
-        else:
-            通常結果 = re.search(配置['對話模式']['通常'], text)
-            隱式結果 = re.search(配置['對話模式']['隱式'], text)
-            if 通常結果:
-                d=通常結果.groupdict()
-                鏡頭.顏對應[d['名']]=d['顏']
-                if 鏡頭.查詢(d['名']) and self.狀態.人物!=d['名']:
-                    self.狀態.人物 = d['名']
-                self.狀態.話語 = d['語']
-                self.狀態.名字 = d['代'] or d['名']
-                logging.debug([d['名'],d['代'],d['顏'],d['語']].__str__())
-            elif 隱式結果:
-                d=隱式結果.groupdict()
-                鏡頭.顏對應[d['名']]=d['顏']
-                if 鏡頭.查詢(d['名']) and self.狀態.人物!=d['名']:
-                    self.狀態.人物 = d['名']
-                logging.debug([d['名'],d['代'],d['顏']].__str__())
+        #不是H的圖……
+        if '插入圖' in s:
+            logging.debug('插入圖: %s'% s['插入圖'] )
+            self.狀態.額外信息=('cut', s['插入圖'] )
+        if '鏡頭' in s:
+            if s['鏡頭']=='+':
+                d=yaml.load(s['內容'])
+                鏡頭.生成鏡頭(d)
                 self.步進()
+            elif s['鏡頭']=='-':
+                鏡頭.解除鏡頭(yaml.load(s['內容']))
+                self.步進()
+        if '旁白' in s:
+            self.狀態.話語 = s['旁白']
+            self.狀態.名字 = ''
+        if '名' in s:
+            if '語' in s:
+                鏡頭.顏對應[s['名']]=s['顏']
+                if 鏡頭.查詢(s['名']) and self.狀態.人物!=s['名']:
+                    self.狀態.人物 = s['名']
+                self.狀態.話語 = s['語']
+                self.狀態.名字 = s['代'] or s['名']
+                logging.debug([s['名'],s['代'],s['顏'],s['語']].__str__())
             else:
-                self.狀態.話語 = text
-                self.狀態.名字 = ''
-            
-    def 進入py模式(self):
-        tot=''
-        while True:
-            s=self.次行()
-            if 命令(s)==硬命令('endpy'): break
-            tot+=s
-        exec(tot,self.箱庭)
-
+                鏡頭.顏對應[s['名']]=s['顏']
+                if 鏡頭.查詢(s['名']) and self.狀態.人物!=s['名']:
+                    self.狀態.人物 = s['名']
+                logging.debug([s['名'],s['代'],s['顏']].__str__())
+                self.步進()
 
 讀者=讀者()
+if __name__=='__main__':
+    for i in range(110):
+        q=讀者.狀態.導出()
+        del q['ch']
+        print(q)
+        讀者.步進()
