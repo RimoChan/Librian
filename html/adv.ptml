@@ -2,6 +2,7 @@ html:
     head:
        meta charset='utf-8'; 
        link rel='stylesheet' href='style.css';
+       link rel="stylesheet" href='黑科技/hi-icon.css';
        link rel='stylesheet' href='黑科技\jquery.mCustomScrollbar.css' type='text/css';     #美化滚动条
        script src='黑科技\qwebchannel.js':
        script src='黑科技\jquery-3.1.1.min.js':
@@ -47,21 +48,25 @@ html:
                     应用设定并返回
             
             #功能按钮块
-            div#tool:           
-                button onclick='send("存檔")': 
-                    Save       
-                button onclick='send("讀檔")': 
-                    Load
-                button onclick='skip()': 
-                    Skip
-                button onclick='auto()':            #这个没做
-                    Auto     
-                button onclick='log()': 
-                    log
-                button onclick='config()':
-                    config
-                button onclick='send("退出")':
-                    exit
+            div#tool:
+                div class="hi-icon-effect-1 hi-icon-effect-1a":
+                    a href='#set-1' class="hi-icon":
+                        S
+                    a href='#set-1' class="hi-icon":
+                        L
+                    a href='javascript:send("存檔");' class="hi-icon double":
+                        qS
+                    a href='javascript:send("讀檔");' class="hi-icon double":
+                        qL
+                    a href='#set-1' class="hi-icon":
+                        A
+                    a href='#set-1' class="hi-icon double":
+                        co
+                    a href='#set-1' class="hi-icon double":
+                        sk
+                    a href='#set-1' class="hi-icon double":
+                        tl
+
     
             #adv表现块
             div#tot onclick='left_click()' oncontextmenu='right_click()':     

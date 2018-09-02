@@ -124,22 +124,17 @@ button{
 	font-family:'微软雅黑';
 	width:90%;
 	margin:20;
+
 }   
 
 #tool{	
-	width:420;
-	height:25;
 	right:0;
 	bottom:0;
+	padding:0;
+    margin:5;
 	position:absolute;
 	z-index:10;
-	background:rgba(111,111,111,0.5);
-}
-#tool > button{
-	display:inline;
-	font-size:13;
-	width:55;
-	margin:0;
+	writing-mode:vertical-rl; 
 }
 
 #history{

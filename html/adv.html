@@ -2,6 +2,7 @@
     <head>
        <meta charset='utf-8'/>
        <link rel='stylesheet' href='style.css'/>
+       <link rel="stylesheet" href='黑科技/hi-icon.css'/>
        <link rel='stylesheet' href='黑科技\jquery.mCustomScrollbar.css' type='text/css'/>
        <script src='黑科技\qwebchannel.js'>
        </script>
@@ -63,27 +64,32 @@
                 </button>
             </div>
             <div id="tool">
-                <button onclick='send("存檔")'>
-                    Save
-                </button>
-                <button onclick='send("讀檔")'>
-                    Load
-                </button>
-                <button onclick='skip()'>
-                    Skip
-                </button>
-                <button onclick='auto()'>
-                    Auto
-                </button>
-                <button onclick='log()'>
-                    log
-                </button>
-                <button onclick='config()'>
-                    config
-                </button>
-                <button onclick='send("退出")'>
-                    exit
-                </button>
+                <div class="hi-icon-effect-1 hi-icon-effect-1a">
+                    <a href='#set-1' class="hi-icon">
+                        S
+                    </a>
+                    <a href='#set-1' class="hi-icon">
+                        L
+                    </a>
+                    <a href='javascript:send("存檔");' class="hi-icon double">
+                        qS
+                    </a>
+                    <a href='javascript:send("讀檔");' class="hi-icon double">
+                        qL
+                    </a>
+                    <a href='#set-1' class="hi-icon">
+                        A
+                    </a>
+                    <a href='#set-1' class="hi-icon double">
+                        co
+                    </a>
+                    <a href='#set-1' class="hi-icon double">
+                        sk
+                    </a>
+                    <a href='#set-1' class="hi-icon double">
+                        tl
+                    </a>
+                </div>
             </div>
             <div id="tot" onclick='left_click()' oncontextmenu='right_click()'>
                 <div id="cover">
