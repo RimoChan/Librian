@@ -8,6 +8,8 @@ import logging
 顏對應={}
 鏡頭對應={}
 
+上次生成={}
+
 class 鏡頭:
     def __init__(self,所有位置):
         self.所有位置=所有位置
@@ -16,14 +18,20 @@ class 鏡頭:
     def 轉html(self):
         tot=''
         try:
+            global 上次生成
             for 人 in self.所有位置:
-                tot+=生成html(人,衣對應.get(人),顏對應.get(人),self.所有位置[人])
+                tot+=生成html(人,衣對應.get(人),顏對應.get(人),self.所有位置[人],上次生成)
+            上次生成={}
+            for 人 in self.所有位置:
+                上次生成[人]=self.所有位置[人]
         except Exception as e:   
             if 配置['嚴格模式']:
                 raise e    
             logging.warning('立繪立即被停用，因爲立繪生成出現問題了「%s」。' %e.__repr__())
             self.轉html=lambda:None
         return tot
+    def __repr__(self):
+        return str(self.所有位置)
     def __bool__(self):
         return bool(self.所有位置)
         
@@ -46,5 +54,5 @@ def 解除鏡頭(人):
     鏡頭對應[人]=空鏡頭
 
 if __name__=='__main__':
-    print(bool(查詢('潘大爺')))
-    print(bool(空鏡頭))
+    print(查詢('潘大爺'))
+    print(空鏡頭)

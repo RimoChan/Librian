@@ -1,0 +1,28 @@
+@keyframes _淡入{
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+}
+@keyframes _下入{
+    0%{
+        position: relative;
+        top: 50px;
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+        position: relative;
+        top: 0px;
+    }
+}
+.淡入{
+    animation:_淡入 0.6s;
+    animation-fill-mode:forwards;
+}
+.下入{
+    animation:_下入 0.6s;
+    animation-fill-mode:forwards;
+}
