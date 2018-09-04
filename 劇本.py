@@ -90,7 +90,7 @@ class 讀者():
         self.箱庭={'goto':self.跳轉, 'push':self.棧跳轉, 'choice':self.產生選項}
         self.狀態=狀態()
         self.狀態.重置()
-        self.步進()
+        鏡頭.鏡頭對應={}
 
     def 編譯(self,s):
         f=open(s,encoding='utf-8')

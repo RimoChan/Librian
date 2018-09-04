@@ -10,8 +10,13 @@ var a=new QWebChannel(qt.webChannelTransport, function (channel) {
 	};
 });
 
-function game_continue(){
-	send('从title继续')
+function 開始(){
+	send('步進'); 
+	window.location.href='/html/adv.html';
+}
+
+function 從title讀檔(){
+	send('從title讀檔')
 }
 
 function extra(){

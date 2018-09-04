@@ -51,21 +51,21 @@ html:
             #功能按钮块
             div#tool:
                 div class="hi-icon-effect-1 hi-icon-effect-1a":
-                    a href='#set-1' class="hi-icon":
+                    a href='javascript:send("存檔");' class="hi-icon":
                         S
-                    a href='#set-1' class="hi-icon":
+                    a href='javascript:send("讀檔");' class="hi-icon":
                         L
-                    a href='javascript:send("存檔");' class="hi-icon double":
+                    a href='javascript:send("快速存檔");' class="hi-icon double":
                         qS
-                    a href='javascript:send("讀檔");' class="hi-icon double":
+                    a href='javascript:send("快速讀檔");' class="hi-icon double":
                         qL
-                    a href='#set-1' class="hi-icon":
+                    a href='javascript:alert("沒做這個功能");' class="hi-icon":
                         A
-                    a href='#set-1' class="hi-icon double":
+                    a href='javascript:$("#config").show();' class="hi-icon double":
                         co
-                    a href='#set-1' class="hi-icon double":
+                    a href='javascript:skip();' class="hi-icon double":
                         sk
-                    a href='#set-1' class="hi-icon double":
+                    a href='javascript:send("回標題")' class="hi-icon double":
                         tl
 
     

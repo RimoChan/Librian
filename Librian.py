@@ -10,7 +10,7 @@ import logging
 
 from 環境 import 配置,工程路徑
 try:
-    os.mkdir('%s/save_data' %工程路徑)
+    os.mkdir(f'{工程路徑}/存檔資料')
 except:
     logging.debug('已有存檔。')
 

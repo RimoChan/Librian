@@ -21,38 +21,75 @@ class 山彥(QObject):
         super().__init__()
         self.頁面=頁面
 
+    def 選擇讀檔文件(self):
+        return QFileDialog.getOpenFileName(
+            self.頁面.parent(),
+            '讀檔',
+            f'{工程路徑}/存檔資料',
+            'pickle 文件 (*.pkl)'
+        )
+    def 選擇存檔文件(self):
+        return QFileDialog.getSaveFileName(
+            self.頁面.parent(),
+            '存檔',
+            f'{工程路徑}/存檔資料',
+            'pickle 文件 (*.pkl)'
+        )
+        
+    def 更新(self):
+        更新()
+    def 步進(self):
+        讀者.步進()
+    def 步進更新(self):
+        讀者.步進()
+        更新()
+    def 初始化(self):
+        js(f'''path="../{工程路徑}/"; 
+              自定css="{配置['自定css']}";
+              解析度={配置['主解析度']};
+              邊界={int(配置['顯示繪圖邊界'])};
+              link_on=true; 
+              準備工作();
+           ''')
+    def 存檔(self):
+        文件名, 文件類型 = self.選擇存檔文件()
+        if 文件名:
+            讀者.存檔(文件名)
+            js('提示("存檔好了。")')
+    def 讀檔(self):
+        文件名, 文件類型 = self.選擇讀檔文件()
+        if 文件名:
+            讀者.讀檔(文件名)
+            更新()
+    def 快速存檔(self):
+        讀者.存檔(f'{工程路徑}/存檔資料/快速存檔.pkl')
+        js('提示("存檔好了。")')
+    def 從title讀檔(self):
+        文件名, 文件類型 = self.選擇讀檔文件()
+        if 文件名:
+            讀者.讀檔(文件名)
+            js('開始()')
+    def 退出(self):
+        exit()
+    def 回標題(self):
+        讀者.__init__()
+        js(f'window.location.href="file:///{工程路徑}/{配置["標題畫面"]}"')
+        
     @pyqtSlot(str)
     def rec(self,令):
-        logging.debug(令)
-        if 令=='更新':
-            更新()
-        elif 令=='步進更新':
-            讀者.步進()
-            更新()
-        elif 令=='初始化':
-            js('''path="../%s/"; 
-                  自定css="%s";
-                  解析度=%s;
-                  邊界=%d;
-                  link_on=true; 
-                  準備工作();
-               ''' 
-                    % (工程路徑,配置['自定css'],配置['主解析度'],配置['顯示繪圖邊界']))
-        elif 令=='存檔':
-            讀者.存檔('%s/save_data/save_1.dat' %工程路徑)
-            js('提示("存檔好了。")')
-        elif 令=='讀檔':
-            讀者.讀檔('%s/save_data/save_1.dat' %工程路徑)
-            更新()
-        elif 令=='退出':
-            exit()
-        else:
-            t=讀者.選項[int(令)][1]
-            讀者.選項=()
+        logging.debug(f'受到頁面來的指令: 「{令}」')
+        if 令 in 山彥.__dict__:
+            山彥.__dict__[令](self)
+        elif 令[0]=='選':
+            令=令[1:]
+            t=讀者.狀態.選項[int(令)][1]
+            讀者.狀態.選項=()
             t()
             logging.debug('選擇了「%s」。'%令)
             讀者.步進()
             更新()
+        else:
+            raise Exception(f'命令「{令}」無法理解。')
                 
         js('link_on=true')
 
@@ -78,7 +115,7 @@ class gal窗口(QWebEngineView):
         self.setWindowIcon(QIcon('%s/%s' %(工程路徑,配置['圖標']) ))
 
         if 配置['標題畫面']:
-            self.load(QUrl('file:///%s/%s' %(工程路徑,配置['標題畫面']) ))
+            self.load(QUrl(f'file:///{工程路徑}/{配置["標題畫面"]}'))
         else:
             self.load(QUrl('file:///html/title.html'))
             
@@ -95,7 +132,7 @@ class gal窗口(QWebEngineView):
 
     def 準備快速鍵(self):
         #我也不知道為什麼enter就是綁定不了2333
-        QShortcut(QKeySequence('alt+\\'), self).activated.connect(lambda:self.切換全屏())
+        QShortcut(QKeySequence('alt+enter'), self).activated.connect(lambda:self.切換全屏())
 
     def resizeEvent(self,ev):
         self.頁面.setZoomFactor(min(self.width()/配置['主解析度'][0],self.height()/配置['主解析度'][1]))
