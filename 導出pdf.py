@@ -12,9 +12,9 @@ import 編譯
 cc = opencc.OpenCC('t2s')
 簡化字 = True
 
-參數 = argparse.ArgumentParser(description='Sketch simplification demo.')
+參數 = argparse.ArgumentParser(description='劇本文件生成pdf')
 參數.add_argument('--css', type=str, default='./導出組件/樣式.html')
-參數.add_argument('--play' , type=str)
+參數.add_argument('--play' , type=str, required=True)
 參數.add_argument('--out', type=str)
 參數 = 參數.parse_args()
 
