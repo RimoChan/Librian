@@ -11,7 +11,7 @@ from 環境 import 配置,工程路徑
 
 
 def js(code):
-    主窗口.頁面.runJavaScript(code)
+    主窗口.網頁.頁面.runJavaScript(code)
 def 更新():
     js('state_Change(%s)' % json.dumps(讀者.狀態.導出()))
 #————————————————————————————
@@ -100,10 +100,9 @@ class 山彥(QObject):
 #視窗介面
 class gal窗口(QWebEngineView):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self,*li):
+        super().__init__(*li)
         self.準備網頁()
-        self.準備快速鍵()
         self.做界面()
 
     def 準備網頁(self): 
@@ -114,16 +113,24 @@ class gal窗口(QWebEngineView):
         self.頁面.setWebChannel(self.頻道)
 
     def 做界面(self):
-        self.setWindowTitle(配置['標題'])
-        self.setWindowIcon(QIcon('%s/%s' %(工程路徑,配置['圖標']) ))
+        self.resize(*配置['主解析度'])
 
         if 配置['標題畫面']:
             self.load(QUrl(f'file:///{工程路徑}/{配置["標題畫面"]}'))
         else:
             self.load(QUrl('file:///html/title.html'))
             
-        self.全屏=False
+        self.show()
+
+class 統合窗口(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle(配置['標題'])
+        self.setWindowIcon(QIcon('%s/%s' %(工程路徑,配置['圖標']) ))
         self.resize(*配置['主解析度'])
+        self.全屏=False
+        self.準備快速鍵()
+        self.網頁=gal窗口(self)
         self.show()
 
     def 切換全屏(self):
@@ -132,34 +139,20 @@ class gal窗口(QWebEngineView):
             self.showFullScreen()
         else:
             self.showNormal()
-
+    
+    def keyPressEvent(self, event):
+        keyEvent = QKeyEvent(event)
+        if keyEvent.key() in (Qt.Key_Enter,16777220):
+            if QApplication.keyboardModifiers() == Qt.AltModifier:
+                self.切換全屏()
+    
     def 準備快速鍵(self):
-        #我也不知道為什麼enter就是綁定不了2333
-        QShortcut(QKeySequence('alt+enter'), self).activated.connect(lambda:self.切換全屏())
+        QShortcut(QKeySequence('Alt+Enter'), self).activated.connect(lambda:self.切換全屏())
 
     def resizeEvent(self,ev):
-        self.頁面.setZoomFactor(min(self.width()/配置['主解析度'][0],self.height()/配置['主解析度'][1]))
+        self.網頁.resize(self.width(),self.height())
+        self.網頁.頁面.setZoomFactor(min(self.width()/配置['主解析度'][0],self.height()/配置['主解析度'][1]))
 
-    # 媽的到底怎麼固定比例……
-    def 不用的resizeEvent(self,ev):
-        self.頁面.setZoomFactor(min(self.width()/配置['主解析度'][0],self.height()/配置['主解析度'][1]))
-        if self.全屏: return
-        比例=配置['主解析度'][0]/配置['主解析度'][1]
-        w,h=ev.size().width() , ev.size().height()
-        try:
-            if w>=self.w and h>=self.h:
-                self.setMinimumWidth(h*比例-1)
-                self.setMinimumHeight(w/比例-1)
-                self.setMaximumWidth(9999)
-                self.setMaximumHeight(9999)
-            else:
-                self.setMaximumWidth(h*比例+1)
-                self.setMaximumHeight(w/比例+1)
-                self.setMinimumWidth(300*比例)
-                self.setMinimumHeight(300)
-        except BaseException as e:
-            None
-        self.w,self.h=self.width(),self.height()
 
     
-主窗口 = gal窗口()
+主窗口 = 統合窗口()
