@@ -1,30 +1,36 @@
-﻿
 //滚轮功能
 $(function () {
 	$('#tot').mousewheel(function (event, delta) {
 		if (delta > 0)
-			log();
-		if (delta < 0)
-			left_click();
+			顯示履歷();
+		if (delta < 0){
+			if($('.scroll').is(':hidden'))
+				左鍵功能();
+		}
 	});
+	$("#tot").mousedown(function(e) {
+    if (3 == e.which) {
+    	右鍵功能();
+    } else if (1 == e.which) {
+    	左鍵功能();
+    }
+})
 });
 
-//右键功能
-function right_click() {
+function 右鍵功能() {
 	window.event.returnValue = false;
-	$('#dialog').toggle(250);
-	$('.scroll').hide(200);
+	$('#dialog').fadeToggle(250);
+	$('.scroll').fadeOut(200);
 	$('#dialog_bg').fadeToggle(250);
 }
 
-//左键功能
 left_disable = false;
-function left_click() {
+function 左鍵功能() {
 	if ((left_disable)||(choice_state))
 		return;
 	if ($('#dialog').is(':hidden')) {
-		$('.scroll').hide(200);
-		$('#dialog').show(250);
+		$('.scroll').fadeOut(200);
+		$('#dialog').fadeIn(250);
 		$('#dialog_bg').fadeIn(250);
 	} else {
 		if(待打印文字){
@@ -38,59 +44,55 @@ function left_click() {
 	}
 }
 
-//滚动条美化
-$(function () {
-	$('.scroll').mCustomScrollbar();
-});
-
-//显示log，参考资料在http://www.wufangbo.com/mcustomscrollbar/
-function log() {
-	if ($('.scroll').is(':hidden')) {
-		$('#dialog').hide(200);
-		$('.scroll').show(0);
-		$('.scroll').mCustomScrollbar('scrollTo', 9999999);
-	}
+function 顯示履歷() {
+	if (!($('.scroll').is(':hidden'))) 
+		return;
+	$('#dialog').fadeOut(200);
+	$('#dialog_bg').fadeOut(200);
+	$('.scroll').show(0);
+	$('.scroll').animate({scrollTop:99999999},0);
 }
 
 //skip功能
-var skip_mode = 'off';
+var skip_mode = false;
 function skip() {
-	if (skip_mode == 'off') {
-		skip_mode = 'on';
+	if (skip_mode == false) {
+		skip_mode = true;
 		skip_cycle();
 	} else
-		skip_mode = 'off';
+		skip_mode = false;
 }
 function skip_cycle() {
-	if (skip_mode == 'off')
+	if (skip_mode == false)
 		return;
 	else {
-		left_click();
+		左鍵功能();
 		setTimeout(skip_cycle, 65);
 	}
 }
 
-//键盘功能
-function key_press(evt){
+
+window.document.onkeydown = function(evt){
 	k=evt.keyCode
-	//ctrl键的skip
+
+	//[ctrl] skip
 	if(k==17)
 		skip()
-	//空格和回车和z相当于鼠标点击
+	//[空格 回車 z] 左鍵
 	if((k==32)||(k==13)||(k==90))
-		left_click()
+		左鍵功能()
+	//[esc] 右鍵
+	if(k==27)
+		右鍵功能()
+	//[Page_up] 歷史
+	if(k==33)
+		顯示履歷()
 }
-function key_free(evt){
+window.document.onkeyup = function(evt){
+	//[ctrl] skip
 	if(evt.keyCode==17)
 		skip()
 }
-window.document.onkeydown = key_press;
-window.document.onkeyup = key_free;
-
-// $(document).keypress(function(e) {
-// 	if (e.altKey && e.which == 13) 
-// 		send('换全屏')
-// })
 
 //切换到config界面
 function config() {
@@ -99,3 +101,4 @@ function config() {
 function exit_config() {
 	$('#config').fadeOut(300);
 }
+

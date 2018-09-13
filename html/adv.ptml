@@ -4,11 +4,10 @@ html:
        link rel='stylesheet' href='style.css';
        link rel="stylesheet" href='動作.css';
        link rel="stylesheet" href='黑科技/hi-icon.css';
-       link rel='stylesheet' href='黑科技/jquery.mCustomScrollbar.css' type='text/css';     #美化滚动条
+       link rel="stylesheet" href='黑科技/美麗滑條.css';
        script src='黑科技\qwebchannel.js':
        script src='黑科技\jquery-3.1.1.min.js':
        script src='黑科技\jquery-ui.min.js':
-       script src='黑科技\jquery.mCustomScrollbar.js':      #美化滚动条
        script src='黑科技\逐字打印.js':
        script src='黑科技\jquery.mousewheel.js':         #检测滚轮
        script src='gal.js':
@@ -70,14 +69,14 @@ html:
 
     
             #adv表现块
-            div#tot onclick='left_click()' oncontextmenu='right_click()':     
+            div#tot:     
                 div#cover:                              #覆盖层
                 div#choice:                             #选项
                     选项                           
                 div#cg:                                 #CG
                 div#bg:                                 #背景
                 div#ch:                                 #立绘
-                div.scroll:
+                div.美麗滑條.scroll:
                     div#history:                 #對話歷史
     
                 div#dialog:                         #对话框                 
