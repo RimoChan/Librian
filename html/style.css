@@ -74,7 +74,7 @@ video{
 	font-size:24;
 	margin:0 auto;
 	/*border-radius: 10px;*/
-	text-shadow:2px 2px 1px #000;
+	text-shadow:-1px -1px 2px #000,1px 1px 2px #000;
 
 	position:absolute;
 	bottom:0;
@@ -150,7 +150,7 @@ button{
 .scroll{
 	display:none;
 	background:rgba(0,0,0,0.65);
-	width:900;
+	width:940;
 	height:768;
 	position:absolute;
 	left:233;
