@@ -2,10 +2,13 @@
 link_on=true;	//保證同時只有一個通信
 var a=new QWebChannel(qt.webChannelTransport, function (channel) {
 	window.handler = channel.objects.handler;;
-	send=function(str){
+	send=function(s1,s2){
 		if(link_on){
 			link_on=false;
-			window.handler.rec(str);
+			if(!s2)
+				window.handler.rec1(s1)
+			else
+				window.handler.rec2(s1,s2)
 		}
 	};
 });

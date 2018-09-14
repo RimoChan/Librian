@@ -44,13 +44,20 @@ class 山彥(QObject):
         讀者.步進()
         更新()
     def 初始化(self):
-        js(f'''path="../{工程路徑}/"; 
+        s=f'''path="../{工程路徑}/"; 
               自定css="{配置['自定css']}";
               解析度={配置['主解析度']};
               邊界={int(配置['顯示繪圖邊界'])};
               link_on=true; 
               準備工作();
-           ''')
+           '''
+        try:
+            with open(f'{工程路徑}/存檔資料/用戶設置.json',encoding='utf8') as f:
+                s+=f"應用用戶設置('{f.read()}');"
+        except:
+            logging.warning('用戶設置加載失敗')
+        print(s)
+        js(s)
     def 存檔(self):
         文件名, 文件類型 = self.選擇存檔文件()
         if 文件名:
@@ -79,9 +86,20 @@ class 山彥(QObject):
         js(f'window.location.href="file:///{工程路徑}/{配置["標題畫面"]}"')
     def 切換全屏(self): 
         主窗口.切換全屏()
+    def 設置(self,參數):
+        with open(f'{工程路徑}/存檔資料/用戶設置.json','w',encoding='utf8') as f:
+            f.write(參數)
+    @pyqtSlot(str,str)
+    def rec2(self,令,參數):
+        logging.debug(f'收到頁面來的指令:「{令}({參數})」')
+        if 令 in 山彥.__dict__:
+            山彥.__dict__[令](self,參數)
+        else:
+            raise Exception(f'命令「{令}」無法理解。')
+        js('link_on=true')
     @pyqtSlot(str)
-    def rec(self,令):
-        logging.debug(f'受到頁面來的指令: 「{令}」')
+    def rec1(self,令):
+        logging.debug(f'收到頁面來的指令: 「{令}」')
         if 令 in 山彥.__dict__:
             山彥.__dict__[令](self)
         elif 令[0]=='選':

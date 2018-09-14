@@ -5,7 +5,7 @@ var a=new QWebChannel(qt.webChannelTransport, function (channel) {
 	send=function(str){
 		if(link_on){
 			link_on=false;
-			window.handler.rec(str);
+			window.handler.rec1(str);
 		}
 	};
 });
