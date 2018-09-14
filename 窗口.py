@@ -53,10 +53,9 @@ class 山彥(QObject):
            '''
         try:
             with open(f'{工程路徑}/存檔資料/用戶設置.json',encoding='utf8') as f:
-                s+=f"應用用戶設置('{f.read()}');"
+                s+=f"設置.應用用戶設置('{f.read()}');"
         except:
             logging.warning('用戶設置加載失敗')
-        print(s)
         js(s)
     def 存檔(self):
         文件名, 文件類型 = self.選擇存檔文件()

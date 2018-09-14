@@ -9,9 +9,9 @@ html:
        script src='黑科技\jquery-3.1.1.min.js':
        script src='黑科技\jquery-ui.min.js':
        script src='黑科技\jquery.mousewheel.js':         #检测滚轮
-       script src='設置.js':
        script src='gal.js':
        script src='ctrl.js':
+       script src='設置.js':
        script src='逐字打印.js':
 
     style#style:        # js用來表現動畫的……
@@ -38,7 +38,7 @@ html:
                         span.小塊:
                             文字速度
                         須臾
-                        input#文字速度 type="range" min="0" max="100" onchange="同調(this)":
+                        input#文字速度 type="range" min="0" max="100" onchange="設置.同調(this)":
                         永恆
                     div.option: 
                         span.小塊:
@@ -48,17 +48,17 @@ html:
                         span.小塊:
                             對話框背景透明度 
                         通透
-                        input#對話框背景透明度 type="range" min="0" max="1" step='0.01' onchange="同調(this)":
+                        input#對話框背景透明度 type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)":
                         固實
                     div.option: 
                         span.小塊:
                             自動收起控制面板
-                        input#自動收起控制面板 type="checkbox" onchange="同調(this)":
+                        input#自動收起控制面板 type="checkbox" onchange="設置.同調(this)":
                     div.option: 
                         span.小塊:
                             總體音量: 
                         小聲
-                        input#總體音量 type="range" min="0" max="1" step='0.01' onchange="同調(this)":
+                        input#總體音量 type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)":
                         大聲(沒用)
 
                     a.hicon href='javascript:exit_config();':
