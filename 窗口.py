@@ -77,7 +77,8 @@ class 山彥(QObject):
     def 回標題(self):
         讀者.__init__()
         js(f'window.location.href="file:///{工程路徑}/{配置["標題畫面"]}"')
-        
+    def 切換全屏(self): 
+        主窗口.切換全屏()
     @pyqtSlot(str)
     def rec(self,令):
         logging.debug(f'受到頁面來的指令: 「{令}」')
