@@ -1,4 +1,4 @@
-.hi-icon {
+.hicon {
 	display: inline-block;
 	font-size: 32px;
 	text-decoration: none;
@@ -14,11 +14,11 @@
 	color: #fff;
 }
 
-.hi-icon.double {
+.hicon.double {
 	font-size:28px;
 }
 
-.hi-icon:after {
+.hicon:after {
 	pointer-events: none;
 	position: absolute;
 	width: 100%;
@@ -30,7 +30,7 @@
 	box-sizing: content-box;
 }
 
-.hi-icon:before {
+.hicon:before {
 	font-family: 'ecoicon';
 	speak: none;
 	font-size: 48px;
@@ -44,14 +44,14 @@
 }
 
 /* Effect 1 */
-.hi-icon-effect-1 .hi-icon {
+.hicon_effect_1 .hicon {
 	background: rgba(255,255,255,0.2);
 	-webkit-transition: background 0.2s, color 0.2s;
 	-moz-transition: background 0.2s, color 0.2s;
 	transition: background 0.2s, color 0.2s;
 }
 
-.hi-icon-effect-1 .hi-icon:after {
+.hicon_effect_1 .hicon:after {
 	top: -7px;
 	left: -7px;
 	padding: 7px;
@@ -66,12 +66,12 @@
 	opacity: 0;
 }
 
-/* Effect 1a */
-.hi-icon-effect-1a .hi-icon:hover {
+
+.hicon_effect_1a .hicon:hover {
 	background: rgba(255,255,255,1);
 	color: #41ab6b;
 }
-.hi-icon-effect-1a .hi-icon:hover:after {
+.hicon_effect_1a .hicon:hover:after {
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
 	-ms-transform: scale(1);

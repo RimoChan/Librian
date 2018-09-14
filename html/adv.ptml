@@ -8,10 +8,11 @@ html:
        script src='黑科技\qwebchannel.js':
        script src='黑科技\jquery-3.1.1.min.js':
        script src='黑科技\jquery-ui.min.js':
-       script src='黑科技\逐字打印.js':
        script src='黑科技\jquery.mousewheel.js':         #检测滚轮
        script src='gal.js':
        script src='ctrl.js':
+       script src='設置.js':
+       script src='逐字打印.js':
 
     style#style:        # js用來表現動畫的……
 
@@ -26,45 +27,62 @@ html:
     
             # 有鬼的配置面板
             div#config:
-                div.option:
-                    全屏: (不让你调)
-                div.option: 
-                    文字速度: (不让你调)
-                div.option: 
-                    自动模式速度: (不让你调)
-                div.option: 
-                    对话框透明度: (不让你调)
-                div.option: 
-                    菜单栏自动收起: (不让你调)
-                div.option: 
-                    BGM音量: (不让你调)
-                div.option: 
-                    效果音量: (不让你调)
-                div.option: 
-                    总体音量: (不让你调)
-                div.option: 
-                    文字缩进: (不让你调)
-                button onclick="exit_config()" style='position:absolute;bottom:0;':
-                    应用设定并返回
+                div.hicon_effect_1.hicon_effect_1a:
+                    div.option:
+                        span.小塊:
+                            全屏幕
+                        a.hicon href='javascript:send("切換全屏");':
+                            T
+                        (其實按alt+enter就好了)
+                    div.option: 
+                        span.小塊:
+                            文字速度
+                        須臾
+                        input#文字速度 type="range" min="0" max="100" onchange="同調(this)":
+                        永恆
+                    div.option: 
+                        span.小塊:
+                            自動模式速度
+                        哪有自動模式……
+                    div.option: 
+                        span.小塊:
+                            對話框背景透明度 
+                        通透
+                        input#對話框背景透明度 type="range" min="0" max="1" step='0.01' onchange="同調(this)":
+                        固實
+                    div.option: 
+                        span.小塊:
+                            自動收起控制面板
+                        input#自動收起控制面板 type="checkbox" onchange="同調(this)":
+                    div.option: 
+                        span.小塊:
+                            總體音量: 
+                        小聲
+                        input#總體音量 type="range" min="0" max="1" step='0.01' onchange="同調(this)":
+                        大聲(沒用)
+
+                    a.hicon href='javascript:exit_config();':
+                        ×
+                        
             
             #功能按钮块
             div#tool:
-                div class="hi-icon-effect-1 hi-icon-effect-1a":
-                    a href='javascript:send("存檔");' class="hi-icon":
+                div.hicon_effect_1.hicon_effect_1a:
+                    a.hicon href='javascript:send("存檔");':
                         S
-                    a href='javascript:send("讀檔");' class="hi-icon":
+                    a.hicon href='javascript:send("讀檔");':
                         L
-                    a href='javascript:send("快速存檔");' class="hi-icon double":
+                    a.hicon.double href='javascript:send("快速存檔");':
                         qS
-                    a href='javascript:send("快速讀檔");' class="hi-icon double":
+                    a.hicon.double href='javascript:send("快速讀檔");':
                         qL
-                    a href='javascript:alert("沒做這個功能");' class="hi-icon":
+                    a.hicon href='javascript:alert("沒做這個功能");':
                         A
-                    a href='javascript:$("#config").show();' class="hi-icon double":
+                    a.hicon.double href='javascript:$("#config").show();'":
                         co
-                    a href='javascript:skip();' class="hi-icon double":
+                    a.hicon.double href='javascript:skip();':
                         sk
-                    a href='javascript:send("回標題")' class="hi-icon double":
+                    a.hicon.double href='javascript:send("回標題")':
                         tl
 
     

@@ -193,9 +193,11 @@ function 換bgm(bgm){
 	if(當前曲名==曲名) return;
 	當前曲名=曲名
 	if(當前曲名=='None'){
+		au.stop()
 		au.animate({volume: 0}, 2000);
 		setTimeout( (function(){ au.attr('src',當前曲名); }) , 2000);
 	}else{
+		au.stop()
         au.attr('src',當前曲名);
         au.animate({volume: 0}, 0);
 		au.animate({volume: 音量}, 2000);
