@@ -35,8 +35,6 @@ except:
 
 app = QApplication([])
 
-import 劇本
 import 窗口
-import 鏡頭
 
 app.exec_()
