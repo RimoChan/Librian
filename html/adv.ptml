@@ -9,8 +9,8 @@ html:
        script src='黑科技\jquery-3.1.1.min.js':
        script src='黑科技\jquery-ui.min.js':
        script src='黑科技\jquery.mousewheel.js':         #检测滚轮
-       script src='gal.js':
-       script src='ctrl.js':
+       script src='演出.js':
+       script src='控制.js':
        script src='設置.js':
        script src='逐字打印.js':
 
