@@ -11,7 +11,7 @@
 			e.html(e.attr('f'))
 			setTimeout(function () {
 				循环(e)
-			}, 設置.文字速度)
+			}, 設置.內容.文字速度)
 		}
 		else{
 			$('#嘀').attr('src','');
