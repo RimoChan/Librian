@@ -6,8 +6,8 @@ from 環境 import 配置,工程路徑
 
 import psd拆包
 
-相對網頁路徑="../%s/立繪" %工程路徑
-立繪路徑='%s/立繪' %工程路徑
+相對網頁路徑=os.path.join("../%s" %工程路徑,配置['立繪文件夾'])
+立繪路徑=os.path.join(工程路徑,配置['立繪文件夾'])
 try:
     with open('%s/映射.yaml' %立繪路徑,encoding='utf8') as f:
         映射=yaml.load(f)

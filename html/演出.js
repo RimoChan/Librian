@@ -4,7 +4,7 @@
 	$("<link>")
 		.attr({ rel: "stylesheet",
 		type: "text/css",
-		href: path+自定css
+		href: 演出.自定css
 	}).appendTo("head");
 	$('#总画面').css('width',解析度[0])
 	$('#总画面').css('height',解析度[1])
@@ -29,14 +29,14 @@
 	if(!data.bg)
 		data.bg='url(static/None.png)';
 	else
-		data.bg='url('+path+'img/'+data.bg+')';
+		data.bg='url('+演出.圖片文件夾+'/'+data.bg+')';
 	if(!data.cg)
 		data.cg='url(static/None.png)';
 	else
-		data.cg='url('+path+'img/'+data.cg+')';
+		data.cg='url('+演出.圖片文件夾+'/'+data.cg+')';
 
 	if(data.bgm[0]!='None')
-		data.bgm[0]=path+'bgm/'+data.bgm[0];
+		data.bgm[0]=演出.音樂文件夾+'bgm/'+data.bgm[0];
 	if(data.name!='') {
 		data.name='【'+data.name+'】';
 		$('#name_bg').fadeIn(200);
@@ -93,7 +93,7 @@
 	$('#cover').css('display','block');
 	
     $('#总画面').fadeOut(400);
-	setTimeout( (function(){ 演出.換圖('cover','url('+path+'img/'+圖+')',1);})          , 400);
+	setTimeout( (function(){ 演出.換圖('cover','url('+演出.圖片文件夾+'/'+圖+')',1);})          , 400);
     $('#总画面').fadeIn(1100);
 	setTimeout( (function(){ 演出.換圖('cover','url(static/None.png)',1);})          , 4500);
 	setTimeout( (function(){ $('#cover').css('display','none');            })          , 5500);
@@ -105,7 +105,7 @@
 	控制.左鍵屏蔽=true;
 	var v=$('video');
 	v.css('display','block');
-	v.attr('src',path+'video/'+視頻);
+	v.attr('src',演出.視頻文件夾+'/'+視頻);
 	v[0].addEventListener('ended', function () {  
 		步進更新();
 		setTimeout( (function(){ v[0].style.display = 'none'; 控制.左鍵屏蔽=false; }) , 500);

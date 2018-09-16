@@ -5,6 +5,7 @@ from PyQt5.QtWebChannel import QWebChannel
 from PyQt5.QtGui import *
 import logging
 import json
+import os
 
 from 劇本 import 讀者
 from 環境 import 配置,工程路徑
@@ -44,11 +45,16 @@ class 山彥(QObject):
         讀者.步進()
         更新()
     def 初始化(self):
-        s=f'''path="../{工程路徑}/"; 
-              自定css="{配置['自定css']}";
+        圖片文件夾=os.path.join(f'../{工程路徑}',配置['圖片文件夾']).replace('\\','/')
+        音樂文件夾=os.path.join(f'../{工程路徑}',配置['音樂文件夾']).replace('\\','/')
+        自定css=os.path.join(f'../{工程路徑}',配置['自定css']).replace('\\','/')
+        s=f'''
               解析度={配置['主解析度']};
               邊界={int(配置['顯示繪圖邊界'])};
-              link_on=true; 
+              link_on=true;
+              演出.自定css="{自定css}";
+              演出.圖片文件夾="{圖片文件夾}";
+              演出.音樂文件夾="{音樂文件夾}";
               演出.準備工作();
            '''
         try:
@@ -134,8 +140,10 @@ class gal窗口(QWebEngineView):
         self.resize(*配置['主解析度'])
 
         if 配置['標題畫面']:
+            print(配置['標題畫面'])
             self.load(QUrl(f'file:///{工程路徑}/{配置["標題畫面"]}'))
         else:
+            print(1)
             self.load(QUrl('file:///html/title.html'))
             
         self.show()
