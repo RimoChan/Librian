@@ -94,6 +94,14 @@ class 山彥(QObject):
     def 設置(self,參數):
         with open(f'{工程路徑}/存檔資料/用戶設置.json','w',encoding='utf8') as f:
             f.write(參數)
+    def 選(self,參數):
+        t=讀者.狀態.選項[int(參數)][1]
+        讀者.狀態.選項=()
+        t()
+        logging.debug('選擇了「%s」。'%參數)
+        讀者.步進()
+        更新()
+        
     @pyqtSlot(str,str)
     def rec2(self,令,參數):
         logging.debug(f'收到頁面來的指令:「{令}({參數})」')
@@ -107,17 +115,8 @@ class 山彥(QObject):
         logging.debug(f'收到頁面來的指令: 「{令}」')
         if 令 in 山彥.__dict__:
             山彥.__dict__[令](self)
-        elif 令[0]=='選':
-            令=令[1:]
-            t=讀者.狀態.選項[int(令)][1]
-            讀者.狀態.選項=()
-            t()
-            logging.debug('選擇了「%s」。'%令)
-            讀者.步進()
-            更新()
         else:
             raise Exception(f'命令「{令}」無法理解。')
-                
         js('link_on=true')
 
 #————————————————————————————

@@ -84,7 +84,7 @@
 }
 演出.點選項 = function (x){
 	$('#choice').hide(250);
-	send(x);
+	send('選',x+'');
 	演出.選擇之刻=false
 }
 
