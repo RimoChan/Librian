@@ -13,7 +13,7 @@ from 環境 import 配置,工程路徑
 def js(code):
     主窗口.網頁.頁面.runJavaScript(code)
 def 更新():
-    js('state_Change(%s)' % json.dumps(讀者.狀態.導出()))
+    js('演出.改變演出狀態(%s)' % json.dumps(讀者.狀態.導出()))
 #————————————————————————————
 #接受gui回傳的資訊
 class 山彥(QObject):
@@ -49,7 +49,7 @@ class 山彥(QObject):
               解析度={配置['主解析度']};
               邊界={int(配置['顯示繪圖邊界'])};
               link_on=true; 
-              準備工作();
+              演出.準備工作();
            '''
         try:
             with open(f'{工程路徑}/存檔資料/用戶設置.json',encoding='utf8') as f:
@@ -61,7 +61,7 @@ class 山彥(QObject):
         文件名, 文件類型 = self.選擇存檔文件()
         if 文件名:
             讀者.存檔(文件名)
-            js('提示("存檔好了。")')
+            js('演出.提示("存檔好了。")')
     def 讀檔(self):
         文件名, 文件類型 = self.選擇讀檔文件()
         if 文件名:
@@ -69,7 +69,7 @@ class 山彥(QObject):
             更新()
     def 快速存檔(self):
         讀者.存檔(f'{工程路徑}/存檔資料/快速存檔.pkl')
-        js('提示("存檔好了。")')
+        js('演出.提示("存檔好了。")')
     def 快速讀檔(self):
         讀者.讀檔(f'{工程路徑}/存檔資料/快速存檔.pkl')
         更新()

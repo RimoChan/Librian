@@ -13,6 +13,8 @@
        </script>
        <script src='黑科技\jquery.mousewheel.js'>
        </script>
+       <script src='全局.js'>
+       </script>
        <script src='演出.js'>
        </script>
        <script src='控制.js'>
@@ -84,7 +86,7 @@
                         </input>
                         大聲(沒用)
                     </div>
-                    <a class="hicon" href='javascript:exit_config();'>
+                    <a class="hicon" href='javascript:控制.退出設置();'>
                         ×
                     </a>
                 </div>
@@ -106,10 +108,10 @@
                     <a class="hicon" href='javascript:alert("沒做這個功能");'>
                         A
                     </a>
-                    <a class="hicon double" href='javascript:$("#config").show();'">
+                    <a class="hicon double" href='javascript:控制.進入設置();'">
                         co
                     </a>
-                    <a class="hicon double" href='javascript:skip();'>
+                    <a class="hicon double" href='javascript:控制.快進();'>
                         sk
                     </a>
                     <a class="hicon double" href='javascript:send("回標題")'>

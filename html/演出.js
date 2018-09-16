@@ -1,33 +1,6 @@
-//與後端的通信器
-link_on=true;	//保證同時只有一個通信
-var a=new QWebChannel(qt.webChannelTransport, function (channel) {
-	window.handler = channel.objects.handler;;
-	send=function(s1,s2){
-		if(link_on){
-			link_on=false;
-			if(!s2)
-				window.handler.rec1(s1)
-			else
-				window.handler.rec2(s1,s2)
-		}
-	};
-});
+演出=new Object();
 
-
-$(function() {
-	初始化()
-});
-
-function 初始化(){
-	try{
-        send('初始化');
-    }
-    catch(err){
-        setTimeout(初始化,35)
-    }
-}
-
-function 準備工作(){
+演出.準備工作 = function(){
 	$("<link>")
 		.attr({ rel: "stylesheet",
 		type: "text/css",
@@ -36,23 +9,23 @@ function 準備工作(){
 	$('#总画面').css('width',解析度[0])
 	$('#总画面').css('height',解析度[1])
 	if(邊界) $('div').css('border','1px solid #22f');
-	change_img('cover','url(static/None.png)',0);
-	change_img('bg','url(static/None.png)',0);
-	change_img('cg','url(static/None.png)',0);
-	change_img('ch','url(static/.png)',0);
-	更新()
+	演出.換圖('cover','url(static/None.png)',0);
+	演出.換圖('bg','url(static/None.png)',0);
+	演出.換圖('cg','url(static/None.png)',0);
+	演出.換圖('ch','url(static/.png)',0);
+	演出.更新()
 }
 
 
-function 步進更新(){
+演出.步進更新 = function(){
 	send('步進更新');
 }
 
-function 更新(){
+演出.更新 = function(){
 	send('更新')
 }
 
-function 信息預處理(data){
+演出.信息預處理 = function(data){
 	if(!data.bg)
 		data.bg='url(static/None.png)';
 	else
@@ -74,10 +47,10 @@ function 信息預處理(data){
 }
 
 //得到信息全部改變頁面
-function state_Change(data) {
-	信息預處理(data)
+演出.改變演出狀態 = function(data) {
+	演出.信息預處理(data)
 	if(data.choice.length>0){
-		處理選項(data.choice);
+		演出.處理選項(data.choice);
 		return
 	}
 	if(data.info){
@@ -85,103 +58,103 @@ function state_Change(data) {
 			data.name=''
 			data.word=''
 			data.bgm=['None',0]
-			插入圖(data.info[1])
+			演出.插入圖(data.info[1])
 		}
 		if(data.info[0]=='video')
-			放視頻(data.info[1])
+			演出.放視頻(data.info[1])
 		if(data.info[0]=='load')
-			load特效()
+			演出.load特效()
 	}
-	換cg(data.cg);
-	換bg(data.bg);
-	換立繪(data.ch);
-	換bgm(data.bgm);
-	換人名(data.name);
-	換對話(data.word,data.name);
+	演出.換cg(data.cg);
+	演出.換bg(data.bg);
+	演出.換立繪(data.ch);
+	演出.換bgm(data.bgm);
+	演出.換人名(data.name);
+	演出.換對話(data.word,data.name);
 }
 
-choice_state=false;
-function 處理選項(choice){
+演出.選擇之刻=false;
+演出.處理選項 = function(choice){
 	var tot='';
 	for(var i in choice)
-		tot+='<button onclick="choose('+i+');">'+choice[i]+'</botton>';
+		tot+='<button onclick="演出.點選項('+i+');">' +choice[i]+'</botton>';
 	$('#choice').html(tot);
 	$('#choice').show(250);
-	choice_state=true
+	演出.選擇之刻=true
 }
-function choose(x){
+演出.點選項 = function (x){
 	$('#choice').hide(250);
 	send(x);
-	choice_state=false
+	演出.選擇之刻=false
 }
 
-function 插入圖(圖){
-	left_disable=true;
+演出.插入圖 = function(圖){
+	控制.左鍵屏蔽=true;
 	$('#cover').css('display','block');
 	
     $('#总画面').fadeOut(400);
-	setTimeout( (function(){ change_img('cover','url('+path+'img/'+圖+')',1);})          , 400);
+	setTimeout( (function(){ 演出.換圖('cover','url('+path+'img/'+圖+')',1);})          , 400);
     $('#总画面').fadeIn(1100);
-	setTimeout( (function(){ change_img('cover','url(static/None.png)',1);})          , 4500);
+	setTimeout( (function(){ 演出.換圖('cover','url(static/None.png)',1);})          , 4500);
 	setTimeout( (function(){ $('#cover').css('display','none');            })          , 5500);
 	setTimeout( (function(){ 步進更新();                                  })            ,6000);
-	setTimeout( (function(){ left_disable=false;    })                                 , 6500);
+	setTimeout( (function(){ 控制.左鍵屏蔽=false;    })                                 , 6500);
 }
 
-function 放視頻(視頻){
-	left_disable=true;
+演出.放視頻 = function(視頻){
+	控制.左鍵屏蔽=true;
 	var v=$('video');
 	v.css('display','block');
 	v.attr('src',path+'video/'+視頻);
 	v[0].addEventListener('ended', function () {  
 		步進更新();
-		setTimeout( (function(){ v[0].style.display = 'none'; left_disable=false; }) , 500);
+		setTimeout( (function(){ v[0].style.display = 'none'; 控制.左鍵屏蔽=false; }) , 500);
 	}, false);
 	v[0].play();
 }
 
-function load特效(){
-    left_disable=true;
+演出.load特效 = function(){
+    控制.左鍵屏蔽=true;
     $('#总画面').fadeOut(0);
     $('#总画面').fadeIn(1200);
-    setTimeout( (function(){ left_disable=false;    }) , 1000);
+    setTimeout( (function(){ 控制.左鍵屏蔽=false;    }) , 1000);
 }
 
-function 提示(x){
+演出.提示 = function(x){
     $('#提示').html(x);
     $('#提示').fadeIn(300);
     $('#提示').hide(1000);
 }
 
-現在cg='None'
-function 換cg(cg){
-	if(cg===現在cg)
+演出.現在cg='None'
+演出.換cg = function(cg){
+	if(cg===演出.現在cg)
 		return;
-	現在cg=cg
-	change_img('cg',cg,1);
+	演出.現在cg=cg
+	演出.換圖('cg',cg,1);
 }
 
 //改變立繪
-function 換立繪(text){
+演出.換立繪 = function(text){
 	$('#ch').html(text)
 }	
 
-現在bg='None'
-function 換bg(bg){
-	if(bg===現在bg)
+演出.現在bg='None'
+演出.換bg = function(bg){
+	if(bg===演出.現在bg)
 		return;
 	現在bg=bg
 	if(bg==='None')
 		bg='url(static/None.png)'
-	change_img('bg',bg,1.4);
+	演出.換圖('bg',bg,1.4);
 }
 
-function 換人名(text) {
+演出.換人名 = function(text) {
 	$('#name').html(text);
 	$('#history').append(text+'<br/>');
 }
 
-function 換對話(text,name) {
+演出.換對話 = function (text,name) {
     if (name)
         $('#word').逐字打印(text,true);
     else
@@ -189,25 +162,25 @@ function 換對話(text,name) {
     $('#history').append(text+'<br/><br/>');
 }
 
-當前曲名='None'
-function 換bgm(bgm){
+演出.當前曲名='None'
+演出.換bgm = function(bgm){
 	var 曲名=bgm[0],音量=bgm[1];
 	var au=$('#bgm');
-	if(當前曲名==曲名) return;
-	當前曲名=曲名
-	if(當前曲名=='None'){
+	if(演出.當前曲名==曲名) return;
+	演出.當前曲名=曲名
+	if(演出.當前曲名=='None'){
 		au.stop()
 		au.animate({volume: 0}, 2000);
-		setTimeout( (function(){ au.attr('src',當前曲名); }) , 2000);
+		setTimeout( (function(){ au.attr('src',演出.當前曲名); }) , 2000);
 	}else{
 		au.stop()
-        au.attr('src',當前曲名);
+        au.attr('src',演出.當前曲名);
         au.animate({volume: 0}, 0);
 		au.animate({volume: 音量}, 2000);
 	}
 }
-//改變圖像，通用，bg和ch都會用到
-function change_img(dst,img_b,time){
+//改變圖像，通用
+演出.換圖 = function(dst,img_b,time){
 	var frame='A'+Math.ceil(Math.random()*999999).toString();
 	var img_a;
 	dst='#'+dst;
