@@ -1,5 +1,6 @@
 >py
-import time, threading
+import time
+import threading
 >endpy
 
 pandaye 「自动更新剧本！」
@@ -16,7 +17,7 @@ def 更新():
     time.sleep(5)
     #连接到你自己的发布地址
 
-    goto(lable='#更新完了')
+    goto(lable='更新完了')
 
     import 窗口,劇本
     劇本.讀者.步進()

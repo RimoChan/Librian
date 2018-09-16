@@ -16,10 +16,11 @@ def f(i):
         now_path+=i+'/'
     return f
 a=[i for i in os.listdir(now_path) if os.path.isdir(now_path+i)] 
-d=[(i,f(i)) for i in ['..']+a[:6]]+[('不看了',lambda: goto(lable='#end'))]
+d=[(i,f(i)) for i in ['..']+a[:6]]+[('不看了',lambda: goto(lable='end'))]
 choice(*d)
 > endpy
 
 > py
 goto(lable='back')
 > endpy
+*end
