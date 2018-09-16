@@ -90,7 +90,7 @@ window.document.onkeyup = function(evt){
 $(function () {
 	$('#tot').mousewheel(function (event, delta) {
 		if (delta > 0)
-			顯示履歷();
+			控制.顯示履歷();
 		if (delta < 0){
 			if($('.scroll').is(':hidden'))
 				控制.左鍵功能();
@@ -98,7 +98,7 @@ $(function () {
 	});
 	$("#tot").mousedown(function(e) {
     if (3 == e.which) {
-    	右鍵功能();
+    	控制.右鍵功能();
     } else if (1 == e.which) {
     	控制.左鍵功能();
     }
