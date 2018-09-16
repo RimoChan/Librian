@@ -36,7 +36,7 @@
 		data.cg='url('+演出.圖片文件夾+'/'+data.cg+')';
 
 	if(data.bgm[0]!='None')
-		data.bgm[0]=演出.音樂文件夾+'bgm/'+data.bgm[0];
+		data.bgm[0]=演出.音樂文件夾+'/'+data.bgm[0];
 	if(data.name!='') {
 		data.name='【'+data.name+'】';
 		$('#name_bg').fadeIn(200);
