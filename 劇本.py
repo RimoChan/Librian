@@ -91,6 +91,16 @@ class 讀者():
         self.狀態=狀態()
         self.狀態.重置()
         鏡頭.鏡頭對應={}
+    
+    def 下一句(self):
+        if not self.劇本棧:
+            return {'旁白':'<small>【演出結束了】</small>'}
+        s=self.劇本文件.下一句()
+        if s:
+            return s
+        else:
+            self.劇本棧.pop()
+            return self.下一句()
 
     def 編譯(self,s):
         f=open(s,encoding='utf-8')
@@ -156,7 +166,7 @@ class 讀者():
         if self.狀態.選項: return
         self.狀態.額外信息=''
         
-        s=self.劇本文件.下一句()
+        s=self.下一句()
             
         if any([i in s for i in ('註釋','空行','躍點')]):
             self.步進()
