@@ -13,4 +13,6 @@ def 設定工程路徑(路徑):
     global 工程路徑
     工程路徑=路徑
     with open('%s/工程配置.yaml'%工程路徑,encoding='utf8') as f:
-        配置.update(yaml.load(f))
+        a=yaml.load(f)
+        for i in a:
+            配置.update(a[i])
