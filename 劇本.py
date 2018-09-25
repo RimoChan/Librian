@@ -9,6 +9,7 @@ import yaml
 from 環境 import 配置,工程路徑
 import 鏡頭
 import 編譯
+import 讀txt
 
 def 硬命令(s):
     return 命令('>'+s)
@@ -103,7 +104,7 @@ class 讀者():
             return self.下一句()
 
     def 編譯(self,s):
-        f=open(s,encoding='utf-8')
+        f=讀txt.讀(s)
         return 劇本(編譯.編譯(f),s)
 
     @property
