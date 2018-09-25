@@ -27,9 +27,10 @@ class librian面板(QWidget):
     def 選擇工程(self):
         工程路徑 = QFileDialog.getExistingDirectory(self,
                                     "选取文件夹",
-                                    "./project")   
-        self.答案 = 工程路徑
-        self.app.exit()
+                                    "./project")
+        if 工程路徑:
+            self.答案 = 工程路徑
+            self.app.exit()
 
     
     def 新建工程(self):
