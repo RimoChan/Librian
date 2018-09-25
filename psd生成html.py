@@ -18,7 +18,11 @@ except Exception as e:
 def 位置轉html(位置):
     return f'left:{位置[0]}; top:{位置[1]}; transform:scale({位置[2]});'
 
-def 生成html(包,衣=None,顏=None,位置=[0,0,1],上次生成=None):
+def 生成html(包,參數):
+    衣=參數['衣']
+    顏=參數['顏']
+    位置=參數['位置']
+    動作=參數['動作']
     if 包==''or not 映射:
         return ''
     衣=衣 or '_默認'
@@ -38,17 +42,16 @@ def 生成html(包,衣=None,顏=None,位置=[0,0,1],上次生成=None):
     人物配件=映射[包]
     類=[]
     css=''
-    if 包 not in 上次生成:
-        類.append('淡入')
-    elif 上次生成[包]!=位置:
-        原位置=上次生成[包]
-        新位置=位置
-        print(原位置,新位置)
-        臨時名='移動'+str(random.randint(0,999999))
-        動畫名='_'+臨時名
-        css+='@keyframes %s { 0%% { %s;}100%% { %s;} }' % (動畫名,位置轉html(原位置),位置轉html(新位置))
-        css+='.%s { animation: %s 0.4s;animation-fill-mode:forwards; }' % (臨時名,動畫名)
-        類.append(臨時名)
+    if 動作:
+        類.append(動作[0])
+        if 動作[0]=='移動':
+            原位置=動作[1]
+            新位置=動作[2]
+            臨時名='移動'+str(random.randint(0,999999))
+            動畫名='_'+臨時名
+            css+='@keyframes %s { 0%% { %s;}100%% { %s;} }' % (動畫名,位置轉html(原位置),位置轉html(新位置))
+            css+='.%s { animation: %s 0.4s;animation-fill-mode:forwards; }' % (臨時名,動畫名)
+            類.append(臨時名)
         
     頭html='<style>%s</style>' % css
     人物html=''

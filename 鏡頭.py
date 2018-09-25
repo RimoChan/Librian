@@ -4,32 +4,47 @@ import logging
 
 默認位置=配置['默認立繪位置']
 
+#['潘大爺':'嘆']
 衣對應={}
 顏對應={}
 鏡頭對應={}
 
-上次生成={}
+上次位置={}
 
 class 鏡頭:
     def __init__(self,所有位置):
         self.所有位置=所有位置
         for 人 in 所有位置:
             鏡頭對應[人]=self
+            
+    def 統合(self):
+        global 上次位置
+        t={}
+        for 人 in self.所有位置:
+            位置=self.所有位置[人]
+            t[人]={'衣':衣對應.get(人),'顏':顏對應.get(人),'位置':位置,'動作':None}
+            if 人 not in 上次位置:
+                t[人]['動作']=('淡入',)
+            elif 上次位置[人]!=位置: 
+                原位置=上次位置[人]
+                t[人]['動作']=('移動',原位置,位置)
+        上次位置={}
+        for 人 in self.所有位置:
+            上次位置[人]=self.所有位置[人]
+        return t
+        
     def 轉html(self):
         tot=''
         try:
-            global 上次生成
-            for 人 in self.所有位置:
-                tot+=生成html(人,衣對應.get(人),顏對應.get(人),self.所有位置[人],上次生成)
-            上次生成={}
-            for 人 in self.所有位置:
-                上次生成[人]=self.所有位置[人]
-        except Exception as e:   
+            for 人,參數 in self.統合().items():
+                tot+=生成html(人,參數)
+        except Exception as e: 
             if 配置['嚴格模式']:
-                raise e    
+                raise e 
             logging.warning('立繪立即被停用，因爲立繪生成出現問題了「%s」。' %e.__repr__())
             self.轉html=lambda:None
         return tot
+        
     def __repr__(self):
         return str(self.所有位置)
     def __bool__(self):
