@@ -97,7 +97,7 @@
     $('#总画面').fadeIn(1100);
 	setTimeout( (function(){ 演出.換圖('cover','url(static/None.png)',1);})          , 4500);
 	setTimeout( (function(){ $('#cover').css('display','none');            })          , 5500);
-	setTimeout( (function(){ 步進更新();                                  })            ,6000);
+	setTimeout( (function(){ 演出.步進更新();                                  })            ,6000);
 	setTimeout( (function(){ 控制.左鍵屏蔽=false;    })                                 , 6500);
 }
 
@@ -107,7 +107,7 @@
 	v.css('display','block');
 	v.attr('src',演出.視頻文件夾+'/'+視頻);
 	v[0].addEventListener('ended', function () {  
-		步進更新();
+		演出.步進更新();
 		setTimeout( (function(){ v[0].style.display = 'none'; 控制.左鍵屏蔽=false; }) , 500);
 	}, false);
 	v[0].play();
