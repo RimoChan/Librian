@@ -59,11 +59,15 @@ class 狀態():
         self.CG=''
         self.選項=()
 
-    def 導出(self):
+    def 導出(self,html=True):
+        if html:
+            ch=鏡頭.查詢(self.人物).轉html()
+        else:
+            ch=鏡頭.查詢(self.人物).拆解()
         return {'info':self.額外信息,
                 'word':self.話語,
                 'name':self.名字,
-                'ch'  :鏡頭.查詢(self.人物).轉html(),
+                'ch'  :ch,
                 'bg'  :self.背景,
                 'bgm' :self.背景音樂,
                 'cg'  :self.CG,
@@ -95,7 +99,7 @@ class 讀者():
     
     def 下一句(self):
         if not self.劇本棧:
-            return {'旁白':'<small>【演出結束了】</small>'}
+            return {'旁白':'<small>【演出結束了】</small>','終焉':True}
         s=self.劇本文件.下一句()
         if s:
             return s
@@ -179,6 +183,8 @@ class 讀者():
         if '插入圖' in s:
             logging.debug('插入圖: %s'% s['插入圖'] )
             self.狀態.額外信息=('cut', s['插入圖'] )
+        if '終焉' in s:
+            self.狀態.額外信息=('終焉',)
         if '鏡頭' in s:
             if s['鏡頭']=='+':
                 d=yaml.load(s['內容'])

@@ -1,4 +1,5 @@
 from psd生成html import 生成html
+import 立繪
 from 環境 import 配置
 import logging
 
@@ -32,12 +33,15 @@ class 鏡頭:
         for 人 in self.所有位置:
             上次位置[人]=self.所有位置[人]
         return t
-        
+    
+    def 拆解(self):
+        return [立繪.人物拆解(人,參數) for 人,參數 in self.統合().items()]
+    
     def 轉html(self):
         tot=''
         try:
-            for 人,參數 in self.統合().items():
-                tot+=生成html(人,參數)
+            for a in self.拆解():
+                tot+=生成html(a)
         except Exception as e: 
             if 配置['嚴格模式']:
                 raise e 
