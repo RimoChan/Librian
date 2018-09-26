@@ -4,12 +4,11 @@ import random
 import yaml
 from 環境 import 配置,工程路徑
 
-import psd拆包
 
 def 位置轉html(位置):
     return f'left:{位置[0]}; top:{位置[1]}; transform:scale({位置[2]});'
 
-def 生成html(參數):
+def 生成html(參數): 
     動作=參數['動作']
     位置=參數['位置']
     類=[]

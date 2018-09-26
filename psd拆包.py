@@ -4,14 +4,19 @@ import yaml
 from psd_tools import PSDImage
 import PIL
 
-def 拆包(文件名):
+def 拆包(文件名,目標文件夾):
+    try:
+        os.mkdir(目標文件夾)
+    except:
+        None
+    前名=os.path.basename(os.path.splitext(文件名)[0])
+    圖片文件夾=os.path.join(目標文件夾,前名)
     psd = PSDImage.load(文件名)
-    前名=文件名[:-4] +'/' #網頁路徑問題的patch……什麼鬼2333
-    print(前名)
     d={}
     def 記錄(層,path=''):
+        print(path)
         try:
-            os.mkdir(前名+path)
+            os.mkdir(os.path.join(圖片文件夾,path))
         except:
             None
         if hasattr(層,'layers'):
@@ -21,13 +26,13 @@ def 拆包(文件名):
             名=path+層.name
             d[名]={'x':層.bbox.x1,'y':層.bbox.y1}
             layer_image = 層.as_PIL()
-            layer_image.save(前名+'%s.png' %名)
+            layer_image.save(os.path.join(圖片文件夾,f'{名}.png'))
     
     for i in psd.layers:
         記錄(i)
     
-    with open('%s/位置.yaml'%前名,'w',encoding='utf8') as f:
+    with open(os.path.join(圖片文件夾,'位置.yaml' ),'w',encoding='utf8') as f:
         yaml.dump(d,f,default_flow_style=False,allow_unicode=1)
 
 if __name__=='__main__':
-    拆包('../project/test/立繪/靈夢.psd')
+    拆包('project/test/立繪/靈夢.psd',目標文件夾='project/test/_臨時文件')
