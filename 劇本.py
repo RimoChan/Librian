@@ -173,7 +173,7 @@ class 讀者():
         
         s=self.下一句()
             
-        if any([i in s for i in ('註釋','空行','躍點')]):
+        if any([i in s for i in ('註釋','躍點')]):
             self.步進()
         if '函數' in s:
             命令(s).執行(self)
