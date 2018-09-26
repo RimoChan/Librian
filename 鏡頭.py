@@ -41,7 +41,8 @@ class 鏡頭:
         tot=''
         try:
             for a in self.拆解():
-                tot+=生成html(a)
+                if a:
+                    tot+=生成html(a)
         except Exception as e: 
             if 配置['嚴格模式']:
                 raise e 
