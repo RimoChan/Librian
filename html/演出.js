@@ -91,14 +91,14 @@
 演出.插入圖 = function(圖){
 	控制.左鍵屏蔽=true;
 	$('#cover').css('display','block');
-	
-    $('#总画面').fadeOut(400);
-	setTimeout( (function(){ 演出.換圖('cover','url('+演出.圖片文件夾+'/'+圖+')',1);})          , 400);
-    $('#总画面').fadeIn(1100);
-	setTimeout( (function(){ 演出.換圖('cover','url(static/None.png)',1);})          , 4500);
-	setTimeout( (function(){ $('#cover').css('display','none');            })          , 5500);
-	setTimeout( (function(){ 演出.步進更新();                                  })            ,6000);
-	setTimeout( (function(){ 控制.左鍵屏蔽=false;    })                                 , 6500);
+    $('#总画面').fadeOut(1400);
+	setTimeout( (function(){ 演出.換圖('cover','url('+演出.圖片文件夾+'/'+圖+')',0);})   , 1500);
+    setTimeout( (function(){ 演出.步進更新();                                  })       ,1500);
+    setTimeout( (function(){ $('#总画面').fadeIn(1100);                       })       ,1500);
+	setTimeout( (function(){ 演出.換圖('cover','url(static/None.png)',1);})             , 4500);
+    setTimeout( (function(){ $('#cover').css('animation','');}), 5550);
+    setTimeout( (function(){ $('#cover').css('display','none');}), 5600);
+    setTimeout( (function(){ 控制.左鍵屏蔽=false;    })                                 , 5600);
 }
 
 演出.放視頻 = function(視頻){
@@ -186,10 +186,12 @@
 	dst='#'+dst;
 	img_a=$(dst).attr('my_img');
 	
-	$(dst).css('animation','');
-	$('#style').append('@keyframes '+frame+'{ 0%{background-image:'+img_a+';}100%{background-image:'+img_b+';} }\n');
-	$(dst).css('animation',frame+' '+time.toString()+'s');	
-	$(dst).css('background-image',img_b);
+    if (time>0){
+	   $(dst).css('animation','');
+	   $('#style').append('@keyframes '+frame+'{ 0%{background-image:'+img_a+';}100%{background-image:'+img_b+';} }\n');
+	   $(dst).css('animation',frame+' '+time.toString()+'s');	
+	}
+    $(dst).css('background-image',img_b);
 	
 	$(dst).attr('my_img',img_b);
 }
