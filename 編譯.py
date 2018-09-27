@@ -85,7 +85,8 @@ def 編譯(f):
     g=iter(f.readlines())
     for s in g:
         if not re.search('\\S',s):
-            棧.尾句['之後的空白']=棧.尾句.get('之後的空白',0)+1
+            if 棧.尾:
+                棧.尾句['之後的空白']=棧.尾句.get('之後的空白',0)+1
             continue
 
         自={}
