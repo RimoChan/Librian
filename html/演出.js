@@ -39,6 +39,7 @@
 		data.bgm[0]=演出.音樂文件夾+'/'+data.bgm[0];
 	if(data.name!='') {
 		data.name='【'+data.name+'】';
+        data.word='「'+data.word+'」';
 		$('#name_bg').fadeIn(200);
 	}else{
 		data.word='　　'+data.word;
