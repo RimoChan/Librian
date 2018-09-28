@@ -60,6 +60,7 @@ class 狀態():
         self.選項=()
 
     def 導出(self,html=True):
+        鏡頭.語者=self.名字
         if html:
             ch=鏡頭.查詢(self.人物).轉html()
         else:
