@@ -81,8 +81,11 @@ class j棧(list):
         return self[-1][-1]
 
 def 編譯(f):
+    return 生編譯(f.readlines())
+
+def 生編譯(s):
     棧=j棧()
-    g=iter(f.readlines())
+    g=iter(s)
     for s in g:
         if not re.search('\\S',s):
             if 棧.尾:

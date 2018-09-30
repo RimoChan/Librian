@@ -93,9 +93,20 @@ class 劇本():
 class 讀者():
     def __init__(self):
         self.劇本棧=[self.編譯(f'{工程路徑}/{配置["劇本入口"]}')]
-        self.箱庭={'goto':self.跳轉, 'push':self.棧跳轉, 'choice':self.產生選項}
         self.狀態=狀態()
         self.狀態.重置()
+        self.箱庭={
+            'goto':self.跳轉, 
+            'call':self.棧跳轉, 
+            'choice':self.產生選項,
+            'fusion':self.同化,
+            'adv_end':self.演出終了,
+            '跳轉':self.跳轉, 
+            '調用':self.棧跳轉,
+            '產生選項':self.產生選項,
+            '同化':self.同化,
+            '演出終了':self.演出終了,
+        }
         鏡頭.鏡頭對應={}
     
     def 下一句(self):
@@ -166,6 +177,12 @@ class 讀者():
     def 產生選項(self,*d):
         d=[(i[0],i[1]) for i in d]
         self.狀態.選項=d
+    
+    def 同化(self,s):
+        self.劇本棧.append(劇本(編譯.生編譯(iter([s])),'_字串'))
+        
+    def 演出終了(self):
+        self.劇本棧=[]
 
 #——————————————————————————————————————————————
     def 步進(self):    
