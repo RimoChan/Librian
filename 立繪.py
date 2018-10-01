@@ -1,6 +1,7 @@
 import os
 import yaml
 import logging
+import copy
 from 環境 import 配置,工程路徑
 import psd拆包
 
@@ -15,16 +16,26 @@ except Exception as e:
     映射=None
     
 def 人物拆解(包,參數):
+    if not 映射 or 包 not in 映射:
+        logging.warning(f'沒有映射「{包}」的立繪。')
+        return None
+        
     衣=參數['衣']
     顏=參數['顏']
-    位置=參數['位置']
+    位置=copy.deepcopy(參數['位置'])
     語=參數['語']
-    if 包=='' or not 映射:
-        return None
     衣=衣 or '_默認'
     顏=顏 or '_默認'
-    if len(位置)==2:
-        位置.append(1)
+    
+    動作=copy.deepcopy(參數['動作'])
+    if '縮放' in 映射[包]:
+        固有縮放=映射[包]['縮放']
+        位置[2]*=固有縮放
+        if 動作 and 動作[0]=='移動':
+            動作[1][2]*=固有縮放
+            動作[2][2]*=固有縮放
+        
+    
     if not os.path.isdir('%s/%s'%(圖片路徑,包)):
         try:
             包名='%s/%s.psd'%(psd路徑,包)
@@ -36,7 +47,7 @@ def 人物拆解(包,參數):
         d=yaml.load(f)
     人物配件=映射[包]
     
-    人={'圖層':[],'位置':位置,'動作':參數['動作']}
+    人={'圖層':[],'位置':位置,'動作':動作}
     
     衣配件=人物配件['衣'][衣][::-1]
     顏=人物配件['顏'][顏]
@@ -52,6 +63,5 @@ def 人物拆解(包,參數):
             {'文件':'%s/%s/%s.png'%(相對網頁路徑,包,物件),
             '子位置':(x,y)}
         )
-                
     return 人
 

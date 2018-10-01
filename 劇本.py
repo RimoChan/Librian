@@ -61,10 +61,13 @@ class 狀態():
 
     def 導出(self,html=True):
         鏡頭.語者=self.名字
-        if html:
-            ch=鏡頭.查詢(self.人物).轉html()
+        if self.人物:
+            if html:
+                ch=鏡頭.查詢(self.人物).轉html()
+            else:
+                ch=鏡頭.查詢(self.人物).拆解()
         else:
-            ch=鏡頭.查詢(self.人物).拆解()
+            ch=''
         return {'info':self.額外信息,
                 'word':self.話語,
                 'name':self.名字,

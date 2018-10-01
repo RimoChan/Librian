@@ -17,8 +17,10 @@ import logging
 class 鏡頭:
     def __init__(self,所有位置):
         self.所有位置=所有位置
-        for 人 in 所有位置:
+        for 人,位置 in 所有位置.items():
             鏡頭對應[人]=self
+            if len(位置)==2:
+                位置.append(1)
             
     def 統合(self):
         global 上次位置
@@ -44,9 +46,9 @@ class 鏡頭:
     def 轉html(self):
         tot=''
         try:
-            for a in self.拆解():
-                if a:
-                    tot+=生成html(a)
+            for 人 in self.拆解():
+                if 人:
+                    tot+=生成html(人)
         except Exception as e: 
             if 配置['嚴格模式']:
                 raise e 
