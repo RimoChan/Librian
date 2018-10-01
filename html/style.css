@@ -2,7 +2,7 @@
 	margin:0;
 	padding:0;
 	font-family:'微软雅黑';
-	background:#000;
+    background:url(static/塊.png);
 	-webkit-user-select:none;
 	color:#fff;
 	overflow:hidden;
@@ -165,11 +165,20 @@ button{
 }
 
 #ch{
-	position:fixed;
-	top:0;
-	left:0;
-	background:#777;
-	z-index:-2;
+    position:absolute;
+    top:0;
+    left:0;
+    background:#777;
+    z-index:-2;
+}
+#墊底{
+    position:absolute;
+    top:0;
+    left:0;
+    width:1366;
+    height:768;
+    background:#000;
+    z-index:-999;
 }
 #cache{
 	height:0;
