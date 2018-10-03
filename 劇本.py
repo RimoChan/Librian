@@ -1,12 +1,13 @@
 import sys
 import os
 import logging
+import copy
 import json
 import pickle
 import re, shlex
 import yaml
 
-from 環境 import 配置,工程路徑
+from 環境 import 配置
 import 鏡頭
 import 編譯
 import 讀txt
@@ -94,8 +95,8 @@ class 劇本():
         return r
 
 class 讀者():
-    def __init__(self):
-        self.劇本棧=[self.編譯(f'{工程路徑}/{配置["劇本入口"]}')]
+    def __init__(self,初始劇本):
+        self.劇本棧=[self.編譯(初始劇本)]
         self.狀態=狀態()
         self.狀態.重置()
         self.箱庭={
@@ -132,6 +133,15 @@ class 讀者():
         
 #————————————————————————————
 #S/L方法
+    def 縮減箱庭(self):
+        鏡箱庭=copy.copy(self.箱庭)
+        鏡箱庭2=copy.copy(self.箱庭)
+        for i,x in 鏡箱庭2.items():
+            try:
+                pickle.dumps(x)
+            except:
+                鏡箱庭.pop(i)
+        return 鏡箱庭
     def 存檔(self,path):
         with open(path,'wb') as f:
             pickle.dump({'狀態':self.狀態,
@@ -139,6 +149,7 @@ class 讀者():
                          '顏對應':鏡頭.顏對應,
                          '鏡頭對應':鏡頭.鏡頭對應,
                          '劇本棧':self.劇本棧,
+                         '箱庭':self.縮減箱庭(),
                          }
                          ,f)
     def 讀檔(self,path):
@@ -151,6 +162,7 @@ class 讀者():
                 self.狀態=data['狀態']
                 self.狀態.額外信息=('load',)
                 self.劇本棧=data['劇本棧']
+                self.箱庭=data['箱庭']
         except Exception as e:
             logging.warning('讀檔失敗……因爲%s'%e)
 
@@ -232,10 +244,10 @@ class 讀者():
                 logging.debug([s['名'],s['代'],s['顏']].__str__())
                 self.步進()
 
-讀者=讀者()
 if __name__=='__main__':
+    初讀者=讀者()
     for i in range(110):
-        q=讀者.狀態.導出()
+        q=初讀者.狀態.導出()
         del q['ch']
         print(q)
-        讀者.步進()
+        初讀者.步進()

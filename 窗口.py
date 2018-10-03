@@ -7,9 +7,10 @@ import logging
 import json
 import os
 
-from 劇本 import 讀者
+import 劇本
 from 環境 import 配置,工程路徑
 
+讀者=劇本.讀者(f'{工程路徑}/{配置["劇本入口"]}')
 
 def js(code):
     主窗口.網頁.頁面.runJavaScript(code)
