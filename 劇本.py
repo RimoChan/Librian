@@ -55,13 +55,14 @@ class 狀態():
         self.話語=''
         self.名字=''
         self.人物=''
+        self.語者=''
         self.背景=''
         self.背景音樂=('',1)
         self.CG=''
         self.選項=()
 
     def 導出(self,html=True):
-        鏡頭.語者=self.名字
+        鏡頭.語者=self.語者
         if self.人物:
             if html:
                 ch=鏡頭.查詢(self.人物).轉html()
@@ -229,6 +230,7 @@ class 讀者():
         if '旁白' in s:
             self.狀態.話語 = s['旁白']
             self.狀態.名字 = ''
+            self.狀態.語者 = ''
         if '名' in s:
             if '語' in s:
                 鏡頭.顏對應[s['名']]=s['顏']
@@ -236,6 +238,7 @@ class 讀者():
                     self.狀態.人物 = s['名']
                 self.狀態.話語 = s['語']
                 self.狀態.名字 = s['代'] or s['名']
+                self.狀態.語者 = s['名']
                 logging.debug([s['名'],s['代'],s['顏'],s['語']].__str__())
             else:
                 鏡頭.顏對應[s['名']]=s['顏']
