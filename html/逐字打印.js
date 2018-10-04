@@ -18,10 +18,17 @@
 		}
 	}
 	e.fn.逐字打印 = function (n,嘀=false) { 
+        d = e(this)
+        if(設置.內容.文字速度==0){
+            待打印文字=''
+            d.empty()
+            d.attr('f','')
+            d.html(n)
+            return
+        }
 		if(嘀)
 			$('#嘀').attr('src','./static/嘀.mp3');
 		待打印文字=n
-		d = e(this)
 		d.empty()
 		d.attr('f','')
 		循环(d)
