@@ -140,10 +140,8 @@ class gal窗口(QWebEngineView):
         self.resize(*配置['主解析度'])
 
         if 配置['標題畫面']:
-            print(配置['標題畫面'])
             self.load(QUrl(f'file:///{工程路徑}/{配置["標題畫面"]}'))
         else:
-            print(1)
             self.load(QUrl('file:///html/title.html'))
             
         self.show()
