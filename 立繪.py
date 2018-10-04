@@ -40,9 +40,9 @@ def 人物拆解(包,參數):
         try:
             包名='%s/%s.psd'%(psd路徑,包)
             psd拆包.拆包(包名,圖片路徑)
-        except:
+        except Exception as e:
             logging.warning('拆包「%s」時出錯了' % 包名)
-            return None
+            raise e
     with open('%s/%s/位置.yaml'%(圖片路徑,包),encoding='utf8') as f:
         d=yaml.load(f)
     人物配件=映射[包]
