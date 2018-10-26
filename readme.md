@@ -1,8 +1,10 @@
 # Librian: 簡明強大的Galgame引擎
 
 ## 關於中文文檔
-之前一股腦地把使用說明等等全塞進這裏了。後來想了想還是用mkdocs弄了個獨立的，看起來也漂亮點。   
-你可以在看完這個簡介之後去[這裏](https://rimochan.github.io/Librian_doc)看看詳細的說明。
+這個粗略的介紹是關於Librian本身的，如果你有興趣使用的話，
+可以直接參閱使用方法的[中文文檔](https://rimochan.github.io/Librian_doc)。
+
+對了，明明說是中文文檔卻沒有簡化字呢……這樣真的好嗎……
 
 ## 簡介
 Librian是一个容易上手的gal引擎，Librian由純python編寫而成，並基於pyqt前端。
