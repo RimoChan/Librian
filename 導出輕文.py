@@ -5,7 +5,8 @@ import yaml
 import shutil
 
 import 環境
-環境.設定工程路徑('./project/極夜所在的星之海')
+if __name__=='__main__':
+    環境.設定工程路徑('./project/極夜所在的星之海')
 
 from 環境 import 配置,工程路徑
 import 劇本
