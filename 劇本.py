@@ -18,17 +18,25 @@ class 命令():
     def __init__(self,d):
         self.函數=d['函數']
         self.參數=[i['a'] for i in d['參數表']]
+        self.原文=d['原文']
         if '代碼' in d:
             self.代碼=d['代碼']
     def 執行(self,讀者):
         try:
-            函數=eval('self.'+self.函數)
-            函數(*([讀者]+self.參數))
-        except Exception as e:
-            if 配置['嚴格模式']:
-                raise e
-            s='%s(%s)' % (self.函數,', '.join(self.參數))
-            logging.warning('在劇本中執行方法「%s」時遇到了意外%s'%(s,e.__repr__()))
+            eval(self.原文,{
+                i:(lambda *li,f=f:f(self,讀者,*li))
+                    for i,f in self.__class__.__dict__.items() 
+                        if i!='py' and i[0]!='_'
+            })
+        except:
+            try:
+                函數=eval('self.'+self.函數)
+                函數(*([讀者]+self.參數))
+            except Exception as e:
+                if 配置['嚴格模式']:
+                    raise e
+                s='%s(%s)' % (self.函數,', '.join(self.參數))
+                logging.warning('在劇本中執行方法「%s」時遇到了意外%s'%(s,e.__repr__()))
 
     #——————————————————————————————
     def py(self,讀者):
@@ -116,7 +124,7 @@ class 讀者():
     
     def 下一句(self):
         if not self.劇本棧:
-            return {'旁白':'<small>【演出結束了】</small>','終焉':True}
+            return {'旁白':'<small>【演出結束了】</small>','類型':'終焉'}
         s=self.劇本文件.下一句()
         if s:
             return s
@@ -206,20 +214,19 @@ class 讀者():
         self.狀態.額外信息=''
         
         s=self.下一句()
-            
-        if any([i in s for i in ('註釋','躍點')]):
+        類型=s['類型']
+        if 類型 in ('註釋','躍點'):
             self.步進()
-        if '函數' in s:
+        if 類型=='函數調用':
             命令(s).執行(self)
             if not self.狀態.選項:
                 self.步進()
-        #不是H的圖……
-        if '插入圖' in s:
+        if 類型=='插入圖':
             logging.debug('插入圖: %s'% s['插入圖'] )
             self.狀態.額外信息=('cut', s['插入圖'] )
-        if '終焉' in s:
+        if 類型=='終焉':
             self.狀態.額外信息=('終焉',)
-        if '鏡頭' in s:
+        if 類型=='鏡頭':
             if s['鏡頭']=='+':
                 d=yaml.load(s['內容'])
                 鏡頭.生成鏡頭(d)
@@ -227,25 +234,24 @@ class 讀者():
             elif s['鏡頭']=='-':
                 鏡頭.解除鏡頭(yaml.load(s['內容']))
                 self.步進()
-        if '旁白' in s:
+        if 類型=='旁白':
             self.狀態.話語 = s['旁白']
             self.狀態.名字 = ''
             self.狀態.語者 = ''
-        if '名' in s:
-            if '語' in s:
-                鏡頭.顏對應[s['名']]=s['顏']
-                if 鏡頭.查詢(s['名']) and self.狀態.人物!=s['名']:
-                    self.狀態.人物 = s['名']
-                self.狀態.話語 = s['語']
-                self.狀態.名字 = s['代'] or s['名']
-                self.狀態.語者 = s['名']
-                logging.debug([s['名'],s['代'],s['顏'],s['語']].__str__())
-            else:
-                鏡頭.顏對應[s['名']]=s['顏']
-                if 鏡頭.查詢(s['名']) and self.狀態.人物!=s['名']:
-                    self.狀態.人物 = s['名']
-                logging.debug([s['名'],s['代'],s['顏']].__str__())
-                self.步進()
+        if 類型=='人物對話':
+            鏡頭.顏對應[s['名']]=s['顏']
+            if 鏡頭.查詢(s['名']) and self.狀態.人物!=s['名']:
+                self.狀態.人物 = s['名']
+            self.狀態.話語 = s['語']
+            self.狀態.名字 = s['代'] or s['名']
+            self.狀態.語者 = s['名']
+            logging.debug([s['名'],s['代'],s['顏'],s['語']].__str__())
+        if 類型=='人物表情':
+            鏡頭.顏對應[s['名']]=s['顏']
+            if 鏡頭.查詢(s['名']) and self.狀態.人物!=s['名']:
+                self.狀態.人物 = s['名']
+            logging.debug([s['名'],s['代'],s['顏']].__str__())
+            self.步進()
 
 if __name__=='__main__':
     初讀者=讀者()
