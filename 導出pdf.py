@@ -44,12 +44,14 @@ def 導出(f):
             代 = 化(s['代'] or s["名"])
             顏 = 化(s['顏'] or '')
             語 = 化(s.get('語',''))
-            html+=f'''
-                <span class="代 {s["名"]}">　　{代}</span>
-                <span class="顏">{顏}</span>
-                <span class="語">{語}</span>
-                <br/>
-                '''
+            html+=f'<span class="代 {s["名"]}">　　{代}</span>'
+            if 顏:
+                html+=f'<span class="顏">({顏})</span>'
+            if 語:
+                html+=f'「<span class="語">{語}</span>」'
+            html+=f'<br/>'
+            
+                
         if '註釋' in s:
             html+=f'<span class="註釋">{s["註釋"]}</span><br/>\n'
         if '空行' in s:
