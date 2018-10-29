@@ -142,8 +142,8 @@ class gal窗口(QWebEngineView):
         if 配置['標題畫面']:
             self.load(QUrl(f'file:///{工程路徑}/{配置["標題畫面"]}'))
         else:
-            self.load(QUrl('file:///html/title.html'))
-            
+            self.load(QUrl('file:///html/默認標題畫面/標題.html'))
+        
         self.show()
 
 class 統合窗口(QWidget):
