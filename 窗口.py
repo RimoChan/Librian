@@ -150,7 +150,10 @@ class 統合窗口(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle(配置['標題'])
-        self.setWindowIcon(QIcon('%s/%s' %(工程路徑,配置['圖標']) ))
+        if 配置['圖標']:
+            self.setWindowIcon(QIcon('%s/%s' %(工程路徑,配置['圖標']) ))
+        else: 
+            self.setWindowIcon(QIcon('./資源/librian.ico'))
         self.resize(*配置['主解析度'])
         self.全屏=False
         self.準備快速鍵()
