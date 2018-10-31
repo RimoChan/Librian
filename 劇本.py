@@ -12,8 +12,20 @@ import 鏡頭
 import 編譯
 import 讀txt
 
-def 硬命令(s):
-    return 命令('>'+s)
+def 別名適用(x):
+    print(dir(x))
+    for i,f in list(x.__dict__.items()):
+        if '別名' in dir(f):
+            for 各別名 in f.別名:
+                x.__class__.__setattr__(x,各別名,f)
+    return x
+def 別名(*li):
+    def f2(x):
+        x.別名=li
+        return x
+    return f2
+
+@別名適用
 class 命令():
     def __init__(self,d):
         self.函數=d['函數']
@@ -41,21 +53,24 @@ class 命令():
     #——————————————————————————————
     def py(self,讀者):
         exec(self.代碼,讀者.箱庭)
+    @別名('背景')
     def BG(self,讀者,bg):
         讀者.狀態.背景=bg
+    @別名('背景音樂','背景音乐')
     def BGM(self,讀者,bgm,音量=1):
         讀者.狀態.背景音樂=bgm,音量
     def CG(self,讀者,cg=None):
         讀者.狀態.CG=cg
+    @別名('視頻','视频')
     def VIDEO(self,讀者,v):
         讀者.狀態.重置()
         讀者.狀態.額外信息=('video',v)
+    @別名('快捷選項','快捷选项')
     def WRAP(self,讀者,*li):
         包=lambda x: (lambda:讀者.棧跳轉(*x[1:]))
         li=[yaml.load(i) for i in li]
         li=[(i[0],包(i)) for i in li]
         讀者.產生選項(*li)
-
 
 class 狀態():
     def __init__(self):
