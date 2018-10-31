@@ -65,7 +65,7 @@ class 命令():
     def VIDEO(self,讀者,v):
         讀者.狀態.重置()
         讀者.狀態.額外信息=('video',v)
-    @別名('快捷選項','快捷选项')
+    @別名('快速選項','快速选项')
     def WRAP(self,讀者,*li):
         包=lambda x: (lambda:讀者.棧跳轉(*x[1:]))
         li=[yaml.load(i) for i in li]
