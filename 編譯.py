@@ -52,15 +52,15 @@ def 遞歸re(s, start=正則組):
                     gd[k]=遞歸re(gd[k],start[i]['子樹'][k])
     return d
     
-def py狀態(g,自):
-            code=''
-            while True:
-                q=next(g)
-                l=遞歸re(q)
-                if l and l[0].get('函數', '')=='endpy':
-                    break
-                code+=q
-            自['代碼']=code
+def 多行檢查(g,自,結束函數):
+    內容=''
+    while True:
+        q=next(g)
+        l=遞歸re(q)
+        if l and 結束函數(l):
+            break
+        內容+=q
+    return 內容
 
 def 多行文本狀態(g,自):
         txt=''
@@ -121,7 +121,9 @@ def 生編譯(s):
         自.update(d[0])
 
         if 自.get('函數', '')=='py':
-            py狀態(g,自)
+            自['代碼']=多行檢查(g,自,lambda x:x[0].get('函數', '')=='endpy')
+        if 自.get('函數', '')=='js':
+            自['代碼']=多行檢查(g,自,lambda x:x[0].get('函數', '')=='endjs')
         if '多行起始' in 自:
             多行文本狀態(g,自)
 

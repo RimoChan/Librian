@@ -15,7 +15,11 @@ from 環境 import 配置,工程路徑
 def js(code):
     主窗口.網頁.頁面.runJavaScript(code)
 def 更新():
-    js('演出.改變演出狀態(%s)' % json.dumps(讀者.狀態.導出()))
+    狀態=讀者.狀態.導出()
+    if 狀態['js']:
+        js(狀態['js'])
+        讀者.狀態.js=''
+    js('演出.改變演出狀態(%s)' % json.dumps(狀態))
 #————————————————————————————
 #接受gui回傳的資訊
 class 山彥(QObject):

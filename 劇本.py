@@ -13,7 +13,6 @@ import 編譯
 import 讀txt
 
 def 別名適用(x):
-    print(dir(x))
     for i,f in list(x.__dict__.items()):
         if '別名' in dir(f):
             for 各別名 in f.別名:
@@ -38,7 +37,7 @@ class 命令():
             eval(self.原文,{
                 i:(lambda *li,f=f:f(self,讀者,*li))
                     for i,f in self.__class__.__dict__.items() 
-                        if i!='py' and i[0]!='_'
+                        if i not in ('py','js') and i[0]!='_'
             })
         except:
             try:
@@ -53,6 +52,8 @@ class 命令():
     #——————————————————————————————
     def py(self,讀者):
         exec(self.代碼,讀者.箱庭)
+    def js(self,讀者):
+        讀者.狀態.js=self.代碼
     @別名('背景')
     def BG(self,讀者,bg):
         讀者.狀態.背景=bg
@@ -82,6 +83,7 @@ class 狀態():
         self.背景=''
         self.背景音樂=('',1)
         self.CG=''
+        self.js=''
         self.選項=()
 
     def 導出(self,html=True):
@@ -100,6 +102,7 @@ class 狀態():
                 'bg'  :self.背景,
                 'bgm' :self.背景音樂,
                 'cg'  :self.CG,
+                'js'  :self.js,
                 'choice' :[i[0] for i in self.選項]
             }
 
