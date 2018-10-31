@@ -26,3 +26,6 @@
     animation:_下入 0.6s;
     animation-fill-mode:forwards;
 }
+.灰{
+    filter: grayscale();
+}
