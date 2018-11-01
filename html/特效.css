@@ -29,3 +29,6 @@
 .灰{
     filter: grayscale();
 }
+.透明{
+    opacity:0.5;
+}
