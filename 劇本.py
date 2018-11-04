@@ -173,8 +173,7 @@ class 讀者():
     def 存檔(self,path):
         with open(path,'wb') as f:
             pickle.dump({'狀態':self.狀態,
-                         '衣對應':鏡頭.衣對應,
-                         '顏對應':鏡頭.顏對應,
+                         '角色表':角色.角色表,
                          '鏡頭對應':鏡頭.鏡頭對應,
                          '劇本棧':self.劇本棧,
                          '箱庭':self.縮減箱庭(),
@@ -184,8 +183,7 @@ class 讀者():
         try:
             with open(path,'rb') as f:
                 data=pickle.load(f)
-                鏡頭.衣對應=data['衣對應']
-                鏡頭.顏對應=data['顏對應']
+                角色.角色表=data['角色表']
                 鏡頭.鏡頭對應=data['鏡頭對應']
                 self.狀態=data['狀態']
                 self.狀態.額外信息=('load',)
