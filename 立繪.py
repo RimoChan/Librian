@@ -3,10 +3,8 @@ import yaml
 import logging
 import copy
 from 環境 import 配置,工程路徑
-import psd拆包
 
 import 角色
-
     
 def 人物拆解(包,參數):
     try:
@@ -15,8 +13,6 @@ def 人物拆解(包,參數):
         logging.warning(f'沒有映射「{包}」的立繪。')
         return None
         
-    衣=人.現衣
-    顏=人.現顏
     位置=copy.deepcopy(參數['位置'])
     語=參數['語']
     
