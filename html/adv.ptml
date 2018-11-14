@@ -89,22 +89,23 @@ html:
     
             #adv表现块
             div#tot:     
-                div#cover:                              #覆盖层
-                div#choice:                             #选项
-                    选项                           
+                div#覆蓋:                           
+                div#選項:                             
                 div#cg:                                 #CG
                 div#bg:                                 #背景
-                div#ch:                                 #立绘
+                div#立繪:                             
                 div.美麗滑條.scroll:
-                    div#history:                 #對話歷史
+                    div#對話歷史:  
     
-                div#dialog:                         #对话框                 
-                    div#name:            #名字
-                    div#word:           #话语
-
-                div#dialog_bg:
-                    div#name_bg:
-
+                div#對話框:  
+                    div#名字框:
+                        div#名字:
+                        div#名字框背景:
+                    div#話語框:
+                        div#話語:
+                        div#話語框背景:
+                    div#對話框背景:
+                    
             div#提示:
                 23333
 

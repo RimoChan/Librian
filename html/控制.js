@@ -2,19 +2,17 @@
 
 控制.右鍵功能 = function() {
 	window.event.returnValue = false;
-	$('#dialog').fadeToggle(250);
+	$('#對話框').fadeToggle(250);
 	$('.scroll').fadeOut(200);
-	$('#dialog_bg').fadeToggle(250);
 }
 
 控制.左鍵屏蔽 = false;
 控制.左鍵功能 = function() {
 	if ((控制.左鍵屏蔽)||(演出.選擇之刻))
 		return;
-	if ($('#dialog').is(':hidden')) {
+	if ($('#對話框').is(':hidden')) {
 		$('.scroll').fadeOut(200);
-		$('#dialog').fadeIn(250);
-		$('#dialog_bg').fadeIn(250);
+		$('#對話框').fadeIn(250);
 	} else {
 		if(待打印文字){
 			e=$('#word')
@@ -30,8 +28,7 @@
 控制.顯示履歷 = function() {
 	if (!($('.scroll').is(':hidden'))) 
 		return;
-	$('#dialog').fadeOut(200);
-	$('#dialog_bg').fadeOut(200);
+	$('#對話框').fadeOut(200);
 	$('.scroll').show(0);
 	$('.scroll').animate({scrollTop:99999999},0);
 }

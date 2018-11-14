@@ -67,46 +67,76 @@ video{
 	cursor:url(static/mouse1.cur),auto;
 }
 #cover{
-	width:1366;
-	height:768;
+	width:1366px;
+	height:768px;
 	position:absolute;
 	background-size: cover;
 	z-index:99;
 	display:none;
 }
 
-#dialog{
-	width:1000;
-	height:189;
+#對話框{
+	width:1000px;
+	height:240px;
 	color:#fff;
-	font-size:24;
+	font-size:24px;
 	margin:0 auto;
-	/*border-radius: 10px;*/
 	text-shadow:-1px -1px 2px #000,1px 1px 2px #000;
 
 	position:absolute;
-	bottom:0;
-	left:185;
+	bottom:0px;
+	left:185px;
 }
-#word{
+#名字框{
 	position:absolute;
-	top:59;
+	top:0px;
+	left:80px;
+	height:30%;
+}
+#話語框{
+	position:absolute;
+	top:25%;
+	z-index: 10;
+	width:100%;
+	height:75%;
+}
+#名字框背景{
+	/*display:none;*/ /*防止一開始閃現*/
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index: -1;
+
+	width:100%;
+	height:100%;
+    box-sizing: border-box;
+    border:36px solid;
+    border-image: url(./static/t0.png) 115  115 round;
+    background:rgba(128,128,128,0.8);
+    background-clip:padding-box;
+}
+#話語框背景{
+	position: absolute;
+	top:0px;
+	left:0px;
+	z-index: -1;
+
+	width:100%;
+	height:100%;
+
+    box-sizing: border-box;
+    border:36px solid;
+    border-image: url(./static/t0.png) 115 115 round;
+    background:rgba(128,128,128,0.8);
+    background-clip:padding-box;
+}
+#名字{
+	padding: 22px;
 	z-index: 10;
 }
-#name{
-	position:absolute;
-	top:0;
-	left:80;
+#話語{
+	padding: 40px;
 	z-index: 10;
-}
-
-#name_bg{
-	display:none;
-	z-index:2;
-}
-
-#dialog_bg{
-	z-index:2;
 }
 
 #choice{
@@ -145,7 +175,7 @@ button{
 	writing-mode:vertical-rl; 
 }
 
-#history{
+#對話歷史{
 	font-size:27;
 	width:900;
 	padding:20 20 120 20;
@@ -164,7 +194,7 @@ button{
 	left:233;
 }
 
-#ch{
+#立繪{
     position:absolute;
     top:0;
     left:0;

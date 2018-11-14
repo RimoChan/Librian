@@ -9,10 +9,9 @@
 	$('#总画面').css('width',解析度[0])
 	$('#总画面').css('height',解析度[1])
 	if(邊界) $('div').css('border','1px solid #22f');
-	演出.換圖('cover','url(static/None.png)',0);
+	演出.換圖('覆蓋','url(static/None.png)',0);
 	演出.換圖('bg','url(static/None.png)',0);
 	演出.換圖('cg','url(static/None.png)',0);
-	演出.換圖('ch','url(static/.png)',0);
 	演出.更新()
 }
 
@@ -40,10 +39,10 @@
 	if(data.name!='') {
 		data.name='【'+data.name+'】';
         data.word='「'+data.word+'」';
-		$('#name_bg').fadeIn(200);
+		$('#名字框').fadeIn(200);
 	}else{
 		data.word='　　'+data.word;
-		$('#name_bg').fadeOut(200);
+		$('#名字框').fadeOut(200);
 	}
 }
 
@@ -79,26 +78,26 @@
 	var tot='';
 	for(var i in choice)
 		tot+='<button onclick="演出.點選項('+i+');">' +choice[i]+'</botton>';
-	$('#choice').html(tot);
-	$('#choice').show(250);
+	$('#選項').html(tot);
+	$('#選項').show(250);
 	演出.選擇之刻=true
 }
 演出.點選項 = function (x){
-	$('#choice').hide(250);
+	$('#選項').hide(250);
 	send('選',x+'');
 	演出.選擇之刻=false
 }
 
 演出.插入圖 = function(圖){
 	控制.左鍵屏蔽=true;
-	$('#cover').css('display','block');
+	$('#覆蓋').css('display','block');
     $('#总画面').fadeOut(1400);
-	setTimeout( (function(){ 演出.換圖('cover','url('+演出.圖片文件夾+'/'+圖+')',0);})   , 1500);
+	setTimeout( (function(){ 演出.換圖('覆蓋','url('+演出.圖片文件夾+'/'+圖+')',0);})   , 1500);
     setTimeout( (function(){ 演出.步進更新();                                  })       ,1500);
     setTimeout( (function(){ $('#总画面').fadeIn(1100);                       })       ,1500);
-	setTimeout( (function(){ 演出.換圖('cover','url(static/None.png)',1);})             , 4500);
-    setTimeout( (function(){ $('#cover').css('animation','');}), 5550);
-    setTimeout( (function(){ $('#cover').css('display','none');}), 5600);
+	setTimeout( (function(){ 演出.換圖('覆蓋','url(static/None.png)',1);})             , 4500);
+    setTimeout( (function(){ $('#覆蓋').css('animation','');}), 5550);
+    setTimeout( (function(){ $('#覆蓋').css('display','none');}), 5600);
     setTimeout( (function(){ 控制.左鍵屏蔽=false;    })                                 , 5600);
 }
 
@@ -137,7 +136,7 @@
 
 //改變立繪
 演出.換立繪 = function(text){
-	$('#ch').html(text)
+	$('#立繪').html(text)
 }	
 
 演出.現在bg='None'
@@ -151,16 +150,16 @@
 }
 
 演出.換人名 = function(text) {
-	$('#name').html(text);
-	$('#history').append(text+'<br/>');
+	$('#名字').html(text);
+	$('#對話歷史').append(text+'<br/>');
 }
 
 演出.換對話 = function (text,name) {
     if (name)
-        $('#word').逐字打印(text,true);
+        $('#話語').逐字打印(text,true);
     else
-        $('#word').逐字打印(text);
-    $('#history').append(text+'<br/><br/>');
+        $('#話語').逐字打印(text);
+    $('#對話歷史').append(text+'<br/><br/>');
 }
 
 演出.當前曲名='None'
