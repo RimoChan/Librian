@@ -111,7 +111,7 @@ video{
 	height:100%;
     box-sizing: border-box;
     border:36px solid;
-    border-image: url(./static/t0.png) 115  115 round;
+    border-image: url(./static/t0.png) 86 86 round;
     background:rgba(128,128,128,0.8);
     background-clip:padding-box;
 }
@@ -126,7 +126,7 @@ video{
 
     box-sizing: border-box;
     border:36px solid;
-    border-image: url(./static/t0.png) 115 115 round;
+    border-image: url(./static/t0.png) 86 86 round;
     background:rgba(128,128,128,0.8);
     background-clip:padding-box;
 }
