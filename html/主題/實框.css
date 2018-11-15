@@ -1,0 +1,16 @@
+#話語框背景{
+    background: #000;
+    border:1px solid #777;
+    border-radius: 12px;
+}
+#名字框背景{
+    background: #000;
+    border:1px solid #777;
+    border-radius: 12px;
+}
+#名字{
+    padding:10px;
+}
+#話語{
+    padding:10px;
+}

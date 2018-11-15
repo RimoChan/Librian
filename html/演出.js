@@ -6,6 +6,12 @@
 		type: "text/css",
 		href: 演出.自定css
 	}).appendTo("head");
+	$("<link>")
+		.attr({ rel: "stylesheet",
+		type: "text/css",
+		href: 演出.主題css
+	}).appendTo("head");
+
 	$('#总画面').css('width',解析度[0])
 	$('#总画面').css('height',解析度[1])
 	if(邊界) $('div').css('border','1px solid #22f');
@@ -37,7 +43,6 @@
 	if(data.bgm[0]!='None')
 		data.bgm[0]=演出.音樂文件夾+'/'+data.bgm[0];
 	if(data.name!='') {
-		data.name='【'+data.name+'】';
         data.word='「'+data.word+'」';
 		$('#名字框').fadeIn(200);
 	}else{

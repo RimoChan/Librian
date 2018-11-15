@@ -82,16 +82,16 @@ video{
 	font-size:24px;
 	margin:0 auto;
 	text-shadow:-1px -1px 2px #000,1px 1px 2px #000;
-
 	position:absolute;
-	bottom:0px;
+	top:528px;
 	left:185px;
 }
 #名字框{
+    display:none; /*防止一開始閃現*/
 	position:absolute;
 	top:0px;
 	left:80px;
-	height:30%;
+	/*height:25%;*/
 }
 #話語框{
 	position:absolute;
@@ -101,42 +101,20 @@ video{
 	height:75%;
 }
 #名字框背景{
-	/*display:none;*/ /*防止一開始閃現*/
-	position:absolute;
-	top:0px;
-	left:0px;
-	z-index: -1;
-
-	width:100%;
-	height:100%;
-    box-sizing: border-box;
-    border:36px solid;
-    border-image: url(./static/t0.png) 86 86 round;
-    background:rgba(128,128,128,0.8);
-    background-clip:padding-box;
+    position:absolute;
+    top:0px;
+    left:0px;
+    z-index: -1;
+    width:100%;
+    height:100%;
 }
 #話語框背景{
-	position: absolute;
-	top:0px;
-	left:0px;
-	z-index: -1;
-
-	width:100%;
-	height:100%;
-
-    box-sizing: border-box;
-    border:36px solid;
-    border-image: url(./static/t0.png) 86 86 round;
-    background:rgba(128,128,128,0.8);
-    background-clip:padding-box;
-}
-#名字{
-	padding: 22px;
-	z-index: 10;
-}
-#話語{
-	padding: 40px;
-	z-index: 10;
+    position: absolute;
+    top:0px;
+    left:0px;
+    z-index: -1;
+    width:100%;
+    height:100%;
 }
 
 #choice{

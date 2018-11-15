@@ -53,10 +53,12 @@ class 山彥(QObject):
         圖片文件夾=os.path.join(f'../{工程路徑}',配置['圖片文件夾']).replace('\\','/')
         音樂文件夾=os.path.join(f'../{工程路徑}',配置['音樂文件夾']).replace('\\','/')
         自定css=os.path.join(f'../{工程路徑}',配置['自定css']).replace('\\','/')
+        主題css=os.path.join(f'主題',配置['主題css']+'.css').replace('\\','/')
         s=f'''
               解析度={配置['主解析度']};
               邊界={int(配置['顯示繪圖邊界'])};
               link_on=true;
+              演出.主題css="{主題css}";
               演出.自定css="{自定css}";
               演出.圖片文件夾="{圖片文件夾}";
               演出.音樂文件夾="{音樂文件夾}";

@@ -1,0 +1,30 @@
+#名字框{
+    height:32%;
+}
+#話語框{
+    position:absolute;
+    top:25%;
+    z-index: 10;
+    width:100%;
+    height:90%;
+}
+#名字框背景{
+    box-sizing: border-box;
+    border:36px solid;
+    border-image: url(../static/t0.png) 86 86 round;
+    background:rgba(128,128,128,0.8);
+    background-clip:padding-box;
+}
+#話語框背景{
+    box-sizing: border-box;
+    border:36px solid;
+    border-image: url(../static/t0.png) 86 86 round;
+    background:rgba(128,128,128,0.8);
+    background-clip:padding-box;
+}
+#名字{
+    padding: 22px 42px;
+}
+#話語{
+    padding: 40px;
+}
