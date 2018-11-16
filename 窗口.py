@@ -91,6 +91,10 @@ class 山彥(QObject):
         if 文件名:
             讀者.讀檔(文件名)
             js('開始()')
+    def 從劇本開始(self,劇本):
+        入口=f'{工程路徑}/{配置["劇本入口"]}'
+        讀者.__init__(f'{os.path.dirname(入口)}/{劇本}')
+        js('link_on=true;開始();')
     def 退出(self):
         exit()
     def 回標題(self):

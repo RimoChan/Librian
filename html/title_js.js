@@ -1,11 +1,14 @@
-﻿//与后端的通信器
-link_on=true;	//保证同时只有一个通信
+﻿//與後端的通信器
+link_on=true;	//保證同時只有一個通信
 var a=new QWebChannel(qt.webChannelTransport, function (channel) {
 	window.handler = channel.objects.handler;;
-	send=function(str){
+	send=function(s1,s2){
 		if(link_on){
 			link_on=false;
-			window.handler.rec1(str);
+			if(!s2)
+				window.handler.rec1(s1)
+			else
+				window.handler.rec2(s1,s2)
 		}
 	};
 });
@@ -19,8 +22,8 @@ function 從title讀檔(){
 	send('從title讀檔')
 }
 
-function extra(){
-	
+function 從劇本開始(劇本){
+	send('從劇本開始',劇本); 
 }
 
 function setting(){
