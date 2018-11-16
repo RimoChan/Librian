@@ -12,8 +12,8 @@
 		href: 演出.主題css
 	}).appendTo("head");
 
-	$('#总画面').css('width',解析度[0])
-	$('#总画面').css('height',解析度[1])
+	$('#總畫面').css('width',解析度[0])
+	$('#總畫面').css('height',解析度[1])
 	if(邊界) $('div').css('border','1px solid #22f');
 	演出.換圖('覆蓋','url(static/None.png)',0);
 	演出.換圖('bg','url(static/None.png)',0);
@@ -96,10 +96,10 @@
 演出.插入圖 = function(圖){
 	控制.左鍵屏蔽=true;
 	$('#覆蓋').css('display','block');
-    $('#总画面').fadeOut(1400);
+    $('#總畫面').fadeOut(1400);
 	setTimeout( (function(){ 演出.換圖('覆蓋','url('+演出.圖片文件夾+'/'+圖+')',0);})   , 1500);
     setTimeout( (function(){ 演出.步進更新();                                  })       ,1500);
-    setTimeout( (function(){ $('#总画面').fadeIn(1100);                       })       ,1500);
+    setTimeout( (function(){ $('#總畫面').fadeIn(1100);                       })       ,1500);
 	setTimeout( (function(){ 演出.換圖('覆蓋','url(static/None.png)',1);})             , 4500);
     setTimeout( (function(){ $('#覆蓋').css('animation','');}), 5550);
     setTimeout( (function(){ $('#覆蓋').css('display','none');}), 5600);
@@ -120,8 +120,8 @@
 
 演出.load特效 = function(){
     控制.左鍵屏蔽=true;
-    $('#总画面').fadeOut(0);
-    $('#总画面').fadeIn(1200);
+    $('#總畫面').fadeOut(0);
+    $('#總畫面').fadeIn(1200);
     setTimeout( (function(){ 控制.左鍵屏蔽=false;    }) , 1000);
 }
 

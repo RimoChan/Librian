@@ -52,10 +52,10 @@
 }
 
 控制.進入設置 = function() {
-	$('#config').fadeIn(300);
+	$('#配置面板').fadeIn(300);
 }
 控制.退出設置 = function() {
-	$('#config').fadeOut(300);
+	$('#配置面板').fadeOut(300);
 }
 
 
@@ -85,7 +85,7 @@ window.document.onkeyup = function(evt){
 
 //滚轮功能
 $(function () {
-	$('#tot').mousewheel(function (event, delta) {
+	$('#adv畫面').mousewheel(function (event, delta) {
 		if (delta > 0)
 			控制.顯示履歷();
 		if (delta < 0){
@@ -93,7 +93,7 @@ $(function () {
 				控制.左鍵功能();
 		}
 	});
-	$("#tot").mousedown(function(e) {
+	$("#adv畫面").mousedown(function(e) {
     if (3 == e.which) {
     	控制.右鍵功能();
     } else if (1 == e.which) {
