@@ -15,7 +15,7 @@
 		$('#對話框').fadeIn(250);
 	} else {
 		if(待打印文字){
-			e=$('#word')
+			e=$('#話語')
 			e.attr('f',e.attr('f')+待打印文字)
 			e.html(e.attr('f'))
 			待打印文字=''
