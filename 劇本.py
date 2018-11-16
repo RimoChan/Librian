@@ -44,6 +44,8 @@ class 命令():
             try:
                 函數=eval('self.'+self.函數)
                 函數(*([讀者]+self.參數))
+            except AttributeError as e:
+                raise AttributeError('沒有可用的函數「%s」。'%self.函數)
             except Exception as e:
                 if 配置['嚴格模式']:
                     raise e
@@ -58,6 +60,12 @@ class 命令():
     @別名('背景')
     def BG(self,讀者,bg):
         讀者.狀態.背景=bg
+    @別名('特效')
+    def EF(self,讀者,標識,類名=None):
+        if 類名 is None and 標識 in 讀者.狀態.特效表:
+            del 讀者.狀態.特效表[標識]
+        else:
+            讀者.狀態.特效表[標識]=類名
     @別名('背景音樂','背景音乐')
     def BGM(self,讀者,bgm,音量=1):
         讀者.狀態.背景音樂=bgm,音量
@@ -85,6 +93,7 @@ class 狀態():
         self.背景音樂=('',1)
         self.CG=''
         self.js=''
+        self.特效表={}
         self.選項=()
 
     def 導出(self,html=True):
@@ -104,7 +113,8 @@ class 狀態():
                 'bgm' :self.背景音樂,
                 'cg'  :self.CG,
                 'js'  :self.js,
-                'choice' :[i[0] for i in self.選項]
+                'choice' :[i[0] for i in self.選項],
+                '特效表': self.特效表
             }
 
     def 重置(self):

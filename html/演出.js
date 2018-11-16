@@ -53,7 +53,8 @@
 
 //得到信息全部改變頁面
 演出.改變演出狀態 = function(data) {
-	演出.信息預處理(data)
+	演出.信息預處理(data);
+	演出.特效處理(data.特效表);
 	if(data.choice.length>0){
 		演出.處理選項(data.choice);
 		return
@@ -76,6 +77,14 @@
 	演出.換bgm(data.bgm);
 	演出.換人名(data.name);
 	演出.換對話(data.word,data.name);
+}
+演出.特效處理 = function(特效表){
+	var a=['總畫面','adv畫面','覆蓋','選項','cg','bg','立繪','對話歷史','對話框','名字框','名字','名字框背景','話語框','話語','話語框背景','對話框背景']
+	for (var i in a)
+		if($('#'+a[i]).attr('class'))
+			$('#'+a[i]).attr('class','')
+	for (var i in 特效表) 
+		$('#'+i).addClass(特效表[i])
 }
 
 演出.選擇之刻=false;
