@@ -11,14 +11,14 @@ html:
         script src='黑科技/jquery-ui.min.js':
         script src='黑科技/jquery.mousewheel.js':
 
-        script src="黑科技/coffeescript.js": 
-        <script type='text/coffeescript'>{% include '演出.coffee'%}</script>
         script src='全局.js':
+        script src='演出.js': 
         script src='控制.js':
         script src='設置.js':
         script src='逐字打印.js':
-
-    style#style:        # js用來表現動畫的……
+        
+    # js用來表現動畫的……
+    style#style:        
 
     body oncontextmenu='window.event.returnValue=false;':
         div#總畫面:
