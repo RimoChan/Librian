@@ -286,11 +286,11 @@ class 讀者():
                 self.狀態.人物 = s['名']
             logging.debug([s['名'],s['代'],s['顏']].__str__())
             self.步進()
-
-if __name__=='__main__':
-    初讀者=讀者()
-    for i in range(110):
-        q=初讀者.狀態.導出()
-        del q['ch']
-        print(q)
-        初讀者.步進()
+    def 迭代器(self):
+        while True:
+            self.步進()
+            s = self.狀態.導出()
+            if s['info'] and s['info'][0]=='終焉':
+                break
+            else:
+                yield s
