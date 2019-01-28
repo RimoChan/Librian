@@ -1,9 +1,10 @@
 import chardet
 
+
 def 讀(txt):
-    with open(txt,'rb') as f:
-        a=chardet.detect(f.read())
-    if a['confidence']<0.5:
+    with open(txt, 'rb') as f:
+        a = chardet.detect(f.read())
+    if a['confidence'] < 0.5:
         return open(txt)
-    else: 
-        return open(txt,encoding=a['encoding'])
+    else:
+        return open(txt, encoding=a['encoding'])
