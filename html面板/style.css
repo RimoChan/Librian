@@ -1,0 +1,74 @@
+body{
+    overflow:hidden;
+    font-family:'微软雅黑';
+}
+div{
+    /*border: 1px dashed #777;*/
+}
+*{
+    position:relative;
+}
+.中{
+    /*border: 1px dashed #777;*/
+    padding:0;
+    margin:0;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.滿高{
+    height:100%;
+}
+.反饋{
+    z-index:0;
+    filter: hue-rotate(0deg);
+    /*transition: filter 0.3s, transform 0.3s;*/
+}
+.反饋:hover{
+    filter: hue-rotate(180deg);
+    /*transition: filter 0.3s, transform 0.3s;*/
+}
+.反饋:active{
+    border: 2px solid rgba(0,0,0,0.3);
+    z-index:10;
+}
+h2{
+    display:block;
+}
+#標題{
+    background: #cfa972; 
+    height:11%;
+}
+.主塊{
+    height:89%;
+}
+#工程信息{
+    background: #aaf; 
+}
+#開啓工程{
+    background: #ffa; 
+}
+#建立工程{
+    background: #ccf;
+}
+
+#運行{
+    background: #bfb; 
+}
+#運行同時編寫{
+    background: #9f9; 
+}
+#打開文件夾{
+    background: #ee6; 
+}
+#生成exe{
+    background: #fbb; 
+}
+#生成html{
+    background: #fca; 
+}
+#返回剛纔的界面{
+    background: #88b; 
+}
