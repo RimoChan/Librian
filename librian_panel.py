@@ -37,7 +37,7 @@ class 山彥(QObject):
             環境.設定工程路徑(工程路徑)
             配置 = 環境.配置
             if 配置['圖標']:
-                圖標路徑 = os.path.relpath('%s/%s' % (工程路徑, 配置['圖標']),'./html面板')
+                圖標路徑 = os.path.relpath('%s/%s' % (工程路徑, 配置['圖標']), './html面板')
             else:
                 圖標路徑 = '../資源/librian.ico'
             js(f'v.工程路徑={工程路徑.__repr__()}')
@@ -79,10 +79,14 @@ class 山彥(QObject):
         os.system(f'start {self.工程路徑}')
 
     def 生成exe(self):
-        alert('還沒有連上。')
+        import 構建
+        構建.構建工程(self.工程路徑, 環境.配置["標題"], '%s/%s' % (self.工程路徑, 環境.配置['圖標']))
+        alert('好了。')
 
     def 生成html(self):
-        alert('還沒有連上。')
+        import 虛擬演繹
+        虛擬演繹.生成虛擬核心()
+        alert('好了。')
 
     @pyqtSlot(str, str)
     def rec2(self, 令, 參數):
