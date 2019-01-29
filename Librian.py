@@ -18,11 +18,7 @@ from 環境 import 配置
 參數.add_argument('--project', type=str, required=True)
 參數 = 參數.parse_args()
 
-def 路徑處理(路徑):
-    return os.path.relpath(路徑).replace('\\', '/')
-
-工程路徑 = 路徑處理(參數.project)
-環境.設定工程路徑(工程路徑)
+環境.設定工程路徑(參數.project)
 
 try:
     os.mkdir(f'{工程路徑}/存檔資料')

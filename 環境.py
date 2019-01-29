@@ -12,6 +12,7 @@ with open('配置.yaml', encoding='utf8') as f:
 
 def 設定工程路徑(路徑):
     global 工程路徑
+    路徑 = os.path.relpath(路徑).replace('\\', '/')
     工程路徑 = 路徑
     with open('%s/工程配置.yaml' % 工程路徑, encoding='utf8') as f:
         a = yaml.load(f)
