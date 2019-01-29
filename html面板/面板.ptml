@@ -29,6 +29,7 @@ html:
             div.row#工程信息 style="height:67%": 
               div.col-xs-12:
                 h3:
+                    img.圖標 v-bind:src='圖標路徑';
                     「{{'{{標題}}'}}」
                 p:
                     路徑: {{'{{工程路徑}}'}}

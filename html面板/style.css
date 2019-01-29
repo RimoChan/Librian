@@ -44,9 +44,15 @@ h2{
 .主塊{
     height:89%;
 }
+
 #工程信息{
     background: #aaf; 
 }
+.圖標{
+    width:64px;
+    height:64px;
+}
+
 #開啓工程{
     background: #ffa; 
 }

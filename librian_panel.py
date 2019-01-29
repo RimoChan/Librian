@@ -11,13 +11,18 @@ from PyQt5.QtGui import *
 
 import 環境
 
+
 def js(code):
     主窗口.網頁.頁面.runJavaScript(code)
+
+
 def alert(s):
     js(f'alert("{s}")')
 
 # ————————————————————————————
 # 接受gui回傳的資訊
+
+
 class 山彥(QObject):
     def __init__(self, 頁面):
         super().__init__()
@@ -25,26 +30,33 @@ class 山彥(QObject):
 
     def 初始化(self):
         pass
-        
+
     def 同調(self, 工程路徑):
         try:
-            self.工程路徑=工程路徑
+            self.工程路徑 = 工程路徑
             環境.設定工程路徑(工程路徑)
-            配置=環境.配置
+            配置 = 環境.配置
+            if 配置['圖標']:
+                圖標路徑 = os.path.relpath('%s/%s' % (工程路徑, 配置['圖標']),'./html面板')
+            else:
+                圖標路徑 = '../資源/librian.ico'
             js(f'v.工程路徑={工程路徑.__repr__()}')
+            print(f'v.圖標路徑={圖標路徑.__repr__()}')
+            js(f'v.圖標路徑={圖標路徑.__repr__()}')
             js(f'v.標題={配置["標題"].__repr__()}')
             js(f'v.主解析度={配置["主解析度"].__repr__()}')
-        except:
+        except Exception as e:
+            print(e)
             alert('工程配置文件不正確。')
         js(f'進入工程()')
-    
+
     def 開啓工程(self):
         工程路徑 = QFileDialog.getExistingDirectory(主窗口,
-                                            "選取文件夾",
-                                            "./project")
+                                                "選取文件夾",
+                                                "./project")
         if 工程路徑:
             self.同調(工程路徑)
-    
+
     def 建立工程(self):
         s, go = QInputDialog.getText(主窗口, "小面板", "工程名", QLineEdit.Normal, "")
         if not go:
@@ -56,20 +68,22 @@ class 山彥(QObject):
             return
         shutil.copytree('./project/_默認工程', 新工程路徑)
         self.同調(新工程路徑)
-    
-        
+
     def 運行(self):
         os.system(f'""./python36/python"" ./librian.py --project {self.工程路徑}')
+
     def 運行同時編寫(self):
         alert('還沒有做。')
+
     def 打開文件夾(self):
         os.system(f'start {self.工程路徑}')
+
     def 生成exe(self):
         alert('還沒有連上。')
+
     def 生成html(self):
         alert('還沒有連上。')
-    
-        
+
     @pyqtSlot(str, str)
     def rec2(self, 令, 參數):
         logging.debug(f'收到頁面來的指令:「{令}({參數})」')
