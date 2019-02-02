@@ -42,6 +42,20 @@ Librian是面向劇本的引擎，在設計時首要的考慮是:
 
 不只是adv，你甚至可以嵌入線上交互等功能！
 
+## 快速上手
+
+在[中文文檔](https://rimochan.github.io/Librian_doc)裏有比較詳細的安裝步驟。
+
+方便起見的話，也可以直接下載打包的release版本使用。
+
+如果你持「不讀說明書主義」，也可以: 
+
+1. 安裝python3.6
+2. pip install pyqt5 pillow psdtools yaml chardet
+3. python3 librian_panel.py
+
+(僅在python3.6下測試通過。3.7版本的pyqt5似乎無法import QtWebEngineWidgets，希望好心人告訴我爲什麼。)
+
 ## 赞助
 
 如果你覺得本文檔對你的……
