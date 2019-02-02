@@ -41,7 +41,6 @@ class 山彥(QObject):
             else:
                 圖標路徑 = '../資源/librian.ico'
             js(f'v.工程路徑={工程路徑.__repr__()}')
-            print(f'v.圖標路徑={圖標路徑.__repr__()}')
             js(f'v.圖標路徑={圖標路徑.__repr__()}')
             js(f'v.標題={配置["標題"].__repr__()}')
             js(f'v.主解析度={配置["主解析度"].__repr__()}')
