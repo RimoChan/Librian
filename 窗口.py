@@ -8,6 +8,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWebChannel import QWebChannel
 from PyQt5.QtGui import *
 
+import 讀txt
 import 劇本
 from 環境 import 配置, 工程路徑
 
@@ -27,13 +28,16 @@ def 更新():
     js('演出.改變演出狀態(%s)' % json.dumps(狀態))
 
 
-# ————————————————————————————
-# 接受gui回傳的資訊
+
 class 山彥(QObject):
     def __init__(self, 頁面):
         super().__init__()
         self.頁面 = 頁面
-
+    
+    def 更新終態(self):
+        讀者.從一而終(f'{工程路徑}/{配置["劇本入口"]}')
+        更新()
+    
     def 選擇讀檔文件(self):
         return QFileDialog.getOpenFileName(
             self.頁面.parent(),
@@ -54,10 +58,12 @@ class 山彥(QObject):
         更新()
 
     def 步進(self):
+        if 配置['編寫模式']:
+            return
         讀者.步進()
 
     def 步進更新(self):
-        讀者.步進()
+        self.步進()
         更新()
 
     def 初始化(self):
@@ -81,6 +87,8 @@ class 山彥(QObject):
         except:
             logging.warning('用戶設置加載失敗')
         js(s)
+        if 配置['編寫模式']:
+            self.更新終態()
 
     def 存檔(self):
         文件名, 文件類型 = self.選擇存檔文件()
@@ -154,8 +162,6 @@ class 山彥(QObject):
         js('link_on=true')
 
 
-# ————————————————————————————
-# 視窗介面
 class gal窗口(QWebEngineView):
 
     def __init__(self, *li):
@@ -169,11 +175,26 @@ class gal窗口(QWebEngineView):
         self.handler = 山彥(self.頁面)
         self.頻道.registerObject('handler', self.handler)
         self.頁面.setWebChannel(self.頻道)
+        if 配置['編寫模式']:
+            import threading
+            def 監視():
+                原字=''
+                while True:
+                    with 讀txt.讀(f'{工程路徑}/{配置["劇本入口"]}') as f:
+                        字 = f.read()
+                        if 字!=原字:
+                            self.handler.更新終態()
+                            原字=字
+            t = threading.Thread(target=監視)
+            t.setDaemon(True)
+            t.start()
 
     def 做界面(self):
         self.resize(*配置['主解析度'])
 
-        if 配置['標題畫面']:
+        if 配置['編寫模式']:
+            self.load(QUrl(f'file:///html/adv.html'))
+        elif 配置['標題畫面']:
             self.load(QUrl(f'file:///{工程路徑}/{配置["標題畫面"]}'))
         else:
             self.load(QUrl('file:///html/默認標題畫面/標題.html'))

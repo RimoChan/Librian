@@ -254,7 +254,7 @@ class 讀者():
         self.劇本棧 = []
 
 # ——————————————————————————————————————————————
-    def 步進(self):
+    def 步進(self, 防止終焉=False):
         if self.狀態.選項:
             return
         self.狀態.額外信息 = ''
@@ -271,6 +271,8 @@ class 讀者():
             logging.debug('插入圖: %s' % s['插入圖'])
             self.狀態.額外信息 = ('cut', s['插入圖'])
         if 類型 == '終焉':
+            if 防止終焉:
+                return '終焉'
             self.狀態.額外信息 = ('終焉',)
             self.狀態.話語 = s['旁白']
             self.狀態.名字 = ''
@@ -314,3 +316,10 @@ class 讀者():
                 break
             else:
                 yield s
+    
+    def 從一而終(self,劇本):
+        self.__init__(劇本)
+        print(self.劇本文件.內容)
+        while True:
+            if self.步進(防止終焉=True):
+                break

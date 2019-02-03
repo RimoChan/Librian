@@ -1,6 +1,7 @@
 import logging
 import json
 import os
+import subprocess
 import shutil
 
 from PyQt5.QtWidgets import *
@@ -18,9 +19,6 @@ def js(code):
 
 def alert(s):
     js(f'alert("{s}")')
-
-# ————————————————————————————
-# 接受gui回傳的資訊
 
 
 class 山彥(QObject):
@@ -72,7 +70,10 @@ class 山彥(QObject):
         os.system(f'""./python36/python"" ./librian.py --project {self.工程路徑}')
 
     def 運行同時編寫(self):
-        alert('還沒有做。')
+        subprocess.Popen(
+            f'"./python36/python" ./librian.py --project {self.工程路徑} ' +
+            '--config "{編寫模式: True}"'
+        )
 
     def 打開文件夾(self):
         os.system(f'start {self.工程路徑}')
@@ -104,9 +105,6 @@ class 山彥(QObject):
         else:
             raise Exception(f'命令「{令}」無法理解。')
         js('link_on=true')
-
-# ————————————————————————————
-# 視窗介面
 
 
 class gal窗口(QWebEngineView):
