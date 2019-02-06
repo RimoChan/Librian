@@ -8,10 +8,8 @@ import 角色
 
 
 def 人物拆解(包, 參數):
-    try:
-        人 = 角色.角色表[包]
-    except:
-        logging.warning(f'沒有映射「{包}」的立繪。')
+    人 = 角色.取角色(包)
+    if not 人.有立繪:
         return None
 
     位置 = copy.deepcopy(參數['位置'])
