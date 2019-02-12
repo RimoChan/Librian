@@ -2,14 +2,14 @@
 (function() {
   window.演出 = {
     準備工作: function() {
-      $("<link>").attr({
-        rel: "stylesheet",
-        type: "text/css",
+      $('<link>').attr({
+        rel: 'stylesheet',
+        type: 'text/css',
         href: this.自定css
-      }).appendTo("head");
-      $("<link>").attr({
-        rel: "stylesheet",
-        type: "text/css",
+      }).appendTo('head');
+      $('<link>').attr({
+        rel: 'stylesheet',
+        type: 'text/css',
         href: this.主題css
       }).appendTo("head");
       $('#總畫面').css('width', 解析度[0]);
