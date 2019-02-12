@@ -1,4 +1,4 @@
-# Librian: 簡明強大的Galgame引擎
+# ![](資源/Librian小.png)Librian: 簡明強大的Galgame引擎
 
 ## 關於中文文檔
 這個粗略的介紹是關於Librian本身的，如果你有興趣使用的話，
