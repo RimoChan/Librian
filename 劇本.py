@@ -8,7 +8,7 @@ import re
 import shlex
 import yaml
 
-from 環境 import 配置
+from 環境 import 配置, 工程路徑
 import 鏡頭
 import 編譯
 import 讀txt
@@ -57,7 +57,12 @@ class 命令():
                     raise e
                 s = '%s(%s)' % (self.函數, ', '.join(self.參數))
                 logging.warning('在劇本中執行方法「%s」時遇到了意外%s' % (s, e.__repr__()))
-
+                
+    def 確保(self, 文件名):
+        if os.path.isfile(文件名):
+            return
+        else:
+            logging.waring(f'「{文件名}」不存在。')
     # ——————————————————————————————
     def py(self, 讀者):
         exec(self.代碼, 讀者.箱庭)
@@ -67,6 +72,7 @@ class 命令():
 
     @別名('背景')
     def BG(self, 讀者, bg):
+        self.確保(f'./{工程路徑}/{配置["圖片文件夾"]}/{bg}')
         讀者.狀態.背景 = bg
 
     @別名('特效')
@@ -78,9 +84,11 @@ class 命令():
 
     @別名('背景音樂', '背景音乐')
     def BGM(self, 讀者, bgm, 音量=1):
+        self.確保(f'./{工程路徑}/{配置["音樂文件夾"]}/{bgm}')
         讀者.狀態.背景音樂 = bgm, 音量
 
     def CG(self, 讀者, cg=None):
+        self.確保(f'./{工程路徑}/{配置["圖片文件夾"]}/{cg}')
         讀者.狀態.CG = cg
 
     @別名('視頻', '视频')
