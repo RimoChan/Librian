@@ -13,6 +13,7 @@ import 鏡頭
 import 編譯
 import 讀txt
 import 角色
+import 文件
 
 
 def 別名適用(x):
@@ -57,12 +58,7 @@ class 命令():
                     raise e
                 s = '%s(%s)' % (self.函數, ', '.join(self.參數))
                 logging.warning('在劇本中執行方法「%s」時遇到了意外%s' % (s, e.__repr__()))
-                
-    def 確保(self, 文件名):
-        if os.path.isfile(文件名):
-            return
-        else:
-            logging.waring(f'「{文件名}」不存在。')
+
     # ——————————————————————————————
     def py(self, 讀者):
         exec(self.代碼, 讀者.箱庭)
@@ -72,7 +68,7 @@ class 命令():
 
     @別名('背景')
     def BG(self, 讀者, bg):
-        self.確保(f'./{工程路徑}/{配置["圖片文件夾"]}/{bg}')
+        bg = 文件.補充擴展名(bg, ['webp', 'png', 'jpg'], f'./{工程路徑}/{配置["圖片文件夾"]}')
         讀者.狀態.背景 = bg
 
     @別名('特效')
@@ -84,11 +80,11 @@ class 命令():
 
     @別名('背景音樂', '背景音乐')
     def BGM(self, 讀者, bgm, 音量=1):
-        self.確保(f'./{工程路徑}/{配置["音樂文件夾"]}/{bgm}')
+        bgm = 文件.補充擴展名(bgm, ['mp3', 'ogg'], f'./{工程路徑}/{配置["音樂文件夾"]}')
         讀者.狀態.背景音樂 = bgm, 音量
 
     def CG(self, 讀者, cg=None):
-        self.確保(f'./{工程路徑}/{配置["圖片文件夾"]}/{cg}')
+        cg = 文件.補充擴展名(cg, ['webp', 'png', 'jpg'], f'./{工程路徑}/{配置["圖片文件夾"]}')
         讀者.狀態.CG = cg
 
     @別名('視頻', '视频')
