@@ -43,37 +43,36 @@ window.演出 =
         if data.bgm[0]!='None'
             data.bgm[0] = this.音樂文件夾 + '/' + data.bgm[0]
 
-        if data.name!=''
-            data.word = "「#{data.word}」"
+        if data.名字!=''
+            data.話語 = "「#{data.話語}」"
             $('#名字框').fadeIn(200)
         else
-            data.word = '　　' + data.word
+            data.話語 = '　　' + data.話語
             $('#名字框').fadeOut(200)
 
     改變演出狀態: (data) ->
         this.信息預處理 data
-        {bg, bgm, cg, 特效表, ch, choice, name, word, info} = data
-
+        {特效表, 立繪, 名字, 話語, 額外信息, 語者, bg, bgm, cg, choice} = data
         this.特效處理 特效表
         if choice.length > 0
             this.處理選項 choice
             return
-        if info
-            if info[0] == 'cut'
-                name = ''
-                word = ''
+        if 額外信息
+            if 額外信息[0] == 'cut'
+                名字 = ''
+                話語 = ''
                 bgm = ['None', 0]
-                this.插入圖(info[1])
-            if info[0] == 'video'
-                this.放視頻(info[1])
-            if info[0] == 'load'
+                this.插入圖(額外信息[1])
+            if 額外信息[0] == 'video'
+                this.放視頻(額外信息[1])
+            if 額外信息[0] == 'load'
                 this.load特效()
         this.換cg(cg)
         this.換bg(bg)
-        this.換立繪(ch)
+        this.換立繪(立繪)
         this.換bgm(bgm)
-        this.換人名(name)
-        this.換對話(word, name)
+        this.換人名(語者, 名字)
+        this.換對話(話語, 名字)
 
     特效處理: (特效表) ->
         可特效块 = [
@@ -170,12 +169,14 @@ window.演出 =
             bg = 'url(static/None.png)'
         this.換圖('bg', bg, 1.4)
 
-    換人名: (text) ->
-        $('#名字').html(text)
-        $('#對話歷史').append(text+'<br/>')
-
-    換對話: (text, name) ->
-        if name
+    換人名: (語者, 名字) ->
+        $('#名字').html(名字)
+        $('#對話歷史').append(名字+'<br/>')
+        $('#對話框').attr('class','人物--'+語者)
+        # alert $('#對話框').attr('class')
+        
+    換對話: (text, 名字) ->
+        if 名字
             $('#話語').逐字打印(text, true)
         else
             $('#話語').逐字打印(text)

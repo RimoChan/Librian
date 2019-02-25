@@ -118,21 +118,22 @@ class 狀態():
         鏡頭.語者 = self.語者
         if self.人物:
             if html:
-                ch = 鏡頭.查詢(self.人物).轉html()
+                立繪 = 鏡頭.查詢(self.人物).轉html()
             else:
-                ch = 鏡頭.查詢(self.人物).拆解()
+                立繪 = 鏡頭.查詢(self.人物).拆解()
         else:
-            ch = ''
-        return {'info': self.額外信息,
-                'word': self.話語,
-                'name': self.名字,
-                'ch': ch,
+            立繪 = ''
+        return {'額外信息': self.額外信息,
+                '話語': self.話語,
+                '名字': self.名字,
+                '立繪': 立繪,
                 'bg': self.背景,
                 'bgm': self.背景音樂,
                 'cg': self.CG,
                 'js': self.js,
                 'choice': [i[0] for i in self.選項],
-                '特效表': self.特效表
+                '語者' : self.語者,
+                '特效表': self.特效表,
                 }
 
     def 重置(self):
@@ -325,7 +326,7 @@ class 讀者():
         while True:
             self.步進()
             s = self.狀態.導出()
-            if s['info'] and s['info'][0] == '終焉':
+            if s['額外信息'] and s['額外信息'][0] == '終焉':
                 break
             else:
                 yield s

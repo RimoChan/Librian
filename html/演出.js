@@ -42,43 +42,43 @@
       if (data.bgm[0] !== 'None') {
         data.bgm[0] = this.音樂文件夾 + '/' + data.bgm[0];
       }
-      if (data.name !== '') {
-        data.word = `「${data.word}」`;
+      if (data.名字 !== '') {
+        data.話語 = `「${data.話語}」`;
         return $('#名字框').fadeIn(200);
       } else {
-        data.word = '　　' + data.word;
+        data.話語 = '　　' + data.話語;
         return $('#名字框').fadeOut(200);
       }
     },
     改變演出狀態: function(data) {
-      var bg, bgm, cg, ch, choice, info, name, word, 特效表;
+      var bg, bgm, cg, choice, 名字, 特效表, 立繪, 話語, 語者, 額外信息;
       this.信息預處理(data);
-      ({bg, bgm, cg, 特效表, ch, choice, name, word, info} = data);
+      ({特效表, 立繪, 名字, 話語, 額外信息, 語者, bg, bgm, cg, choice} = data);
       this.特效處理(特效表);
       if (choice.length > 0) {
         this.處理選項(choice);
         return;
       }
-      if (info) {
-        if (info[0] === 'cut') {
-          name = '';
-          word = '';
+      if (額外信息) {
+        if (額外信息[0] === 'cut') {
+          名字 = '';
+          話語 = '';
           bgm = ['None', 0];
-          this.插入圖(info[1]);
+          this.插入圖(額外信息[1]);
         }
-        if (info[0] === 'video') {
-          this.放視頻(info[1]);
+        if (額外信息[0] === 'video') {
+          this.放視頻(額外信息[1]);
         }
-        if (info[0] === 'load') {
+        if (額外信息[0] === 'load') {
           this.load特效();
         }
       }
       this.換cg(cg);
       this.換bg(bg);
-      this.換立繪(ch);
+      this.換立繪(立繪);
       this.換bgm(bgm);
-      this.換人名(name);
-      return this.換對話(word, name);
+      this.換人名(語者, 名字);
+      return this.換對話(話語, 名字);
     },
     特效處理: function(特效表) {
       var i, j, k, len, len1, results, 可特效块;
@@ -190,12 +190,14 @@
       }
       return this.換圖('bg', bg, 1.4);
     },
-    換人名: function(text) {
-      $('#名字').html(text);
-      return $('#對話歷史').append(text + '<br/>');
+    換人名: function(語者, 名字) {
+      $('#名字').html(名字);
+      $('#對話歷史').append(名字 + '<br/>');
+      return $('#對話框').attr('class', '人物--' + 語者);
     },
-    換對話: function(text, name) {
-      if (name) {
+    // alert $('#對話框').attr('class')
+    換對話: function(text, 名字) {
+      if (名字) {
         $('#話語').逐字打印(text, true);
       } else {
         $('#話語').逐字打印(text);
