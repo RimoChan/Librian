@@ -1,0 +1,110 @@
+scopeName: 'source.liber'
+name: 'liber'
+fileTypes: ['liber','play']
+patterns: [
+  {
+    begin: '^(>) *(py)$'
+    end: '^(>) *(endpy)$'
+    beginCaptures:
+      1:
+        name: 'operator'
+      2:
+        name: 'storage.inline'
+    endCaptures:
+      1:
+        name: 'operator'
+      2:
+        name: 'storage.inline'
+    patterns: [
+      {
+        include: 'source.python'
+      }
+    ]
+  }
+
+  {
+    match: '^\#.*?$'
+    name: 'comment'
+  }
+  {
+    match: '^([@+->\*])(.*?)$'
+    captures:
+        1:
+            name: 'operator'
+        2:
+            name: 'support.function'
+  }
+  {
+    match: '^(((?:([^|]*?)\\|)?(.*?)) (\\(.*?\\))?)(「(?:.)*?」)?$'
+
+    captures:
+        1:
+            name: '人物名和表情'
+        2:
+            name: '人物名'
+            patterns: [
+                {
+                    match: '^(.*?)(?:\\|.*)?$'
+                    name: '$1'
+                }
+            ]
+        3:
+            name: 'comment'
+        4:
+            name: 'comment'
+        5:
+            name: 'storage.inline'
+        6:
+            patterns: [
+                {
+                    match: '[，。？！…——]'
+                    name: 'less'
+                }
+                {
+                    match: '[「」]'
+                    name: 'operator'
+                }
+            ]
+            name: '對話.string'
+  }
+
+  {
+    begin: '^(((?:([^|]*?)\\|)?(.*?)) (\\(.*?\\))?)(?=「)'
+    beginCaptures:
+      1:
+          name: '人物名和表情'
+      2:
+          name: '人物名'
+          patterns: [
+              {
+                  match: '^(.*?)(?:\\|.*)?$'
+                  name: '$1'
+              }
+          ]
+      3:
+          name: 'keyword'
+      4:
+          name: 'entity.name.type'
+      5:
+          name: 'storage.inline'
+
+    contentName: '對話.string'
+    patterns: [
+            {
+                match: '「'
+                name: 'punctuation'
+            }
+    ]
+
+    end: '」'
+    endCaptures:
+      0:
+        name: 'punctuation'
+  }
+
+  {
+    match: '「.*?」'
+    name: 'storage.liber'
+  }
+]
+
