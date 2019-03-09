@@ -8,6 +8,9 @@ from PyQt5.QtCore import *
 from PyQt5.QtWebChannel import QWebChannel
 from PyQt5.QtGui import *
 
+import PyQt5
+print(dir(PyQt5.QtWebEngineWidgets.QWebEngineView))
+
 import 讀txt
 import 劇本
 from 環境 import 配置, 工程路徑
@@ -22,22 +25,18 @@ def js(code):
 
 def 更新():
     狀態 = 讀者.狀態.導出()
-    if 狀態['js']:
-        js(狀態['js'])
-        讀者.狀態.js = ''
     js('演出.改變演出狀態(%s)' % json.dumps(狀態))
-
 
 
 class 山彥(QObject):
     def __init__(self, 頁面):
         super().__init__()
         self.頁面 = 頁面
-    
+
     def 更新終態(self):
         讀者.從一而終(f'{工程路徑}/{配置["劇本入口"]}')
         更新()
-    
+
     def 選擇讀檔文件(self):
         return QFileDialog.getOpenFileName(
             self.頁面.parent(),
@@ -69,6 +68,7 @@ class 山彥(QObject):
     def 初始化(self):
         圖片文件夾 = os.path.join(f'../{工程路徑}', 配置['圖片文件夾']).replace('\\', '/')
         音樂文件夾 = os.path.join(f'../{工程路徑}', 配置['音樂文件夾']).replace('\\', '/')
+        視頻文件夾 = os.path.join(f'../{工程路徑}', 配置['視頻文件夾']).replace('\\', '/')
         自定css = os.path.join(f'../{工程路徑}', 配置['自定css']).replace('\\', '/')
         主題css = os.path.join(f'主題', 配置['主題css'] + '.css').replace('\\', '/')
         s = f'''
@@ -79,6 +79,7 @@ class 山彥(QObject):
               演出.自定css="{自定css}";
               演出.圖片文件夾="{圖片文件夾}";
               演出.音樂文件夾="{音樂文件夾}";
+              演出.視頻文件夾="{視頻文件夾}";
               演出.準備工作();
            '''
         try:
@@ -177,14 +178,15 @@ class gal窗口(QWebEngineView):
         self.頁面.setWebChannel(self.頻道)
         if 配置['編寫模式']:
             import threading
+
             def 監視():
-                原字=''
+                原字 = ''
                 while True:
                     with 讀txt.讀(f'{工程路徑}/{配置["劇本入口"]}') as f:
                         字 = f.read()
-                        if 字!=原字:
+                        if 字 != 原字:
                             self.handler.更新終態()
-                            原字=字
+                            原字 = 字
             t = threading.Thread(target=監視)
             t.setDaemon(True)
             t.start()

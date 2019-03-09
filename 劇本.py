@@ -88,9 +88,9 @@ class 命令():
         讀者.狀態.CG = cg
 
     @別名('視頻', '视频')
-    def VIDEO(self, 讀者, v):
+    def VIDEO(self, 讀者, 文件名):
         讀者.狀態.重置()
-        讀者.狀態.額外信息 = ('video', v)
+        讀者.狀態.視頻 = 文件名
 
     @別名('快速選項', '快速选项')
     def WRAP(self, 讀者, *li):
@@ -113,6 +113,7 @@ class 狀態():
         self.js = ''
         self.特效表 = {}
         self.選項 = ()
+        self.視頻 = ''
 
     def 導出(self, html=True):
         鏡頭.語者 = self.語者
@@ -123,21 +124,30 @@ class 狀態():
                 立繪 = 鏡頭.查詢(self.人物).拆解()
         else:
             立繪 = ''
-        return {'額外信息': self.額外信息,
-                '話語': self.話語,
-                '名字': self.名字,
-                '立繪': 立繪,
-                'bg': self.背景,
-                'bgm': self.背景音樂,
-                'cg': self.CG,
-                'js': self.js,
-                'choice': [i[0] for i in self.選項],
-                '語者' : self.語者,
-                '特效表': self.特效表,
-                }
+        快照 = {
+            '額外信息': self.額外信息,
+            '話語': self.話語,
+            '名字': self.名字,
+            '立繪': 立繪,
+            '視頻': self.視頻,
+            '背景': self.背景,
+            '背景音樂': self.背景音樂,
+            'cg': self.CG,
+            'js': self.js,
+            '選項': [i[0] for i in self.選項],
+            '語者': self.語者,
+            '特效表': self.特效表,
+        }
+        self.清除臨時狀態()
+        return 快照
 
     def 重置(self):
         self.__init__()
+
+    def 清除臨時狀態(self):
+        self.js = ''
+        self.額外信息 = ''
+        self.視頻 = ''
 
 
 class 劇本():
@@ -259,10 +269,10 @@ class 讀者():
         self.劇本棧 = []
 
 # ——————————————————————————————————————————————
+
     def 步進(self, 防止終焉=False):
         if self.狀態.選項:
             return
-        self.狀態.額外信息 = ''
 
         s = self.下一句()
         類型 = s['類型']

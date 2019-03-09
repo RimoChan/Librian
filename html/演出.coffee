@@ -31,17 +31,17 @@ window.演出 =
         send('更新')
 
     信息預處理: (data) ->
-        if ! data.bg
-            data.bg = 'url(static/None.png)'
+        if ! data.背景
+            data.背景 = 'url(static/None.png)'
         else
-            data.bg = "url(#{this.圖片文件夾}/#{data.bg})"
+            data.背景 = "url(#{this.圖片文件夾}/#{data.背景})"
         if ! data.cg
             data.cg = 'url(static/None.png)'
         else
-            data.bg = "url(#{this.圖片文件夾}/#{data.cg})"
+            data.背景 = "url(#{this.圖片文件夾}/#{data.cg})"
 
-        if data.bgm[0]!='None'
-            data.bgm[0] = this.音樂文件夾 + '/' + data.bgm[0]
+        if data.背景音樂[0]!='None'
+            data.背景音樂[0] = this.音樂文件夾 + '/' + data.背景音樂[0]
 
         if data.名字!=''
             data.話語 = "「#{data.話語}」"
@@ -52,25 +52,25 @@ window.演出 =
 
     改變演出狀態: (data) ->
         this.信息預處理 data
-        {特效表, 立繪, 名字, 話語, 額外信息, 語者, bg, bgm, cg, choice} = data
+        {特效表, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, 視頻} = data
         this.特效處理 特效表
-        if choice.length > 0
-            this.處理選項 choice
+        if 選項.length > 0
+            this.處理選項 選項
             return
         if 額外信息
             if 額外信息[0] == 'cut'
                 名字 = ''
                 話語 = ''
-                bgm = ['None', 0]
+                背景音樂 = ['None', 0]
                 this.插入圖(額外信息[1])
-            if 額外信息[0] == 'video'
-                this.放視頻(額外信息[1])
             if 額外信息[0] == 'load'
                 this.load特效()
+        eval(js)
+        this.放視頻(視頻)
         this.換cg(cg)
-        this.換bg(bg)
+        this.換背景(背景)
         this.換立繪(立繪)
-        this.換bgm(bgm)
+        this.換背景音樂(背景音樂)
         this.換人名(語者, 名字)
         this.換對話(話語, 名字)
 
@@ -87,10 +87,10 @@ window.演出 =
             $('#' + i).addClass(特效表[i])
 
     選擇之刻: false,
-    處理選項: (choice) ->
+    處理選項: (選項) ->
         tot = ''
-        for i in choice
-            tot += "<button onclick='this.點選項(#{i});'>#{choice[i]}</botton>\n"
+        for i in 選項
+            tot += "<button onclick='this.點選項(#{i});'>#{選項[i]}</botton>\n"
         $('#選項').html(tot)
         $('#選項').show(250)
         this.選擇之刻 = true
@@ -125,12 +125,13 @@ window.演出 =
             控制.左鍵屏蔽 = false
         , 5600
     放視頻: (視頻) ->
+        if !視頻
+            return
         控制.左鍵屏蔽 = true
         v = $('video')
         v.css('display','block')
         v.attr('src',this.視頻文件夾+'/' + 視頻)
         v[0].addEventListener 'ended', ->
-            this.步進更新()
             setTimeout ->
                 v[0].style.display = 'none'
                 控制.左鍵屏蔽 = false
@@ -160,14 +161,14 @@ window.演出 =
     換立繪: (text) ->
         $('#立繪').html(text)
 
-    現在bg: 'None',
-    換bg: (bg) ->
-        if bg == this.現在bg
+    現在背景: 'None',
+    換背景: (背景) ->
+        if 背景 == this.現在背景
             return
-        現在bg = bg
-        if bg == 'None'
-            bg = 'url(static/None.png)'
-        this.換圖('bg', bg, 1.4)
+        現在背景 = 背景
+        if 背景 == 'None'
+            背景 = 'url(static/None.png)'
+        this.換圖('bg', 背景, 1.4)
 
     換人名: (語者, 名字) ->
         $('#名字').html(名字)
@@ -183,9 +184,9 @@ window.演出 =
         $('#對話歷史').append(text+'<br/><br/>')
 
     當前曲名: 'None',
-    換bgm: (bgm) ->
-        曲名 = bgm[0]
-        音量 = bgm[1]
+    換背景音樂: (背景音樂) ->
+        曲名 = 背景音樂[0]
+        音量 = 背景音樂[1]
         au = $('#bgm')
         if this.當前曲名 == 曲名
             return
