@@ -15,7 +15,7 @@ def 生成虛擬核心():
     自定css = os.path.join(f'../{工程路徑}', 配置['自定css']).replace('\\', '/')
     主題css = os.path.join(f'主題', 配置['主題css'] + '.css').replace('\\', '/')
 
-    演出步 = json.dumps(list(讀者.迭代器()), ensure_ascii=False)
+    演出步 = json.dumps(list(讀者.迭代器()), ensure_ascii=False, indent=2)
 
     with open('./html/虛擬核心.js', 'w', encoding='utf-8') as f:
         f.write(f'作品名 = {配置["標題"].__repr__()};\n')
