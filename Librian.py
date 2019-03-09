@@ -6,11 +6,8 @@ import logging
 import argparse
 import yaml
 
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWebEngineWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtWebChannel import QWebChannel
-from PyQt5.QtGui import *
 
 import 環境
 from 環境 import 配置
