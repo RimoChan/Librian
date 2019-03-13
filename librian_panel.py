@@ -74,6 +74,7 @@ class 山彥(QObject):
             f'"./python36/python" ./librian.py --project {self.工程路徑} ' +
             '--config "{編寫模式: True}"'
         )
+        os.system(f'"{self.工程路徑}/{環境.配置["劇本入口"]}"')
 
     def 打開文件夾(self):
         os.system(f'start {self.工程路徑}')
