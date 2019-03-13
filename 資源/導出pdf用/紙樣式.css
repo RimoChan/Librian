@@ -1,0 +1,79 @@
+html {
+    font-size: 18px;
+    font-family: 方正标雅宋_GBK;
+}
+small{
+    font-size: 85%;
+}
+@page{
+    size: A4; 
+    margin: 1.5cm;
+    margin-bottom: 2cm;
+
+    background: url('./紙背景花紋印刷.jpg');
+    background-size: 125%;
+    background-position: 50% 50%; 
+
+   counter-increment: page;
+   @bottom-center {
+       color: rgba(0,0,0,0.5);
+       content: '——　' counter(page) '　——';
+       padding-bottom: 1cm;
+   }
+}
+p.旁白:before{
+    content:'　　';
+}
+p > *{ 
+    vertical-align:top;
+}
+.旁白{
+    color: #000;
+}
+.語{
+    color: rgba(0,0,80,1);
+    white-space:pre;
+    display:inline-block;
+
+    padding-left: 6px;
+    margin-left: 6px;
+    border-left: 3px solid rgba(0,0,0,0.4);
+}
+.顏{
+    font-size: 80%;
+}
+.註釋{
+    font-size: 80%;
+    color: rgba(0,0,0,0.5);
+}
+.函數調用{
+    font-size: 80%;
+    width: 80%;
+    padding: 0.6rem 1rem;
+    border-radius: 2px;
+    background-color: rgba(0,0,0,0.1);
+    display: inline-block;
+    white-space: pre;
+}
+.引用{
+    font-size: 95%;
+    color: #030;
+}
+.標點{
+    color: #300;
+}
+.代, .插入{
+    background:url('./紙背景插入.jpg');
+    background-size: cover;
+    background-position: fixed;
+
+    border: 1px solid rgba(0,0,0,0.4);
+    border-radius: 2px;
+
+    font-family: 方正中雅宋_GBK;
+    padding: 4px;
+}
+.插入{
+    text-align:center;
+    font-size:120%;
+}
