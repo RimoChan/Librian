@@ -32,7 +32,7 @@ html:
                     div.option:
                         span.小塊:
                             全屏幕
-                        a.hicon href='javascript:send("切換全屏");':
+                        a.hicon href='javascript:山彥("切換全屏");':
                             T
                         (其實按alt+enter就好了)
                     div.option: 
@@ -68,21 +68,21 @@ html:
             
             div#工具欄:
                 div.hicon_effect_1.hicon_effect_1a:
-                    a.hicon href='javascript:send("存檔");':
+                    a.hicon href='javascript:山彥.存檔();':
                         S
-                    a.hicon href='javascript:send("讀檔");':
+                    a.hicon href='javascript:山彥.讀檔();':
                         L
-                    a.hicon.double href='javascript:send("快速存檔");':
+                    a.hicon.double href='javascript:山彥.快速存檔();':
                         qS
-                    a.hicon.double href='javascript:send("快速讀檔");':
+                    a.hicon.double href='javascript:山彥.快速讀檔();':
                         qL
                     a.hicon href='javascript:alert("沒做這個功能");':
                         A
                     a.hicon.double href='javascript:控制.進入設置();'":
                         co
-                    a.hicon.double href='javascript:控制.快進();':
+                    a.hicon.double href='javascript:控制.切換快進();':
                         sk
-                    a.hicon.double href='javascript:send("回標題")':
+                    a.hicon.double href='javascript:山彥.回標題()':
                         tl
 
     

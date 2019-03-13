@@ -32,7 +32,7 @@
             $('#工具欄').attr('class', '自動收起');
         else
             $('#工具欄').attr('class', '');
-        send('設置',JSON.stringify(設置.內容))
+        山彥.設置(JSON.stringify(設置.內容))
     }
 };
 $(function(){

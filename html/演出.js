@@ -12,21 +12,42 @@
         type: 'text/css',
         href: this.主題css
       }).appendTo("head");
-      $('#總畫面').css('width', 解析度[0]);
-      $('#總畫面').css('height', 解析度[1]);
-      if (邊界) {
+      $('#總畫面').css('width', this.解析度[0]);
+      $('#總畫面').css('height', this.解析度[1]);
+      if (this.邊界) {
         $('div').css('border', '1px solid #22f');
       }
       this.換圖('覆蓋', 'url(static/None.png)', 0);
       this.換圖('bg', 'url(static/None.png)', 0);
       this.換圖('cg', 'url(static/None.png)', 0);
+      this.縮放調整();
       return this.更新();
     },
+    縮放調整: function() {
+      var a, b, t;
+      a = document.body.clientWidth / 演出.解析度[0];
+      b = document.body.clientHeight / 演出.解析度[1];
+      t = Math.min(a, b);
+      $('#總畫面 , #墊底').css({
+        "transform-origin": "0% 0%",
+        "transform": "scale(" + t + ")"
+      });
+      return setTimeout(演出.縮放調整, 200);
+    },
+    配置: function(d) {
+      var i, j, results;
+      results = [];
+      for (i in d) {
+        j = d[i];
+        results.push(this[i] = j);
+      }
+      return results;
+    },
     步進更新: function() {
-      return send('步進更新');
+      return 山彥.步進更新();
     },
     更新: function() {
-      return send('更新');
+      return 山彥.更新();
     },
     信息預處理: function(data) {
       if (!data.背景) {
@@ -80,27 +101,27 @@
       return this.換對話(話語, 名字);
     },
     特效處理: function(特效表) {
-      var i, j, k, len, len1, results, 可特效块;
+      var i, k, l, len, len1, results, 可特效块;
       可特效块 = ['總畫面', 'adv畫面', '覆蓋', '選項', 'cg', 'bg', '立繪', '對話歷史', '對話框', '名字框', '名字', '名字框背景', '話語框', '話語', '話語框背景', '對話框背景'];
-      for (j = 0, len = 可特效块.length; j < len; j++) {
-        i = 可特效块[j];
+      for (k = 0, len = 可特效块.length; k < len; k++) {
+        i = 可特效块[k];
         if ($('#' + i).attr('class')) {
           $('#' + i).attr('class', '');
         }
       }
       results = [];
-      for (k = 0, len1 = 特效表.length; k < len1; k++) {
-        i = 特效表[k];
+      for (l = 0, len1 = 特效表.length; l < len1; l++) {
+        i = 特效表[l];
         results.push($('#' + i).addClass(特效表[i]));
       }
       return results;
     },
     選擇之刻: false,
     處理選項: function(選項) {
-      var i, j, len, tot;
+      var i, k, len, tot;
       tot = '';
-      for (j = 0, len = 選項.length; j < len; j++) {
-        i = 選項[j];
+      for (k = 0, len = 選項.length; k < len; k++) {
+        i = 選項[k];
         tot += `<button onclick='this.點選項(${i});'>${選項[i]}</botton>\n`;
       }
       $('#選項').html(tot);
@@ -109,7 +130,7 @@
     },
     點選項: function(x) {
       $('#選項').hide(250);
-      send('選', x + '');
+      山彥.選(x + '');
       return this.選擇之刻 = false;
     },
     插入圖: function(圖) {

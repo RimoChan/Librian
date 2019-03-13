@@ -12,23 +12,39 @@ window.演出 =
                 type: 'text/css'
                 href: this.主題css
             .appendTo("head")
+            
+        $('#總畫面').css 'width', this.解析度[0]
+        $('#總畫面').css 'height', this.解析度[1]
 
-        $('#總畫面').css 'width', 解析度[0]
-        $('#總畫面').css 'height', 解析度[1]
-
-        if 邊界
+        if this.邊界
             $ 'div'
                 .css 'border','1px solid #22f'
 
         this.換圖('覆蓋','url(static/None.png)', 0)
         this.換圖('bg','url(static/None.png)', 0)
         this.換圖('cg','url(static/None.png)', 0)
+        this.縮放調整()
         this.更新()
+        
+    縮放調整:->
+        a = document.body.clientWidth / 演出.解析度[0]
+        b = document.body.clientHeight / 演出.解析度[1]
+        t = Math.min(a, b)
+        $('#總畫面 , #墊底').css({
+            "transform-origin": "0% 0%"
+            "transform": "scale("+t+")"
+        } )
+        setTimeout(演出.縮放調整, 200)
+        
+
+    配置: (d) ->
+        for i, j of d
+            this[i] = j
 
     步進更新: ->
-        send('步進更新')
+        山彥.步進更新()
     更新: ->
-        send('更新')
+        山彥.更新()
 
     信息預處理: (data) ->
         if ! data.背景
@@ -96,7 +112,7 @@ window.演出 =
         this.選擇之刻 = true
     點選項: (x) ->
         $('#選項').hide(250)
-        send('選',x+'')
+        山彥.選(x + '')
         this.選擇之刻 = false
 
     插入圖: (圖) ->
@@ -125,7 +141,7 @@ window.演出 =
             控制.左鍵屏蔽 = false
         , 5600
     放視頻: (視頻) ->
-        if !視頻
+        if ! 視頻
             return
         控制.左鍵屏蔽 = true
         v = $('video')
@@ -173,9 +189,9 @@ window.演出 =
     換人名: (語者, 名字) ->
         $('#名字').html(名字)
         $('#對話歷史').append(名字+'<br/>')
-        $('#對話框').attr('class','人物--'+語者)
+        $('#對話框').attr('class','人物--' + 語者)
         # alert $('#對話框').attr('class')
-        
+
     換對話: (text, 名字) ->
         if 名字
             $('#話語').逐字打印(text, true)
