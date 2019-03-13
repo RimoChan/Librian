@@ -6,6 +6,7 @@ def 讀(txt):
         a = chardet.detect(f.read())
     if a['confidence'] < 0.5:
         try:
+            open(txt).read()
             return open(txt)
         except:
             return open(txt, encoding='utf8')
