@@ -18,7 +18,7 @@ def 設定工程路徑(路徑):
 def 導入全局配置(a):
     global 配置
     配置.update(a)
-    print(配置)
+    logging.debug(配置)
 
 with open('配置.yaml', encoding='utf8') as f:
     配置 = yaml.load(f)
