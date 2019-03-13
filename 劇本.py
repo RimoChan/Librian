@@ -294,11 +294,17 @@ class 讀者():
             self.狀態.語者 = ''
         if 類型 == '鏡頭':
             if s['鏡頭'] == '+':
-                d = yaml.load(s['內容'])
-                鏡頭.生成鏡頭(d)
+                try:
+                    d = yaml.load(s['內容'])
+                    鏡頭.生成鏡頭(d)
+                except:
+                    logging.warning(f'鏡頭「{s["內容"]}」的內容不正確。')
                 self.步進()
             elif s['鏡頭'] == '-':
-                鏡頭.解除鏡頭(yaml.load(s['內容']))
+                try:
+                    鏡頭.解除鏡頭(yaml.load(s['內容']))
+                except:
+                    logging.waring(f'鏡頭「{s["內容"]}」的內容不正確。')
                 self.步進()
         if 類型 == '旁白':
             self.狀態.話語 = s['旁白']
@@ -343,7 +349,7 @@ class 讀者():
 
     def 從一而終(self, 劇本):
         self.__init__(劇本)
-        print(self.劇本文件.內容)
+        logging.debug(self.劇本文件.內容)
         while True:
             if self.步進(防止終焉=True):
                 break
