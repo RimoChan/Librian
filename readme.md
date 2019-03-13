@@ -1,11 +1,7 @@
 # ![](資源/Librian小.png)Librian: 簡明強大的Galgame引擎
 
-## 關於中文文檔
-這個粗略的介紹是關於Librian本身的，如果你有興趣使用的話，
-可以直接參閱使用方法的[中文文檔](https://rimochan.github.io/Librian_doc)。
-
 ## 簡介
-Librian是一个容易上手的gal引擎，Librian由python和html編寫而成，並基於pyqt前端。
+Librian是一个容易上手的Galgame引擎，Librian由python和html編寫而成，並基於pyqt前端。
 
 Librian適用於快速高效的adv實現，能將你的idea迅速轉換爲結果，你只需提供素材文件和简单的劇本就能觀賞adv演出！
 
@@ -17,10 +13,13 @@ Librian是面向劇本的引擎，在設計時首要的考慮是:
 - 表現與邏輯獨立
 - 易於擴展
 
+## 關於中文文檔
+這個粗略的介紹是關於Librian本身的，如果你有興趣使用的話，
+可以直接參閱使用方法的[中文文檔](https://rimochan.github.io/Librian_doc)。
+
 ## 演示視頻
 
 [![視頻佔位](./資源/視頻佔位.png)](https://www.zhihu.com/video/1075418256290131968)  
-知乎視頻，應該沒問題吧。
 
 ## 劇本格式
 
@@ -58,7 +57,7 @@ Librian是面向劇本的引擎，在設計時首要的考慮是:
 2. pip install pyqt5 pillow psdtools yaml chardet
 3. python3 librian_panel.py
 
-(僅在python3.6下測試通過。3.7版本的pyqt5似乎無法import QtWebEngineWidgets，希望好心人告訴我爲什麼。)
+(注意，pyqt5在5.12版本之後將網頁引擎獨立了。你可能還需要pip install PyQtWebEngine。)
 
 ## 赞助
 
@@ -66,4 +65,3 @@ Librian是面向劇本的引擎，在設計時首要的考慮是:
 錯了，廢話少說，快給錢！
 
 ![圖1](文檔/支付寶.jpg)
-
