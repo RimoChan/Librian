@@ -59,7 +59,7 @@ def 導出(f):
 
             body += f'<p><span class="代 {s["名"]}">{代}</span>'
             if 顏:
-                body += f'<span class="顏">({顏})</span>'
+                body += f'<span class="顏">{顏}</span>'
             if 語:
                 body += f'<span class="語">{語}</span>'
             body += f'</p>'

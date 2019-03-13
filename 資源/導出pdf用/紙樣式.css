@@ -40,7 +40,8 @@ p > *{
     border-left: 3px solid rgba(0,0,0,0.4);
 }
 .顏{
-    font-size: 80%;
+    color: rgba(0,0,0,0.5);
+    padding-left: 6px;
 }
 .註釋{
     font-size: 80%;
