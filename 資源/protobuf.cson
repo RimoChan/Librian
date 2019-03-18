@@ -21,13 +21,40 @@ patterns: [
       }
     ]
   }
-
   {
-    match: '^\#.*?$'
+    begin: '^(>) *(js)$'
+    end: '^(>) *(endjs)$'
+    beginCaptures:
+      1:
+        name: 'operator'
+      2:
+        name: 'storage.inline'
+    endCaptures:
+      1:
+        name: 'operator'
+      2:
+        name: 'storage.inline'
+    patterns: [
+      {
+        include: 'source.js'
+      }
+    ]
+  }
+  {
+    begin: '(?=<)'
+    end: '(?<=>)'
+    patterns: [
+      {
+        include: 'text.html.basic'
+      }
+    ]
+  }
+  {
+    match: '^#.*?$'
     name: 'comment'
   }
   {
-    match: '^([@+->\*])(.*?)$'
+    match: '^([@\\+\\-\\>\\*]|={3,})(.*?)$'
     captures:
         1:
             name: 'operator'
@@ -35,8 +62,7 @@ patterns: [
             name: 'support.function'
   }
   {
-    match: '^(((?:([^|]*?)\\|)?(.*?)) (\\(.*?\\))?)(「(?:.)*?」)?$'
-
+    match: '^(((?:([^|]*?)\\|)?(.*?)) (\\(.*?\\))?)$'
     captures:
         1:
             name: '人物名和表情'
@@ -54,22 +80,9 @@ patterns: [
             name: 'comment'
         5:
             name: 'storage.inline'
-        6:
-            patterns: [
-                {
-                    match: '[，。？！…——]'
-                    name: 'less'
-                }
-                {
-                    match: '[「」]'
-                    name: 'operator'
-                }
-            ]
-            name: '對話.string'
   }
-
   {
-    begin: '^(((?:([^|]*?)\\|)?(.*?)) (\\(.*?\\))?)(?=「)'
+    begin: '^(((?:([^|]*?)\\|)?(.*?)) (\\(.*?\\))?)(?=「.)'
     beginCaptures:
       1:
           name: '人物名和表情'
@@ -94,6 +107,15 @@ patterns: [
                 match: '「'
                 name: 'punctuation'
             }
+            {
+                begin: '(?=<)'
+                end: '(?<=>)'
+                patterns: [
+                  {
+                    include: 'text.html.basic'
+                  }
+                ]
+            }
     ]
 
     end: '」'
@@ -101,7 +123,7 @@ patterns: [
       0:
         name: 'punctuation'
   }
-
+  
   {
     match: '「.*?」'
     name: 'storage.liber'
