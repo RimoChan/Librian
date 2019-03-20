@@ -1,135 +1,41 @@
-﻿<head>
-    <script src='/html/黑科技/qwebchannel.js'></script>
-    <script src='/html/黑科技/jquery-3.1.1.min.js'></script>
-	<script src='/html/黑科技/jquery-ui.min.js'></script>
-    <script src='/html/title_js.js'></script>
-    <script>
-		$(function(){
-			$('.cover').fadeOut(500)
-		})
-	</script>
-    <style>
-		body {
-			-webkit-user-select:none;
-			overflow: hidden;
-			margin:0;
-			padding:0;
-			color:#fff;
-			background:#000;
-		    font-family: 微软雅黑;
-			font-size:30px;
-		    text-shadow: 1px 1px 5px #FFF,-1px -1px 5px #FFF;
-		}
-		p {
-		}
-		a{
-			display: inline-block;
-			text-decoration: none;
-			color:#def;
-			font-size: 100%;
-			transform: scale(1);
-			transition: transform 0.2s, color 0.8s;
-		}
-		a:hover{
-			color:#fff;
-			transform: scale(1.3);
-			transition: transform 0.2s, color 0.2s;
-		}
-		.main {
-			position:absolute;
-			top:0px;
-			left:1000px;
-
-			height:100%;
-			width:366px;
-
-    		box-shadow: 0px 0px 14px;
-		}
-		.mbg{
-			background:url('2.jpg');
-    		background-attachment: fixed; 
-			background-size: cover;
-			background-position: center;
-			overflow: hidden;
-			z-index:-1;
-		}
-		.img {
-			background:#660;
-			height:100%;
-			width:70%;
-			margin:0;
-			padding:0;
-		}
-
-		h1{
-			font-size:350%;
-			font-family:Kunstler Script;
-		    text-shadow: 1px 1px 15px #FFF,-1px -1px 15px #FFF;
-		}
-		.圖層{
-			margin:0;
-			padding:0;
-			width:100%;
-			height:100%;
-			position:absolute;
-		}
-		.cover{
-			z-index:999;
-			background:#000;
-		}
-		.字{
-			text-align:center;
-			padding:0px 20px;
-		}
-
-		@-webkit-keyframes 極彩{
-			0% { 
-				transform: translate(0px,0px);
-			}
-			100% {
-				transform: translate(-100px,0px);
-			}
-		}
-		.librian{
-		    animation-name: 極彩;
-			animation-duration: 4s;
-			animation-timing-function: ease-in-out;
-			animation-iteration-count: infinite;
-			animation-direction: alternate;
-		    background:#777;
-  		    background:url('1.jpg');
-		    background-size:cover;
-		    z-index:-2;
-		}
-
-	</style>
-</head>
-<body>
-	<div class='圖層 cover'></div>
-	<div class='圖層 librian'></div>
-	<div class='main'>
-		<div class='圖層 mbg'></div>
-			<div class='字'>
-				<h1>Librian</h1>
-				
-				<p>
-					<a href='javascript:開始()'>從最初開始</a>
-				</p>
-				
-				<p>
-					<a href='javascript:從title讀檔()'>從存檔繼續</a>
-				</p>
-				
-				<p>
-					<a>放映室</a>
-				</p>
-				
-				<p>
-					<a href='javascript:send("退出")'>退出</a>
-				</p>
-			</div>
-	</div>
-	
-	
-	
-</body>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel='stylesheet' href='樣式.css'/>
+        <script src="./定位.js"></script>
+    </head>
+    <body>
+      <div id="all">
+        <div id="bg"></div>
+        <div id="bb">
+            <div id="bg2"></div>
+        </div>
+        <div class="主">
+            <div>
+                <a href='javascript:山彥.步進();window.location.href="/html/adv.html";'>
+                    <div class="核"></div>
+                    開始遊戲
+                </a>
+            </div>
+            <div>
+                <a href='javascript:山彥.從title讀檔();'>
+                    <div class="核"></div>
+                    繼續遊戲
+                </a>
+            </div>
+            <div>
+                <a>
+                    <div class="核"></div>
+                    美術館
+                </a>
+            </div>
+            <div>
+                <a href='javascript:山彥.退出();'>
+                    <div class="核"></div>
+                    退出
+                </a>
+            </div>
+        </div>
+      </div>
+    </body>
+</html>
