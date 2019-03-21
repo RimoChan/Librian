@@ -20,7 +20,7 @@ def app():
         圖標 = './資源/librian.ico'
 
     app, 瀏覽器 = wxcef.group(title=配置['標題'], url=url, icon=圖標, size=配置['主解析度'])
-    山彥.綁定(app)
+    山彥.綁定(app, 標題url=url)
 
     return app
 
