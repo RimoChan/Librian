@@ -55,10 +55,8 @@ Librian是面向劇本的引擎，賣點是:
 如果你持「不讀說明書主義」，也可以: 
 
 1. 安裝python3.6
-2. pip install pyqt5 pillow psdtools yaml chardet
+2. pip install wxpython cefpython3 pillow psdtools yaml chardet
 3. python3 librian_panel.py
-
-(注意，pyqt5在5.12版本之後將網頁引擎獨立了。你可能還需要pip install PyQtWebEngine。)
 
 ## 赞助
 
