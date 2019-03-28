@@ -12,13 +12,11 @@ from 環境 import 配置, 工程路徑
 
 def 綁定(app, 標題url):
     讀者 = 劇本.讀者(f'{工程路徑}/{配置["劇本入口"]}')
-    bindings = cef.JavascriptBindings()
-    bindings.SetObject("山彥", 極山彥(app.frame, app.frame.browser, 讀者, 標題url))
-    app.frame.browser.SetJavascriptBindings(bindings)
+    app.frame.set_browser_object("山彥", 極山彥(app.frame, app.frame.browser, 讀者, 標題url))
 
 
 class 山彥:
-    def __init__(self,  窗口, 瀏覽器, 讀者, 標題url):
+    def __init__(self, 窗口, 瀏覽器, 讀者, 標題url):
         self.瀏覽器 = 瀏覽器
         self.窗口 = 窗口
         self.讀者 = 讀者

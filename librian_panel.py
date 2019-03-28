@@ -3,31 +3,24 @@ import json
 import os
 import subprocess
 import shutil
+import wx
 
-from PyQt5.QtWidgets import *
-from PyQt5.QtWebEngineWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtWebChannel import QWebChannel
-from PyQt5.QtGui import *
+import wxcef
 
 import 環境
 
 
-def js(code):
-    主窗口.網頁.頁面.runJavaScript(code)
+def js(x):
+    真山彥.窗口.browser.ExecuteJavascript(x)
 
 
 def alert(s):
     js(f'alert("{s}")')
 
 
-class 山彥(QObject):
-    def __init__(self, 頁面):
-        super().__init__()
-        self.頁面 = 頁面
-
-    def 初始化(self):
-        pass
+class 山彥:
+    def __init__(self, 窗口):
+        self.窗口 = 窗口
 
     def 同調(self, 工程路徑):
         try:
@@ -48,31 +41,28 @@ class 山彥(QObject):
         js(f'進入工程()')
 
     def 開啓工程(self):
-        工程路徑 = QFileDialog.getExistingDirectory(主窗口,
-                                                "選取文件夾",
-                                                "./project")
-        if 工程路徑:
-            self.同調(工程路徑)
+        with wx.DirDialog(self.窗口, "选择文件夹") as dlg:
+            dlg.SetPath(os.path.abspath('./project'))
+            if dlg.ShowModal() == wx.ID_OK:
+                self.同調(dlg.GetPath())
 
     def 建立工程(self):
-        s, go = QInputDialog.getText(主窗口, "小面板", "工程名", QLineEdit.Normal, "")
-        if not go:
-            return
-        新工程路徑 = os.path.join('.', 'project', s)
-        if os.path.isdir(新工程路徑):
-            self.box = QMessageBox(QMessageBox.Warning, "小面板", "已經有這個工程了。")
-            self.box.show()
-            return
-        shutil.copytree('./project/_默認工程', 新工程路徑)
-        self.同調(新工程路徑)
+        with wx.TextEntryDialog(self.窗口, '工程名: ', '小面板') as dlg:
+            if dlg.ShowModal() == wx.ID_OK:
+                新工程路徑 = os.path.join('.', 'project', dlg.GetValue())
+                if os.path.isdir(新工程路徑):
+                    alert('已經有這個工程了。')
+                    return
+                shutil.copytree('./project/_默認工程', 新工程路徑)
+                self.同調(新工程路徑)
 
     def 運行(self):
         os.system(f'""./python36/python"" ./librian.py --project {self.工程路徑}')
 
     def 運行同時編寫(self):
         subprocess.Popen(
-            f'"./python36/python" ./librian.py --project {self.工程路徑} ' +
-            '--config "{編寫模式: True}"'
+            f'"./python36/python" ./librian.py --project {self.工程路徑} '
+            + '--config "{編寫模式: True}"'
         )
         os.system(f'"{self.工程路徑}/{環境.配置["劇本入口"]}"')
 
@@ -89,55 +79,8 @@ class 山彥(QObject):
         虛擬演繹.生成虛擬核心()
         alert('好了。')
 
-    @pyqtSlot(str, str)
-    def rec2(self, 令, 參數):
-        logging.debug(f'收到頁面來的指令:「{令}({參數})」')
-        if 令 in 山彥.__dict__:
-            山彥.__dict__[令](self, 參數)
-        else:
-            raise Exception(f'命令「{令}」無法理解。')
-        js('link_on=true')
 
-    @pyqtSlot(str)
-    def rec1(self, 令):
-        logging.debug(f'收到頁面來的指令: 「{令}」')
-        if 令 in 山彥.__dict__:
-            山彥.__dict__[令](self)
-        else:
-            raise Exception(f'命令「{令}」無法理解。')
-        js('link_on=true')
-
-
-class gal窗口(QWebEngineView):
-
-    def __init__(self, *li):
-        super().__init__(*li)
-        self.準備網頁()
-        self.做界面()
-
-    def 準備網頁(self):
-        self.頁面 = self.page()
-        self.頻道 = QWebChannel()
-        self.handler = 山彥(self.頁面)
-        self.頻道.registerObject('handler', self.handler)
-        self.頁面.setWebChannel(self.頻道)
-
-    def 做界面(self):
-        self.resize(800, 450)
-        self.load(QUrl('file:///html面板/面板.html'))
-        self.show()
-
-
-class 統合窗口(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.setWindowIcon(QIcon('./資源/librian.ico'))
-        self.setWindowTitle('librian面板')
-        self.resize(800, 450)
-        self.網頁 = gal窗口(self)
-        self.show()
-
-
-app = QApplication([])
-主窗口 = 統合窗口()
-app.exec_()
+app, 瀏覽器 = wxcef.group(title='librian面板', url='file:///html面板/面板.html', icon='./資源/librian.ico', size=(800, 450))
+真山彥 = 山彥(app.frame)
+app.frame.set_browser_object("山彥", 真山彥)
+app.MainLoop()

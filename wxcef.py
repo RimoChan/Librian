@@ -23,7 +23,7 @@ class MainFrame(wx.Frame):
     def __init__(self, url, icon, title, size):
         self.browser = None
 
-        wx.Frame.__init__(self, parent=None, id=wx.ID_ANY, title=title, style=wx.DEFAULT_FRAME_STYLE|wx.WANTS_CHARS)
+        wx.Frame.__init__(self, parent=None, id=wx.ID_ANY, title=title, style=wx.DEFAULT_FRAME_STYLE | wx.WANTS_CHARS)
 
         self.browser_panel = wx.Panel(self, size=tuple(size))
         self.browser_panel.Bind(wx.EVT_SIZE, self.OnSize)
@@ -44,13 +44,18 @@ class MainFrame(wx.Frame):
                                [0, 0, width, height])
         self.browser = cef.CreateBrowserSync(window_info, url=url)
 
+    def set_browser_object(self, name, obj):
+        bindings = cef.JavascriptBindings()
+        bindings.SetObject(name, obj)
+        self.browser.SetJavascriptBindings(bindings)
+
     def OnSize(self, _):
         if not self.browser:
             return
         cef.WindowUtils.OnSize(self.browser_panel.GetHandle(),
                                0, 0, 0)
         self.browser.NotifyMoveOrResizeStarted()
-        
+
     def toggleFullScreen(self):
         if self.IsFullScreen():
             self.ShowFullScreen(False)
@@ -62,11 +67,11 @@ class CefApp(wx.App):
 
     def __init__(self, url, icon, title, size):
         self.url, self.icon, self.title, self.size = url, icon, title, size
-        
+
         self.timer = None
         self.timer_id = 1
         self.is_initialized = False
-        
+
         super(CefApp, self).__init__(redirect=False)
 
     def OnPreInit(self):
