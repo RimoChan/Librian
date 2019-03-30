@@ -20,7 +20,7 @@ def 導入全局配置(a):
     配置.update(a)
     logging.debug(配置)
 
-with open('配置.yaml', encoding='utf8') as f:
+with open(os.path.split(os.path.realpath(__file__))[0]+'/配置.yaml', encoding='utf8') as f:
     配置 = yaml.load(f)
     if 配置['額外信息']:
         logging.basicConfig(level=logging.DEBUG)
