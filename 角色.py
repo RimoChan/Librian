@@ -36,8 +36,14 @@ def 導入有立繪的角色():
 
 class 角色:
     def __init__(self, 名字, 立繪表=None):
+        self.名字 = 名字
+        self.顯示名字 = None
+        
         self.有立繪 = bool(立繪表)
         if self.有立繪:
+            with open('%s/%s/位置.yaml' % (配置['圖片路徑'], self.名字), encoding='utf8') as f:
+                self.圖層座標 = yaml.load(f)
+            
             self.衣圖層 = 立繪表['衣']
             self.顏圖層 = 立繪表['顏']
             self.固有縮放 = 立繪表.get('縮放', 1)
@@ -46,8 +52,8 @@ class 角色:
             self.現特效 = None
         else:
             logging.warning(f'新建了沒有立繪的角色「{名字}」')
-        self.名字 = 名字
-        self.顯示名字 = None
+        
+        assert self.名字 not in 角色表
         角色表[self.名字] = self
 
     @property
@@ -66,8 +72,11 @@ class 角色:
             logging.warning(f'顏「{self.現顏}」沒有配置。')
             return []
 
+    def 定座標(self, 圖層):
+        return self.圖層座標[圖層]['x'], self.圖層座標[圖層]['y']
+
     def __repr__(self):
-        return f'角色{"|"+self.顯示名字 if self.顯示名字 else ""}({self.名字}->[衣:{self.衣圖層}],[顏:{self.顏圖層}])  '
+        return f'角色{"|"+self.顯示名字 if self.顯示名字 else ""}({self.名字}->[衣:{self.衣圖層}],[顏:{self.顏圖層}])'
 
 
 導入有立繪的角色()
