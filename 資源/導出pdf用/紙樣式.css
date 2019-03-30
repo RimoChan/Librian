@@ -39,11 +39,19 @@ p > *{
     margin-left: 6px;
     border-left: 3px solid rgba(0,0,0,0.4);
 }
+.躍點{
+    font-size: 80%;
+    color: #338;
+}
 .顏{
     color: rgba(0,0,0,0.5);
     padding-left: 6px;
 }
 .註釋{
+    font-size: 80%;
+    color: rgba(0,0,0,0.5);
+}
+.人物操作{
     font-size: 80%;
     color: rgba(0,0,0,0.5);
 }
