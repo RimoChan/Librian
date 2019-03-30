@@ -41,7 +41,7 @@ p > *{
 }
 .躍點{
     font-size: 80%;
-    color: #338;
+    color: rgba(0,0,111,0.5);
 }
 .顏{
     color: rgba(0,0,0,0.5);
