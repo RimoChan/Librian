@@ -15,35 +15,38 @@ def 取角色(名字):
 
 
 def 導入有立繪的角色():
-    with open(f'{配置["psd路徑"]}/映射.yaml', encoding='utf8') as f:
-        映射 = yaml.load(f)
-        if 映射:
-            for i in 映射:
-                角色(i, 映射[i])
-                if not os.path.isdir('%s/%s' % (配置["圖片路徑"], i)):
-                    psd拆包.拆包(f'{配置["psd路徑"]}/{i}.psd', 配置["圖片路徑"])
-        for i in os.listdir(配置["psd路徑"]):
-            if i.endswith('.png'):
-                前名 = os.path.basename(os.path.splitext(i)[0])
-                if not os.path.isdir('%s/%s' % (配置["圖片路徑"], 前名)):
-                    全名 = os.path.join(配置["psd路徑"], i)
-                    psd拆包.png假裝拆包(全名, 配置["圖片路徑"])
-                角色(前名, {
-                    '衣': {'_默認': ['_']},
-                    '顏': {'_默認': []},
-                })
+    try:
+        with open(f'{配置["psd路徑"]}/映射.yaml', encoding='utf8') as f:
+            映射 = yaml.load(f)
+            if 映射:
+                for i in 映射:
+                    角色(i, 映射[i])
+                    if not os.path.isdir('%s/%s' % (配置["圖片路徑"], i)):
+                        psd拆包.拆包(f'{配置["psd路徑"]}/{i}.psd', 配置["圖片路徑"])
+            for i in os.listdir(配置["psd路徑"]):
+                if i.endswith('.png'):
+                    前名 = os.path.basename(os.path.splitext(i)[0])
+                    if not os.path.isdir('%s/%s' % (配置["圖片路徑"], 前名)):
+                        全名 = os.path.join(配置["psd路徑"], i)
+                        psd拆包.png假裝拆包(全名, 配置["圖片路徑"])
+                    角色(前名, {
+                        '衣': {'_默認': ['_']},
+                        '顏': {'_默認': []},
+                    })
+    except:
+        logging.warning('角色立繪沒有導入。')
 
 
 class 角色:
     def __init__(self, 名字, 立繪表=None):
         self.名字 = 名字
         self.顯示名字 = None
-        
+
         self.有立繪 = bool(立繪表)
         if self.有立繪:
             with open('%s/%s/位置.yaml' % (配置['圖片路徑'], self.名字), encoding='utf8') as f:
                 self.圖層座標 = yaml.load(f)
-            
+
             self.衣圖層 = 立繪表['衣']
             self.顏圖層 = 立繪表['顏']
             self.固有縮放 = 立繪表.get('縮放', 1)
@@ -52,7 +55,7 @@ class 角色:
             self.現特效 = None
         else:
             logging.warning(f'新建了沒有立繪的角色「{名字}」')
-        
+
         assert self.名字 not in 角色表
         角色表[self.名字] = self
 
