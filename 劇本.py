@@ -194,8 +194,8 @@ class 讀者():
             return self.下一句()
 
     def 編譯(self, s):
-        f = 讀txt.讀(s)
-        return 劇本(編譯.編譯(f), s)
+        with 讀txt.讀(s) as f:
+            return 劇本(編譯.編譯(f), s)
 
     @property
     def 劇本文件(self):
