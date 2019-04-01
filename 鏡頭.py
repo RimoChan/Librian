@@ -1,4 +1,4 @@
-from psd生成html import 生成html
+from 人物生成html import 生成html
 import 立繪
 from 環境 import 配置
 import logging

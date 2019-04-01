@@ -42,8 +42,3 @@ def 生成html(參數):
             logging.warning('生成立繪時出錯了。' + e.__repr__())
     人物html += '</div>\n'
     return 頭html + 人物html
-
-
-if __name__ == '__main__':
-    with open('1.html', 'w', encoding='utf8') as f:
-        f.write(生成html('靈夢', 顏='笑'))
