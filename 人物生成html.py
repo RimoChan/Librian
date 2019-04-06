@@ -1,7 +1,6 @@
 import os
 import logging
 import random
-import yaml
 from 環境 import 配置, 工程路徑
 
 
