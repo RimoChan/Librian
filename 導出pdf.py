@@ -85,7 +85,6 @@ def 導出(文件名):
     head = f'''
     <head>
         <meta charset="utf8"/>
-        {" ".join([f"<link rel='stylesheet' href='file:///{css}'/>" for css in 參數.css])}
     </head>
     '''
     t = list(速讀者(文件名).迭代器())
@@ -108,6 +107,6 @@ if __name__ == '__main__':
             with open(參數.out, 'w', encoding='utf8') as f2:
                 f2.write(t)
         if pdf:
-            HTML(string=t).write_pdf(參數.out)
+            HTML(string=t).write_pdf(參數.out, stylesheets=參數.css)
         else:
             raise Exception('操你媽')
