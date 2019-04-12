@@ -13,11 +13,9 @@ window.控制 =
             $('.scroll').fadeOut(200)
             $('#對話框').fadeIn(250)
         else
-            if 待打印文字
-                e = $('#話語')
-                e.attr('f',e.attr('f') + 待打印文字)
-                e.html(e.attr('f'))
-                待打印文字 = ''
+            if Date.now() < 演出.淡入過期時間
+                演出.淡入過期時間 = 0
+                演出.早泄()
             else
                 演出.步進更新()
 

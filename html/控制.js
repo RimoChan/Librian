@@ -8,7 +8,6 @@
     },
     左鍵屏蔽: false,
     左鍵功能: function() {
-      var e, 待打印文字;
       if (this.左鍵屏蔽 || this.選擇之刻) {
         return;
       }
@@ -16,11 +15,9 @@
         $('.scroll').fadeOut(200);
         return $('#對話框').fadeIn(250);
       } else {
-        if (待打印文字) {
-          e = $('#話語');
-          e.attr('f', e.attr('f') + 待打印文字);
-          e.html(e.attr('f'));
-          return 待打印文字 = '';
+        if (Date.now() < 演出.淡入過期時間) {
+          演出.淡入過期時間 = 0;
+          return 演出.早泄();
         } else {
           return 演出.步進更新();
         }

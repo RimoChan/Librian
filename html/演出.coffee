@@ -12,7 +12,7 @@ window.演出 =
                 type: 'text/css'
                 href: this.主題css
             .appendTo("head")
-            
+
         $('#總畫面').css 'width', this.解析度[0]
         $('#總畫面').css 'height', this.解析度[1]
 
@@ -25,8 +25,8 @@ window.演出 =
         this.換圖('cg','url(static/None.png)', 0)
         this.縮放調整()
         this.更新()
-        
-    縮放調整:->
+
+    縮放調整: ->
         a = document.body.clientWidth / 演出.解析度[0]
         b = document.body.clientHeight / 演出.解析度[1]
         t = Math.min(a, b)
@@ -35,7 +35,7 @@ window.演出 =
             "transform": "scale("+t+")"
         } )
         setTimeout(演出.縮放調整, 200)
-        
+
 
     配置: (d) ->
         for i, j of d
@@ -140,6 +140,7 @@ window.演出 =
         setTimeout ->
             控制.左鍵屏蔽 = false
         , 5600
+
     放視頻: (視頻) ->
         if ! 視頻
             return
@@ -192,12 +193,15 @@ window.演出 =
         $('#對話框').attr('class','人物--' + 語者)
         # alert $('#對話框').attr('class')
 
+    淡入過期時間: 0,
     換對話: (text, 名字) ->
-        if 名字
-            $('#話語').逐字打印(text, true)
-        else
-            $('#話語').逐字打印(text)
+        淡入字 = 演出.文字淡入(text)
+        $('#話語').html(淡入字.內容)
+        演出.淡入過期時間 = Date.now() + 淡入字.總時間 * 1000
         $('#對話歷史').append(text+'<br/><br/>')
+    早泄: ->
+        $('#話語 *').css('animation','None')
+        $('#話語 *').css('opacity','1')
 
     當前曲名: 'None',
     換背景音樂: (背景音樂) ->
@@ -230,3 +234,17 @@ window.演出 =
             $(dst).css('animation',frame+' '+time.toString()+'s')
         $(dst).css('background-image', img_b)
         $(dst).attr('my_img', img_b)
+
+    文字淡入: (s, 動畫名 = '_淡入') ->
+        時間間隔 = 設置.內容.文字速度/800
+        group = s.replace(/((<.*?>)|(.))/g, "$2$3\0").split('\0')
+        動畫時間 = 時間間隔 * 8
+        時間 = 0
+        內容 = (for i in group
+            if i[0] == '<'
+                i
+            else
+                時間 += 時間間隔
+                "<span style='animation:#{動畫名} #{動畫時間}s;animation-fill-mode:forwards;animation-delay:#{時間}s;opacity:0;'>#{i}</span>"
+        ).join('')
+        {內容, 總時間: 時間 + 動畫時間}

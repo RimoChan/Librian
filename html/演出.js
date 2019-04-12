@@ -218,13 +218,17 @@
       return $('#對話框').attr('class', '人物--' + 語者);
     },
     // alert $('#對話框').attr('class')
+    淡入過期時間: 0,
     換對話: function(text, 名字) {
-      if (名字) {
-        $('#話語').逐字打印(text, true);
-      } else {
-        $('#話語').逐字打印(text);
-      }
+      var 淡入字;
+      淡入字 = 演出.文字淡入(text);
+      $('#話語').html(淡入字.內容);
+      演出.淡入過期時間 = Date.now() + 淡入字.總時間 * 1000;
       return $('#對話歷史').append(text + '<br/><br/>');
+    },
+    早泄: function() {
+      $('#話語 *').css('animation', 'None');
+      return $('#話語 *').css('opacity', '1');
     },
     當前曲名: 'None',
     換背景音樂: function(背景音樂) {
@@ -267,6 +271,31 @@
       }
       $(dst).css('background-image', img_b);
       return $(dst).attr('my_img', img_b);
+    },
+    文字淡入: function(s, 動畫名 = '_淡入') {
+      var group, i, 內容, 動畫時間, 時間, 時間間隔;
+      時間間隔 = 設置.內容.文字速度 / 800;
+      group = s.replace(/((<.*?>)|(.))/g, "$2$3\0").split('\0');
+      動畫時間 = 時間間隔 * 8;
+      時間 = 0;
+      內容 = ((function() {
+        var k, len, results;
+        results = [];
+        for (k = 0, len = group.length; k < len; k++) {
+          i = group[k];
+          if (i[0] === '<') {
+            results.push(i);
+          } else {
+            時間 += 時間間隔;
+            results.push(`<span style='animation:${動畫名} ${動畫時間}s;animation-fill-mode:forwards;animation-delay:${時間}s;opacity:0;'>${i}</span>`);
+          }
+        }
+        return results;
+      })()).join('');
+      return {
+        內容,
+        總時間: 時間 + 動畫時間
+      };
     }
   };
 
