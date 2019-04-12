@@ -5,7 +5,6 @@
     if (typeof 虛擬核心已加載 === "undefined") {
       alert('無法加載虛擬核心。');
     }
-    $('title').html(作品名);
     縮放調整 = function() {
       var a, b, t;
       a = document.body.clientWidth / 解析度[0];
@@ -15,9 +14,10 @@
         "transform-origin": "0% 0%",
         "transform": "scale(" + t + ")"
       });
-      return setTimeout(縮放調整, 100);
+      return setTimeout(縮放調整, 200);
     };
     縮放調整();
+    $('title').html(作品名);
     return 山彥.初始化();
   });
 
@@ -37,7 +37,8 @@
       return 0;
     },
     初始化: function() {
-      return 演出.配置({解析度, 邊界, 主題css, 自定css, 圖片文件夾, 音樂文件夾, 視頻文件夾});
+      演出.配置({解析度, 邊界, 主題css, 自定css, 圖片文件夾, 音樂文件夾, 視頻文件夾});
+      return 演出.準備工作();
     }
   };
 
