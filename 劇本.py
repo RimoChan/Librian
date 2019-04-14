@@ -28,7 +28,7 @@ def 別名(*li):
 
 
 @別名適用
-class 命令():
+class 命令:
     def __init__(self, d):
         self.函數 = d['函數']
         self.參數 = [i['a'] for i in d['參數表']]
@@ -96,7 +96,7 @@ class 命令():
         讀者.產生選項(*li)
 
 
-class 狀態():
+class 狀態:
     def __init__(self):
         self.額外信息 = ''
         self.話語 = ''
@@ -146,7 +146,7 @@ class 狀態():
         self.視頻 = ''
 
 
-class 劇本():
+class 劇本:
     def __init__(self, 內容, 名):
         self.內容 = 內容
         self.指針 = 0
@@ -160,7 +160,7 @@ class 劇本():
         return r
 
 
-class 讀者():
+class 讀者:
     def __init__(self, 初始劇本):
         self.劇本棧 = [self.編譯(初始劇本)]
         self.狀態 = 狀態()
