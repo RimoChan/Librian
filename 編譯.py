@@ -141,6 +141,6 @@ def 印(q):
 
 
 if __name__ == '__main__':
-    with open('1.play', encoding='utf8') as f:
+    with open('1.liber', encoding='utf8') as f:
         印(編譯(f))
         # print(編譯(f))
