@@ -23,18 +23,3 @@ def app():
     山彥.綁定(app, 標題url=url)
 
     return app
-
-
-class 統合窗口():
-    def 切換全屏(self):
-        self.全屏 = not self.全屏
-        if self.全屏:
-            self.showFullScreen()
-        else:
-            self.showNormal()
-
-    def keyPressEvent(self, event):
-        keyEvent = QKeyEvent(event)
-        if keyEvent.key() in (Qt.Key_Enter, 16777220):
-            if QApplication.keyboardModifiers() == Qt.AltModifier:
-                self.切換全屏()
