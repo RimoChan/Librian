@@ -1,5 +1,5 @@
 # ![](資源/Librian小.png)Librian: 簡明強大的 Galgame | Visual Novel 引擎
-
+[简化字版本](readme_chs.md)  
 Librian是一个容易上手的 Galgame | Visual Novel 引擎。   
 Librian由python和HTML編寫而成，基於CEFPython和wxPython前端。
 
