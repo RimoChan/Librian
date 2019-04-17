@@ -1,12 +1,12 @@
 @font-face{
-    font-family: zzz;
-    src: url('小塚明朝縮減.otf');
+    font-family: 源流明體SemiBold;
+    src: url('../GenRyuMinTW-SemiBold.ttf');
 }
 body{
+    font-family: 源流明體SemiBold; 
     margin: 0;
     padding: 0;
     font-size: 1.6vw;
-    font-family: zzz; 
     text-shadow: 1px 1px 5px #FFF,-1px -1px 5px #FFF;
     overflow:hidden;
 }
@@ -44,7 +44,8 @@ a{
 #bg2{
     -webkit-mask-image: url('虛僞的假面.png');
     -webkit-mask-size: cover;
-    -webkit-mask-position: var(--x) var(--y);
+    /*-webkit-mask-position: var(--x) var(--y);*/
+    /*動起來有點卡*/
     filter:hue-rotate(var(--s));
     background: url('紙背景花紋模糊.jpg');
     background-size: cover;
@@ -65,9 +66,10 @@ a{
     animation: a 10s;
 }
 .主{
-    font-size:200%;
-    margin-left:45%;
-    margin-top:8%;
+    font-size:250%;
+    line-height: 150%;
+    margin-left:50%;
+    margin-top:10%;
 }
 
 .主>div{
@@ -82,14 +84,15 @@ a{
     filter:hue-rotate(var(--s));
 
     display:inline-block;
-    height:1.6vw;
-    width:1.6vw;
+    height:2.6vw;
+    width:2.6vw;
     box-shadow: 0px 0px 1.4vw;
 
-    transition: border-radius 0.3s, box-shadow 0.3s;
+    transition: border-radius 0.2s, box-shadow 0.2s, filter 0.2s;
 }
 a:hover>.核{
+    filter:hue-rotate(90deg);
     border-radius: 5%;
-    box-shadow: 0px 0px 0.4vw;
-    transition: border-radius 0.3s, box-shadow 0.3s;
+    box-shadow: 0px 0px 0.8vw;
+    transition: border-radius 0.2s, box-shadow 0.2s, filter 0.2s;
 }

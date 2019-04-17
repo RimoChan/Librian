@@ -1,7 +1,11 @@
-﻿body {
+﻿@font-face{
+    font-family: 源流明體SemiBold;
+    src: url('GenRyuMinTW-SemiBold.ttf');
+}
+body{
+    font-family: 源流明體SemiBold; 
     margin: 0px;
     padding: 0px;
-    font-family: '微软雅黑';
     background: url(static/塊.png);
     -webkit-user-select: none;
     color: #fff;

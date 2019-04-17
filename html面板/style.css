@@ -1,6 +1,17 @@
+@font-face{
+    font-family: 源流明體SemiBold;
+    src: url('../html/GenRyuMinTW-SemiBold.ttf');
+}
 body{
+    font-family: 源流明體SemiBold; 
     overflow:hidden;
-    font-family:'微软雅黑';
+    font-size: 2.5vw;
+}
+h2{
+    font-size: 180%;
+}
+h3{
+    font-size: 140%;
 }
 div{
     /*border: 1px dashed #777;*/
@@ -24,11 +35,9 @@ div{
 .反饋{
     z-index:0;
     filter: hue-rotate(0deg);
-    /*transition: filter 0.3s, transform 0.3s;*/
 }
 .反饋:hover{
     filter: hue-rotate(180deg);
-    /*transition: filter 0.3s, transform 0.3s;*/
 }
 .反饋:active{
     border: 2px solid rgba(0,0,0,0.3);
