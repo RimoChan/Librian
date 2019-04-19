@@ -1,7 +1,7 @@
 import os
 import logging
 import copy
-import pickle
+import cloudpickle as pickle
 import yaml
 
 from 環境 import 配置, 工程路徑
@@ -199,23 +199,13 @@ class 讀者:
 
 # ————————————————————————————
 # S/L方法
-    def 縮減箱庭(self):
-        鏡箱庭 = copy.copy(self.箱庭)
-        鏡箱庭2 = copy.copy(self.箱庭)
-        for i, x in 鏡箱庭2.items():
-            try:
-                pickle.dumps(x)
-            except:
-                鏡箱庭.pop(i)
-        return 鏡箱庭
-
     def 存檔(self, path):
         with open(path, 'wb') as f:
             pickle.dump({'狀態': self.狀態,
                          '角色表': 角色.角色表,
                          '鏡頭對應': 鏡頭.鏡頭對應,
                          '劇本棧': self.劇本棧,
-                         '箱庭': self.縮減箱庭(),
+                         '箱庭': self.箱庭,
                          }, f)
 
     def 讀檔(self, path):
