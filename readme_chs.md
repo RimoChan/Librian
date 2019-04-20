@@ -13,9 +13,6 @@ Librian是面向剧本的引擎，卖点是:
 - 导出美观的PDF，与原画老师轻松交流。
 - 附带语义文件，让现代字编辑器如虎添翼。
 
-## 关于中文文档
-这个粗略的介绍是关于Librian本身的，如果你有兴趣使用的话，
-可以直接参阅使用方法的[中文文档](https://rimochan.github.io/Librian_doc)。
 
 ## 演示视频
 
@@ -41,13 +38,13 @@ Librian是面向剧本的引擎，卖点是:
 
 ## 扩展功能
 
-你可以轻松客制化你的游戏，包括游标，界面，标题画面等。
+你可以轻松自定义你的游戏，包括鼠标，界面，标题画面等。
 
 不只是adv，你甚至可以嵌入线上交互等功能！
 
 ## 快速上手
 
-在[中文文档](https://rimochan.github.io/Librian_doc)里有详细的安装步骤。
+如果你有兴趣使用的话，可以直接参阅使用方法的[中文文档](https://rimochan.github.io/Librian_doc)，那里有详细的安装步骤。
 
 方便起见的话，也可以直接下载打包的[release版本](https://github.com/RimoChan/Librian/releases)使用。
 

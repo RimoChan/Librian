@@ -13,9 +13,6 @@ Librian是面向劇本的引擎，賣點是:
 - 導出美觀的PDF，與原畫老師輕鬆交流。
 - 附帶語義文件，讓現代字編輯器如虎添翼。
 
-## 關於中文文檔
-這個粗略的介紹是關於Librian本身的，如果你有興趣使用的話，
-可以直接參閱使用方法的[中文文檔](https://rimochan.github.io/Librian_doc)。
 
 ## 演示視頻
 
@@ -47,7 +44,7 @@ Librian是面向劇本的引擎，賣點是:
 
 ## 快速上手
 
-在[中文文檔](https://rimochan.github.io/Librian_doc)裏有詳細的安裝步驟。
+如果你有興趣使用的話，可以直接參閱Librian的[中文文檔](https://rimochan.github.io/Librian_doc)，那裏有詳細的安裝步驟。
 
 方便起見的話，也可以直接下載打包的[release版本](https://github.com/RimoChan/Librian/releases)使用。
 
