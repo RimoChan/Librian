@@ -31,8 +31,12 @@ import re
         '類型': '躍點'
     }
 }
-續行組={
+續行組 = {
     '^(.+?)(\|(.+?))? (\((.+?)\))?「([^」]*)$',
+}
+錯誤組 = {
+    '^.*?「[^」]*「.*$':
+        '引號不匹配'
 }
 
 def 遞歸re(s, start=正則組):
@@ -81,7 +85,7 @@ def 編譯(f):
 def 生編譯(s):
     棧 = j棧()
     g = iter(s)
-    多行緩衝=''
+    多行緩衝 = ''
     for s in g:
         if not re.search('\\S', s):
             if 棧.尾:
@@ -100,18 +104,20 @@ def 生編譯(s):
             if 棧.尾句['縮進數'] != 自['縮進數']:
                 raise Exception('層次錯誤')
 
-        
         s = s.lstrip(' ')
         s = s.rstrip('\r').rstrip('\n')
         if 多行緩衝:
-            s=多行緩衝+'\n'+s
-            多行緩衝=''
-        if any([re.match(i,s) for i in 續行組]):
-            多行緩衝=s
+            s = 多行緩衝 + '\n' + s
+            多行緩衝 = ''
+        if any([re.match(i, s) for i in 續行組]):
+            多行緩衝 = s
             continue
+        for 表達式, 信息 in 錯誤組.items():
+            if re.match(表達式, s):
+                raise Exception(f'『{s}』有語法錯誤——{信息}。')
         d = 遞歸re(s)
         if not d:
-            d.append({'類型':'旁白', '旁白': s})
+            d.append({'類型': '旁白', '旁白': s})
         if len(d) > 1:
             raise Exception(f'『{s}』匹配過多，有可能是【{"，".join([i["類型"] for i in d])}】')
         自.update(d[0])
