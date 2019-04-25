@@ -1,7 +1,8 @@
 # ![](資源/Librian小.png)Librian: 简明强大的 Galgame | Visual Novel 引擎
 
 Librian是一个容易上手的 Galgame | Visual Novel 引擎。   
-Librian由python和HTML编写而成，基于CEFPython和wxPython前端。
+
+![Librian2.jpg](./資源/Librian2.jpg)
 
 Librian适用于快速高效的adv实现，能将你的奇思妙想迅速转换为成果——你只需提供素材文件和简单的剧本就能观赏adv演出！
 
@@ -13,6 +14,7 @@ Librian是面向剧本的引擎，卖点是:
 - 导出美观的PDF，与原画老师轻松交流。
 - 附带语义文件，让现代字编辑器如虎添翼。
 
+Librian由python和HTML编写而成，基于CEFPython和wxPython前端。
 
 ## 演示视频
 
