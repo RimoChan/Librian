@@ -17,8 +17,8 @@ def 綁定(app, 標題url):
 
 class 山彥:
     def __init__(self, 窗口, 瀏覽器, 讀者, 標題url):
-        self.瀏覽器 = 瀏覽器
         self.窗口 = 窗口
+        self.瀏覽器 = 瀏覽器
         self.讀者 = 讀者
         self.標題url = 標題url
 
@@ -65,7 +65,7 @@ class 山彥:
         exit()
 
     def 切換全屏(self):
-        主窗口.切換全屏()
+        self.窗口.toggleFullScreen()
 
     def 設置(self, 參數):
         with open(f'{工程路徑}/存檔資料/用戶設置.json', 'w', encoding='utf8') as f:
@@ -121,7 +121,7 @@ class 演出山彥(山彥):
         self.js(s)
 
     def 選(self, 參數):
-        t = self.讀者.狀態.選項[int(參數)][1]
+        t = self.讀者.狀態.選項[參數][1]
         self.讀者.狀態.選項 = ()
         t()
         logging.debug('選擇了「%s」。' % 參數)

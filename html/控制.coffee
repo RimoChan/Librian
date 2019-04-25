@@ -6,7 +6,7 @@ window.控制 =
 
     左鍵屏蔽: false
     左鍵功能: ->
-        if this.左鍵屏蔽 || this.選擇之刻
+        if this.左鍵屏蔽 or 演出.選擇之刻
             return
 
         if $('#對話框').is(':hidden')

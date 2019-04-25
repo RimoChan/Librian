@@ -68,6 +68,7 @@ window.演出 =
 
     改變演出狀態: (data) ->
         this.信息預處理 data
+        console.log data
         {特效表, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, 視頻} = data
         this.特效處理 特效表
         if 選項.length > 0
@@ -104,15 +105,18 @@ window.演出 =
 
     選擇之刻: false,
     處理選項: (選項) ->
+        console.log '處理選項',選項
         tot = ''
-        for i in 選項
-            tot += "<button onclick='this.點選項(#{i});'>#{選項[i]}</botton>\n"
+        for i,p in 選項
+            tot += "<button onclick='演出.點選項(#{p});'>#{i}</botton>\n"
         $('#選項').html(tot)
+        console.log '選項show'
         $('#選項').show(250)
         this.選擇之刻 = true
     點選項: (x) ->
+        console.log '點選項hide'
         $('#選項').hide(250)
-        山彥.選(x + '')
+        山彥.選(x)
         this.選擇之刻 = false
 
     插入圖: (圖) ->

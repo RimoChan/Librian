@@ -74,6 +74,7 @@
     改變演出狀態: function(data) {
       var cg, js, 名字, 特效表, 立繪, 背景, 背景音樂, 視頻, 話語, 語者, 選項, 額外信息;
       this.信息預處理(data);
+      console.log(data);
       ({特效表, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, 視頻} = data);
       this.特效處理(特效表);
       if (選項.length > 0) {
@@ -118,19 +119,23 @@
     },
     選擇之刻: false,
     處理選項: function(選項) {
-      var i, k, len, tot;
+      var i, k, len, p, tot;
+      console.log('處理選項', 選項);
       tot = '';
-      for (k = 0, len = 選項.length; k < len; k++) {
-        i = 選項[k];
-        tot += `<button onclick='this.點選項(${i});'>${選項[i]}</botton>\n`;
+      for (p = k = 0, len = 選項.length; k < len; p = ++k) {
+        i = 選項[p];
+        console.log(`<button onclick='演出.點選項(${p});'>${i}</botton>\n`);
+        tot += `<button onclick='演出.點選項(${p});'>${i}</botton>\n`;
       }
       $('#選項').html(tot);
+      console.log('選項show');
       $('#選項').show(250);
       return this.選擇之刻 = true;
     },
     點選項: function(x) {
+      console.log('點選項hide');
       $('#選項').hide(250);
-      山彥.選(x + '');
+      山彥.選(x);
       return this.選擇之刻 = false;
     },
     插入圖: function(圖) {
