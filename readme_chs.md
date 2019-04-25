@@ -1,8 +1,8 @@
 # ![](資源/Librian小.png)Librian: 简明强大的 Galgame | Visual Novel 引擎
 
-Librian是一个容易上手的 Galgame | Visual Novel 引擎。   
-
 ![Librian2.jpg](./資源/Librian2.jpg)
+
+Librian是一个非常容易上手的 Galgame | Visual Novel 引擎。   
 
 Librian适用于快速高效的adv实现，能将你的奇思妙想迅速转换为成果——你只需提供素材文件和简单的剧本就能观赏adv演出！
 
