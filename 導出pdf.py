@@ -19,6 +19,7 @@ cc = opencc.OpenCC('t2s')
 參數.add_argument('--css', type=str, action='append')
 參數.add_argument('--out', type=str)
 參數.add_argument('--chs', action='store_true')
+參數.add_argument('--html', action='store_true')
 參數 = 參數.parse_args()
 
 
@@ -83,32 +84,18 @@ class 速讀者(劇本.讀者):
         return 句
 
 
-def 導出(文件名):
-    head = f'''
-    <head>
-        <meta charset="utf8"/>
-    </head>
-    '''
+def 導出(文件名, 帶css=False):
+    head = f'<meta charset="utf8"/>\n'
+    if 帶css:
+        for css in 參數.css:
+            head += f'<link rel="stylesheet" href="{css}"/>\n'
     t = list(速讀者(文件名).迭代器())
     return head + '\n'.join([i['內容'] for i in t])
 
 
 if __name__ == '__main__':
-    if 參數.play:
-        pdf = html = False
-        if 參數.out is None:
-            參數.out = 參數.play[:-5] + '.pdf'
-            pdf = True
-        elif 參數.out.endswith('pdf'):
-            pdf = True
-        elif 參數.out.endswith('pdf'):
-            html = True
-
-        t = 導出(參數.play)
-        if html:
-            with open(參數.out, 'w', encoding='utf8') as f2:
-                f2.write(t)
-        if pdf:
-            HTML(string=t).write_pdf(參數.out, stylesheets=參數.css)
-        else:
-            raise Exception('操你媽')
+    if 參數.html:
+        with open(參數.out, 'w', encoding='utf8') as f2:
+            f2.write(導出(參數.play, True))
+    else:
+        HTML(string=導出(參數.play)).write_pdf(參數.out, stylesheets=參數.css)
