@@ -8,11 +8,11 @@ Librian适用于快速高效的adv实现，能将你的奇思妙想迅速转换�
 
 Librian是面向剧本的引擎，卖点是:
 
-- 清晰自然的剧本，提升你的写作速度。
-- 自动分配立绘，无需手工操作且兼容性强。
-- 可以嵌入python，具有无限大的扩展性。
-- 导出美观的PDF，与原画老师轻松交流。
-- 附带语义文件，让现代字编辑器如虎添翼。
+-   清晰自然的剧本，提升你的写作速度。
+-   自动分配立绘，无需手工操作且兼容性强。
+-   可以嵌入python，具有无限大的扩展性。
+-   导出美观的PDF，与原画老师轻松交流。
+-   附带语义文件，让现代字编辑器如虎添翼。
 
 Librian由python和HTML编写而成，基于CEFPython和wxPython前端。
 
@@ -34,8 +34,9 @@ Librian由python和HTML编写而成，基于CEFPython和wxPython前端。
     青色的光像是风中的火，频繁而随机地稍稍淡下又变得更强，也许有人会不禁怀疑电路是不是出了故障…………
     …………又像是装可爱的女儿眨着俏皮的眼睛。
     # 这是随便编的www，本来想随便写几句程序的哲理体现一下潘大爷的厉害，结果就变成了小说23333
-不需要任何其他标记或代码，一小段剧本就完成了。   
-准备好立绘和背景后，运行Librian主程序并选择刚才的工程启动——演出是这样的效果。   
+
+不需要任何其他标记或代码，一小段剧本就完成了。  
+准备好立绘和背景后，运行Librian主程序并选择刚才的工程启动——演出是这样的效果。  
 ![圖1](文檔/樣例_潘大爺.jpg)
 
 ## 扩展功能
@@ -44,17 +45,21 @@ Librian由python和HTML编写而成，基于CEFPython和wxPython前端。
 
 不只是adv，你甚至可以嵌入线上交互等功能！
 
+## 中文文档
+
+如果你想了解详细的使用方法，可以直接阅读Librian的中文文档——<https://rimochan.github.io/Librian_doc>。
+
 ## 快速上手
 
-如果你有兴趣使用的话，可以直接参阅使用方法的[中文文档](https://rimochan.github.io/Librian_doc)，那里有详细的安装步骤。
-
-方便起见的话，也可以直接下载打包的[release版本](https://github.com/RimoChan/Librian/releases)使用。
+方便起见的话，Windows用户可以直接下载打包的[release版本](https://github.com/RimoChan/Librian/releases)使用。
 
 如果你持「不读说明书主义」，也可以:
 
-1. 安装python3.6
-2. pip install wxpython cefpython3 pillow psdtools yaml chardet
-3. python3 librian_panel.py
+1.  安装python3.6
+2.  pip install wxpython cefpython3 pillow psdtools yaml chardet
+3.  python3 librian_panel.py
+
+此外，你也可以根据[中文文档](https://rimochan.github.io/Librian_doc)的指示来安装。
 
 ## 赞助
 
