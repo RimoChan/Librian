@@ -6,6 +6,8 @@ html:
         link rel="stylesheet" href='特效.css';
         link rel="stylesheet" href='黑科技/hi-icon.css';
         link rel="stylesheet" href='黑科技/美麗滑條.css';
+        link rel="stylesheet" href='黑科技/font-awesome-4.7.0/css/font-awesome.css';
+
         script src='黑科技/qwebchannel.js':
         script src='黑科技/vue.js':
         script src='黑科技/jquery-3.1.1.min.js':
@@ -19,7 +21,6 @@ html:
         script src='設置.js':
         script src='逐字打印.js':
         
-    # js用來表現動畫的……
     style#style:        
 
     body oncontextmenu='window.event.returnValue=false;':
@@ -30,63 +31,63 @@ html:
             audio#嘀 autoplay='' loop='' src='': 
     
             div#配置面板:
-                div.hicon_effect_1.hicon_effect_1a:
-                    div.option:
-                        span.小塊:
-                            全屏幕
-                        a.hicon href='javascript:send("切換全屏");':
-                            T
-                        (其實按alt+enter就好了)
-                    div.option: 
-                        span.小塊:
-                            文字速度
-                        須臾
-                        input#文字速度 type="range" min="0" max="100" onchange="設置.同調(this)":
-                        永恆
-                    div.option: 
-                        span.小塊:
-                            自動模式速度
-                        哪有自動模式……
-                    div.option: 
-                        span.小塊:
-                            對話框背景透明度 
-                        通透
-                        input#對話框背景透明度 type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)":
-                        固實
-                    div.option: 
-                        span.小塊:
-                            自動收起控制面板
-                        input#自動收起控制面板 type="checkbox" onchange="設置.同調(this)":
-                    div.option: 
-                        span.小塊:
-                            總體音量: 
-                        小聲
-                        input#總體音量 type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)":
-                        大聲(沒用)
+                div.option:
+                    span.小塊:
+                        全屏幕
+                    a.hicon href='javascript:山彥.切換全屏();':
+                        <i class="fa fa-arrows-alt"></i>
+                div.option: 
+                    span.小塊:
+                        文字速度
+                    須臾
+                    input#文字速度 type="range" min="0" max="100" onchange="設置.同調(this)":
+                    永恆
+                div.option: 
+                    span.小塊:
+                        自動模式速度
+                    哪有自動模式……
+                div.option: 
+                    span.小塊:
+                        對話框背景透明度 
+                    通透
+                    input#對話框背景透明度 type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)":
+                    固實
+                div.option: 
+                    span.小塊:
+                        自動收起控制面板
+                    input#自動收起控制面板 type="checkbox" onchange="設置.同調(this)":
+                div.option: 
+                    span.小塊:
+                        總體音量: 
+                    小聲
+                    input#總體音量 type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)":
+                    大聲(沒用)
 
-                    a.hicon href='javascript:控制.退出設置();':
-                        ×
+                a.hicon href='javascript:控制.退出設置();':
+                    <i class="fa fa-times"></i>
                         
             
             div#工具欄:
-                div.hicon_effect_1.hicon_effect_1a:
-                    a.hicon href='javascript:send("存檔");':
-                        S
-                    a.hicon href='javascript:send("讀檔");':
-                        L
-                    a.hicon.double href='javascript:send("快速存檔");':
-                        qS
-                    a.hicon.double href='javascript:send("快速讀檔");':
-                        qL
-                    a.hicon href='javascript:alert("沒做這個功能");':
-                        A
-                    a.hicon.double href='javascript:控制.進入設置();'":
-                        co
-                    a.hicon.double href='javascript:控制.快進();':
-                        sk
-                    a.hicon.double href='javascript:send("回標題")':
-                        tl
-
+                a.hicon href='javascript:山彥.存檔();':
+                    <i class="fa fa-floppy-o"></i>
+                    <i class="fa fa-angle-double-down" style='text-shadow:0 0 4px #000;'></i>
+                a.hicon href='javascript:山彥.讀檔();':
+                    <i class="fa fa-floppy-o"></i>
+                    <i class="fa fa-angle-double-up" style='text-shadow:0 0 4px #000;'></i>
+                a.hicon href='javascript:山彥.快速存檔();':
+                    <i class="fa fa-floppy-o"></i>
+                    <i class="fa fa-angle-double-down" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
+                a.hicon href='javascript:山彥.快速讀檔();':
+                    <i class="fa fa-floppy-o"></i>
+                    <i class="fa fa-angle-double-up" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
+                a.hicon href='javascript:alert("沒做這個功能");':
+                    <i class="fa fa-forward"></i>
+                a.hicon href='javascript:控制.切換快進();':
+                    <i class="fa fa-fast-forward"></i>
+                a.hicon href='javascript:控制.進入設置();'":
+                    <i class="fa fa-gear"></i>
+                a.hicon href='javascript:山彥.回標題();':
+                    <i class="fa fa-mail-reply"></i>
     
             div#adv畫面:     
                 div#覆蓋:                           

@@ -6,6 +6,7 @@
         <link rel="stylesheet" href='特效.css'/>
         <link rel="stylesheet" href='黑科技/hi-icon.css'/>
         <link rel="stylesheet" href='黑科技/美麗滑條.css'/>
+        <link rel="stylesheet" href='黑科技/font-awesome-4.7.0/css/font-awesome.css'/>
         <script src='黑科技/qwebchannel.js'></script>
         <script src='黑科技/vue.js'></script>
         <script src='黑科技/jquery-3.1.1.min.js'></script>
@@ -25,84 +26,83 @@
             <audio id="bgm" autoplay='' loop='' src=''></audio>
             <audio id="嘀" autoplay='' loop='' src=''></audio>
             <div id="配置面板">
-                <div class="hicon_effect_1 hicon_effect_1a">
-                    <div class="option">
-                        <span class="小塊">
-                            全屏幕
-                        </span>
-                        <a class="hicon" href='javascript:send("切換全屏");'>
-                            T
-                        </a>
-                        (其實按alt+enter就好了)
-                    </div>
-                    <div class="option">
-                        <span class="小塊">
-                            文字速度
-                        </span>
-                        須臾
-                        <input id="文字速度" type="range" min="0" max="100" onchange="設置.同調(this)"></input>
-                        永恆
-                    </div>
-                    <div class="option">
-                        <span class="小塊">
-                            自動模式速度
-                        </span>
-                        哪有自動模式……
-                    </div>
-                    <div class="option">
-                        <span class="小塊">
-                            對話框背景透明度
-                        </span>
-                        通透
-                        <input id="對話框背景透明度" type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)"></input>
-                        固實
-                    </div>
-                    <div class="option">
-                        <span class="小塊">
-                            自動收起控制面板
-                        </span>
-                        <input id="自動收起控制面板" type="checkbox" onchange="設置.同調(this)"></input>
-                    </div>
-                    <div class="option">
-                        <span class="小塊">
-                            <總體音量></總體音量>
-                        </span>
-                        小聲
-                        <input id="總體音量" type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)"></input>
-                        大聲(沒用)
-                    </div>
-                    <a class="hicon" href='javascript:控制.退出設置();'>
-                        ×
+                <div class="option">
+                    <span class="小塊">
+                        全屏幕
+                    </span>
+                    <a class="hicon" href='javascript:山彥.切換全屏();'>
+                        <i class="fa fa-arrows-alt"></i>
                     </a>
                 </div>
+                <div class="option">
+                    <span class="小塊">
+                        文字速度
+                    </span>
+                    須臾
+                    <input id="文字速度" type="range" min="0" max="100" onchange="設置.同調(this)"></input>
+                    永恆
+                </div>
+                <div class="option">
+                    <span class="小塊">
+                        自動模式速度
+                    </span>
+                    哪有自動模式……
+                </div>
+                <div class="option">
+                    <span class="小塊">
+                        對話框背景透明度
+                    </span>
+                    通透
+                    <input id="對話框背景透明度" type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)"></input>
+                    固實
+                </div>
+                <div class="option">
+                    <span class="小塊">
+                        自動收起控制面板
+                    </span>
+                    <input id="自動收起控制面板" type="checkbox" onchange="設置.同調(this)"></input>
+                </div>
+                <div class="option">
+                    <span class="小塊">
+                        <總體音量></總體音量>
+                    </span>
+                    小聲
+                    <input id="總體音量" type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)"></input>
+                    大聲(沒用)
+                </div>
+                <a class="hicon" href='javascript:控制.退出設置();'>
+                    <i class="fa fa-times"></i>
+                </a>
             </div>
             <div id="工具欄">
-                <div class="hicon_effect_1 hicon_effect_1a">
-                    <a class="hicon" href='javascript:send("存檔");'>
-                        S
-                    </a>
-                    <a class="hicon" href='javascript:send("讀檔");'>
-                        L
-                    </a>
-                    <a class="hicon double" href='javascript:send("快速存檔");'>
-                        qS
-                    </a>
-                    <a class="hicon double" href='javascript:send("快速讀檔");'>
-                        qL
-                    </a>
-                    <a class="hicon" href='javascript:alert("沒做這個功能");'>
-                        A
-                    </a>
-                    <a class="hicon double" href='javascript:控制.進入設置();'">
-                        co
-                    </a>
-                    <a class="hicon double" href='javascript:控制.快進();'>
-                        sk
-                    </a>
-                    <a class="hicon double" href='javascript:send("回標題")'>
-                        tl
-                    </a>
-                </div>
+                <a class="hicon" href='javascript:山彥.存檔();'>
+                    <i class="fa fa-floppy-o"></i>
+                    <i class="fa fa-angle-double-down" style='text-shadow:0 0 4px #000;'></i>
+                </a>
+                <a class="hicon" href='javascript:山彥.讀檔();'>
+                    <i class="fa fa-floppy-o"></i>
+                    <i class="fa fa-angle-double-up" style='text-shadow:0 0 4px #000;'></i>
+                </a>
+                <a class="hicon" href='javascript:山彥.快速存檔();'>
+                    <i class="fa fa-floppy-o"></i>
+                    <i class="fa fa-angle-double-down" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
+                </a>
+                <a class="hicon" href='javascript:山彥.快速讀檔();'>
+                    <i class="fa fa-floppy-o"></i>
+                    <i class="fa fa-angle-double-up" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
+                </a>
+                <a class="hicon" href='javascript:alert("沒做這個功能");'>
+                    <i class="fa fa-forward"></i>
+                </a>
+                <a class="hicon" href='javascript:控制.切換快進();'>
+                    <i class="fa fa-fast-forward"></i>
+                </a>
+                <a class="hicon" href='javascript:控制.進入設置();'">
+                    <i class="fa fa-gear"></i>
+                </a>
+                <a class="hicon" href='javascript:山彥.回標題();'>
+                    <i class="fa fa-mail-reply"></i>
+                </a>
             </div>
             <div id="adv畫面">
                 <div id="覆蓋"></div>

@@ -163,7 +163,6 @@ button {
     margin: 5px;
     position: absolute;
     z-index: 10;
-    writing-mode: vertical-rl;
 }
 
 #對話歷史 {
