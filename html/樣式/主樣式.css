@@ -1,6 +1,6 @@
 ﻿@font-face{
     font-family: 源流明體SemiBold;
-    src: url('GenRyuMinTW-SemiBold.ttf');
+    src: url('./static/GenRyuMinTW-SemiBold.ttf');
 }
 body{
     font-family: 源流明體SemiBold; 
