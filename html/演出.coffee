@@ -20,9 +20,6 @@ window.演出 =
             $ 'div'
                 .css 'border','1px solid #22f'
 
-        this.換圖('覆蓋','url(static/None.png)', 0)
-        this.換圖('bg','url(static/None.png)', 0)
-        this.換圖('cg','url(static/None.png)', 0)
         this.縮放調整()
         this.更新()
 
@@ -47,14 +44,8 @@ window.演出 =
         山彥.更新()
 
     信息預處理: (data) ->
-        if ! data.背景
-            data.背景 = 'url(static/None.png)'
-        else
-            data.背景 = "url(#{this.圖片文件夾}/#{data.背景})"
-        if ! data.cg
-            data.cg = 'url(static/None.png)'
-        else
-            data.背景 = "url(#{this.圖片文件夾}/#{data.cg})"
+        data.背景[0] = "url(#{this.圖片文件夾}/#{data.背景[0]})"
+        data.cg[0] = "url(#{this.圖片文件夾}/#{data.cg[0]})"
 
         if data.背景音樂[0]!='None'
             data.背景音樂[0] = this.音樂文件夾 + '/' + data.背景音樂[0]
@@ -174,22 +165,30 @@ window.演出 =
 
     現在cg: 'None',
     換cg: (cg) ->
-        if cg == this.現在cg
+        cg圖片 = cg[0]
+        淡入時間 = cg[1]
+        漸變方法 = cg[2]
+        console.log cg圖片, this.現在cg
+        if cg圖片 == this.現在cg
             return
-        this.現在cg = cg
-        this.換圖('cg', cg, 1)
+        this.現在cg = cg圖片
+        console.log cg圖片, 淡入時間, 漸變方法
+        this.換圖('cg', cg圖片, 淡入時間, 漸變方法)
 
     換立繪: (text) ->
         $('#立繪').html(text)
 
     現在背景: 'None',
     換背景: (背景) ->
-        if 背景 == this.現在背景
+        背景圖片 = 背景[0]
+        淡入時間 = 背景[1]
+        漸變方法 = 背景[2]
+        if 背景圖片 == this.現在背景
             return
-        現在背景 = 背景
-        if 背景 == 'None'
-            背景 = 'url(static/None.png)'
-        this.換圖('bg', 背景, 1.4)
+        this.現在背景 = 背景圖片
+        if 背景圖片 == 'None'
+            背景圖片 = 'url(static/None.png)'
+        this.換圖('bg', 背景圖片, 淡入時間, 漸變方法)
 
     換人名: (語者, 名字) ->
         $('#名字').html(名字)
@@ -227,7 +226,7 @@ window.演出 =
             au.animate({volume: 0} , 0)
             au.animate({volume: 音量} , 2000)
             
-    換圖: (目標, 新圖, 漸變時間) ->
+    換圖: (目標, 新圖, 漸變時間, 漸變方法='_淡出') ->
         目標 = $('#'+目標)
         原背景 = 目標.css('background-image')
         
@@ -238,8 +237,7 @@ window.演出 =
         
         if 漸變時間>0
             舊淡出.css('background-image', 原背景)
-            舊淡出.css('animation', "_淡入 #{漸變時間}s")
-            舊淡出.css('animation-direction', 'reverse')
+            舊淡出.css('animation', "#{漸變方法} #{漸變時間}s")
             舊淡出.css('animation-fill-mode', 'forwards')
             舊淡出.css('animation-play-state', 'running')
 

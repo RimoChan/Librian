@@ -38,11 +38,13 @@ class 命令:
 
     def 執行(self, 讀者):
         try:
-            eval(self.原文, {
+            t=eval(self.原文, {
                 i: (lambda *li, f=f: f(self, 讀者, *li))
                 for i, f in self.__class__.__dict__.items()
                 if i not in ('py', 'js') and i[0] != '_'
             })
+            if t is not None:
+                raise Exception('不太對勁……')
         except:
             try:
                 函數 = eval('self.' + self.函數)
@@ -63,9 +65,9 @@ class 命令:
         讀者.狀態.js = self.代碼
 
     @別名('背景')
-    def BG(self, 讀者, bg):
+    def BG(self, 讀者, bg, 淡入時間=1, 漸變方法='_淡出'):
         bg = 文件.補充擴展名(bg, ['webp', 'png', 'jpg'], f'./{工程路徑}/{配置["圖片文件夾"]}')
-        讀者.狀態.背景 = bg
+        讀者.狀態.背景 = bg, 淡入時間, 漸變方法
 
     @別名('特效')
     def EF(self, 讀者, 標識, 類名=None):
@@ -79,9 +81,10 @@ class 命令:
         bgm = 文件.補充擴展名(bgm, ['mp3', 'ogg'], f'./{工程路徑}/{配置["音樂文件夾"]}')
         讀者.狀態.背景音樂 = bgm, 音量
 
-    def CG(self, 讀者, cg=None):
-        cg = 文件.補充擴展名(cg, ['webp', 'png', 'jpg'], f'./{工程路徑}/{配置["圖片文件夾"]}')
-        讀者.狀態.CG = cg
+    def CG(self, 讀者, cg=None, 淡入時間=1, 漸變方法='_淡出'):
+        if cg is not None:
+            cg = 文件.補充擴展名(cg, ['webp', 'png', 'jpg'], f'./{工程路徑}/{配置["圖片文件夾"]}')
+        讀者.狀態.CG = cg, 淡入時間, 漸變方法
 
     @別名('視頻', '视频')
     def VIDEO(self, 讀者, 文件名):
