@@ -124,7 +124,6 @@
       tot = '';
       for (p = k = 0, len = 選項.length; k < len; p = ++k) {
         i = 選項[p];
-        console.log(`<button onclick='演出.點選項(${p});'>${i}</botton>\n`);
         tot += `<button onclick='演出.點選項(${p});'>${i}</botton>\n`;
       }
       $('#選項').html(tot);
@@ -264,7 +263,22 @@
         }, 2000);
       }
     },
-    換圖: function(dst, img_b, time) {
+    換圖: function(目標, 新圖, 漸變時間) {
+      var 原背景, 舊淡出;
+      目標 = $('#' + 目標);
+      原背景 = 目標.css('background-image');
+      目標.css('background-image', 新圖);
+      目標.html('<div class="舊淡出"></div>');
+      舊淡出 = 目標.children();
+      if (漸變時間 > 0) {
+        舊淡出.css('background-image', 原背景);
+        舊淡出.css('animation', `_淡入 ${漸變時間}s`);
+        舊淡出.css('animation-direction', 'reverse');
+        舊淡出.css('animation-fill-mode', 'forwards');
+        return 舊淡出.css('animation-play-state', 'running');
+      }
+    },
+    換圖2: function(dst, img_b, time) {
       var frame, img_a;
       frame = 'A' + Math.ceil(Math.random() * 999999).toString();
       dst = '#' + dst;

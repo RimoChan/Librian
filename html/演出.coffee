@@ -226,18 +226,22 @@ window.演出 =
             au.attr('src', this.當前曲名)
             au.animate({volume: 0} , 0)
             au.animate({volume: 音量} , 2000)
-
-    換圖: (dst, img_b, time) ->
-        frame = 'A' + Math.ceil(Math.random() * 999999).toString()
-        dst = '#' + dst
-        img_a = $(dst).attr('my_img')
-
-        if time > 0
-            $(dst).css('animation','')
-            $('#style').append('@keyframes '+frame+'{ 0%{background-image:'+img_a+';}100%{background-image:'+img_b+';} }\n')
-            $(dst).css('animation',frame+' '+time.toString()+'s')
-        $(dst).css('background-image', img_b)
-        $(dst).attr('my_img', img_b)
+            
+    換圖: (目標, 新圖, 漸變時間) ->
+        目標 = $('#'+目標)
+        原背景 = 目標.css('background-image')
+        
+        目標.css('background-image', 新圖)
+        
+        目標.html('<div class="舊淡出"></div>')
+        舊淡出 = 目標.children()
+        
+        if 漸變時間>0
+            舊淡出.css('background-image', 原背景)
+            舊淡出.css('animation', "_淡入 #{漸變時間}s")
+            舊淡出.css('animation-direction', 'reverse')
+            舊淡出.css('animation-fill-mode', 'forwards')
+            舊淡出.css('animation-play-state', 'running')
 
     文字淡入: (s, 動畫名 = '_淡入') ->
         時間間隔 = 設置.內容.文字速度/800
