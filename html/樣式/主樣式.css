@@ -79,7 +79,6 @@ video {
     position: relative;
     margin: 0;
     overflow: hidden;
-    cursor: url(static/mouse1.cur), auto;
 }
 
 #覆蓋 {
