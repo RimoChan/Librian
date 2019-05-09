@@ -56,7 +56,7 @@ Librian由python和HTML编写而成，基于CEFPython和wxPython前端。
 如果你持「不读说明书主义」，也可以:
 
 1.  安装python3.6
-2.  pip install wxpython cefpython3 pillow psdtools yaml chardet
+2.  pip install wxpython cefpython3 pillow psd-tools pyyaml chardet
 3.  python3 librian_panel.py
 
 此外，你也可以根据[中文文档](https://rimochan.github.io/Librian_doc)的指示来安装。
