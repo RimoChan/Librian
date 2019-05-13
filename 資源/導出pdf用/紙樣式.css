@@ -37,7 +37,7 @@ p>* {
 
 .語 {
     color: rgba(0, 0, 80, 1);
-    white-space: pre-wrap;
+    white-space: pre;
     display: inline-block;
     padding-left: 6px;
     margin-left: 6px;
