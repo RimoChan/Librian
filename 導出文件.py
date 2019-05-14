@@ -14,19 +14,6 @@ import 角色
 cc = opencc.OpenCC('t2s')
 
 
-參數 = argparse.ArgumentParser(description='劇本文件生成pdf')
-參數.add_argument('--play', type=str, required=True)
-參數.add_argument('--css', type=str, action='append')
-參數.add_argument('--out', type=str)
-參數.add_argument('--chs', action='store_true')
-參數.add_argument('--html', action='store_true')
-參數 = 參數.parse_args()
-
-
-if not 參數.css:
-    參數.css = [os.path.join(此處, './資源/導出pdf用/紙樣式.css')]
-
-
 class 虛狀態:
     def __init__(self):
         self.額外信息 = ()
@@ -36,7 +23,11 @@ class 虛狀態:
         return {'內容': self.內容, '額外信息': self.額外信息}
 
 
-class 速讀者(劇本.讀者):
+class 虛讀者(劇本.讀者):
+    def __init__(self, 初始劇本, 簡化字=False):
+        super().__init__(初始劇本)
+        self.簡化字 = 簡化字
+
     def 步進(self):
         self.狀態 = 虛狀態()
         s = self.下一句()
@@ -74,7 +65,7 @@ class 速讀者(劇本.讀者):
             self.狀態.內容 += '<br/>\n' * s['之後的空白']
 
     def 化(self, s):
-        if 參數.chs:
+        if self.簡化字:
             return cc.convert(s)
         return s
 
@@ -84,18 +75,34 @@ class 速讀者(劇本.讀者):
         return 句
 
 
-def 導出(文件名, 帶css=False):
-    head = f'<meta charset="utf8"/>\n'
-    if 帶css:
-        for css in 參數.css:
-            head += f'<link rel="stylesheet" href="{css}"/>\n'
-    t = list(速讀者(文件名).迭代器())
-    return head + '\n'.join([i['內容'] for i in t])
+    def 導出html(self, 帶css=False):
+        head = f'<meta charset="utf8"/>\n'
+        if 帶css:
+            for css in 參數.css:
+                head += f'<link rel="stylesheet" href="{css}"/>\n'
+    
+        return head + self.body內容()
+    
+    def body內容(self):
+        t = list(self.迭代器())
+        return '\n'.join([i['內容'] for i in t])
 
 
 if __name__ == '__main__':
+    參數 = argparse.ArgumentParser(description='劇本文件生成pdf')
+    參數.add_argument('--play', type=str, required=True)
+    參數.add_argument('--css', type=str, action='append')
+    參數.add_argument('--out', type=str)
+    參數.add_argument('--chs', action='store_true')
+    參數.add_argument('--html', action='store_true')
+    參數 = 參數.parse_args()
+
+    if not 參數.css:
+        參數.css = [os.path.join(此處, './資源/導出pdf用/紙樣式.css')]
+
+    讀 = 虛讀者(參數.play)
     if 參數.html:
         with open(參數.out, 'w', encoding='utf8') as f2:
-            f2.write(導出(參數.play, True))
+            f2.write(讀.導出html(帶css=True))
     else:
-        HTML(string=導出(參數.play)).write_pdf(參數.out, stylesheets=參數.css)
+        HTML(string=讀.導出html()).write_pdf(參數.out, stylesheets=參數.css)
