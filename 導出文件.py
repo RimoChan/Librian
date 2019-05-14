@@ -35,9 +35,9 @@ class 虛讀者(劇本.讀者):
         if 類型 == '終焉':
             self.狀態.額外信息 = ('終焉',)
         if 類型 in ('註釋', '躍點'):
-            self.狀態.內容 = f'<span class="{類型}">{s[類型]}</span><br/>\n'
+            self.狀態.內容 = f'<span class="{類型}">{s[類型]}</span>\n'
         if 類型 == '函數調用':
-            self.狀態.內容 = f'<span class="函數調用">{s["原文"]}</span><br/>\n'
+            self.狀態.內容 = f'<span class="函數調用">{s["原文"]}</span>\n'
         if 類型 == '插入圖':
             self.狀態.內容 = f'<div class="插入">{s["插入圖"]}</div>'
         if 類型 == '旁白':
