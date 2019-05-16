@@ -2,6 +2,12 @@
 
 ![Librian2.jpg](./資源/Librian2.jpg)
 
+![](https://img.shields.io/github/stars/RimoChan/Librian.svg)
+![](https://img.shields.io/badge/platform-windows-blueviolet.svg)
+![](https://img.shields.io/github/release/RimoChan/librian.svg)
+![](https://img.shields.io/github/downloads/RimoChan/librian/total.svg)
+![](https://img.shields.io/github/license/RimoChan/Librian.svg)
+
 Librian是一个非常容易上手的 Galgame | Visual Novel 引擎。   
 
 Librian适用于快速高效的adv实现，能将你的奇思妙想迅速转换为成果——你只需提供素材文件和简单的剧本就能观赏adv演出！
