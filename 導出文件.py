@@ -3,15 +3,13 @@ import re
 import argparse
 import logging
 
-from weasyprint import HTML, CSS
-
-import opencc
-
 import 劇本
 import 角色
-此處 = os.path.dirname(os.path.abspath(__file__))
 
+import opencc
 cc = opencc.OpenCC('t2s')
+
+此處 = os.path.dirname(os.path.abspath(__file__))
 
 
 class 虛狀態:
@@ -74,15 +72,14 @@ class 虛讀者(劇本.讀者):
         句 = re.sub('(「.*?」)', '<span class="引用">\\1</span>', 句)
         return 句
 
-
     def 導出html(self, 帶css=False):
         head = f'<meta charset="utf8"/>\n'
         if 帶css:
             for css in 參數.css:
                 head += f'<link rel="stylesheet" href="{css}"/>\n'
-    
+
         return head + self.body內容()
-    
+
     def body內容(self):
         t = list(self.迭代器())
         return '\n'.join([i['內容'] for i in t])
@@ -100,9 +97,10 @@ if __name__ == '__main__':
     if not 參數.css:
         參數.css = [os.path.join(此處, './資源/導出pdf用/紙樣式.css')]
 
-    讀 = 虛讀者(參數.play)
+    讀 = 虛讀者(參數.play, 參數.chs)
     if 參數.html:
         with open(參數.out, 'w', encoding='utf8') as f2:
             f2.write(讀.導出html(帶css=True))
     else:
+        from weasyprint import HTML, CSS
         HTML(string=讀.導出html()).write_pdf(參數.out, stylesheets=參數.css)
