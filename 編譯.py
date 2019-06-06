@@ -9,6 +9,9 @@ import re
             }
         }
     },
+    '^```(?P<代碼類型>.*?)\n(?P<代碼內容>(.|\\n)*?)\\n```$': {
+        '類型': '插入代碼'
+    },
     '^@ *(?P<人物名>.+?) *(?P<操作符>[\\+\\|]) *(?P<目標>.+?)$': {
         '類型': '人物操作'
     },
@@ -33,11 +36,13 @@ import re
 }
 續行組 = {
     '^(.+?)(\|(.+?))? (\((.+?)\))?「([^」]*)$',
+    r'^```(.|\n)*(?<!\n```)$'
 }
 錯誤組 = {
     '^.*?「[^」]*「.*$':
         '引號不匹配'
 }
+
 
 def 遞歸re(s, start=正則組):
     d = []
@@ -52,17 +57,6 @@ def 遞歸re(s, start=正則組):
                 for k in start[i]['子樹']:
                     gd[k] = 遞歸re(gd[k], start[i]['子樹'][k])
     return d
-
-
-def 多行檢查(g, 自, 結束函數):
-    內容 = ''
-    while True:
-        q = next(g)
-        l = 遞歸re(q)
-        if l and 結束函數(l):
-            break
-        內容 += q
-    return 內容
 
 
 class j棧(list):
@@ -82,18 +76,17 @@ def 編譯(f):
     return 生編譯(f.readlines())
 
 
-def 生編譯(s):
+def 生編譯(t):
     棧 = j棧()
-    g = iter(s)
     多行緩衝 = ''
-    for s in g:
-        if not re.search('\\S', s):
+    for 當前行 in iter(t):
+        if not re.search('\\S', 當前行):
             if 棧.尾:
                 棧.尾句['之後的空白'] = 棧.尾句.get('之後的空白', 0) + 1
             continue
 
         自 = {}
-        自['縮進數'] = len(s) - len(s.lstrip(' '))
+        自['縮進數'] = len(當前行) - len(當前行.lstrip(' '))
         if 自['縮進數'] > 0 and 自['縮進數'] > 棧.尾句['縮進數']:
             棧.尾句['子'] = []
             棧.append(棧.尾句['子'])
@@ -104,28 +97,22 @@ def 生編譯(s):
             if 棧.尾句['縮進數'] != 自['縮進數']:
                 raise Exception('層次錯誤')
 
-        s = s.lstrip(' ')
-        s = s.rstrip('\r').rstrip('\n')
+        當前行 = 當前行.rstrip('\r').rstrip('\n').lstrip(' ').rstrip(' ')
         if 多行緩衝:
-            s = 多行緩衝 + '\n' + s
+            當前行 = 多行緩衝 + '\n' + 當前行
             多行緩衝 = ''
-        if any([re.match(i, s) for i in 續行組]):
-            多行緩衝 = s
+        if any([re.match(i, 當前行) for i in 續行組]):
+            多行緩衝 = 當前行
             continue
         for 表達式, 信息 in 錯誤組.items():
-            if re.match(表達式, s):
-                raise Exception(f'『{s}』有語法錯誤——{信息}。')
-        d = 遞歸re(s)
+            if re.match(表達式, 當前行):
+                raise Exception(f'『{當前行}』有語法錯誤——{信息}。')
+        d = 遞歸re(當前行)
         if not d:
-            d.append({'類型': '旁白', '旁白': s})
+            d.append({'類型': '旁白', '旁白': 當前行})
         if len(d) > 1:
-            raise Exception(f'『{s}』匹配過多，有可能是【{"，".join([i["類型"] for i in d])}】')
+            raise Exception(f'『{當前行}』匹配過多，有可能是【{"，".join([i["類型"] for i in d])}】')
         自.update(d[0])
-
-        if 自.get('函數', '') == 'py':
-            自['代碼'] = 多行檢查(g, 自, lambda x: x[0].get('函數', '') == 'endpy')
-        if 自.get('函數', '') == 'js':
-            自['代碼'] = 多行檢查(g, 自, lambda x: x[0].get('函數', '') == 'endjs')
 
         棧.尾.append(自)
     return 棧[0]

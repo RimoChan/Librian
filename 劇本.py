@@ -58,11 +58,6 @@ class 命令:
                 logging.warning('在劇本中執行方法「%s」時遇到了意外%s' % (s, e.__repr__()))
 
     # ——————————————————————————————
-    def py(self, 讀者):
-        exec(self.代碼, 讀者.箱庭)
-
-    def js(self, 讀者):
-        讀者.狀態.js = self.代碼
 
     @別名('背景')
     def BG(self, 讀者, bg, 淡入時間=1, 漸變方法='_淡出'):
@@ -271,6 +266,14 @@ class 讀者:
             命令(s).執行(self)
             if not self.狀態.選項:
                 self.步進()
+        if 類型 == '插入代碼':
+            if s['代碼類型'] in ['', 'py', 'python']:
+                exec(s['代碼內容'], self.箱庭)
+            elif s['代碼類型'] in ['js', 'javascript']:
+                self.狀態.js = s['代碼內容']
+            else:
+                raise Exception(f'『{s["代碼類型"]}』代碼類型不明白。')
+            self.步進()
         if 類型 == '插入圖':
             logging.debug('插入圖: %s' % s['插入圖'])
             self.狀態.額外信息 = ('cut', s['插入圖'])
