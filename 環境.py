@@ -1,4 +1,5 @@
 import yaml
+yaml.warnings({'YAMLLoadWarning': False})
 import logging
 import os
 
