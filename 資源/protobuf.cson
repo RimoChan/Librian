@@ -3,8 +3,8 @@ name: 'liber'
 fileTypes: ['liber','play']
 patterns: [
   {
-    begin: '^(>) *(py)$'
-    end: '^(>) *(endpy)$'
+    begin: '^(```(py|python)?)$'
+    end: '^(```)$'
     beginCaptures:
       1:
         name: 'operator'
@@ -13,8 +13,6 @@ patterns: [
     endCaptures:
       1:
         name: 'operator'
-      2:
-        name: 'storage.inline'
     patterns: [
       {
         include: 'source.python'
@@ -22,8 +20,8 @@ patterns: [
     ]
   }
   {
-    begin: '^(>) *(js)$'
-    end: '^(>) *(endjs)$'
+    begin: '^(```(js|javascript)?)$'
+    end: '^(```)$'
     beginCaptures:
       1:
         name: 'operator'
@@ -32,8 +30,6 @@ patterns: [
     endCaptures:
       1:
         name: 'operator'
-      2:
-        name: 'storage.inline'
     patterns: [
       {
         include: 'source.js'
@@ -82,7 +78,7 @@ patterns: [
             name: 'storage.inline'
   }
   {
-    begin: '^(((?:([^|]*?)\\|)?(.*?)) (\\(.*?\\))?)(?=「.)'
+    begin: '^(((?:([^|]*?)\\|)?(.*?)) (\\(.*?\\))?)(?=「)'
     beginCaptures:
       1:
           name: '人物名和表情'
