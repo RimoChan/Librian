@@ -29,16 +29,14 @@ def 別名(*li):
 
 @別名適用
 class 命令:
-    def __init__(self, d):
-        self.函數 = d['函數']
-        self.參數 = [i['a'] for i in d['參數表']]
-        self.原文 = d['原文']
-        if '代碼' in d:
-            self.代碼 = d['代碼']
+    def __init__(self, 函數, 參數表, 原文):
+        self.函數 = 函數
+        self.參數 = [i['a'] for i in 參數表]
+        self.原文 = 原文
 
     def 執行(self, 讀者):
         try:
-            t=eval(self.原文, {
+            t = eval(self.原文, {
                 i: (lambda *li, f=f: f(self, 讀者, *li))
                 for i, f in self.__class__.__dict__.items()
                 if i not in ('py', 'js') and i[0] != '_'
@@ -259,76 +257,9 @@ class 讀者:
             return
 
         s = self.下一句()
-        類型 = s['類型']
-        if 類型 in ('註釋', '躍點'):
-            self.步進()
-        if 類型 == '函數調用':
-            命令(s).執行(self)
-            if not self.狀態.選項:
-                self.步進()
-        if 類型 == '插入代碼':
-            if s['代碼類型'] in ['', 'py', 'python']:
-                exec(s['代碼內容'], self.箱庭)
-            elif s['代碼類型'] in ['js', 'javascript']:
-                self.狀態.js = s['代碼內容']
-            else:
-                raise Exception(f'『{s["代碼類型"]}』代碼類型不明白。')
-            self.步進()
-        if 類型 == '插入圖':
-            logging.debug('插入圖: %s' % s['插入圖'])
-            self.狀態.額外信息 = ('cut', s['插入圖'])
-        if 類型 == '終焉':
-            if 防止終焉:
-                return '終焉'
-            self.狀態.額外信息 = ('終焉',)
-            self.狀態.話語 = s['旁白']
-            self.狀態.名字 = ''
-            self.狀態.語者 = ''
-        if 類型 == '鏡頭':
-            if s['鏡頭'] == '+':
-                try:
-                    d = yaml.load(s['內容'])
-                    鏡頭.生成鏡頭(d)
-                except:
-                    logging.warning(f'鏡頭「{s["內容"]}」的內容不正確。')
-                self.步進()
-            elif s['鏡頭'] == '-':
-                try:
-                    鏡頭.解除鏡頭(yaml.load(s['內容']))
-                except:
-                    logging.waring(f'鏡頭「{s["內容"]}」的內容不正確。')
-                self.步進()
-        if 類型 == '旁白':
-            self.狀態.話語 = s['旁白']
-            self.狀態.名字 = ''
-            self.狀態.語者 = ''
-        if 類型 == '人物操作':
-            人物名 = s['人物名']
-            目標 = s['目標']
-            if s['操作符'] == '+':
-                角色.取角色(人物名).現衣 = s['目標']
-            if s['操作符'] == '|':
-                角色.取角色(人物名).顯示名字 = s['目標']
-            self.步進()
-        if 類型 == '人物對話':
-            人物 = 角色.取角色(s['名'])
-            人物.現顏 = s['顏']
-            人物.現特效 = s['特效']
-            替代顯示名字 = 人物.顯示名字
-            if 鏡頭.查詢(s['名']) and self.狀態.人物 != s['名']:
-                self.狀態.人物 = s['名']
-            self.狀態.話語 = s['語']
-            self.狀態.名字 = s['代'] or 替代顯示名字 or s['名']
-            self.狀態.語者 = s['名']
-            logging.debug([s['名'], s['代'], s['顏'], s['語']].__str__())
-        if 類型 == '人物表情':
-            人物 = 角色.取角色(s['名'])
-            人物.現顏 = s['顏']
-            人物.現特效 = s['特效']
-            if 鏡頭.查詢(s['名']) and self.狀態.人物 != s['名']:
-                self.狀態.人物 = s['名']
-            logging.debug([s['名'], s['代'], s['顏']].__str__())
-            self.步進()
+        if s['類型']=='終焉':
+            s['防止終焉'] = 防止終焉
+        讀者句控制(self, s['類型'], s)
 
     def 迭代器(self):
         while True:
@@ -345,3 +276,109 @@ class 讀者:
         while True:
             if self.步進(防止終焉=True):
                 break
+
+
+class 讀者句控制:
+    def __init__(self, 讀者, 類型, 參數表):
+        del 參數表['類型']
+        if '縮進數' in 參數表:
+            del 參數表['縮進數']
+        if '之後的空白' in 參數表:
+            del 參數表['之後的空白']
+        logging.debug(類型)
+        logging.debug(參數表)
+        讀者句控制.__getattribute__(self, 類型)(讀者, **參數表)
+    
+    @staticmethod
+    def 註釋(讀者, 註釋):
+        None
+
+    @staticmethod
+    def 躍點(讀者, 躍點):
+        None
+
+    @staticmethod
+    def 函數調用(讀者, 函數, 參數表, 原文):
+        命令(函數, 參數表, 原文).執行(讀者)
+        if not 讀者.狀態.選項:
+            讀者.步進()
+
+    @staticmethod
+    def 插入代碼(讀者, 代碼類型, 代碼內容):
+        if 代碼類型 in ['', 'py', 'python']:
+            exec(代碼內容, 讀者.箱庭)
+        elif 代碼類型 in ['js', 'javascript']:
+            讀者.狀態.js = 代碼內容
+        else:
+            raise Exception(f'『{代碼類型}』代碼類型不明白。')
+        讀者.步進()
+
+    @staticmethod
+    def 插入圖(讀者, 插入圖):
+        logging.debug('插入圖: %s' % 插入圖)
+        讀者.狀態.額外信息 = ('cut', 插入圖)
+        
+    @staticmethod
+    def 終焉(讀者, 防止終焉, 旁白):
+        if 防止終焉:
+            return '終焉'
+        讀者.狀態.額外信息 = ('終焉',)
+        讀者.狀態.話語 = 旁白
+        讀者.狀態.名字 = ''
+        讀者.狀態.語者 = ''
+        
+    @staticmethod
+    def 鏡頭(讀者, 鏡頭符號, 內容):
+        if 鏡頭符號 == '+':
+            try:
+                d = yaml.load(內容)
+                鏡頭.生成鏡頭(d)
+            except:
+                logging.warning(f'鏡頭「{內容}」的內容不正確。')
+            讀者.步進()
+        elif 鏡頭符號 == '-':
+            try:
+                鏡頭.解除鏡頭(yaml.load(內容))
+            except:
+                logging.waring(f'鏡頭「{內容}」的內容不正確。')
+            讀者.步進()
+            
+    @staticmethod
+    def 旁白(讀者, 旁白):
+        讀者.狀態.話語 = 旁白
+        讀者.狀態.名字 = ''
+        讀者.狀態.語者 = ''
+        
+    @staticmethod
+    def 人物操作(讀者, 人物名, 目標, 操作符):
+        if 操作符 == '+':
+            角色.取角色(人物名).現衣 = 目標
+        if 操作符 == '|':
+            角色.取角色(人物名).顯示名字 = 目標
+        讀者.步進()
+        
+    @staticmethod
+    def 人物對話(讀者, 名, 顏, 語, 代, 特效):
+        人物 = 讀者句控制._表情變化(讀者, 名, 顏, 代, 特效)
+        讀者.狀態.話語 = 語
+        讀者.狀態.名字 = 代 or 人物.顯示名字 or 名
+        讀者.狀態.語者 = 名
+        logging.debug([名, 代, 顏, 語].__str__())
+        
+    @staticmethod
+    def 人物表情(讀者, 名, 顏, 代, 特效):
+        人物 = 讀者句控制._表情變化(讀者, 名, 顏, 代, 特效)
+        logging.debug([名, 代, 顏].__str__())
+        讀者.步進()
+        
+    @staticmethod
+    def _表情變化(讀者, 名, 顏, 代, 特效):
+        人物 = 角色.取角色(名)
+        人物.現顏 = 顏
+        人物.現特效 = 特效
+        if 鏡頭.查詢(名) and 讀者.狀態.人物 != 名:
+            讀者.狀態.人物 = 名
+        return 人物
+        
+    
+    
