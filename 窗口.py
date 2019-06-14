@@ -17,14 +17,14 @@ def app():
     else:
         url = './html/默認標題畫面/標題.html'
 
-    入口url = 文件.轉爲網址路徑(url)
+    標題url = 文件.轉爲網址路徑(url)
 
     if 配置['圖標']:
         圖標 = f'{工程路徑}/{配置["圖標"]}'
     else:
         圖標 = './資源/librian.ico'
 
-    app, 瀏覽器 = wxcef.group(title=配置['標題'], url=入口url, icon=圖標, size=配置['主解析度'])
-    山彥.綁定(app, 標題url=url)
+    app, 瀏覽器 = wxcef.group(title=配置['標題'], url=標題url, icon=圖標, size=配置['主解析度'])
+    山彥.綁定(app, 標題url=標題url)
 
     return app
