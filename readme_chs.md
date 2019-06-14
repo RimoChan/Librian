@@ -67,6 +67,10 @@ Librian由python和HTML编写而成，基于CEFPython和wxPython前端。
 
 此外，你也可以根据[中文文档](https://rimochan.github.io/Librian_doc)的指示来安装。
 
+## 援交(???)
+
+嗯……试着建了QQ讨论组: 618775838，快来一起玩吧！
+
 ## 赞助
 
 如果你觉得Librian对你的工作或学习有帮助，欢迎给作者介绍一些可爱的女朋友。
