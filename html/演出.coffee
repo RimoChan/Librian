@@ -96,9 +96,9 @@ window.演出 =
 
     選擇之刻: false,
     處理選項: (選項) ->
-        console.log '處理選項',選項
+        console.log '處理選項', 選項
         tot = ''
-        for i,p in 選項
+        for i, p in 選項
             tot += "<button onclick='演出.點選項(#{p});'>#{i}</botton>\n"
         $('#選項').html(tot)
         console.log '選項show'
@@ -139,15 +139,25 @@ window.演出 =
     放視頻: (視頻) ->
         if ! 視頻
             return
-        控制.左鍵屏蔽 = true
+        視頻文件 = 視頻[0]
+        可以跳過 = 視頻[1]
         v = $('video')
-        v.css('display','block')
-        v.attr('src',this.視頻文件夾+'/' + 視頻)
+        v.css('display', 'block')
+        v.attr('src', this.視頻文件夾+'/' + 視頻文件)
+        v.click if 可以跳過 
+            ->
+                v.css('animation', '_黑出 0.5s')
+                v.css('animation-fill-mode', 'forwards')
+                setTimeout ->
+                    v.css('animation', '')
+                    v.attr('src', '')
+                    v[0].style.display = 'none'
+                , 600
+        else 
+            ->  null
+            
         v[0].addEventListener 'ended', ->
-            setTimeout ->
-                v[0].style.display = 'none'
-                控制.左鍵屏蔽 = false
-            , 500
+            v[0].style.display = 'none'
         , false
         v[0].play()
 
@@ -225,24 +235,24 @@ window.演出 =
             au.attr('src', this.當前曲名)
             au.animate({volume: 0} , 0)
             au.animate({volume: 音量} , 2000)
-            
-    換圖: (目標, 新圖, 漸變時間, 漸變方法='_淡出') ->
+
+    換圖: (目標, 新圖, 漸變時間, 漸變方法 = '_淡出') ->
         目標 = $('#'+目標)
         原背景 = 目標.css('background-image')
-        
+
         目標.css('background-image', 新圖)
-        
+
         目標.html('<div class="舊淡出"></div>')
         舊淡出 = 目標.children()
-        
-        if 漸變時間>0
+
+        if 漸變時間 > 0
             舊淡出.css('background-image', 原背景)
             舊淡出.css('animation', "#{漸變方法} #{漸變時間}s")
             舊淡出.css('animation-fill-mode', 'forwards')
             舊淡出.css('animation-play-state', 'running')
 
     文字淡入: (s, 動畫名 = '_淡入') ->
-        時間間隔 = 設置.內容.文字速度/800
+        時間間隔 = 設置.內容.文字速度 / 800
         group = s.replace(/((<.*?>)|(.))/g, "$2$3\0").split('\0')
         動畫時間 = 時間間隔 * 8
         時間 = 0

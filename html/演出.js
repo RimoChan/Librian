@@ -153,19 +153,28 @@
       }, 5600);
     },
     放視頻: function(視頻) {
-      var v;
+      var v, 可以跳過, 視頻文件;
       if (!視頻) {
         return;
       }
-      控制.左鍵屏蔽 = true;
+      視頻文件 = 視頻[0];
+      可以跳過 = 視頻[1];
       v = $('video');
       v.css('display', 'block');
-      v.attr('src', this.視頻文件夾 + '/' + 視頻);
-      v[0].addEventListener('ended', function() {
+      v.attr('src', this.視頻文件夾 + '/' + 視頻文件);
+      v.click(可以跳過 ? function() {
+        v.css('animation', '_黑出 0.5s');
+        v.css('animation-fill-mode', 'forwards');
         return setTimeout(function() {
-          v[0].style.display = 'none';
-          return 控制.左鍵屏蔽 = false;
-        }, 500);
+          v.css('animation', '');
+          v.attr('src', '');
+          return v[0].style.display = 'none';
+        }, 600);
+      } : function() {
+        return null;
+      });
+      v[0].addEventListener('ended', function() {
+        return v[0].style.display = 'none';
       }, false);
       return v[0].play();
     },
