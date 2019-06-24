@@ -2,11 +2,11 @@
 
 ![Librian2.jpg](./資源/Librian2.jpg)
 
-![](https://img.shields.io/github/stars/RimoChan/Librian.svg)
-![](https://img.shields.io/badge/platform-windows-blueviolet.svg)
-![](https://img.shields.io/github/release/RimoChan/librian.svg)
-![](https://img.shields.io/github/downloads/RimoChan/librian/total.svg)
-![](https://img.shields.io/github/license/RimoChan/Librian.svg)
+[![](https://img.shields.io/github/stars/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/stargazers)
+[![](https://img.shields.io/badge/platform-windows-blueviolet.svg)](https://en.wikipedia.org/wiki/Microsoft_Windows)
+[![](https://img.shields.io/github/release/RimoChan/librian.svg)](https://github.com/RimoChan/Librian/releases)
+[![](https://img.shields.io/github/downloads/RimoChan/librian/total.svg)](https://github.com/RimoChan/Librian/releases)
+[![](https://img.shields.io/github/license/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/blob/master/LICENSE)
 
 [读简化字版本](readme_chs.md)
 
