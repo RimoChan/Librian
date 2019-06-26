@@ -1,10 +1,12 @@
 import os
-import yaml
 import logging
 import copy
+
+import yaml
+
 from 環境 import 配置, 工程路徑
 
-import 角色
+from . import 角色
 
 
 def 人物拆解(包, 參數):

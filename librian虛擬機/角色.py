@@ -1,8 +1,10 @@
 import yaml
 import os
-import psd拆包
 import logging
+
 from 環境 import 配置, 工程路徑
+
+from . import psd拆包
 
 角色表 = {}
 

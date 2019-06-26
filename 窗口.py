@@ -5,7 +5,7 @@ import wxcef
 
 from 環境 import 配置, 工程路徑
 import 山彥
-import 文件
+from Librian虛擬機.util import 文件
 
 
 def app():

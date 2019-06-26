@@ -3,10 +3,11 @@ import re
 import argparse
 import logging
 
-import 劇本
-import 角色
-
 import opencc
+
+from Librian虛擬機 import 劇本
+from Librian虛擬機 import 角色
+
 cc = opencc.OpenCC('t2s')
 
 此處 = os.path.dirname(os.path.abspath(__file__))

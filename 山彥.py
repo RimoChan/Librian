@@ -5,9 +5,10 @@ import logging
 import wx
 from cefpython3 import cefpython as cef
 
-import 讀txt
-import 劇本
-import 文件
+from Librian虛擬機 import 劇本
+from Librian虛擬機.util import 讀txt
+from Librian虛擬機.util import 文件
+
 from 環境 import 配置, 工程路徑
 
 

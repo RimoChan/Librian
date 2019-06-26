@@ -5,11 +5,14 @@ import cloudpickle as pickle
 import yaml
 
 from 環境 import 配置, 工程路徑
-import 鏡頭
-import 編譯
-import 讀txt
-import 角色
-import 文件
+
+from .util import 讀txt
+from .util import 文件
+
+from . import 鏡頭
+from . import 編譯
+from . import 角色
+
 
 
 def 別名適用(x):
@@ -80,7 +83,7 @@ class 命令:
         讀者.狀態.CG = cg, 淡入時間, 漸變方法
 
     @別名('視頻', '视频')
-    def VIDEO(self, 讀者, 文件名, 可以跳過 = False):
+    def VIDEO(self, 讀者, 文件名, 可以跳過=False):
         讀者.狀態.重置()
         讀者.狀態.視頻 = 文件名, 可以跳過
 
@@ -257,7 +260,7 @@ class 讀者:
             return
 
         s = self.下一句()
-        if s['類型']=='終焉':
+        if s['類型'] == '終焉':
             s['防止終焉'] = 防止終焉
         讀者句控制(self, s['類型'], s)
 
@@ -288,7 +291,7 @@ class 讀者句控制:
         logging.debug(類型)
         logging.debug(參數表)
         讀者句控制.__getattribute__(self, 類型)(讀者, **參數表)
-    
+
     @staticmethod
     def 註釋(讀者, 註釋):
         None
@@ -317,7 +320,7 @@ class 讀者句控制:
     def 插入圖(讀者, 插入圖):
         logging.debug('插入圖: %s' % 插入圖)
         讀者.狀態.額外信息 = ('cut', 插入圖)
-        
+
     @staticmethod
     def 終焉(讀者, 防止終焉, 旁白):
         if 防止終焉:
@@ -326,7 +329,7 @@ class 讀者句控制:
         讀者.狀態.話語 = 旁白
         讀者.狀態.名字 = ''
         讀者.狀態.語者 = ''
-        
+
     @staticmethod
     def 鏡頭(讀者, 鏡頭符號, 內容):
         if 鏡頭符號 == '+':
@@ -342,13 +345,13 @@ class 讀者句控制:
             except:
                 logging.waring(f'鏡頭「{內容}」的內容不正確。')
             讀者.步進()
-            
+
     @staticmethod
     def 旁白(讀者, 旁白):
         讀者.狀態.話語 = 旁白
         讀者.狀態.名字 = ''
         讀者.狀態.語者 = ''
-        
+
     @staticmethod
     def 人物操作(讀者, 人物名, 目標, 操作符):
         if 操作符 == '+':
@@ -356,7 +359,7 @@ class 讀者句控制:
         if 操作符 == '|':
             角色.取角色(人物名).顯示名字 = 目標
         讀者.步進()
-        
+
     @staticmethod
     def 人物對話(讀者, 名, 顏, 語, 代, 特效):
         人物 = 讀者句控制._表情變化(讀者, 名, 顏, 代, 特效)
@@ -364,13 +367,13 @@ class 讀者句控制:
         讀者.狀態.名字 = 代 or 人物.顯示名字 or 名
         讀者.狀態.語者 = 名
         logging.debug([名, 代, 顏, 語].__str__())
-        
+
     @staticmethod
     def 人物表情(讀者, 名, 顏, 代, 特效):
         人物 = 讀者句控制._表情變化(讀者, 名, 顏, 代, 特效)
         logging.debug([名, 代, 顏].__str__())
         讀者.步進()
-        
+
     @staticmethod
     def _表情變化(讀者, 名, 顏, 代, 特效):
         人物 = 角色.取角色(名)
@@ -379,6 +382,3 @@ class 讀者句控制:
         if 鏡頭.查詢(名) and 讀者.狀態.人物 != 名:
             讀者.狀態.人物 = 名
         return 人物
-        
-    
-    
