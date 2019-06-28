@@ -9,12 +9,14 @@ from cefpython3 import cefpython as cef
 
 def group(url, icon, title, size):
     sys.excepthook = cef.ExceptHook
-    cef.Initialize(settings={})
+    cef.Initialize(settings={}, commandLineSwitches={
+        "autoplay-policy": "no-user-gesture-required",
+        "lang": 'zh-CN'
+    })
     app = CefApp(url, icon, title, size)
     return app, app.frame.browser
-    
-    
-    
+
+
 # Platforms
 WINDOWS = (platform.system() == "Windows")
 LINUX = (platform.system() == "Linux")
@@ -26,9 +28,9 @@ if MAC:
         from AppKit import NSApp
     except ImportError:
         logging.debug("[wxpython.py] Error: PyObjC package is missing, "
-              "cannot fix Issue #371")
+                      "cannot fix Issue #371")
         logging.debug("[wxpython.py] To install PyObjC type: "
-              "pip install -U pyobjc")
+                      "pip install -U pyobjc")
         sys.exit(1)
 
 
@@ -61,16 +63,14 @@ def main():
 def check_versions():
     logging.debug("[wxpython.py] CEF Python {ver}".format(ver=cef.__version__))
     logging.debug("[wxpython.py] Python {ver} {arch}".format(
-            ver=platform.python_version(), arch=platform.architecture()[0]))
+        ver=platform.python_version(), arch=platform.architecture()[0]))
     logging.debug("[wxpython.py] wxPython {ver}".format(ver=wx.version()))
     # CEF Python version requirement
     assert cef.__version__ >= "66.0", "CEF Python v66.0+ required to run this"
 
 
-
-
 class MainFrame(wx.Frame):
-    
+
     def __init__(self, url, icon, title, size):
         self.browser = None
 
@@ -86,7 +86,7 @@ class MainFrame(wx.Frame):
         if WINDOWS:
             # noinspection PyUnresolvedReferences, PyArgumentList
             logging.debug("[wxpython.py] System DPI settings: %s"
-                  % str(cef.DpiAware.GetSystemDpi()))
+                          % str(cef.DpiAware.GetSystemDpi()))
         if hasattr(wx, "GetDisplayPPI"):
             logging.debug("[wxpython.py] wx.GetDisplayPPI = %s" % wx.GetDisplayPPI())
         logging.debug("[wxpython.py] wx.GetDisplaySize = %s" % wx.GetDisplaySize())
@@ -126,7 +126,7 @@ class MainFrame(wx.Frame):
             # still not yet available, so must delay embedding browser
             # (Issue #349).
             if wx.version().startswith("3.") or wx.version().startswith("4."):
-                wx.CallLater(100, lambda:self.embed_browser(url))
+                wx.CallLater(100, lambda: self.embed_browser(url))
             else:
                 # This works fine in wxPython 2.8 on Linux
                 self.embed_browser(url)
@@ -134,14 +134,17 @@ class MainFrame(wx.Frame):
             self.embed_browser(url)
             self.Show()
 
-
-    def embed_browser(self,url):
+    def embed_browser(self, url):
         window_info = cef.WindowInfo()
         (width, height) = self.browser_panel.GetClientSize().Get()
         assert self.browser_panel.GetHandle(), "Window handle not available"
         window_info.SetAsChild(self.browser_panel.GetHandle(),
                                [0, 0, width, height])
-        self.browser = cef.CreateBrowserSync(window_info, url=url)
+        self.browser = cef.CreateBrowserSync(window_info, url=url,
+                                             browserSettings={
+                                                 'web_security_disabled': False,
+                                             }
+                                             )
         self.browser.SetClientHandler(FocusHandler())
 
     def set_browser_object(self, name, obj):
@@ -200,7 +203,7 @@ class MainFrame(wx.Frame):
         # Clear browser references that you keep anywhere in your
         # code. All references must be cleared for CEF to shutdown cleanly.
         self.browser = None
-        
+
     def toggleFullScreen(self):
         if self.IsFullScreen():
             self.ShowFullScreen(False)
@@ -213,7 +216,7 @@ class FocusHandler(object):
         # Temporary fix for focus issues on Linux (Issue #284).
         if LINUX:
             logging.debug("[wxpython.py] FocusHandler.OnGotFocus:"
-                  " keyboard focus fix (Issue #284)")
+                          " keyboard focus fix (Issue #284)")
             browser.SetFocus(True)
 
 
@@ -234,7 +237,7 @@ class CefApp(wx.App):
         # resolve the problem (Issue #350).
         if MAC and wx.version().startswith("4."):
             logging.debug("[wxpython.py] OnPreInit: initialize here"
-                  " (wxPython 4.0 fix)")
+                          " (wxPython 4.0 fix)")
             self.initialize()
 
     def OnInit(self):
