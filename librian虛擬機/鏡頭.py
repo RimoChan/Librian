@@ -1,5 +1,5 @@
 import logging
-from .人物生成html import 生成html
+# from .人物生成html import 生成html
 from . import 立繪
 from 環境 import 配置
 
@@ -37,20 +37,8 @@ class 鏡頭:
         return t
 
     def 拆解(self):
-        return [立繪.人物拆解(人, 參數) for 人, 參數 in self.統合().items()]
-
-    def 轉html(self):
-        tot = ''
-        try:
-            for 人 in self.拆解():
-                if 人:
-                    tot += 生成html(人)
-        except Exception as e:
-            if 配置['嚴格模式']:
-                raise e
-            logging.warning('立繪立即被停用，因爲立繪生成出現問題了「%s」。' % e.__repr__())
-            self.轉html = lambda: None
-        return tot
+        立繪組 = [立繪.人物拆解(人, 參數) for 人, 參數 in self.統合().items()]
+        return [立繪 for 立繪 in 立繪組 if 立繪 is not None]
 
     def __repr__(self):
         return str(self.所有位置)

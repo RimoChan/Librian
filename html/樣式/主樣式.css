@@ -197,6 +197,11 @@ button {
     z-index: -2;
 }
 
+#立繪 > div {
+    position: absolute;
+    transform-origin: 0% 0%;
+}
+
 #墊底 {
     position: absolute;
     top: 0px;

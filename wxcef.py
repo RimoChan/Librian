@@ -142,7 +142,7 @@ class MainFrame(wx.Frame):
                                [0, 0, width, height])
         self.browser = cef.CreateBrowserSync(window_info, url=url,
                                              browserSettings={
-                                                 'web_security_disabled': False,
+                                                 'web_security_disabled': True,
                                              }
                                              )
         self.browser.SetClientHandler(FocusHandler())

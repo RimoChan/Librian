@@ -109,19 +109,16 @@
     選擇之刻: false,
     處理選項: function(選項) {
       var i, k, len, p, tot;
-      console.log('處理選項', 選項);
       tot = '';
       for (p = k = 0, len = 選項.length; k < len; p = ++k) {
         i = 選項[p];
         tot += `<button onclick='演出.點選項(${p});'>${i}</botton>\n`;
       }
       $('#選項').html(tot);
-      console.log('選項show');
       $('#選項').show(250);
       return this.選擇之刻 = true;
     },
     點選項: function(x) {
-      console.log('點選項hide');
       $('#選項').hide(250);
       山彥.選(x);
       return this.選擇之刻 = false;
@@ -197,16 +194,61 @@
       cg圖片 = cg[0];
       淡入時間 = cg[1];
       漸變方法 = cg[2];
-      console.log(cg圖片, this.現在cg);
       if (cg圖片 === this.現在cg) {
         return;
       }
       this.現在cg = cg圖片;
-      console.log(cg圖片, 淡入時間, 漸變方法);
       return this.換圖('cg', cg圖片, 淡入時間, 漸變方法);
     },
-    換立繪: function(text) {
-      return $('#立繪').html(text);
+    當前人物: [],
+    換立繪: function(立繪組) {
+      var k, l, len, len1, len2, len3, m, n, ref, t, 名字, 名字組, 層, 立繪, 組;
+      名字組 = (function() {
+        var k, len, results;
+        results = [];
+        for (k = 0, len = 立繪組.length; k < len; k++) {
+          立繪 = 立繪組[k];
+          results.push(立繪.名字);
+        }
+        return results;
+      })();
+      ref = this.當前人物;
+      for (k = 0, len = ref.length; k < len; k++) {
+        名字 = ref[k];
+        if (名字組.indexOf(名字) === -1) {
+          $(`#立繪--${名字}`).remove();
+          console.log(`去除 ${名字}`);
+        }
+      }
+      for (l = 0, len1 = 名字組.length; l < len1; l++) {
+        名字 = 名字組[l];
+        if (this.當前人物.indexOf(名字) === -1) {
+          $('#立繪').append($(`<div id='立繪--${名字}' class='淡入'></div>`));
+          console.log(`加入 ${名字}`);
+        }
+      }
+      for (m = 0, len2 = 立繪組.length; m < len2; m++) {
+        立繪 = 立繪組[m];
+        組 = (function() {
+          var len3, n, ref1, results;
+          ref1 = 立繪.圖層;
+          results = [];
+          for (n = 0, len3 = ref1.length; n < len3; n++) {
+            層 = ref1[n];
+            results.push([層.文件, 層.子位置[0], 層.子位置[1]]);
+          }
+          return results;
+        })();
+        圖像融合.融合到div(組, 0.5, `立繪--${立繪.名字}`);
+      }
+      for (n = 0, len3 = 立繪組.length; n < len3; n++) {
+        立繪 = 立繪組[n];
+        t = $(`#立繪--${立繪.名字}`);
+        t.css('left', `${立繪.位置[0]}px`);
+        t.css('top', `${立繪.位置[1]}px`);
+        t.css('transform', `scale(${立繪.位置[2]})`);
+      }
+      return this.當前人物 = 名字組;
     },
     現在背景: 'None',
     換背景: function(背景) {

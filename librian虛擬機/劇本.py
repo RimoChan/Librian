@@ -113,12 +113,9 @@ class 狀態:
     def 導出(self, html=True):
         鏡頭.語者 = self.語者
         if self.人物:
-            if html:
-                立繪 = 鏡頭.查詢(self.人物).轉html()
-            else:
-                立繪 = 鏡頭.查詢(self.人物).拆解()
+            立繪 = 鏡頭.查詢(self.人物).拆解()
         else:
-            立繪 = ''
+            立繪 = []
         快照 = {
             '額外信息': self.額外信息,
             '話語': self.話語,

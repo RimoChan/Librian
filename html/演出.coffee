@@ -96,16 +96,13 @@ window.演出 =
 
     選擇之刻: false,
     處理選項: (選項) ->
-        console.log '處理選項', 選項
         tot = ''
         for i, p in 選項
             tot += "<button onclick='演出.點選項(#{p});'>#{i}</botton>\n"
         $('#選項').html(tot)
-        console.log '選項show'
         $('#選項').show(250)
         this.選擇之刻 = true
     點選項: (x) ->
-        console.log '點選項hide'
         $('#選項').hide(250)
         山彥.選(x)
         this.選擇之刻 = false
@@ -144,7 +141,7 @@ window.演出 =
         v = $('video')
         v.css('display', 'block')
         v.attr('src', this.視頻文件夾+'/' + 視頻文件)
-        v.click if 可以跳過 
+        v.click if 可以跳過
             ->
                 v.css('animation', '_黑出 0.5s')
                 v.css('animation-fill-mode', 'forwards')
@@ -153,9 +150,9 @@ window.演出 =
                     v.attr('src', '')
                     v[0].style.display = 'none'
                 , 600
-        else 
-            ->  null
-            
+        else
+            -> null
+
         v[0].addEventListener 'ended', ->
             v[0].style.display = 'none'
         , false
@@ -178,15 +175,36 @@ window.演出 =
         cg圖片 = cg[0]
         淡入時間 = cg[1]
         漸變方法 = cg[2]
-        console.log cg圖片, this.現在cg
         if cg圖片 == this.現在cg
             return
         this.現在cg = cg圖片
-        console.log cg圖片, 淡入時間, 漸變方法
         this.換圖('cg', cg圖片, 淡入時間, 漸變方法)
 
-    換立繪: (text) ->
-        $('#立繪').html(text)
+    當前人物: []
+    換立繪: (立繪組) ->
+        名字組 = (立繪.名字 for 立繪 in 立繪組)
+        for 名字 in this.當前人物
+            if 名字組.indexOf(名字) == - 1
+                $("#立繪--#{名字}").remove()
+                console.log "去除 #{名字}"
+        for 名字 in 名字組
+            if this.當前人物.indexOf(名字) == - 1
+                $('#立繪').append($("<div id='立繪--#{名字}' class='淡入'></div>"))
+                console.log "加入 #{名字}"
+
+        for 立繪 in 立繪組
+            組 = ([層.文件, 層.子位置[0], 層.子位置[1]] for 層 in 立繪.圖層)
+            圖像融合.融合到div(組, 0.5, "立繪--#{立繪.名字}")
+        
+        for 立繪 in 立繪組
+            t = $("#立繪--#{立繪.名字}")
+            t.css('left', "#{立繪.位置[0]}px")
+            t.css('top', "#{立繪.位置[1]}px")
+            t.css('transform', "scale(#{立繪.位置[2]})")
+
+        this.當前人物 = 名字組
+
+
 
     現在背景: 'None',
     換背景: (背景) ->
