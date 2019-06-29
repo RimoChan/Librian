@@ -291,11 +291,11 @@ class 讀者句控制:
 
     @staticmethod
     def 註釋(讀者, 註釋):
-        None
+        讀者.步進()
 
     @staticmethod
     def 躍點(讀者, 躍點):
-        None
+        讀者.步進()
 
     @staticmethod
     def 函數調用(讀者, 函數, 參數表, 原文):
