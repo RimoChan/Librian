@@ -140,6 +140,19 @@ video {
     height: 100%;
 }
 
+#話語{
+    white-space: pre-line;
+}
+.對話:before{
+    content: '「';
+    display: block;
+    height: 100%;
+    float: left;
+}
+.對話>span:nth-last-child(1):after{
+    content: '」';
+}
+
 #選項 {
     position: absolute;
     height: 220px;

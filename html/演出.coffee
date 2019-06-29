@@ -50,13 +50,6 @@ window.演出 =
         if data.背景音樂[0]!='None'
             data.背景音樂[0] = this.音樂文件夾 + '/' + data.背景音樂[0]
 
-        if data.名字!=''
-            data.話語 = "「#{data.話語}」"
-            $('#名字框').fadeIn(200)
-        else
-            data.話語 = '　　' + data.話語
-            $('#名字框').fadeOut(200)
-
     改變演出狀態: (data) ->
         this.信息預處理 data
         console.log data
@@ -74,6 +67,7 @@ window.演出 =
             if 額外信息[0] == 'load'
                 this.load特效()
         eval(js)
+        
         this.放視頻(視頻)
         this.換cg(cg)
         this.換背景(背景)
@@ -222,10 +216,16 @@ window.演出 =
         $('#名字').html(名字)
         $('#對話歷史').append(名字+'<br/>')
         $('#對話框').attr('class','人物--' + 語者)
-        # alert $('#對話框').attr('class')
 
     淡入過期時間: 0,
     換對話: (text, 名字) ->
+        if 名字 != ''
+            $('#名字框').fadeIn(200)
+            $('#話語').attr('class','對話')
+        else
+            $('#名字框').fadeOut(200)
+            $('#話語').attr('class','旁白')
+            text = '　　' + text
         淡入字 = 演出.文字淡入(text)
         $('#話語').html(淡入字.內容)
         演出.淡入過期時間 = Date.now() + 淡入字.總時間 * 1000
