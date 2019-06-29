@@ -1,9 +1,12 @@
 ﻿@font-face{
-    font-family: 源流明體SemiBold;
-    src: url('./static/GenRyuMinTW-SemiBold.ttf');
+    /* font-family: 源流明體SemiBold;
+    src: url('./static/GenRyuMinTW-SemiBold.ttf'); */
+    font-family: 思源宋體SemiBold;
+    src: url('./static/SourceHanSerifSC-SemiBold.otf');
 }
 body{
-    font-family: 源流明體SemiBold; 
+    font-family: 思源宋體SemiBold;
+    line-height: 1.5;
     margin: 0px;
     padding: 0px;
     background: url(static/塊.png);
