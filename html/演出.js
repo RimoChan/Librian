@@ -75,8 +75,6 @@
         }
       }
       eval(js);
-      $('#名字框').fadeOut(200);
-      $('#話語').attr('class', '旁白');
       this.放視頻(視頻);
       this.換cg(cg);
       this.換背景(背景);
@@ -261,7 +259,12 @@
       return this.換圖('bg', 背景圖片, 淡入時間, 漸變方法);
     },
     換人名: function(語者, 名字) {
-      $('#名字').html(名字);
+      if (名字) {
+        $('#名字').html(名字);
+        $('#名字框').css('opacity', 1);
+      } else {
+        $('#名字框').css('opacity', 0);
+      }
       $('#對話歷史').append(名字 + '<br/>');
       return $('#對話框').attr('class', '人物--' + 語者);
     },
@@ -269,12 +272,9 @@
     換對話: function(text, 名字) {
       var 淡入字;
       if (名字 !== '') {
-        $('#名字框').fadeIn(200);
         $('#話語').attr('class', '對話');
       } else {
-        $('#名字框').fadeOut(200);
         $('#話語').attr('class', '旁白');
-        text = '　　' + text;
       }
       淡入字 = 演出.文字淡入(text);
       $('#話語').html(淡入字.內容);

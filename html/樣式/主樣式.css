@@ -106,12 +106,11 @@ video {
 }
 
 #名字框 {
-    display: none;
-    /*防止一開始閃現*/
+    opacity: 0;
+    transition: opacity 0.3s, width 0.3s;
     position: absolute;
     top: 0px;
     left: 80px;
-    /*height:25%;*/
 }
 
 #話語框 {
@@ -142,6 +141,9 @@ video {
 
 #話語{
     white-space: pre-line;
+}
+.旁白:before{
+    content: '　　';
 }
 .對話:before{
     content: '「';
