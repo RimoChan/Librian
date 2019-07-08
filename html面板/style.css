@@ -1,6 +1,7 @@
 @font-face{
     font-family: 思源宋體SemiBold;
-    src: url('../html/樣式/static/SourceHanSerifSC-SemiBold.otf');
+    /* src: url('../html/樣式/static/SourceHanSerifSC-SemiBold.otf'); */
+    src: url('../html/樣式/static/NotoSerifSC-SemiBold.otf');
 }
 body{
     font-family: 思源宋體SemiBold; 
