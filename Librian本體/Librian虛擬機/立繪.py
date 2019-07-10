@@ -4,8 +4,7 @@ import copy
 
 import yaml
 
-from 環境 import 配置, 工程路徑
-
+from . import 虛擬機環境
 from . import 角色
 
 
@@ -36,7 +35,7 @@ def 人物拆解(包, 參數):
     for 物件 in 衣配件 + 顏配件:
         x, y = 人.定座標(物件)
         回信['圖層'].append(
-            {'文件': '%s/%s/%s.png' % (配置['圖片相對網頁路徑'], 包, 物件),
+            {'文件': '%s/%s/%s.png' % (虛擬機環境.圖片相對網頁路徑, 包, 物件),
              '子位置': (x, y)}
         )
     return 回信

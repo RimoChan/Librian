@@ -1,7 +1,7 @@
 import logging
-# from .人物生成html import 生成html
+
 from . import 立繪
-from 環境 import 配置
+from . import 虛擬機環境
 
 語者 = ''
 
@@ -52,7 +52,7 @@ class 鏡頭:
 
 def 查詢(人):
     if 人 not in 鏡頭對應:
-        鏡頭({人: 配置['默認立繪位置'][1][0]})
+        鏡頭({人: 虛擬機環境.默認立繪位置[1][0]})
     return 鏡頭對應[人]
 
 # ['潘大爺'] -> {'潘大爺':[0,0]}
@@ -62,7 +62,7 @@ def 生成鏡頭(x):
     if type(x) == dict:
         return 鏡頭(x)
     if type(x) == list:
-        m = 配置['默認立繪位置'][len(x)]
+        m = 虛擬機環境.默認立繪位置[len(x)]
         a = dict(zip(x, m))
         return 鏡頭(a)
 

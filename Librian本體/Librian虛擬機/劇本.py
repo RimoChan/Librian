@@ -4,15 +4,13 @@ import copy
 import cloudpickle as pickle
 import yaml
 
-from 環境 import 配置, 工程路徑
-
 from .util import 讀txt
 from .util import 文件
 
 from . import 鏡頭
 from . import 編譯
 from . import 角色
-
+from . import 虛擬機環境
 
 
 def 別名適用(x):
@@ -53,8 +51,6 @@ class 命令:
             except AttributeError as e:
                 raise AttributeError('沒有可用的函數「%s」。' % self.函數)
             except Exception as e:
-                if 配置['嚴格模式']:
-                    raise e
                 s = '%s(%s)' % (self.函數, ', '.join(self.參數))
                 logging.warning('在劇本中執行方法「%s」時遇到了意外%s' % (s, e.__repr__()))
 
@@ -62,7 +58,7 @@ class 命令:
 
     @別名('背景')
     def BG(self, 讀者, bg, 淡入時間=1, 漸變方法='_淡出'):
-        bg = 文件.補充擴展名(bg, ['webp', 'png', 'jpg'], f'./{工程路徑}/{配置["圖片文件夾"]}')
+        bg = 文件.補充擴展名(bg, ['webp', 'png', 'jpg'], f'./{虛擬機環境.工程路徑}/{虛擬機環境.圖片文件夾}')
         讀者.狀態.背景 = bg, 淡入時間, 漸變方法
 
     @別名('特效')
@@ -74,12 +70,12 @@ class 命令:
 
     @別名('背景音樂', '背景音乐')
     def BGM(self, 讀者, bgm, 音量=1):
-        bgm = 文件.補充擴展名(bgm, ['mp3', 'ogg'], f'./{工程路徑}/{配置["音樂文件夾"]}')
+        bgm = 文件.補充擴展名(bgm, ['mp3', 'ogg'], f'./{虛擬機環境.工程路徑}/{虛擬機環境.音樂文件夾}')
         讀者.狀態.背景音樂 = bgm, 音量
 
     def CG(self, 讀者, cg=None, 淡入時間=1, 漸變方法='_淡出'):
         if cg is not None:
-            cg = 文件.補充擴展名(cg, ['webp', 'png', 'jpg'], f'./{工程路徑}/{配置["圖片文件夾"]}')
+            cg = 文件.補充擴展名(cg, ['webp', 'png', 'jpg'], f'./{虛擬機環境.工程路徑}/{虛擬機環境.圖片文件夾}')
         讀者.狀態.CG = cg, 淡入時間, 漸變方法
 
     @別名('視頻', '视频')

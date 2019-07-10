@@ -6,14 +6,15 @@ import wx
 from cefpython3 import cefpython as cef
 
 from Librian虛擬機 import 劇本
+from Librian虛擬機 import 虛擬機環境
 from Librian虛擬機.util import 讀txt
 from Librian虛擬機.util import 文件
 
-from 環境 import 配置, 工程路徑
+from 環境 import 配置
 
 
 def 綁定(app, 標題url):
-    讀者 = 劇本.讀者(f'{工程路徑}/{配置["劇本入口"]}')
+    讀者 = 劇本.讀者(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}')
     app.frame.set_browser_object("山彥", 極山彥(app.frame, app.frame.browser, 讀者, 標題url))
 
 
@@ -30,7 +31,7 @@ class 山彥:
     def 選擇讀檔文件(self):
         with wx.FileDialog(self.窗口, '讀檔', wildcard='pickle 文件 (*.pkl)|*.pkl',
                            style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
-            fileDialog.SetPath(f'{工程路徑}/存檔資料/')
+            fileDialog.SetPath(f'{虛擬機環境.工程路徑}/存檔資料/')
             if fileDialog.ShowModal() == wx.ID_CANCEL:
                 return None
             return fileDialog.GetPath()
@@ -38,7 +39,7 @@ class 山彥:
     def 選擇存檔文件(self):
         with wx.FileDialog(self.窗口, '存檔', wildcard='pickle 文件 (*.pkl)|*.pkl',
                            style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT) as fileDialog:
-            fileDialog.SetPath(f'{工程路徑}/存檔資料/')
+            fileDialog.SetPath(f'{虛擬機環境.工程路徑}/存檔資料/')
             if fileDialog.ShowModal() == wx.ID_CANCEL:
                 return None
             return fileDialog.GetPath()
@@ -56,11 +57,11 @@ class 山彥:
             self.更新()
 
     def 快速存檔(self):
-        self.讀者.存檔(f'{工程路徑}/存檔資料/快速存檔.pkl')
+        self.讀者.存檔(f'{虛擬機環境.工程路徑}/存檔資料/快速存檔.pkl')
         self.js('演出.提示("存檔好了。")')
 
     def 快速讀檔(self):
-        self.讀者.讀檔(f'{工程路徑}/存檔資料/快速存檔.pkl')
+        self.讀者.讀檔(f'{虛擬機環境.工程路徑}/存檔資料/快速存檔.pkl')
         self.更新()
 
     def 退出(self):
@@ -70,13 +71,13 @@ class 山彥:
         self.窗口.toggleFullScreen()
 
     def 設置(self, 參數):
-        with open(f'{工程路徑}/存檔資料/用戶設置.json', 'w', encoding='utf8') as f:
+        with open(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json', 'w', encoding='utf8') as f:
             f.write(參數)
 
 
 class 演出山彥(山彥):
     def 回標題(self):
-        self.讀者.__init__(f'{工程路徑}/{配置["劇本入口"]}')
+        self.讀者.__init__(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}')
         self.js(f'window.location.href="{self.標題url}"')
 
     def 更新(self):
@@ -93,14 +94,15 @@ class 演出山彥(山彥):
         self.更新()
 
     def 初始化(self):
-        圖片文件夾 = os.path.join(f'../{工程路徑}', 配置['圖片文件夾']).replace('\\', '/')
-        音樂文件夾 = os.path.join(f'../{工程路徑}', 配置['音樂文件夾']).replace('\\', '/')
-        視頻文件夾 = os.path.join(f'../{工程路徑}', 配置['視頻文件夾']).replace('\\', '/')
-        自定css = os.path.join(f'../{工程路徑}', 配置['自定css']).replace('\\', '/')
-        主題css = os.path.join(f'主題', 配置['主題css'] + '.css').replace('\\', '/')
+        
+        圖片文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.圖片文件夾).replace('\\', '/')
+        音樂文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.音樂文件夾).replace('\\', '/')
+        視頻文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.視頻文件夾).replace('\\', '/')
+        自定css = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.自定css).replace('\\', '/')
+        主題css = os.path.join(f'主題', 虛擬機環境.主題css + '.css').replace('\\', '/')
 
         演出配置 = {
-            '解析度': 配置['主解析度'],
+            '解析度': 虛擬機環境.主解析度,
             '邊界': 配置['顯示繪圖邊界'],
             '主題css': 主題css,
             '自定css': 自定css,
@@ -115,7 +117,7 @@ class 演出山彥(山彥):
         '''
 
         try:
-            with open(f'{工程路徑}/存檔資料/用戶設置.json', encoding='utf8') as f:
+            with open(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json', encoding='utf8') as f:
                 s += f"設置.應用用戶設置('{f.read()}');"
         except:
             logging.warning('用戶設置加載失敗')
@@ -157,7 +159,7 @@ class 極山彥(帶標題山彥):
             def 監視():
                 原字 = ''
                 while True:
-                    with 讀txt.讀(f'{工程路徑}/{配置["劇本入口"]}') as f:
+                    with 讀txt.讀(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}') as f:
                         字 = f.read()
                         if 字 != 原字:
                             self.更新終態()
@@ -167,7 +169,7 @@ class 極山彥(帶標題山彥):
             t.start()
 
     def 更新終態(self):
-        self.讀者.從一而終(f'{工程路徑}/{配置["劇本入口"]}')
+        self.讀者.從一而終(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}')
         self.更新()
 
     def 初始化(self):
