@@ -64,7 +64,7 @@ Librian由python和HTML編寫而成，基於CEFPython和wxPython前端。
 如果你持「不讀說明書主義」，也可以: 
 
 1.  安裝python3.6
-2.  pip install requirements.txt
+2.  pip install -r requirements.txt
 3.  python3 librian_panel.py
 
 此外，你也可以根據[中文文檔](https://rimochan.github.io/Librian_doc)的指示來安裝。
