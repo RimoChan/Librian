@@ -55,12 +55,12 @@ class 山彥:
 
     def 運行(self):
         subprocess.Popen(f'cmd /c cd Librian本體 & "../python36/python" librian.py --project {self.工程路徑}')
-        
+
     def 運行同時編寫(self):
         subprocess.Popen(
             'cmd /c cd Librian本體 & ' +
-            f'"../python36/python" librian.py --project {self.工程路徑} '
-            + '--config "{編寫模式: True}"'
+            f'"../python36/python" librian.py --project {self.工程路徑} ' +
+            '--config "{編寫模式: True}"'
         )
         os.system(f'"{self.工程路徑}/{虛擬機環境.劇本入口}"')
 
@@ -81,7 +81,7 @@ class 山彥:
         alert('好了。')
 
 
-app, 瀏覽器=wxcef.group(title = 'librian面板', url = 'file:///html面板/面板.html', icon = './Librian本體/資源/librian.ico', size = (800, 450))
-真山彥=山彥(app.frame)
+app, 瀏覽器 = wxcef.group(title='librian面板', url='file:///html面板/面板.html', icon='./Librian本體/資源/librian.ico', size=(800, 450))
+真山彥 = 山彥(app.frame)
 app.frame.set_browser_object("山彥", 真山彥)
 app.MainLoop()
