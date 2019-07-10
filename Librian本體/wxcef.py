@@ -134,25 +134,25 @@ class MainFrame(wx.Frame):
         window_info = cef.WindowInfo()
         (width, height) = self.browser_panel.GetClientSize().Get()
         assert self.browser_panel.GetHandle(), "Window handle not available"
-        handle_to_use = self.browser_panel.GetHandle()
-        display = Gdk.Display.get_default()
-        window = GdkX11.X11Window.foreign_new_for_display(display,handle_to_use)
-        self.gtk_window = gtk_window = Gtk.Window()
-        def callback(gtk_window,window):
-          print("inside callback")
-          gtk_window.set_window(window)
-          gtk_window.set_visual( gtk_window.get_screen().lookup_visual(0x21))
-        gtk_window.connect("realize",callback,window)
-        gtk_window.set_has_window(True)
-        gtk_window.show()
-        sw = Gtk.ScrolledWindow()
-        sw.show()
-        gtk_window.add(sw)
-        sw.set_visual( sw.get_screen().lookup_visual(0x21))
-        self.sw = sw
-        self.Show()
-        window_info.SetAsChild(sw.get_window().get_xid(),
-                               [0, 0, width, height])
+        if LINUX:
+            handle_to_use = self.browser_panel.GetHandle()
+            display = Gdk.Display.get_default()
+            window = GdkX11.X11Window.foreign_new_for_display(display,handle_to_use)
+            self.gtk_window = gtk_window = Gtk.Window()
+            def callback(gtk_window,window):
+                print("inside callback")
+                gtk_window.set_window(window)
+                gtk_window.set_visual( gtk_window.get_screen().lookup_visual(0x21))
+            gtk_window.connect("realize",callback,window)
+            gtk_window.set_has_window(True)
+            gtk_window.show()
+            sw = Gtk.ScrolledWindow()
+            sw.show()
+            gtk_window.add(sw)
+            sw.set_visual( sw.get_screen().lookup_visual(0x21))
+            self.sw = sw
+            self.Show()
+        window_info.SetAsChild(sw.get_window().get_xid(),[0, 0, width, height])
         self.browser = cef.CreateBrowserSync(window_info,url=url,browserSettings={'web_security_disabled': True,})
         self.browser.SetClientHandler(FocusHandler())
 
