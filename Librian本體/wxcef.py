@@ -130,7 +130,6 @@ class MainFrame(wx.Frame):
             self.Show()
 
     def embed_browser(self, url):
-        print("right before embed browser")
         window_info = cef.WindowInfo()
         (width, height) = self.browser_panel.GetClientSize().Get()
         assert self.browser_panel.GetHandle(), "Window handle not available"
@@ -152,7 +151,9 @@ class MainFrame(wx.Frame):
             sw.set_visual( sw.get_screen().lookup_visual(0x21))
             self.sw = sw
             self.Show()
-        window_info.SetAsChild(sw.get_window().get_xid(),[0, 0, width, height])
+            window_info.SetAsChild(sw.get_window().get_xid(),[0, 0, width, height])
+        else:
+            window_info.SetAsChild(self.browser_panel.GetHandle(), [0, 0, width, height])
         self.browser = cef.CreateBrowserSync(window_info,url=url,browserSettings={'web_security_disabled': True,})
         self.browser.SetClientHandler(FocusHandler())
 
