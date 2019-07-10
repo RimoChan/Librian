@@ -1,26 +1,32 @@
-# ![](資源/Librian小.png)Librian: 簡明強大的Galgame引擎
+# ![](資源/Librian小.png)Librian: 簡明強大的 Galgame | Visual Novel 引擎
 
-## 關於中文文檔
-這個粗略的介紹是關於Librian本身的，如果你有興趣使用的話，
-可以直接參閱使用方法的[中文文檔](https://rimochan.github.io/Librian_doc)。
+![Librian2.jpg](./資源/Librian2.jpg)
 
-## 簡介
-Librian是一个容易上手的gal引擎，Librian由python和html編寫而成，並基於pyqt前端。
+[![](https://img.shields.io/github/stars/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/stargazers)
+[![](https://img.shields.io/badge/platform-windows-blueviolet.svg)](https://en.wikipedia.org/wiki/Microsoft_Windows)
+[![](https://img.shields.io/github/release/RimoChan/librian.svg)](https://github.com/RimoChan/Librian/releases)
+[![](https://img.shields.io/github/downloads/RimoChan/librian/total.svg)](https://github.com/RimoChan/Librian/releases)
+[![](https://img.shields.io/github/license/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/blob/master/LICENSE)
 
-Librian適用於快速高效的adv實現，能將你的idea迅速轉換爲結果，你只需提供素材文件和简单的劇本就能觀賞adv演出！
+[读简化字版本](readme_chs.md)
 
-Librian支持在劇本中嵌入即時解釋的python代碼來實現任意的可擴展性。
+Librian是一个非常容易上手的 Galgame | Visual Novel 引擎。   
 
-Librian是面向劇本的引擎，在設計時首要的考慮是: 
+Librian適用於快速高效的adv實現，能將你的奇思妙想迅速轉換爲成果——你只需提供素材文件和简单的劇本就能觀賞adv演出！
 
-- 劇本易讀易寫
-- 表現與邏輯獨立
-- 易於擴展
+Librian是面向劇本的引擎，賣點是: 
+
+-   清晰自然的劇本，提升你的寫作速度。
+-   自動分配立繪，無需手工操作且兼容性強。
+-   可以嵌入python，具有無限大的擴展性。
+-   導出美觀的PDF，與原畫老師輕鬆交流。
+-   附帶語義文件，讓現代字編輯器如虎添翼。
+
+Librian由python和HTML編寫而成，基於CEFPython和wxPython前端。
 
 ## 演示視頻
 
 [![視頻佔位](./資源/視頻佔位.png)](https://www.zhihu.com/video/1075418256290131968)  
-知乎視頻，應該沒問題吧。
 
 ## 劇本格式
 
@@ -36,8 +42,9 @@ Librian是面向劇本的引擎，在設計時首要的考慮是:
     青色的光像是風中的火，頻繁而隨機地稍稍淡下又變得更強，也許有人會不禁懷疑電路是不是出了故障…………
     …………又像是裝可愛的女兒眨着俏皮的眼睛。
     # 這是隨便編的www，本來想隨便寫幾句程序的哲理體現一下潘大爺的厲害，結果就變成了小說23333
-不需要任何其他標記或代碼，一小段劇本就完成了。   
-準備好立繪和背景後，運行Librian主程序並選擇剛纔的工程啓動——演出是這樣的效果。   
+
+不需要任何其他標記或代碼，一小段劇本就完成了。  
+準備好立繪和背景後，運行Librian主程序並選擇剛纔的工程啓動——演出是這樣的效果。  
 ![圖1](文檔/樣例_潘大爺.jpg)
 
 ## 擴展功能
@@ -46,24 +53,31 @@ Librian是面向劇本的引擎，在設計時首要的考慮是:
 
 不只是adv，你甚至可以嵌入線上交互等功能！
 
+## 中文文檔
+
+如果你想瞭解詳細的使用方法，可以直接閱讀Librian的中文文檔——<https://rimochan.github.io/Librian_doc>。
+
 ## 快速上手
 
-在[中文文檔](https://rimochan.github.io/Librian_doc)裏有比較詳細的安裝步驟。
-
-方便起見的話，也可以直接下載打包的[release版本](https://github.com/RimoChan/Librian/releases)使用。
+方便起見的話，Windows用戶可以直接下載打包的[release版本](https://github.com/RimoChan/Librian/releases)使用。
 
 如果你持「不讀說明書主義」，也可以: 
 
-1. 安裝python3.6
-2. pip install pyqt5 pillow psdtools yaml chardet
-3. python3 librian_panel.py
+1.  安裝python3.6
+2.  pip install wxpython cefpython3 pillow psd-tools pyyaml chardet
+3.  python3 librian_panel.py
 
-(僅在python3.6下測試通過。3.7版本的pyqt5似乎無法import QtWebEngineWidgets，希望好心人告訴我爲什麼。)
+此外，你也可以根據[中文文檔](https://rimochan.github.io/Librian_doc)的指示來安裝。
 
-## 赞助
+## 援交～
 
-如果你覺得本文檔對你的……
-錯了，廢話少說，快給錢！
+試着建了QQ討論組: 618775838。
 
-![圖1](文檔/支付寶.jpg)
+如果你需要一些使用幫助，或者有什麼不滿，或者不常用GitHub的話，可以來這裏討論。  
+總之，一起玩就行啦。
 
+## 贊助
+
+如果你覺得Librian對你的工作或學習有幫助，歡迎給作者介紹一些可愛的女朋友。
+
+最好是蘿莉，要那種會坐在腿上蹭蹭，喊「歐尼醬」的。

@@ -3,16 +3,20 @@
 # See http://www.sublimetext.com/docs/3/syntax.html
 file_extensions:
   - play
+  - liber
 scope: source.example-c
 
 contexts:
   # The prototype context is prepended to all contexts but those setting
   # meta_include_prototype: false.
   prototype:
-    - include: 嵌入
+    - include: 嵌入py
+    - include: 嵌入js
     - include: 註釋
+    - include: 躍點
     - include: 關鍵字
     - include: 功能
+    - include: 鏡頭
     - include: 鏡頭
 
   main:
@@ -28,7 +32,15 @@ contexts:
 
 
   註釋:
-    - match: '#'
+    - match: '^[#*]'
+      scope: punctuation.definition.comment.example-c
+      push:
+        - meta_scope: comment.line.double-slash.example-c
+        - match: $\n?
+          pop: true
+
+  躍點:
+    - match: '\*'
       scope: punctuation.definition.comment.example-c
       push:
         - meta_scope: comment.line.double-slash.example-c
@@ -36,7 +48,7 @@ contexts:
           pop: true
 
   功能:
-    - match: '>'
+    - match: '^>'
       scope: punctuation
       push:
         - match: '\w+\b'
@@ -50,7 +62,7 @@ contexts:
           pop: true
 
   對話:
-    - match: (^\S+(?=(\|\S)? (\(\S+\))?(「\S+」)?$))
+    - match: (^\S+(?=(\|\S)? (\(\S*\))?(「.*」)?))
       scope: entity.name.tag
       push:
         - match: '\('
@@ -69,7 +81,7 @@ contexts:
               scope: punctuation
               pop: true
 
-        - match: '$'
+        - match: '(?<=(」))'
           pop: true
 
   鏡頭:
@@ -84,12 +96,11 @@ contexts:
     - match: ^.+$
       scope: text.plain
 
-  嵌入:
-    # - match: '> *py'
-    - match: '> *py'
+  嵌入py:
+    - match: '^(```(py|python)?)$'
       scope: support.function
       push:
-        - match: '> *endpy'
+        - match: '```'
           scope: support.function
           pop: true
 
@@ -97,9 +108,22 @@ contexts:
           push:
             - include: 'scope:source.python'
           with_prototype:
-             - match: '(?=(> *endpy))'
+             - match: '(?=(```))'
+               pop: true
+  嵌入js:
+    - match: '^(```(js|javascript)?)$'
+      scope: support.function
+      push:
+        - match: '```'
+          scope: support.function
+          pop: true
+
+        - match: '\s*'
+          push:
+            - include: 'scope:source.js'
+          with_prototype:
+             - match: '(?=(```))'
                pop: true
 
-    
-    
-    
+
+

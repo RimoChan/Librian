@@ -1,0 +1,98 @@
+@font-face{
+    font-family: 源流明體SemiBold;
+    src: url('../樣式/static/GenRyuMinTW-SemiBold.ttf');
+}
+body{
+    font-family: 源流明體SemiBold; 
+    margin: 0;
+    padding: 0;
+    font-size: 1.6vw;
+    text-shadow: 1px 1px 5px #FFF,-1px -1px 5px #FFF;
+    overflow:hidden;
+}
+h1, h2{
+    font-weight: normal;
+}
+
+a{
+    text-decoration:none;
+    color:#000;
+}
+#bg{
+    background: url('紙背景花紋.jpg');
+    background-size: cover;
+    position:fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: -1;
+}
+#bb{
+    filter:  drop-shadow(0px 0px 0.5vw #000);
+    position:fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: -1;
+}
+#bg2{
+    -webkit-mask-image: url('虛僞的假面.png');
+    -webkit-mask-size: cover;
+    /*-webkit-mask-position: var(--x) var(--y);*/
+    /*動起來有點卡*/
+    filter:hue-rotate(var(--s));
+    background: url('紙背景花紋模糊.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+@keyframes a{
+    from {
+        filter:brightness(0.3) contrast(5) saturate(0); 
+    }to{
+        filter:brightness(1) contrast(1); 
+    }
+}
+#all{
+    border:solid 0.1px #888;
+    width: 100%;
+    height: 100%;
+    animation: a 10s;
+}
+.主{
+    font-size:250%;
+    line-height: 150%;
+    margin-left:50%;
+    margin-top:15%;
+}
+
+.主>div{
+    margin:8%;
+}
+.核{
+    background:url('紙背景花紋模糊.jpg');
+    background-attachment: fixed; 
+    background-size:cover;
+    border:1px solid rgba(0,0,0,0.2);
+    border-radius: 50%;
+    filter:hue-rotate(var(--s));
+
+    display:inline-block;
+    height:2.6vw;
+    width:2.6vw;
+    box-shadow: 0px 0px 1.4vw;
+
+    transition: border-radius 0.2s, box-shadow 0.2s, filter 0.2s;
+}
+a:hover>.核{
+    filter:hue-rotate(90deg);
+    border-radius: 5%;
+    box-shadow: 0px 0px 0.8vw;
+    transition: border-radius 0.2s, box-shadow 0.2s, filter 0.2s;
+}

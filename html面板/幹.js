@@ -11,25 +11,25 @@
       }
     });
     $("#開啓工程").click(function() {
-      return send("開啓工程");
+      return 山彥.開啓工程();
     });
     $("#建立工程").click(function() {
-      return send("建立工程");
+      return 山彥.建立工程();
     });
     $("#運行").click(function() {
-      return send("運行");
+      return 山彥.運行();
     });
     $("#運行同時編寫").click(function() {
-      return send("運行同時編寫");
+      return 山彥.運行同時編寫();
     });
     $("#打開文件夾").click(function() {
-      return send("打開文件夾");
+      return 山彥.打開文件夾();
     });
     $("#生成exe").click(function() {
-      return send("生成exe");
+      return 山彥.生成exe();
     });
     $("#生成html").click(function() {
-      return send("生成html");
+      return 山彥.生成html();
     });
     return window.進入工程 = function() {
       return $("#入口").slideUp();

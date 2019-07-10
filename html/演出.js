@@ -12,97 +12,100 @@
         type: 'text/css',
         href: this.主題css
       }).appendTo("head");
-      $('#總畫面').css('width', 解析度[0]);
-      $('#總畫面').css('height', 解析度[1]);
-      if (邊界) {
+      $('#總畫面').css('width', this.解析度[0]);
+      $('#總畫面').css('height', this.解析度[1]);
+      if (this.邊界) {
         $('div').css('border', '1px solid #22f');
       }
-      this.換圖('覆蓋', 'url(static/None.png)', 0);
-      this.換圖('bg', 'url(static/None.png)', 0);
-      this.換圖('cg', 'url(static/None.png)', 0);
+      this.縮放調整();
       return this.更新();
     },
+    縮放調整: function() {
+      var a, b, t;
+      a = document.body.clientWidth / 演出.解析度[0];
+      b = document.body.clientHeight / 演出.解析度[1];
+      t = Math.min(a, b);
+      $('#總畫面 , #墊底').css({
+        "transform-origin": "0% 0%",
+        "transform": "scale(" + t + ")"
+      });
+      return setTimeout(演出.縮放調整, 200);
+    },
+    配置: function(d) {
+      var i, j, results;
+      results = [];
+      for (i in d) {
+        j = d[i];
+        results.push(this[i] = j);
+      }
+      return results;
+    },
     步進更新: function() {
-      return send('步進更新');
+      return 山彥.步進更新();
     },
     更新: function() {
-      return send('更新');
+      return 山彥.更新();
     },
     信息預處理: function(data) {
-      if (!data.bg) {
-        data.bg = 'url(static/None.png)';
-      } else {
-        data.bg = `url(${this.圖片文件夾}/${data.bg})`;
-      }
-      if (!data.cg) {
-        data.cg = 'url(static/None.png)';
-      } else {
-        data.bg = `url(${this.圖片文件夾}/${data.cg})`;
-      }
-      if (data.bgm[0] !== 'None') {
-        data.bgm[0] = this.音樂文件夾 + '/' + data.bgm[0];
-      }
-      if (data.name !== '') {
-        data.word = `「${data.word}」`;
-        return $('#名字框').fadeIn(200);
-      } else {
-        data.word = '　　' + data.word;
-        return $('#名字框').fadeOut(200);
+      data.背景[0] = `url(${this.圖片文件夾}/${data.背景[0]})`;
+      data.cg[0] = `url(${this.圖片文件夾}/${data.cg[0]})`;
+      if (data.背景音樂[0] !== 'None') {
+        return data.背景音樂[0] = this.音樂文件夾 + '/' + data.背景音樂[0];
       }
     },
     改變演出狀態: function(data) {
-      var bg, bgm, cg, ch, choice, info, name, word, 特效表;
+      var cg, js, 名字, 特效表, 立繪, 背景, 背景音樂, 視頻, 話語, 語者, 選項, 額外信息;
       this.信息預處理(data);
-      ({bg, bgm, cg, 特效表, ch, choice, name, word, info} = data);
+      console.log(data);
+      ({特效表, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, 視頻} = data);
       this.特效處理(特效表);
-      if (choice.length > 0) {
-        this.處理選項(choice);
+      if (選項.length > 0) {
+        this.處理選項(選項);
         return;
       }
-      if (info) {
-        if (info[0] === 'cut') {
-          name = '';
-          word = '';
-          bgm = ['None', 0];
-          this.插入圖(info[1]);
+      if (額外信息) {
+        if (額外信息[0] === 'cut') {
+          名字 = '';
+          話語 = '';
+          背景音樂 = ['None', 0];
+          this.插入圖(額外信息[1]);
         }
-        if (info[0] === 'video') {
-          this.放視頻(info[1]);
-        }
-        if (info[0] === 'load') {
+        if (額外信息[0] === 'load') {
           this.load特效();
         }
       }
+      eval(js);
+      this.放視頻(視頻);
       this.換cg(cg);
-      this.換bg(bg);
-      this.換立繪(ch);
-      this.換bgm(bgm);
-      this.換人名(name);
-      return this.換對話(word, name);
+      this.換背景(背景);
+      this.換立繪(立繪);
+      this.換背景音樂(背景音樂);
+      this.換人名(語者, 名字);
+      return this.換對話(話語, 名字);
     },
     特效處理: function(特效表) {
-      var i, j, k, len, len1, results, 可特效块;
+      var i, k, l, len, len1, results, 可特效块;
       可特效块 = ['總畫面', 'adv畫面', '覆蓋', '選項', 'cg', 'bg', '立繪', '對話歷史', '對話框', '名字框', '名字', '名字框背景', '話語框', '話語', '話語框背景', '對話框背景'];
-      for (j = 0, len = 可特效块.length; j < len; j++) {
-        i = 可特效块[j];
+      for (k = 0, len = 可特效块.length; k < len; k++) {
+        i = 可特效块[k];
         if ($('#' + i).attr('class')) {
           $('#' + i).attr('class', '');
         }
       }
       results = [];
-      for (k = 0, len1 = 特效表.length; k < len1; k++) {
-        i = 特效表[k];
+      for (l = 0, len1 = 特效表.length; l < len1; l++) {
+        i = 特效表[l];
         results.push($('#' + i).addClass(特效表[i]));
       }
       return results;
     },
     選擇之刻: false,
-    處理選項: function(choice) {
-      var i, j, len, tot;
+    處理選項: function(選項) {
+      var i, k, len, p, tot;
       tot = '';
-      for (j = 0, len = choice.length; j < len; j++) {
-        i = choice[j];
-        tot += `<button onclick='this.點選項(${i});'>${choice[i]}</botton>\n`;
+      for (p = k = 0, len = 選項.length; k < len; p = ++k) {
+        i = 選項[p];
+        tot += `<button onclick='演出.點選項(${p});'>${i}</botton>\n`;
       }
       $('#選項').html(tot);
       $('#選項').show(250);
@@ -110,7 +113,7 @@
     },
     點選項: function(x) {
       $('#選項').hide(250);
-      send('選', x + '');
+      山彥.選(x);
       return this.選擇之刻 = false;
     },
     插入圖: function(圖) {
@@ -140,17 +143,28 @@
       }, 5600);
     },
     放視頻: function(視頻) {
-      var v;
-      控制.左鍵屏蔽 = true;
+      var v, 可以跳過, 視頻文件;
+      if (!視頻) {
+        return;
+      }
+      視頻文件 = 視頻[0];
+      可以跳過 = 視頻[1];
       v = $('video');
       v.css('display', 'block');
-      v.attr('src', this.視頻文件夾 + '/' + 視頻);
-      v[0].addEventListener('ended', function() {
-        this.步進更新();
+      v.attr('src', this.視頻文件夾 + '/' + 視頻文件);
+      v.click(可以跳過 ? function() {
+        v.css('animation', '_黑出 0.5s');
+        v.css('animation-fill-mode', 'forwards');
         return setTimeout(function() {
-          v[0].style.display = 'none';
-          return 控制.左鍵屏蔽 = false;
-        }, 500);
+          v.css('animation', '');
+          v.attr('src', '');
+          return v[0].style.display = 'none';
+        }, 600);
+      } : function() {
+        return null;
+      });
+      v[0].addEventListener('ended', function() {
+        return v[0].style.display = 'none';
       }, false);
       return v[0].play();
     },
@@ -169,44 +183,113 @@
     },
     現在cg: 'None',
     換cg: function(cg) {
-      if (cg === this.現在cg) {
+      var cg圖片, 淡入時間, 漸變方法;
+      cg圖片 = cg[0];
+      淡入時間 = cg[1];
+      漸變方法 = cg[2];
+      if (cg圖片 === this.現在cg) {
         return;
       }
-      this.現在cg = cg;
-      return this.換圖('cg', cg, 1);
+      this.現在cg = cg圖片;
+      return this.換圖('cg', cg圖片, 淡入時間, 漸變方法);
     },
-    換立繪: function(text) {
-      return $('#立繪').html(text);
+    當前人物: [],
+    換立繪: function(立繪組) {
+      var k, l, len, len1, len2, len3, m, n, ref, t, 名字, 名字組, 層, 立繪, 組;
+      名字組 = (function() {
+        var k, len, results;
+        results = [];
+        for (k = 0, len = 立繪組.length; k < len; k++) {
+          立繪 = 立繪組[k];
+          results.push(立繪.名字);
+        }
+        return results;
+      })();
+      ref = this.當前人物;
+      for (k = 0, len = ref.length; k < len; k++) {
+        名字 = ref[k];
+        if (名字組.indexOf(名字) === -1) {
+          $(`#立繪--${名字}`).remove();
+          console.log(`去除 ${名字}`);
+        }
+      }
+      for (l = 0, len1 = 名字組.length; l < len1; l++) {
+        名字 = 名字組[l];
+        if (this.當前人物.indexOf(名字) === -1) {
+          $('#立繪').append($(`<div id='立繪--${名字}' class='淡入'></div>`));
+          console.log(`加入 ${名字}`);
+        }
+      }
+      for (m = 0, len2 = 立繪組.length; m < len2; m++) {
+        立繪 = 立繪組[m];
+        組 = (function() {
+          var len3, n, ref1, results;
+          ref1 = 立繪.圖層;
+          results = [];
+          for (n = 0, len3 = ref1.length; n < len3; n++) {
+            層 = ref1[n];
+            results.push([層.文件, 層.子位置[0], 層.子位置[1]]);
+          }
+          return results;
+        })();
+        圖像融合.融合到div(組, 0.5, `立繪--${立繪.名字}`);
+      }
+      for (n = 0, len3 = 立繪組.length; n < len3; n++) {
+        立繪 = 立繪組[n];
+        t = $(`#立繪--${立繪.名字}`);
+        t.css('left', `${立繪.位置[0]}px`);
+        t.css('top', `${立繪.位置[1]}px`);
+        t.css('transform', `scale(${立繪.位置[2]})`);
+      }
+      return this.當前人物 = 名字組;
     },
-    現在bg: 'None',
-    換bg: function(bg) {
-      var 現在bg;
-      if (bg === this.現在bg) {
+    現在背景: 'None',
+    換背景: function(背景) {
+      var 淡入時間, 漸變方法, 背景圖片;
+      背景圖片 = 背景[0];
+      淡入時間 = 背景[1];
+      漸變方法 = 背景[2];
+      if (背景圖片 === this.現在背景) {
         return;
       }
-      現在bg = bg;
-      if (bg === 'None') {
-        bg = 'url(static/None.png)';
+      this.現在背景 = 背景圖片;
+      if (背景圖片 === 'None') {
+        背景圖片 = 'url(static/None.png)';
       }
-      return this.換圖('bg', bg, 1.4);
+      return this.換圖('bg', 背景圖片, 淡入時間, 漸變方法);
     },
-    換人名: function(text) {
-      $('#名字').html(text);
-      return $('#對話歷史').append(text + '<br/>');
-    },
-    換對話: function(text, name) {
-      if (name) {
-        $('#話語').逐字打印(text, true);
+    換人名: function(語者, 名字) {
+      if (名字) {
+        $('#名字').html(名字);
+        $('#名字框').css('opacity', 1);
       } else {
-        $('#話語').逐字打印(text);
+        $('#名字框').css('opacity', 0);
       }
+      $('#對話歷史').append(名字 + '<br/>');
+      return $('#對話框').attr('class', '人物--' + 語者);
+    },
+    淡入過期時間: 0,
+    換對話: function(text, 名字) {
+      var 淡入字;
+      if (名字 !== '') {
+        $('#話語').attr('class', '對話');
+      } else {
+        $('#話語').attr('class', '旁白');
+      }
+      淡入字 = 演出.文字淡入(text);
+      $('#話語').html(淡入字.內容);
+      演出.淡入過期時間 = Date.now() + 淡入字.總時間 * 1000;
       return $('#對話歷史').append(text + '<br/><br/>');
     },
+    早泄: function() {
+      $('#話語 *').css('animation', 'None');
+      return $('#話語 *').css('opacity', '1');
+    },
     當前曲名: 'None',
-    換bgm: function(bgm) {
+    換背景音樂: function(背景音樂) {
       var au, 曲名, 音量;
-      曲名 = bgm[0];
-      音量 = bgm[1];
+      曲名 = 背景音樂[0];
+      音量 = 背景音樂[1];
       au = $('#bgm');
       if (this.當前曲名 === 曲名) {
         return;
@@ -231,18 +314,44 @@
         }, 2000);
       }
     },
-    換圖: function(dst, img_b, time) {
-      var frame, img_a;
-      frame = 'A' + Math.ceil(Math.random() * 999999).toString();
-      dst = '#' + dst;
-      img_a = $(dst).attr('my_img');
-      if (time > 0) {
-        $(dst).css('animation', '');
-        $('#style').append('@keyframes ' + frame + '{ 0%{background-image:' + img_a + ';}100%{background-image:' + img_b + ';} }\n');
-        $(dst).css('animation', frame + ' ' + time.toString() + 's');
+    換圖: function(目標, 新圖, 漸變時間, 漸變方法 = '_淡出') {
+      var 原背景, 舊淡出;
+      目標 = $('#' + 目標);
+      原背景 = 目標.css('background-image');
+      目標.css('background-image', 新圖);
+      目標.html('<div class="舊淡出"></div>');
+      舊淡出 = 目標.children();
+      if (漸變時間 > 0) {
+        舊淡出.css('background-image', 原背景);
+        舊淡出.css('animation', `${漸變方法} ${漸變時間}s`);
+        舊淡出.css('animation-fill-mode', 'forwards');
+        return 舊淡出.css('animation-play-state', 'running');
       }
-      $(dst).css('background-image', img_b);
-      return $(dst).attr('my_img', img_b);
+    },
+    文字淡入: function(s, 動畫名 = '_淡入') {
+      var group, i, 內容, 動畫時間, 時間, 時間間隔;
+      時間間隔 = 設置.內容.文字速度 / 800;
+      group = s.replace(/((<.*?>)|(.))/g, "$2$3\0").split('\0');
+      動畫時間 = 時間間隔 * 8;
+      時間 = 0;
+      內容 = ((function() {
+        var k, len, results;
+        results = [];
+        for (k = 0, len = group.length; k < len; k++) {
+          i = group[k];
+          if (i[0] === '<') {
+            results.push(i);
+          } else {
+            時間 += 時間間隔;
+            results.push(`<span style='animation:${動畫名} ${動畫時間}s;animation-fill-mode:forwards;animation-delay:${時間}s;opacity:0;'>${i}</span>`);
+          }
+        }
+        return results;
+      })()).join('');
+      return {
+        內容,
+        總時間: 時間 + 動畫時間
+      };
     }
   };
 

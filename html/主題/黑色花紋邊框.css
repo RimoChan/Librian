@@ -1,6 +1,5 @@
 /* 感謝lilithbloody！素材的pixiv_id是53882953。 */
 #名字框{
-    height:32%;
 }
 #話語框{
     position:absolute;
@@ -12,14 +11,14 @@
 #名字框背景{
     box-sizing: border-box;
     border:36px solid;
-    border-image: url(../static/t0.png) 86 86 round;
+    border-image: url(../樣式/static/t0.png) 86 86 round;
     background:rgba(128,128,128,0.8);
     background-clip:padding-box;
 }
 #話語框背景{
     box-sizing: border-box;
     border:36px solid;
-    border-image: url(../static/t0.png) 86 86 round;
+    border-image: url(../樣式/static/t0.png) 86 86 round;
     background:rgba(128,128,128,0.8);
     background-clip:padding-box;
 }
