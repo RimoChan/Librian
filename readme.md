@@ -1,6 +1,6 @@
-# ![](資源/Librian小.png)Librian: 簡明強大的 Galgame | Visual Novel 引擎
+# ![](./Librian本體/資源/Librian小.png)Librian: 簡明強大的 Galgame | Visual Novel 引擎
 
-![Librian2.jpg](./資源/Librian2.jpg)
+![Librian2.jpg](./文檔/Librian2.jpg)
 
 [![](https://img.shields.io/github/stars/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/stargazers)
 [![](https://img.shields.io/badge/platform-windows-blueviolet.svg)](https://en.wikipedia.org/wiki/Microsoft_Windows)
@@ -26,7 +26,7 @@ Librian由python和HTML編寫而成，基於CEFPython和wxPython前端。
 
 ## 演示視頻
 
-[![視頻佔位](./資源/視頻佔位.png)](https://www.zhihu.com/video/1075418256290131968)  
+[![視頻佔位](./文檔/視頻佔位.png)](https://www.zhihu.com/video/1075418256290131968)  
 
 ## 劇本格式
 
