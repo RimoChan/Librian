@@ -6,7 +6,16 @@ $ ->
             主解析度: ''
             工程路徑: ''
             圖標路徑: ''
-
+        watch:
+            $data:
+                handler: (val, oldVal) ->
+                    山彥.vue更新(val)
+                deep: true
+    山彥.vue連接初始化((x)-> 
+        for a,b of x
+            v[a]=b
+    )
+    
     $("#開啓工程").click ->
         山彥.開啓工程()
     $("#建立工程").click ->

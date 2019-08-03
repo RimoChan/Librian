@@ -8,7 +8,6 @@ html:
         link rel="stylesheet" href='./樣式/美麗滑條.css';
         link rel="stylesheet" href='./黑科技/font-awesome-4.7.0/css/font-awesome.css';
         
-        script src='./黑科技/qwebchannel.js':
         script src='./黑科技/vue.js':
         script src='./黑科技/jquery-3.1.1.min.js':
         script src='./黑科技/jquery-ui.min.js':
@@ -40,7 +39,7 @@ html:
                     span.小塊:
                         文字速度
                     須臾
-                    input#文字速度 type="range" min="0" max="100" onchange="設置.同調(this)":
+                    input type="range" min="0" max="100" v-model="用戶設置.文字速度": 
                     永恆
                 div.option:
                     span.小塊:
@@ -48,26 +47,26 @@ html:
                     哪有自動模式……
                 div.option:
                     span.小塊:
-                        對話框背景透明度 
+                        對話框背景透明度
                     通透
-                    input#對話框背景透明度 type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)":
+                    input type="range" min="0" max="1" step='0.01' v-model="用戶設置.對話框背景透明度":
                     固實
                 div.option:
                     span.小塊:
                         自動收起控制面板
-                    input#自動收起控制面板 type="checkbox" onchange="設置.同調(this)":
+                    input type="checkbox" v-model="用戶設置.自動收起控制面板":
                 div.option:
                     span.小塊:
                         總體音量:
                     小聲
-                    input#總體音量 type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)":
+                    input type="range" min="0" max="1" step='0.01' v-model="用戶設置.總體音量":
                     大聲(沒用)
 
                 a.hicon href='javascript:控制.退出設置();':
                     <i class="fa fa-times"></i>
                         
             
-            div#工具欄:
+            div#工具欄 v-bind:class="{自動收起: 用戶設置.自動收起控制面板}":
                 a.hicon href='javascript:山彥.存檔();':
                     <i class="fa fa-floppy-o"></i>
                     <i class="fa fa-angle-double-down" style='text-shadow:0 0 4px #000;'></i>
@@ -84,7 +83,7 @@ html:
                     <i class="fa fa-forward"></i>
                 a.hicon href='javascript:控制.切換快進();':
                     <i class="fa fa-fast-forward"></i>
-                a.hicon href='javascript:控制.進入設置();'":
+                a.hicon href='javascript:控制.進入設置();':
                     <i class="fa fa-gear"></i>
                 a.hicon href='javascript:山彥.回標題();':
                     <i class="fa fa-mail-reply"></i>
@@ -101,11 +100,11 @@ html:
                 div#對話框:
                     div#名字框:
                         div#名字:
-                        div#名字框背景:
+                        div#名字框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度}":
                     div#話語框:
                         div#話語:
-                        div#話語框背景:
-                    div#對話框背景:
+                        div#話語框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度}":
+                    div#對話框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度}":
                     
             div#提示:
 

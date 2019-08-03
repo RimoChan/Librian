@@ -10,6 +10,7 @@ from Librian虛擬機 import 虛擬機環境
 from Librian虛擬機.util import 讀txt
 from Librian虛擬機.util import 文件
 
+from 帶有vue的山彥 import 帶有vue的山彥
 from 環境 import 配置
 
 
@@ -18,9 +19,9 @@ def 綁定(app, 標題url):
     app.frame.set_browser_object("山彥", 極山彥(app.frame, app.frame.browser, 讀者, 標題url))
 
 
-class 山彥:
+class 山彥(帶有vue的山彥):
     def __init__(self, 窗口, 瀏覽器, 讀者, 標題url):
-        self.窗口 = 窗口
+        super().__init__(窗口)
         self.瀏覽器 = 瀏覽器
         self.讀者 = 讀者
         self.標題url = 標題url
@@ -70,10 +71,12 @@ class 山彥:
     def 切換全屏(self):
         self.窗口.toggleFullScreen()
 
-    def 設置(self, 參數):
-        with open(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json', 'w', encoding='utf8') as f:
-            f.write(參數)
-
+    def vue更新(self, 內容):
+        t = self.vue.用戶設置 if '用戶設置' in self.vue._內容 else None
+        if t!=內容['用戶設置']:
+            with open(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json', 'w', encoding='utf8') as f:
+                f.write(json.dumps(內容['用戶設置'], ensure_ascii=False))
+        super().vue更新(內容)
 
 class 演出山彥(山彥):
     def 回標題(self):
@@ -94,35 +97,23 @@ class 演出山彥(山彥):
         self.更新()
 
     def 初始化(self):
-        
-        圖片文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.圖片文件夾).replace('\\', '/')
-        音樂文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.音樂文件夾).replace('\\', '/')
-        視頻文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.視頻文件夾).replace('\\', '/')
-        自定css = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.自定css).replace('\\', '/')
-        主題css = os.path.join(f'主題', 虛擬機環境.主題css + '.css').replace('\\', '/')
+        self.vue.圖片文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.圖片文件夾).replace('\\', '/')
+        self.vue.音樂文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.音樂文件夾).replace('\\', '/')
+        self.vue.視頻文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.視頻文件夾).replace('\\', '/')
+        self.vue.自定css = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.自定css).replace('\\', '/')
+        self.vue.主題css = os.path.join(f'主題', 虛擬機環境.主題css + '.css').replace('\\', '/')
+        self.vue.解析度 = 虛擬機環境.主解析度
+        self.vue.邊界 = 配置['顯示繪圖邊界']
 
-        演出配置 = {
-            '解析度': 虛擬機環境.主解析度,
-            '邊界': 配置['顯示繪圖邊界'],
-            '主題css': 主題css,
-            '自定css': 自定css,
-            '圖片文件夾': 圖片文件夾,
-            '音樂文件夾': 音樂文件夾,
-            '視頻文件夾': 視頻文件夾,
-        }
-
-        s = f'''
-            演出.配置({json.dumps(演出配置)});
-            演出.準備工作();
-        '''
-
-        try:
-            with open(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json', encoding='utf8') as f:
-                s += f"設置.應用用戶設置('{f.read()}');"
-        except:
-            logging.warning('用戶設置加載失敗')
-
-        self.js(s)
+        if os.path.isfile(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json'):
+            try:
+                with open(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json', encoding='utf8') as f:
+                    用戶設置 = json.loads(f.read())
+                self.vue.用戶設置 = 用戶設置
+            except Exception as e:
+                logging.warning('用戶設置失效。')
+            
+        self.js('演出.準備工作()')
 
     def 選(self, 參數):
         t = self.讀者.狀態.選項[參數][1]

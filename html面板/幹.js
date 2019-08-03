@@ -8,7 +8,24 @@
         主解析度: '',
         工程路徑: '',
         圖標路徑: ''
+      },
+      watch: {
+        $data: {
+          handler: function(val, oldVal) {
+            return 山彥.vue更新(val);
+          },
+          deep: true
+        }
       }
+    });
+    山彥.vue連接初始化(function(x) {
+      var a, b, results;
+      results = [];
+      for (a in x) {
+        b = x[a];
+        results.push(v[a] = b);
+      }
+      return results;
     });
     $("#開啓工程").click(function() {
       return 山彥.開啓工程();

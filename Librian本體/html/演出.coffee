@@ -1,22 +1,22 @@
-window.演出 =
+window.演出 = 
     準備工作: ->
         $ '<link>'
             .attr
                 rel: 'stylesheet'
                 type: 'text/css'
-                href: this.自定css
+                href: v.自定css
             .appendTo('head')
         $ '<link>'
             .attr
                 rel: 'stylesheet'
                 type: 'text/css'
-                href: this.主題css
+                href: v.主題css
             .appendTo("head")
 
-        $('#總畫面').css 'width', this.解析度[0]
-        $('#總畫面').css 'height', this.解析度[1]
+        $('#總畫面').css 'width', v.解析度[0]
+        $('#總畫面').css 'height', v.解析度[1]
 
-        if this.邊界
+        if v.邊界
             $ 'div'
                 .css 'border','1px solid #22f'
 
@@ -24,8 +24,8 @@ window.演出 =
         this.更新()
 
     縮放調整: ->
-        a = document.body.clientWidth / 演出.解析度[0]
-        b = document.body.clientHeight / 演出.解析度[1]
+        a = document.body.clientWidth / v.解析度[0]
+        b = document.body.clientHeight / v.解析度[1]
         t = Math.min(a, b)
         $('#總畫面 , #墊底').css({
             "transform-origin": "0% 0%"
@@ -33,22 +33,17 @@ window.演出 =
         } )
         setTimeout(演出.縮放調整, 200)
 
-
-    配置: (d) ->
-        for i, j of d
-            this[i] = j
-
     步進更新: ->
         山彥.步進更新()
     更新: ->
         山彥.更新()
 
     信息預處理: (data) ->
-        data.背景[0] = "url(#{this.圖片文件夾}/#{data.背景[0]})"
-        data.cg[0] = "url(#{this.圖片文件夾}/#{data.cg[0]})"
+        data.背景[0] = "url(#{v.圖片文件夾}/#{data.背景[0]})"
+        data.cg[0] = "url(#{v.圖片文件夾}/#{data.cg[0]})"
 
         if data.背景音樂[0]!='None'
-            data.背景音樂[0] = this.音樂文件夾 + '/' + data.背景音樂[0]
+            data.背景音樂[0] = v.音樂文件夾 + '/' + data.背景音樂[0]
 
     改變演出狀態: (data) ->
         this.信息預處理 data
@@ -132,25 +127,25 @@ window.演出 =
             return
         視頻文件 = 視頻[0]
         可以跳過 = 視頻[1]
-        v = $('video')
-        v.css('display', 'block')
-        v.attr('src', this.視頻文件夾+'/' + 視頻文件)
-        v.click if 可以跳過
+        video = $('video')
+        video.css('display', 'block')
+        video.attr('src', v.視頻文件夾+'/' + 視頻文件)
+        video.click if 可以跳過
             ->
-                v.css('animation', '_黑出 0.5s')
-                v.css('animation-fill-mode', 'forwards')
+                video.css('animation', '_黑出 0.5s')
+                video.css('animation-fill-mode', 'forwards')
                 setTimeout ->
-                    v.css('animation', '')
-                    v.attr('src', '')
-                    v[0].style.display = 'none'
+                    video.css('animation', '')
+                    video.attr('src', '')
+                    video[0].style.display = 'none'
                 , 600
         else
             -> null
 
-        v[0].addEventListener 'ended', ->
-            v[0].style.display = 'none'
+        video[0].addEventListener 'ended', ->
+            video[0].style.display = 'none'
         , false
-        v[0].play()
+        video[0].play()
 
     load特效: ->
         控制.左鍵屏蔽 = true
@@ -271,7 +266,7 @@ window.演出 =
             舊淡出.css('animation-play-state', 'running')
 
     文字淡入: (s, 動畫名 = '_淡入') ->
-        時間間隔 = 設置.內容.文字速度 / 800
+        時間間隔 = v.用戶設置.文字速度 / 800
         group = s.replace(/((<.*?>)|(.))/g, "$2$3\0").split('\0')
         動畫時間 = 時間間隔 * 8
         時間 = 0

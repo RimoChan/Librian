@@ -5,16 +5,16 @@
       $('<link>').attr({
         rel: 'stylesheet',
         type: 'text/css',
-        href: this.自定css
+        href: v.自定css
       }).appendTo('head');
       $('<link>').attr({
         rel: 'stylesheet',
         type: 'text/css',
-        href: this.主題css
+        href: v.主題css
       }).appendTo("head");
-      $('#總畫面').css('width', this.解析度[0]);
-      $('#總畫面').css('height', this.解析度[1]);
-      if (this.邊界) {
+      $('#總畫面').css('width', v.解析度[0]);
+      $('#總畫面').css('height', v.解析度[1]);
+      if (v.邊界) {
         $('div').css('border', '1px solid #22f');
       }
       this.縮放調整();
@@ -22,23 +22,14 @@
     },
     縮放調整: function() {
       var a, b, t;
-      a = document.body.clientWidth / 演出.解析度[0];
-      b = document.body.clientHeight / 演出.解析度[1];
+      a = document.body.clientWidth / v.解析度[0];
+      b = document.body.clientHeight / v.解析度[1];
       t = Math.min(a, b);
       $('#總畫面 , #墊底').css({
         "transform-origin": "0% 0%",
         "transform": "scale(" + t + ")"
       });
       return setTimeout(演出.縮放調整, 200);
-    },
-    配置: function(d) {
-      var i, j, results;
-      results = [];
-      for (i in d) {
-        j = d[i];
-        results.push(this[i] = j);
-      }
-      return results;
     },
     步進更新: function() {
       return 山彥.步進更新();
@@ -47,10 +38,10 @@
       return 山彥.更新();
     },
     信息預處理: function(data) {
-      data.背景[0] = `url(${this.圖片文件夾}/${data.背景[0]})`;
-      data.cg[0] = `url(${this.圖片文件夾}/${data.cg[0]})`;
+      data.背景[0] = `url(${v.圖片文件夾}/${data.背景[0]})`;
+      data.cg[0] = `url(${v.圖片文件夾}/${data.cg[0]})`;
       if (data.背景音樂[0] !== 'None') {
-        return data.背景音樂[0] = this.音樂文件夾 + '/' + data.背景音樂[0];
+        return data.背景音樂[0] = v.音樂文件夾 + '/' + data.背景音樂[0];
       }
     },
     改變演出狀態: function(data) {
@@ -84,26 +75,26 @@
       return this.換對話(話語, 名字);
     },
     特效處理: function(特效表) {
-      var i, k, l, len, len1, results, 可特效块;
+      var i, j, k, len, len1, results, 可特效块;
       可特效块 = ['總畫面', 'adv畫面', '覆蓋', '選項', 'cg', 'bg', '立繪', '對話歷史', '對話框', '名字框', '名字', '名字框背景', '話語框', '話語', '話語框背景', '對話框背景'];
-      for (k = 0, len = 可特效块.length; k < len; k++) {
-        i = 可特效块[k];
+      for (j = 0, len = 可特效块.length; j < len; j++) {
+        i = 可特效块[j];
         if ($('#' + i).attr('class')) {
           $('#' + i).attr('class', '');
         }
       }
       results = [];
-      for (l = 0, len1 = 特效表.length; l < len1; l++) {
-        i = 特效表[l];
+      for (k = 0, len1 = 特效表.length; k < len1; k++) {
+        i = 特效表[k];
         results.push($('#' + i).addClass(特效表[i]));
       }
       return results;
     },
     選擇之刻: false,
     處理選項: function(選項) {
-      var i, k, len, p, tot;
+      var i, j, len, p, tot;
       tot = '';
-      for (p = k = 0, len = 選項.length; k < len; p = ++k) {
+      for (p = j = 0, len = 選項.length; j < len; p = ++j) {
         i = 選項[p];
         tot += `<button onclick='演出.點選項(${p});'>${i}</botton>\n`;
       }
@@ -143,30 +134,30 @@
       }, 5600);
     },
     放視頻: function(視頻) {
-      var v, 可以跳過, 視頻文件;
+      var video, 可以跳過, 視頻文件;
       if (!視頻) {
         return;
       }
       視頻文件 = 視頻[0];
       可以跳過 = 視頻[1];
-      v = $('video');
-      v.css('display', 'block');
-      v.attr('src', this.視頻文件夾 + '/' + 視頻文件);
-      v.click(可以跳過 ? function() {
-        v.css('animation', '_黑出 0.5s');
-        v.css('animation-fill-mode', 'forwards');
+      video = $('video');
+      video.css('display', 'block');
+      video.attr('src', v.視頻文件夾 + '/' + 視頻文件);
+      video.click(可以跳過 ? function() {
+        video.css('animation', '_黑出 0.5s');
+        video.css('animation-fill-mode', 'forwards');
         return setTimeout(function() {
-          v.css('animation', '');
-          v.attr('src', '');
-          return v[0].style.display = 'none';
+          video.css('animation', '');
+          video.attr('src', '');
+          return video[0].style.display = 'none';
         }, 600);
       } : function() {
         return null;
       });
-      v[0].addEventListener('ended', function() {
-        return v[0].style.display = 'none';
+      video[0].addEventListener('ended', function() {
+        return video[0].style.display = 'none';
       }, false);
-      return v[0].play();
+      return video[0].play();
     },
     load特效: function() {
       控制.左鍵屏蔽 = true;
@@ -195,47 +186,47 @@
     },
     當前人物: [],
     換立繪: function(立繪組) {
-      var k, l, len, len1, len2, len3, m, n, ref, t, 名字, 名字組, 層, 立繪, 組;
+      var j, k, l, len, len1, len2, len3, m, ref, t, 名字, 名字組, 層, 立繪, 組;
       名字組 = (function() {
-        var k, len, results;
+        var j, len, results;
         results = [];
-        for (k = 0, len = 立繪組.length; k < len; k++) {
-          立繪 = 立繪組[k];
+        for (j = 0, len = 立繪組.length; j < len; j++) {
+          立繪 = 立繪組[j];
           results.push(立繪.名字);
         }
         return results;
       })();
       ref = this.當前人物;
-      for (k = 0, len = ref.length; k < len; k++) {
-        名字 = ref[k];
+      for (j = 0, len = ref.length; j < len; j++) {
+        名字 = ref[j];
         if (名字組.indexOf(名字) === -1) {
           $(`#立繪--${名字}`).remove();
           console.log(`去除 ${名字}`);
         }
       }
-      for (l = 0, len1 = 名字組.length; l < len1; l++) {
-        名字 = 名字組[l];
+      for (k = 0, len1 = 名字組.length; k < len1; k++) {
+        名字 = 名字組[k];
         if (this.當前人物.indexOf(名字) === -1) {
           $('#立繪').append($(`<div id='立繪--${名字}' class='淡入'></div>`));
           console.log(`加入 ${名字}`);
         }
       }
-      for (m = 0, len2 = 立繪組.length; m < len2; m++) {
-        立繪 = 立繪組[m];
+      for (l = 0, len2 = 立繪組.length; l < len2; l++) {
+        立繪 = 立繪組[l];
         組 = (function() {
-          var len3, n, ref1, results;
+          var len3, m, ref1, results;
           ref1 = 立繪.圖層;
           results = [];
-          for (n = 0, len3 = ref1.length; n < len3; n++) {
-            層 = ref1[n];
+          for (m = 0, len3 = ref1.length; m < len3; m++) {
+            層 = ref1[m];
             results.push([層.文件, 層.子位置[0], 層.子位置[1]]);
           }
           return results;
         })();
         圖像融合.融合到div(組, 0.5, `立繪--${立繪.名字}`);
       }
-      for (n = 0, len3 = 立繪組.length; n < len3; n++) {
-        立繪 = 立繪組[n];
+      for (m = 0, len3 = 立繪組.length; m < len3; m++) {
+        立繪 = 立繪組[m];
         t = $(`#立繪--${立繪.名字}`);
         t.css('left', `${立繪.位置[0]}px`);
         t.css('top', `${立繪.位置[1]}px`);
@@ -330,15 +321,16 @@
     },
     文字淡入: function(s, 動畫名 = '_淡入') {
       var group, i, 內容, 動畫時間, 時間, 時間間隔;
-      時間間隔 = 設置.內容.文字速度 / 800;
+      時間間隔 = v.用戶設置.文字速度 / 800;
+      console.log(時間間隔);
       group = s.replace(/((<.*?>)|(.))/g, "$2$3\0").split('\0');
       動畫時間 = 時間間隔 * 8;
       時間 = 0;
       內容 = ((function() {
-        var k, len, results;
+        var j, len, results;
         results = [];
-        for (k = 0, len = group.length; k < len; k++) {
-          i = group[k];
+        for (j = 0, len = group.length; j < len; j++) {
+          i = group[j];
           if (i[0] === '<') {
             results.push(i);
           } else {
