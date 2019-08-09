@@ -6,6 +6,7 @@
         <link rel="stylesheet" href='./樣式/特效.css'/>
         <link rel="stylesheet" href='./樣式/按鈕.css'/>
         <link rel="stylesheet" href='./樣式/美麗滑條.css'/>
+        <link rel="stylesheet" href='./樣式/input樣式.css'/>
         <link rel="stylesheet" href='./黑科技/font-awesome-4.7.0/css/font-awesome.css'/>
         <script src='./黑科技/vue.js'></script>
         <script src='./黑科技/jquery-3.1.1.min.js'></script>
@@ -26,48 +27,64 @@
             <audio id="嘀" autoplay='' loop='' src=''></audio>
             <div id="配置面板">
                 <div class="option">
-                    <span class="小塊">
+                    <span class="頭">
                         全屏幕
                     </span>
-                    <a class="hicon" href='javascript:山彥.切換全屏();'>
-                        <i class="fa fa-arrows-alt"></i>
-                    </a>
+                    <span>
+                        <a class="hicon" href='javascript:山彥.切換全屏();'>
+                            <i class="fa fa-arrows-alt"></i>
+                        </a>
+                    </span>
                 </div>
                 <div class="option">
-                    <span class="小塊">
+                    <span class="頭">
                         文字速度
                     </span>
-                    須臾
+                    <small>
+                        須臾
+                    </small>
                     <input type="range" min="0" max="100" v-model="用戶設置.文字速度"></input>
-                    永恆
+                    <small>
+                        永恆
+                    </small>
                 </div>
                 <div class="option">
-                    <span class="小塊">
+                    <span class="頭">
                         自動模式速度
                     </span>
-                    哪有自動模式……
+                    <span>
+                        哪有自動模式……
+                    </span>
                 </div>
                 <div class="option">
-                    <span class="小塊">
+                    <span class="頭">
                         對話框背景透明度
                     </span>
-                    通透
+                    <small>
+                        通透
+                    </small>
                     <input type="range" min="0" max="1" step='0.01' v-model="用戶設置.對話框背景透明度"></input>
-                    固實
+                    <small>
+                        固實
+                    </small>
                 </div>
                 <div class="option">
-                    <span class="小塊">
+                    <span class="頭">
                         自動收起控制面板
                     </span>
                     <input type="checkbox" v-model="用戶設置.自動收起控制面板"></input>
                 </div>
                 <div class="option">
-                    <span class="小塊">
-                        <總體音量></總體音量>
+                    <span class="頭">
+                        總體音量
                     </span>
-                    小聲
+                    <small>
+                        小聲
+                    </small>
                     <input type="range" min="0" max="1" step='0.01' v-model="用戶設置.總體音量"></input>
-                    大聲(沒用)
+                    <small>
+                        大聲(沒用)
+                    </small>
                 </div>
                 <a class="hicon" href='javascript:控制.退出設置();'>
                     <i class="fa fa-times"></i>
