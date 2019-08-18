@@ -42,7 +42,8 @@ class 山彥(帶有vue的山彥):
     def 建立工程(self):
         with wx.TextEntryDialog(self.窗口, '工程名: ', '小面板') as dlg:
             if dlg.ShowModal() == wx.ID_OK:
-                新工程路徑 = os.path.join('.', 'project', dlg.GetValue())
+                新工程路徑 = os.path.join('.','Librian本體', 'project', dlg.GetValue())
+                新工程路徑 = os.path.abspath(新工程路徑)
                 if os.path.isdir(新工程路徑):
                     alert('已經有這個工程了。')
                     return
