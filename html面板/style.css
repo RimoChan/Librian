@@ -1,91 +1,83 @@
-@font-face{
+@font-face {
     font-family: 思源宋體SemiBold;
-    /* src: url('../Librian本體/html/樣式/static/SourceHanSerifSC-SemiBold.otf'); */
     src: url('../Librian本體/html/樣式/static/NotoSerifSC-SemiBold.otf');
 }
-body{
-    font-family: 思源宋體SemiBold; 
-    overflow:hidden;
+
+body {
+    font-family: 思源宋體SemiBold;
+    overflow: hidden;
     font-size: 2.5vw;
     line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    background: url('../Librian本體/html/默認標題畫面/紙背景花紋.jpg');
+    background-size: cover;
 }
-h2{
+
+.標題 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 12vh;
+    
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 2vh rgba(0, 0, 0, 0.4);
+}
+
+.內容 {
+    margin: 4vh;
+    height: 80vh;
+    /* background: rgba(0, 0, 0, 0.3); */
+
+}
+
+.按鈕 {
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-user-select: none;
+    
+    color: inherit;
+    padding: 0.5vw;
+    margin: 0.5vw;
+    
+    background: url('../Librian本體/html/默認標題畫面/紙背景花紋模糊.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    border-radius: 0.5vw;
+    display: inline-block;
+    box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
+    transition: box-shadow 0.2s, filter 0.2s;
+}
+
+.按鈕:hover {
+    box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0.6), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
+}
+
+.按鈕:active {
+    box-shadow:  0px 0px 0.4vw rgba(0, 0, 0, 0), 0px 0px 0.4vw rgba(0, 0, 0, 0.6) inset;
+    filter: blur(0.1vw);
+}
+
+h2 {
     font-size: 180%;
 }
-h3{
-    font-size: 140%;
+
+.工程信息{
+    display: flex;
+    align-items: center;
 }
-div{
-    /*border: 1px dashed #777;*/
-}
-*{
-    position:relative;
-}
-.中{
-    /*border: 1px dashed #777;*/
-    padding:0;
-    margin:0;
-    display: inline-block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-}
-.滿高{
-    height:100%;
-}
-.反饋{
-    z-index:0;
-    filter: hue-rotate(0deg);
-}
-.反饋:hover{
-    filter: hue-rotate(180deg);
-}
-.反饋:active{
-    border: 2px solid rgba(0,0,0,0.3);
-    z-index:10;
-}
-h2{
-    display:block;
-}
-#標題{
-    background: #cfa972; 
-    height:11%;
-}
-.主塊{
-    height:89%;
+.工程信息>div{
+    flex-direction: column;
 }
 
-#工程信息{
-    background: #aaf; 
-}
-.圖標{
-    width:64px;
-    height:64px;
+.圖標 {
+    width: 10vw;
+    height: 10vw;
+    margin: 2vw;
 }
 
-#開啓工程{
-    background: #ffa; 
-}
-#建立工程{
-    background: #ccf;
-}
-
-#運行{
-    background: #bfb; 
-}
-#運行同時編寫{
-    background: #9f9; 
-}
-#打開文件夾{
-    background: #ee6; 
-}
-#生成exe{
-    background: #fbb; 
-}
-#生成html{
-    background: #fca; 
-}
-#返回剛纔的界面{
-    background: #88b; 
+.右下角 {
+    position: fixed;
+    right: 1vw;
+    bottom: 1vw;
 }

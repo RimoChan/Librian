@@ -2,7 +2,7 @@
 (function() {
   $(function() {
     window.v = new Vue({
-      el: '#工程信息',
+      el: '#工程編輯',
       data: {
         標題: '',
         主解析度: '',
@@ -48,9 +48,18 @@
     $("#生成html").click(function() {
       return 山彥.生成html();
     });
-    return window.進入工程 = function() {
-      return $("#入口").slideUp();
+    $("#返回").click(function() {
+      return window.返回();
+    });
+    window.進入工程 = function() {
+      $('.頁').hide();
+      return $('#工程編輯').show();
     };
+    window.返回 = function() {
+      $('.頁').hide();
+      return $('#入口').show();
+    };
+    return window.返回();
   });
 
 }).call(this);

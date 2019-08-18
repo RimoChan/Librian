@@ -1,6 +1,6 @@
 $ ->
     window.v = new Vue
-        el: '#工程信息'
+        el: '#工程編輯'
         data:
             標題: ''
             主解析度: ''
@@ -31,7 +31,14 @@ $ ->
         山彥.生成exe()
     $("#生成html").click ->
         山彥.生成html()
-
-
+    $("#返回").click ->
+        window.返回()
+        
     window.進入工程 = ->
-        $("#入口").slideUp()
+        $('.頁').hide()
+        $('#工程編輯').show()
+    window.返回 = ->
+        $('.頁').hide()
+        $('#入口').show()
+    
+    window.返回()

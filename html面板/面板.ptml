@@ -1,7 +1,6 @@
 html:
     head:
         meta charset='utf-8'; 
-        link rel='stylesheet' href='./黑科技/bootstrap.min.css';
         link rel='stylesheet' href='./style.css';
         script src='./黑科技/jquery-3.1.1.min.js':
         script src='./黑科技/jquery-ui.min.js':
@@ -9,48 +8,41 @@ html:
         script src='./幹.js':
 
     body oncontextmenu='window.event.returnValue=false;':
-      div.col-xs-12:
-        div#標題.row:
-            div.col-xs-12.滿高:
-                h2.中:
+        div.頁#入口:
+            div.標題:
+                h2:
                     Librian面板
-        div#入口.row.主塊:
-            div#開啓工程.col-xs-6.滿高.反饋:
-                h2.中:
-                    開啓工程
-            div#建立工程.col-xs-6.滿高.反饋:
-                h2.中:
-                    建立工程
-        
-        div.row.主塊:
-          div.col-xs-12:
-            div.row#工程信息 style="height:67%": 
-              div.col-xs-12:
-                h3:
+            div.內容: 
+                div:
+                    a.按鈕#開啓工程:
+                        開啓工程
+                    a.按鈕#建立工程: 
+                        建立工程
+                div:
+                    span:
+                        沒有之前的工程記錄。  
+        div.頁#工程編輯:
+            div.標題:
+                h2:
+                    {{標題}}
+            div.內容: 
+                div.工程信息:
                     img.圖標 v-bind:src='圖標路徑';
-                    「{{'{{標題}}'}}」
-                p:
-                    路徑: {{'{{工程路徑}}'}}
-                p:
-                    主解析度: {{'{{主解析度}}'}}
-            div.row style="height:33%;":
-                div#運行.col-xs-2.滿高.反饋:
-                    span.中:
-                        運行
-                div#運行同時編寫.col-xs-2.滿高.反饋:
-                    span.中:
-                        運行同時編寫
-                div#打開文件夾.col-xs-2.滿高.反饋:
-                    span.中:
-                        打開文件夾
-                div#生成exe.col-xs-2.滿高.反饋:
-                    span.中:
-                        生成exe
-                div#生成html.col-xs-2.滿高.反饋:
-                    span.中:
-                        生成html
-                div#返回剛纔的界面.col-xs-2.滿高.反饋 onclick='$("#入口").slideDown()':
-                    span.中:
-                        返回剛纔的界面
-
-                    
+                    div:
+                        p:
+                            路徑: {{工程路徑}}
+                        p:
+                            主解析度: {{主解析度}}
+                a.按鈕#運行:
+                    運行
+                a.按鈕#運行同時編寫:
+                    運行同時編寫
+                a.按鈕#打開文件夾:
+                    打開文件夾
+                a.按鈕#生成exe:
+                    生成exe
+                a.按鈕#生成html:
+                    生成html
+            div.右下角: 
+                a.按鈕#返回:
+                    返回
