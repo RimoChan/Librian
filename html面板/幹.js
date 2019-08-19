@@ -2,12 +2,13 @@
 (function() {
   $(function() {
     window.v = new Vue({
-      el: '#工程編輯',
+      el: '#all',
       data: {
         標題: '',
         主解析度: '',
         工程路徑: '',
-        圖標路徑: ''
+        圖標路徑: '',
+        存檔資料: []
       },
       watch: {
         $data: {

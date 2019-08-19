@@ -8,6 +8,7 @@ html:
         script src='./幹.js':
 
     body oncontextmenu='window.event.returnValue=false;':
+      div#all:
         div.頁#入口:
             div.標題:
                 h2:
@@ -19,8 +20,16 @@ html:
                     a.按鈕#建立工程: 
                         建立工程
                 div:
-                    span:
+                    p:
+                        歷史記錄
+                    span v-if="存檔資料.length==0":
                         沒有之前的工程記錄。  
+                    div#工程記錄:
+                        a.按鈕 v-for="工程 in 存檔資料":
+                            img.圖標 v-bind:src='工程.圖標路徑';
+                            small:
+                                {{工程.標題}}
+                                
         div.頁#工程編輯:
             div.標題:
                 h2:

@@ -8,6 +8,7 @@
         <script src='./幹.js'></script>
     </head>
     <body oncontextmenu='window.event.returnValue=false;'>
+      <div id="all">
         <div class="頁" id="入口">
             <div class="標題">
                 <h2>
@@ -24,9 +25,20 @@
                     </a>
                 </div>
                 <div>
-                    <span>
+                    <p>
+                        歷史記錄
+                    </p>
+                    <span v-if="存檔資料.length==0">
                         沒有之前的工程記錄。
                     </span>
+                    <div id="工程記錄">
+                        <a class="按鈕" v-for="工程 in 存檔資料">
+                            <img class="圖標" v-bind:src='工程.圖標路徑'/>
+                            <small>
+                                {{工程.標題}}
+                            </small>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,5 +82,6 @@
                 </a>
             </div>
         </div>
+      </div>
     </body>
 </html>

@@ -19,7 +19,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 12vh;
-    
     background: rgba(0, 0, 0, 0.3);
     box-shadow: 0px 0px 2vh rgba(0, 0, 0, 0.4);
 }
@@ -28,18 +27,25 @@ body {
     margin: 4vh;
     height: 80vh;
     /* background: rgba(0, 0, 0, 0.3); */
+}
 
+#工程記錄 {
+    display: flex;
+}
+
+#工程記錄>.按鈕 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .按鈕 {
     cursor: pointer;
     text-decoration: none;
     -webkit-user-select: none;
-    
     color: inherit;
     padding: 0.5vw;
     margin: 0.5vw;
-    
     background: url('../Librian本體/html/默認標題畫面/紙背景花紋模糊.jpg');
     background-attachment: fixed;
     background-size: cover;
@@ -54,7 +60,7 @@ body {
 }
 
 .按鈕:active {
-    box-shadow:  0px 0px 0.4vw rgba(0, 0, 0, 0), 0px 0px 0.4vw rgba(0, 0, 0, 0.6) inset;
+    box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0), 0px 0px 0.4vw rgba(0, 0, 0, 0.6) inset;
     filter: blur(0.1vw);
 }
 
@@ -62,11 +68,12 @@ h2 {
     font-size: 180%;
 }
 
-.工程信息{
+.工程信息 {
     display: flex;
     align-items: center;
 }
-.工程信息>div{
+
+.工程信息>div {
     flex-direction: column;
 }
 

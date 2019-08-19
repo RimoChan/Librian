@@ -2,7 +2,10 @@ import logging
 import os
 import subprocess
 import shutil
+from pathlib import Path
+
 import wx
+import yaml
 
 from Librian本體 import wxcef
 from Librian本體.帶有vue的山彥 import 帶有vue的山彥
@@ -17,34 +20,69 @@ def alert(s):
     js(f'alert("{s}")')
 
 
+if os.path.isfile('./存檔資料/存檔資料.yaml'):
+    with open('./存檔資料/存檔資料.yaml', encoding='utf8') as f:
+        存檔資料 = yaml.load(f)
+else:
+    存檔資料 = []
+
+
 class 山彥(帶有vue的山彥):
+    def __init__(self, *li, **d):
+        super().__init__(*li, **d)
+        if not os.path.isdir('./存檔資料'):
+            os.mkdir('./存檔資料')
+        if os.path.isfile('./存檔資料/存檔資料.yaml'):
+            try:
+                with open('./存檔資料/存檔資料.yaml', encoding='utf8') as f:
+                    存檔資料 = yaml.load(f)
+                self.vue.存檔資料 = 存檔資料
+            except Exception as e:
+                logging.warning('存檔資料失效。')
+                self.vue.存檔資料 = []
+        else:
+            self.vue.存檔資料 = []
+
+    def vue更新(self, 內容):
+        t = self.vue.用戶設置 if '用戶設置' in self.vue._內容 else None
+        if t != 內容['存檔資料']:
+            with open(f'./存檔資料/存檔資料.yaml', 'w', encoding='utf8') as f:
+                f.write(yaml.dump(內容['存檔資料']))
+        super().vue更新(內容)
+
+    def 讀取工程信息(self, 工程路徑):
+        虛擬機環境.加載配置(工程路徑)
+        if 虛擬機環境.圖標:
+            圖標路徑 = Path(工程路徑) / 虛擬機環境.圖標
+        else:
+            圖標路徑 = '../Librian本體/資源/librian.ico'
+        主解析度 = 虛擬機環境.主解析度
+        標題 = 虛擬機環境.標題
+        self.vue.存檔資料 = [{'工程路徑': 工程路徑, '圖標路徑': 圖標路徑, '標題': 標題}] + \
+            [工程信息 for 工程信息 in self.vue.存檔資料 if 工程信息['工程路徑'] != 工程路徑]
+        return 圖標路徑, 主解析度, 標題
+
     def 同調(self, 工程路徑):
+        v = self.vue
         try:
-            self.vue.工程路徑 = 工程路徑
-            虛擬機環境.加載配置(工程路徑)
-            if 虛擬機環境.圖標:
-                self.vue.圖標路徑 = os.path.relpath(f'{工程路徑}/{虛擬機環境.圖標}', './html面板')
-            else:
-                self.vue.圖標路徑 = '../Librian本體/資源/librian.ico'
-            self.vue.主解析度 = 虛擬機環境.主解析度
-            self.vue.標題 = 虛擬機環境.標題
+            v.工程路徑 = 工程路徑
+            v.圖標路徑, v.主解析度, v.標題 = self.讀取工程信息(工程路徑)
         except Exception as e:
-            print(e)
+            logging.warning(e.__repr__())
             alert('工程配置文件不正確。')
         js(f'進入工程()')
 
     def 開啓工程(self):
         with wx.DirDialog(self.窗口, "选择文件夹") as dlg:
-            dlg.SetPath(os.path.abspath('./Librian本體/project'))
+            dlg.SetPath(str(Path('./Librian本體/project').resolve()))
             if dlg.ShowModal() == wx.ID_OK:
                 self.同調(dlg.GetPath())
 
     def 建立工程(self):
         with wx.TextEntryDialog(self.窗口, '工程名: ', '小面板') as dlg:
             if dlg.ShowModal() == wx.ID_OK:
-                新工程路徑 = os.path.join('.','Librian本體', 'project', dlg.GetValue())
-                新工程路徑 = os.path.abspath(新工程路徑)
-                if os.path.isdir(新工程路徑):
+                新工程路徑 = (Path('Librian本體/project') / dlg.GetValue()).resolve()
+                if 新工程路徑.is_dir():
                     alert('已經有這個工程了。')
                     return
                 shutil.copytree('./Librian本體/project/_默認工程', 新工程路徑)
@@ -55,9 +93,9 @@ class 山彥(帶有vue的山彥):
 
     def 運行同時編寫(self):
         subprocess.Popen(
-            'cmd /c cd Librian本體 & '
-            + f'"../python36/python" librian.py --project {self.vue.工程路徑} '
-            + '--config "{編寫模式: True}"'
+            'cmd /c cd Librian本體 & ' +
+            f'"../python36/python" librian.py --project {self.vue.工程路徑} ' +
+            '--config "{編寫模式: True}"'
         )
         os.system(f'"{self.vue.工程路徑}/{虛擬機環境.劇本入口}"')
 
