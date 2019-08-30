@@ -79,7 +79,7 @@ class 山彥(帶有vue的山彥):
                 self.同調(dlg.GetPath())
 
     def 建立工程(self):
-        with wx.TextEntryDialog(self.窗口, '工程名: ', '小面板') as dlg:
+        with wx.TextEntryDialog(self.窗口, '工程名: ', '建立工程') as dlg:
             if dlg.ShowModal() == wx.ID_OK:
                 新工程路徑 = (Path('Librian本體/project') / dlg.GetValue()).resolve()
                 if 新工程路徑.is_dir():
