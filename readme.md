@@ -73,7 +73,7 @@ Librian由python和HTML編寫而成，基於CEFPython和wxPython前端。
 
 試着建了QQ討論組: 618775838。
 
-如果你需要一些使用幫助，或者有什麼不滿，或者不常用GitHub的話，可以來這裏討論。  
+如果你需要使用幫助，或者對Librian和galgame製作有興趣，<sub>或者想觀看蘿莉圖片</sub>，都可以來這裏討論。  
 總之，一起玩就行啦。
 
 ## 贊助
