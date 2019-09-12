@@ -1,23 +1,19 @@
 html:
     head:
         meta http-equiv="Content-Type" content="text/html; charset=utf-8";
+        link rel='stylesheet' href='../../../synthetic_css/synthetic_offline.css';
         link rel='stylesheet' href='./樣式.css';
         script src="./定位.js":
-    body:
-      div#all:
-        div#bg:
+    body.synth:
         div#bb:
             div#bg2:
         div.主:
             div:
-                a href='javascript:山彥.開始();':
-                    div.核:
+                a.synth href='javascript:山彥.開始();':
                     開始遊戲
             div:
-                a href='javascript:山彥.從title讀檔();':
-                    div.核:
+                a.synth href='javascript:山彥.從title讀檔();':
                     繼續遊戲
             div:
-                a href='javascript:山彥.退出();':
-                    div.核:
+                a.synth href='javascript:山彥.退出();':
                     退出

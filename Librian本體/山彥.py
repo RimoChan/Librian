@@ -81,7 +81,7 @@ class 山彥(帶有vue的山彥):
 class 演出山彥(山彥):
     def 回標題(self):
         self.讀者.__init__(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}')
-        self.js(f'window.location.href="{self.標題url}"')
+        self.js(f'window.location.href={self.標題url.__repr__()}')
 
     def 更新(self):
         狀態 = self.讀者.狀態.導出()
@@ -127,13 +127,13 @@ class 演出山彥(山彥):
 class 帶標題山彥(演出山彥):
     def 開始(self):
         self.步進()
-        self.js(f'window.location.href="{文件.轉爲網址路徑("./html/adv.html")}";')
+        self.js(f'window.location.href={文件.轉爲網址路徑("./html/adv.html").__repr__()};')
 
     def 從title讀檔(self):
         文件名 = self.選擇讀檔文件()
         if 文件名:
             self.讀者.讀檔(文件名)
-            self.js(f'window.location.href="{文件.轉爲網址路徑("./html/adv.html")}";')
+            self.js(f'window.location.href={文件.轉爲網址路徑("./html/adv.html").__repr__()};')
 
     def 從劇本開始(self, 劇本):
         入口 = f'{工程路徑}/{配置["劇本入口"]}'

@@ -1,23 +1,24 @@
 html:
     head:
         meta charset='utf-8'; 
+        link rel='stylesheet' href='../synthetic_css/synthetic_offline.css';
         link rel='stylesheet' href='./style.css';
         script src='./黑科技/jquery-3.1.1.min.js':
         script src='./黑科技/jquery-ui.min.js':
         script src='./黑科技/vue.js':
         script src='./幹.js':
 
-    body oncontextmenu='window.event.returnValue=false;':
+    body.synth oncontextmenu='window.event.returnValue=false;':
       div#all:
         div.頁#入口:
-            div.標題:
+            header.synth:
                 h2:
                     Librian面板
             div.內容: 
                 div:
-                    a.按鈕#開啓工程:
+                    a.synth#開啓工程:
                         開啓工程
-                    a.按鈕#建立工程: 
+                    a.synth#建立工程: 
                         建立工程
                 div:
                     p:
@@ -25,13 +26,13 @@ html:
                     span v-if="存檔資料.length==0":
                         沒有之前的工程記錄。  
                     div#工程記錄:
-                        a.按鈕 v-for="工程 in 存檔資料":
+                        a.synth v-for="工程 in 存檔資料":
                             img.圖標 v-bind:src='工程.圖標路徑';
                             small:
                                 {{工程.標題}}
                                 
         div.頁#工程編輯:
-            div.標題:
+            header.synth:
                 h2:
                     {{標題}}
             div.內容: 
@@ -42,16 +43,16 @@ html:
                             路徑: {{工程路徑}}
                         p:
                             主解析度: {{主解析度}}
-                a.按鈕#運行:
+                a.synth#運行:
                     運行
-                a.按鈕#運行同時編寫:
+                a.synth#運行同時編寫:
                     運行同時編寫
-                a.按鈕#打開文件夾:
+                a.synth#打開文件夾:
                     打開文件夾
-                a.按鈕#生成exe:
+                a.synth#生成exe:
                     生成exe
-                a.按鈕#生成html:
+                a.synth#生成html:
                     生成html
             div.右下角: 
-                a.按鈕#返回:
+                a.synth#返回:
                     返回

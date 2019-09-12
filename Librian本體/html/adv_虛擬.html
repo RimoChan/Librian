@@ -2,12 +2,13 @@
     <head>
         <title></title>
         <meta charset='utf-8'/>
+        <link rel='stylesheet' href='../../synthetic_css/synthetic_offline.css'/>
         <link rel='stylesheet' href='./樣式/主樣式.css'/>
+        <link rel='stylesheet' href='./樣式/配置面板的樣式.css'/>
         <link rel="stylesheet" href='./樣式/特效.css'/>
         <link rel="stylesheet" href='./樣式/按鈕.css'/>
         <link rel="stylesheet" href='./樣式/美麗滑條.css'/>
         <link rel="stylesheet" href='./黑科技/font-awesome-4.7.0/css/font-awesome.css'/>
-        <script src='./黑科技/qwebchannel.js'></script>
         <script src='./黑科技/vue.js'></script>
         <script src='./黑科技/jquery-3.1.1.min.js'></script>
         <script src='./黑科技/jquery-ui.min.js'></script>
@@ -16,118 +17,104 @@
         <script src='./全局_虛擬.js'></script>
         <script src='./演出.js'></script>
         <script src='./控制.js'></script>
-        <script src='./設置.js'></script>
         <script src='./逐字打印.js'></script>
         <script src='./圖像融合.js'></script>
-    </head>
-    <style id="style"></style>
-    <body oncontextmenu='window.event.returnValue=false;'>
-        <div id="總畫面">
-            <video width="1366" height="768" src="" autoplay="autoplay"></video>
-            <audio id="bgm" autoplay='' loop='' src=''></audio>
-            <audio id="嘀" autoplay='' loop='' src=''></audio>
-            <div id="配置面板">
-                <div class="option">
-                    <span class="小塊">
-                        全屏幕
+        <style id="style"></style>
+        <body oncontextmenu='window.event.returnValue=false;'>
+            <div id="總畫面">
+                <video width="1366" height="768" src="" autoplay="autoplay"></video>
+                <audio id="bgm" autoplay='' loop='' src=''></audio>
+                <audio id="嘀" autoplay='' loop='' src=''></audio>
+                <div id="配置面板">
+                    <span class="按鈕組">
+                        <a class="synth">
+                            <i class="fa fa-rotate-left"></i>
+                        </a>
+                        <a class="synth" href='javascript:控制.退出設置();'>
+                            <i class="fa fa-check"></i>
+                        </a>
                     </span>
-                    <a class="hicon" href='javascript:山彥.切換全屏();'>
-                        <i class="fa fa-arrows-alt"></i>
+                    <div 名字='全屏幕'>
+                        <a class="synth" href='javascript:山彥.切換全屏();'>
+                            <i class="fa fa-arrows-alt"></i>
+                        </a>
+                    </div>
+                    <div 名字='文字速度'>
+                        須臾
+                        <input class="synth" type="range" min="0" max="100" v-model="用戶設置.文字速度"></input>
+                        永恆
+                    </div>
+                    <div 名字='自動模式速度'>
+                        哪有自動模式……
+                    </div>
+                    <div 名字='對話框背景透明度'>
+                        通透
+                        <input class="synth" type="range" min="0" max="1" step='0.01' v-model="用戶設置.對話框背景透明度"></input>
+                        固實
+                    </div>
+                    <div 名字='自動收起控制面板'>
+                        <input class="synth" type="checkbox" v-model="用戶設置.自動收起控制面板"></input>
+                    </div>
+                    <div 名字='總體音量'>
+                        小聲
+                        <input class="synth" type="range" min="0" max="1" step='0.01' v-model="用戶設置.總體音量"></input>
+                        大聲(沒用)
+                    </div>
+                </div>
+                <div id="工具欄" v-bind:class="{自動收起: 用戶設置.自動收起控制面板}">
+                    <a class="hicon" href='javascript:山彥.存檔();'>
+                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-angle-double-down" style='text-shadow:0 0 4px #000;'></i>
+                    </a>
+                    <a class="hicon" href='javascript:山彥.讀檔();'>
+                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-angle-double-up" style='text-shadow:0 0 4px #000;'></i>
+                    </a>
+                    <a class="hicon" href='javascript:山彥.快速存檔();'>
+                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-angle-double-down" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
+                    </a>
+                    <a class="hicon" href='javascript:山彥.快速讀檔();'>
+                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-angle-double-up" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
+                    </a>
+                    <a class="hicon" href='javascript:alert("沒做這個功能");'>
+                        <i class="fa fa-forward"></i>
+                    </a>
+                    <a class="hicon" href='javascript:控制.切換快進();'>
+                        <i class="fa fa-fast-forward"></i>
+                    </a>
+                    <a class="hicon" href='javascript:控制.進入設置();'>
+                        <i class="fa fa-gear"></i>
+                    </a>
+                    <a class="hicon" href='javascript:山彥.回標題();'>
+                        <i class="fa fa-mail-reply"></i>
                     </a>
                 </div>
-                <div class="option">
-                    <span class="小塊">
-                        文字速度
-                    </span>
-                    須臾
-                    <input id="文字速度" type="range" min="0" max="100" onchange="設置.同調(this)"></input>
-                    永恆
-                </div>
-                <div class="option">
-                    <span class="小塊">
-                        自動模式速度
-                    </span>
-                    哪有自動模式……
-                </div>
-                <div class="option">
-                    <span class="小塊">
-                        對話框背景透明度
-                    </span>
-                    通透
-                    <input id="對話框背景透明度" type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)"></input>
-                    固實
-                </div>
-                <div class="option">
-                    <span class="小塊">
-                        自動收起控制面板
-                    </span>
-                    <input id="自動收起控制面板" type="checkbox" onchange="設置.同調(this)"></input>
-                </div>
-                <div class="option">
-                    <span class="小塊">
-                        <總體音量></總體音量>
-                    </span>
-                    小聲
-                    <input id="總體音量" type="range" min="0" max="1" step='0.01' onchange="設置.同調(this)"></input>
-                    大聲(沒用)
-                </div>
-                <a class="hicon" href='javascript:控制.退出設置();'>
-                    <i class="fa fa-times"></i>
-                </a>
-            </div>
-            <div id="工具欄">
-                <a class="hicon" href='javascript:山彥.存檔();'>
-                    <i class="fa fa-floppy-o"></i>
-                    <i class="fa fa-angle-double-down" style='text-shadow:0 0 4px #000;'></i>
-                </a>
-                <a class="hicon" href='javascript:山彥.讀檔();'>
-                    <i class="fa fa-floppy-o"></i>
-                    <i class="fa fa-angle-double-up" style='text-shadow:0 0 4px #000;'></i>
-                </a>
-                <a class="hicon" href='javascript:山彥.快速存檔();'>
-                    <i class="fa fa-floppy-o"></i>
-                    <i class="fa fa-angle-double-down" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
-                </a>
-                <a class="hicon" href='javascript:山彥.快速讀檔();'>
-                    <i class="fa fa-floppy-o"></i>
-                    <i class="fa fa-angle-double-up" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
-                </a>
-                <a class="hicon" href='javascript:alert("沒做這個功能");'>
-                    <i class="fa fa-forward"></i>
-                </a>
-                <a class="hicon" href='javascript:控制.切換快進();'>
-                    <i class="fa fa-fast-forward"></i>
-                </a>
-                <a class="hicon" href='javascript:控制.進入設置();'">
-                    <i class="fa fa-gear"></i>
-                </a>
-                <a class="hicon" href='javascript:山彥.回標題();'>
-                    <i class="fa fa-mail-reply"></i>
-                </a>
-            </div>
-            <div id="adv畫面">
-                <div id="覆蓋"></div>
-                <div id="選項"></div>
-                <div id="cg"></div>
-                <div id="bg"></div>
-                <div id="立繪"></div>
-                <div class="美麗滑條 scroll">
-                    <div id="對話歷史"></div>
-                </div>
-                <div id="對話框">
-                    <div id="名字框">
-                        <div id="名字"></div>
-                        <div id="名字框背景"></div>
+                <div id="adv畫面">
+                    <div id="覆蓋"></div>
+                    <div id="選項"></div>
+                    <div id="cg"></div>
+                    <div id="bg"></div>
+                    <div id="立繪"></div>
+                    <div class="美麗滑條 scroll">
+                        <div id="對話歷史"></div>
                     </div>
-                    <div id="話語框">
-                        <div id="話語"></div>
-                        <div id="話語框背景"></div>
+                    <div id="對話框">
+                        <div id="名字框">
+                            <div id="名字"></div>
+                            <div id="名字框背景" v-bind:style="{opacity: 用戶設置.對話框背景透明度}"></div>
+                        </div>
+                        <div id="話語框">
+                            <div id="話語"></div>
+                            <div id="話語框背景" v-bind:style="{opacity: 用戶設置.對話框背景透明度}"></div>
+                        </div>
+                        <div id="對話框背景" v-bind:style="{opacity: 用戶設置.對話框背景透明度}"></div>
                     </div>
-                    <div id="對話框背景"></div>
                 </div>
+                <div id="提示"></div>
             </div>
-            <div id="提示"></div>
-        </div>
-        <div id="墊底"></div>
-    </body>
+            <div id="墊底"></div>
+        </body>
+    </head>
 </html>

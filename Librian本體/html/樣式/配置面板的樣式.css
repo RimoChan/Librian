@@ -1,0 +1,28 @@
+@charset "UTF-8";
+#配置面板 {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  height: 74%;
+  width: 76%;
+  padding: 4% 2% 2% 2%;
+  background-image: url("../../../synthetic_css/紙背景花紋.jpg");
+  background-size: cover;
+  box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6);
+  border-radius: 2vw;
+  color: #000;
+  z-index: 998;
+  display: None; }
+  #配置面板 .按鈕組 {
+    position: absolute;
+    right: 2%;
+    top: 2%; }
+  #配置面板 > div {
+    font-size: 24px;
+    height: 80px;
+    display: flex;
+    align-items: center; }
+    #配置面板 > div::before {
+      content: "【" attr(名字) "】"; }
+
+/*# sourceMappingURL=%E9%85%8D%E7%BD%AE%E9%9D%A2%E6%9D%BF%E7%9A%84%E6%A8%A3%E5%BC%8F.css.map */

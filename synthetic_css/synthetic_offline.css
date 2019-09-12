@@ -1,0 +1,209 @@
+@charset "UTF-8";
+body.syn, body.synth {
+  background-color: #dec6a1;
+  background-image: url("紙背景花紋.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: "Noto Serif SC"; }
+  body.syn button, body.synth button, body.syn input, body.synth input, body.syn textarea, body.synth textarea {
+    font-family: "Noto Serif SC"; }
+body.synth {
+  margin: 0px; }
+  body.synth strong, body.synth b {
+    font-weight: normal;
+    text-shadow: 0px 0px 2px black; }
+  body.synth h1, body.synth h2, body.synth h3, body.synth h4, body.synth h5 {
+    font-weight: normal; }
+  body.synth hr {
+    border: none;
+    border-top: 1px solid rgba(120, 50, 0, 0.5); }
+  body.synth ::-moz-focus-inner {
+    border: none; }
+  body.synth ::-moz-focus-outer {
+    border: none; }
+
+header.syn, header.synth {
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 2vh rgba(0, 0, 0, 0.4); }
+header.synth {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+div.syn, div.synth {
+  background-color: #dec6a1;
+  background-image: url("紙背景花紋模糊.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6); }
+div.synth {
+  margin: 0.5vw;
+  padding: 0.5vw;
+  border-radius: 0.5vw; }
+
+button.syn, button.synth, a.syn, a.synth {
+  outline: none;
+  border: none;
+  -webkit-user-select: none;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  background-color: #dec6a1;
+  background-image: url("./紙背景花紋模糊.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  box-shadow: 0px 0px 0.8vw rgba(0, 0, 0, 0.6), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
+  filter: brightness(1.05) hue-rotate(-6deg);
+  transition: box-shadow 0.2s, filter 0.1s; }
+  button.syn:hover, button.synth:hover, a.syn:hover, a.synth:hover {
+    box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0.7), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
+    filter: brightness(1.1) hue-rotate(-12deg); }
+  button.syn:active, button.synth:active, a.syn:active, a.synth:active {
+    box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0), 0px 0px 0.4vw rgba(0, 0, 0, 0.6) inset;
+    filter: blur(0.1vw); }
+button.synth, a.synth {
+  font-size: inherit;
+  display: inline-block;
+  padding: 0.5vw;
+  margin: 0.5vw;
+  border-radius: 0.5vw; }
+
+blockquote.syn, blockquote.synth {
+  color: #00003c;
+  border-left: 3px solid rgba(0, 0, 0, 0.4); }
+blockquote.synth {
+  padding-left: 6px;
+  margin-left: 6px; }
+
+img.syn, img.synth {
+  box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6);
+  border-radius: 0.5vw; }
+img.synth {
+  margin: 0.5vw; }
+
+hr.syn {
+  width: 90%; }
+hr.synth {
+  border: none !important;
+  height: 6px;
+  border-radius: 40%;
+  background: rgba(0, 0, 0, 0.2); }
+
+input[type="range"].syn, input[type="range"].synth {
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
+  border-radius: 5px;
+  height: 5px;
+  transition: all 0.2s; }
+  input[type="range"].syn:hover, input[type="range"].synth:hover {
+    transform: scaleY(2); }
+    input[type="range"].syn:hover::-webkit-slider-thumb, input[type="range"].synth:hover::-webkit-slider-thumb {
+      transform: scaleY(0.5); }
+    input[type="range"].syn:hover::-moz-range-thumb, input[type="range"].synth:hover::-moz-range-thumb {
+      transform: scaleY(0.5); }
+  input[type="range"].syn::-webkit-slider-thumb, input[type="range"].synth::-webkit-slider-thumb {
+    transition: all 0.2s;
+    cursor: pointer;
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px white inset;
+    background: rgba(255, 255, 200, 0.5); }
+  input[type="range"].syn::-moz-range-thumb, input[type="range"].synth::-moz-range-thumb {
+    transition: all 0.2s;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px white inset;
+    background: rgba(255, 255, 200, 0.5); }
+
+input[type="checkbox"].syn, input[type="checkbox"].synth {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  background-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 10px rgba(0, 0, 0, 0.4) inset;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  input[type="checkbox"].syn::before, input[type="checkbox"].synth::before {
+    font-size: 16px;
+    content: "✗";
+    color: rgba(0, 0, 0, 0);
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.8); }
+  input[type="checkbox"].syn:checked, input[type="checkbox"].synth:checked {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px white inset;
+    background: rgba(255, 255, 200, 0.5); }
+    input[type="checkbox"].syn:checked::before, input[type="checkbox"].synth:checked::before {
+      content: "✓";
+      text-shadow: 0px 0px 2px rgba(255, 0, 0, 0.8); }
+
+input[type="text"].syn, input[type="text"].synth, input[type="password"].syn, input[type="password"].synth {
+  background: rgba(0, 0, 0, 0);
+  outline: none;
+  border: solid 1px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  padding: 2px; }
+input[type="text"].synth, input[type="password"].synth {
+  border: none;
+  border-radius: 0px;
+  border-bottom: solid 1px rgba(55, 55, 0, 0.6);
+  border-top: solid 1px rgba(0, 0, 0, 0);
+  text-align: center; }
+  input[type="text"].synth:hover, input[type="password"].synth:hover {
+    padding: 0px 2px;
+    border-top: solid 3px rgba(0, 0, 0, 0);
+    border-bottom: solid 3px rgba(55, 55, 0, 0.4); }
+
+textarea.syn {
+  background: rgba(0, 0, 0, 0);
+  outline: none;
+  border: solid 1px rgba(0, 0, 0, 0.3);
+  border-radius: 2px; }
+
+progress.syn, progress.synth {
+  -webkit-appearance: none;
+  -moz-appearence: none;
+  appearance: none;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+  background: rgba(0, 0, 0, 0.2); }
+  progress.syn::-webkit-progress-bar, progress.synth::-webkit-progress-bar {
+    background: transparent; }
+  progress.syn::-webkit-progress-value, progress.synth::-webkit-progress-value {
+    background: transparent;
+    border-radius: 3px;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    backdrop-filter: saturate(0.8) contrast(1.8) brightness(1.3); }
+  progress.syn::-moz-progress-bar, progress.synth::-moz-progress-bar {
+    background-color: #dec6a1;
+    background-image: url("紙背景花紋模糊.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    border-radius: 3px;
+    filter: brightness(0.8) saturate(0.8) contrast(1.8) brightness(1.3); }
+progress.synth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  margin: 4px; }
+  progress.synth::after {
+    content: attr(value) "/" attr(max);
+    position: absolute;
+    opacity: 0.75;
+    text-shadow: 0px 0px 3px black;
+    color: #ffd; }
+
+/*# sourceMappingURL=synthetic.css.map */

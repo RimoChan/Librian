@@ -1,26 +1,27 @@
 <html>
     <head>
         <meta charset='utf-8'/>
+        <link rel='stylesheet' href='../synthetic_css/synthetic_offline.css'/>
         <link rel='stylesheet' href='./style.css'/>
         <script src='./黑科技/jquery-3.1.1.min.js'></script>
         <script src='./黑科技/jquery-ui.min.js'></script>
         <script src='./黑科技/vue.js'></script>
         <script src='./幹.js'></script>
     </head>
-    <body oncontextmenu='window.event.returnValue=false;'>
+    <body class="synth" oncontextmenu='window.event.returnValue=false;'>
       <div id="all">
         <div class="頁" id="入口">
-            <div class="標題">
+            <header class="synth">
                 <h2>
                     Librian面板
                 </h2>
-            </div>
+            </header>
             <div class="內容">
                 <div>
-                    <a class="按鈕" id="開啓工程">
+                    <a class="synth" id="開啓工程">
                         開啓工程
                     </a>
-                    <a class="按鈕" id="建立工程">
+                    <a class="synth" id="建立工程">
                         建立工程
                     </a>
                 </div>
@@ -32,7 +33,7 @@
                         沒有之前的工程記錄。
                     </span>
                     <div id="工程記錄">
-                        <a class="按鈕" v-for="工程 in 存檔資料">
+                        <a class="synth" v-for="工程 in 存檔資料">
                             <img class="圖標" v-bind:src='工程.圖標路徑'/>
                             <small>
                                 {{工程.標題}}
@@ -43,11 +44,11 @@
             </div>
         </div>
         <div class="頁" id="工程編輯">
-            <div class="標題">
+            <header class="synth">
                 <h2>
                     {{標題}}
                 </h2>
-            </div>
+            </header>
             <div class="內容">
                 <div class="工程信息">
                     <img class="圖標" v-bind:src='圖標路徑'/>
@@ -60,24 +61,24 @@
                         </p>
                     </div>
                 </div>
-                <a class="按鈕" id="運行">
+                <a class="synth" id="運行">
                     運行
                 </a>
-                <a class="按鈕" id="運行同時編寫">
+                <a class="synth" id="運行同時編寫">
                     運行同時編寫
                 </a>
-                <a class="按鈕" id="打開文件夾">
+                <a class="synth" id="打開文件夾">
                     打開文件夾
                 </a>
-                <a class="按鈕" id="生成exe">
+                <a class="synth" id="生成exe">
                     生成exe
                 </a>
-                <a class="按鈕" id="生成html">
+                <a class="synth" id="生成html">
                     生成html
                 </a>
             </div>
             <div class="右下角">
-                <a class="按鈕" id="返回">
+                <a class="synth" id="返回">
                     返回
                 </a>
             </div>

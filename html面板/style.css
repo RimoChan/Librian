@@ -4,23 +4,14 @@
 }
 
 body {
-    font-family: 思源宋體SemiBold;
+    font-family: 思源宋體SemiBold !important;
     overflow: hidden;
     font-size: 2.5vw;
     line-height: 1.5;
-    margin: 0;
-    padding: 0;
-    background: url('../Librian本體/html/默認標題畫面/紙背景花紋.jpg');
-    background-size: cover;
 }
 
-.標題 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+header {
     height: 12vh;
-    background: rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 0px 2vh rgba(0, 0, 0, 0.4);
 }
 
 .內容 {
@@ -33,35 +24,10 @@ body {
     display: flex;
 }
 
-#工程記錄>.按鈕 {
+#工程記錄>a {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.按鈕 {
-    cursor: pointer;
-    text-decoration: none;
-    -webkit-user-select: none;
-    color: inherit;
-    padding: 0.5vw;
-    margin: 0.5vw;
-    background: url('../Librian本體/html/默認標題畫面/紙背景花紋模糊.jpg');
-    background-attachment: fixed;
-    background-size: cover;
-    border-radius: 0.5vw;
-    display: inline-block;
-    box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
-    transition: box-shadow 0.2s, filter 0.2s;
-}
-
-.按鈕:hover {
-    box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0.6), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
-}
-
-.按鈕:active {
-    box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0), 0px 0px 0.4vw rgba(0, 0, 0, 0.6) inset;
-    filter: blur(0.1vw);
 }
 
 h2 {

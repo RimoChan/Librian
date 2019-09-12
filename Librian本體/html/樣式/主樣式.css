@@ -31,37 +31,6 @@ video {
     display: None;
 }
 
-#配置面板 {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 998;
-    background: rgba(0, 0, 0, 0.75);
-    display: None;
-    padding: 30px;
-}
-
-.option {
-    font-size: 24px;
-    height: 80px;
-}
-
-.option>* {
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.option>.頭:before {
-    content: '【';
-}
-
-.option>.頭:after {
-    content: '】';
-}
-
 #bg {
     width: 100%;
     height: 100%;

@@ -2,11 +2,12 @@ html:
     head:
         title:
         meta charset='utf-8'; 
+        link rel='stylesheet' href='../../synthetic_css/synthetic_offline.css';
         link rel='stylesheet' href='./樣式/主樣式.css';
+        link rel='stylesheet' href='./樣式/配置面板的樣式.css';
         link rel="stylesheet" href='./樣式/特效.css';
         link rel="stylesheet" href='./樣式/按鈕.css';
         link rel="stylesheet" href='./樣式/美麗滑條.css';
-        link rel="stylesheet" href='./樣式/input樣式.css';
         link rel="stylesheet" href='./黑科技/font-awesome-4.7.0/css/font-awesome.css';
         
         script src='./黑科技/vue.js':
@@ -17,7 +18,6 @@ html:
         script src='./全局.js':
         script src='./演出.js':
         script src='./控制.js':
-        script src='./設置.js':
         script src='./逐字打印.js':
         script src='./圖像融合.js':
         
@@ -31,50 +31,31 @@ html:
             audio#嘀 autoplay='' loop='' src='':
     
             div#配置面板:
-                div.option:
-                    span.頭:
-                        全屏幕
-                    span:
-                        a.hicon href='javascript:山彥.切換全屏();':
-                            i.fa.fa-arrows-alt:
-                div.option:
-                    span.頭:
-                        文字速度
-                    small:
-                        須臾
-                    input type="range" min="0" max="100" v-model="用戶設置.文字速度": 
-                    small:
-                        永恆
-                div.option:
-                    span.頭:
-                        自動模式速度
-                    span:
-                        哪有自動模式……
-                div.option:
-                    span.頭:
-                        對話框背景透明度
-                    small:
-                        通透
-                    input type="range" min="0" max="1" step='0.01' v-model="用戶設置.對話框背景透明度":
-                    small:
-                        固實
-                div.option:
-                    span.頭:
-                        自動收起控制面板
-                    input type="checkbox" v-model="用戶設置.自動收起控制面板":
-                div.option:
-                    span.頭:
-                        總體音量
-                    small:
-                        小聲
-                    input type="range" min="0" max="1" step='0.01' v-model="用戶設置.總體音量":
-                    small:
-                        大聲(沒用)
-
-                a.hicon href='javascript:控制.退出設置();':
-                    <i class="fa fa-times"></i>
+                span.按鈕組:
+                    a.synth:
+                        i.fa.fa-rotate-left:
+                    a.synth href='javascript:控制.退出設置();':
+                        i.fa.fa-check:
+                div 名字='全屏幕':
+                    a.synth href='javascript:山彥.切換全屏();':
+                        i.fa.fa-arrows-alt:
+                div 名字='文字速度':
+                    須臾
+                    input.synth type="range" min="0" max="100" v-model="用戶設置.文字速度": 
+                    永恆
+                div 名字='自動模式速度':
+                    哪有自動模式……
+                div 名字='對話框背景透明度':
+                    通透
+                    input.synth type="range" min="0" max="1" step='0.01' v-model="用戶設置.對話框背景透明度":
+                    固實
+                div 名字='自動收起控制面板':
+                    input.synth type="checkbox" v-model="用戶設置.自動收起控制面板":
+                div 名字='總體音量':
+                    小聲
+                    input.synth type="range" min="0" max="1" step='0.01' v-model="用戶設置.總體音量":
+                    大聲(沒用)
                         
-            
             div#工具欄 v-bind:class="{自動收起: 用戶設置.自動收起控制面板}":
                 a.hicon href='javascript:山彥.存檔();':
                     <i class="fa fa-floppy-o"></i>
