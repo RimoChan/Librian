@@ -8,7 +8,7 @@ html:
         script src='./黑科技/vue.js':
         script src='./幹.js':
 
-    body.synth oncontextmenu='window.event.returnValue=false;':
+    body.synth:
       div#all:
         div.頁#入口:
             header.synth:
@@ -23,13 +23,16 @@ html:
                 div:
                     p:
                         歷史記錄
+                        a.synth#清除記錄 v-if="存檔資料.length>0": 
+                            清除記錄
                     span v-if="存檔資料.length==0":
                         沒有之前的工程記錄。  
                     div#工程記錄:
-                        a.synth v-for="工程 in 存檔資料":
-                            img.圖標 v-bind:src='工程.圖標路徑';
-                            small:
-                                {{工程.標題}}
+                        span v-for="工程 in 存檔資料":
+                            a.synth v-bind:href='"javascript:山彥.開啓工程("+JSON.stringify(工程.工程路徑)+")"':
+                                img.圖標 v-bind:src='工程.圖標路徑';
+                                small:
+                                    {{工程.標題}}
                                 
         div.頁#工程編輯:
             header.synth:

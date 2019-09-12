@@ -24,7 +24,7 @@ header {
     display: flex;
 }
 
-#工程記錄>a {
+#工程記錄 a {
     display: flex;
     flex-direction: column;
     align-items: center;

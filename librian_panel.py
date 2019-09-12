@@ -72,11 +72,14 @@ class 山彥(帶有vue的山彥):
             alert('工程配置文件不正確。')
         js(f'進入工程()')
 
-    def 開啓工程(self):
-        with wx.DirDialog(self.窗口, "选择文件夹") as dlg:
-            dlg.SetPath(str(Path('./Librian本體/project').resolve()))
-            if dlg.ShowModal() == wx.ID_OK:
-                self.同調(dlg.GetPath())
+    def 開啓工程(self, 工程路徑=None):
+        if 工程路徑:
+            self.同調(工程路徑)
+        else:
+            with wx.DirDialog(self.窗口, "选择文件夹") as dlg:
+                dlg.SetPath(str(Path('./Librian本體/project').resolve()))
+                if dlg.ShowModal() == wx.ID_OK:
+                    self.同調(dlg.GetPath())
 
     def 建立工程(self):
         with wx.TextEntryDialog(self.窗口, '工程名: ', '建立工程') as dlg:
