@@ -51,6 +51,9 @@
       生成exe: function() {
         return 山彥.生成exe();
       },
+      生成html: function() {
+        return 山彥.生成html();
+      },
       返回: function() {
         return window.返回();
       }

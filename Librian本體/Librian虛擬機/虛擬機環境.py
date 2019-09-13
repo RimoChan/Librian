@@ -4,6 +4,7 @@ import logging
 import os
 import sys
 
+此處 = os.path.dirname(os.path.abspath(__file__))
 
 class 假面:
     配置 = {}
@@ -18,7 +19,7 @@ class 假面:
         self.配置['工程路徑'] = 工程路徑
         self.配置['psd路徑'] = os.path.join(工程路徑, self.配置['立繪文件夾'])
         self.配置['圖片路徑'] = f"./{工程路徑}/_臨時文件"
-        self.配置['圖片相對網頁路徑'] = f"../{工程路徑}/_臨時文件"
+        self.配置['圖片相對網頁路徑'] = os.path.relpath(self.配置['圖片路徑'], f'{此處}/../html' ).replace('\\', '/')
 
     def __getattr__(self, x):
         return self.配置[x]
