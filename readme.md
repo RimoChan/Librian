@@ -55,7 +55,7 @@ Librian由python和HTML編寫而成，基於CEFPython和wxPython前端。
 
 ## 中文文檔
 
-如果你想瞭解詳細的使用方法，可以直接閱讀Librian的中文文檔——<https://rimochan.github.io/Librian_doc>。
+如果你想瞭解詳細的使用方法，可以直接閱讀Librian的中文文檔——<https://doc.librian.it>。
 
 ## 快速上手
 
@@ -67,7 +67,7 @@ Librian由python和HTML編寫而成，基於CEFPython和wxPython前端。
 2.  pip install -r requirements.txt
 3.  python3 librian_panel.py
 
-此外，你也可以根據[中文文檔](https://rimochan.github.io/Librian_doc)的指示來安裝。
+此外，你也可以根據[中文文檔](https://doc.librian.it)的指示來安裝。
 
 ## 援交～
 
