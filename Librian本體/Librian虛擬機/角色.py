@@ -21,10 +21,10 @@ def 導入有立繪的角色():
         with open(f'{虛擬機環境.psd路徑}/映射.yaml', encoding='utf8') as f:
             映射 = yaml.load(f)
             if 映射:
-                for i in 映射:
-                    角色(i, 映射[i])
-                    if not os.path.isdir('%s/%s' % (虛擬機環境.圖片路徑, i)):
-                        psd拆包.拆包(f'{虛擬機環境.psd路徑}/{i}.psd', 虛擬機環境.圖片路徑)
+                for 角色名 in 映射:
+                    if not os.path.isdir('%s/%s' % (虛擬機環境.圖片路徑, 角色名)):
+                        psd拆包.拆包(f'{虛擬機環境.psd路徑}/{角色名}.psd', 虛擬機環境.圖片路徑)
+                    角色(角色名, 映射[角色名])
             for i in os.listdir(虛擬機環境.psd路徑):
                 if i.endswith('.png'):
                     前名 = os.path.basename(os.path.splitext(i)[0])
