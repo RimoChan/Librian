@@ -75,7 +75,9 @@
       return this.換對話(話語, 名字);
     },
     特效處理: function(特效表) {
-      var i, j, k, len, len1, results, 可特效块;
+      var i, j, len, 可特效块;
+      console.log('特效處理');
+      console.log(特效表);
       可特效块 = ['總畫面', 'adv畫面', '覆蓋', '選項', 'cg', 'bg', '立繪', '對話歷史', '對話框', '名字框', '名字', '名字框背景', '話語框', '話語', '話語框背景', '對話框背景'];
       for (j = 0, len = 可特效块.length; j < len; j++) {
         i = 可特效块[j];
@@ -83,12 +85,11 @@
           $('#' + i).attr('class', '');
         }
       }
-      results = [];
-      for (k = 0, len1 = 特效表.length; k < len1; k++) {
-        i = 特效表[k];
-        results.push($('#' + i).addClass(特效表[i]));
+      for (i in 特效表) {
+        $('#' + i).addClass(特效表[i]);
+        console.log('特效', i, 特效表[i]);
       }
-      return results;
+      return console.log('特效處理結束');
     },
     選擇之刻: false,
     處理選項: function(選項) {
@@ -322,7 +323,6 @@
     文字淡入: function(s, 動畫名 = '_淡入') {
       var group, i, 內容, 動畫時間, 時間, 時間間隔;
       時間間隔 = v.用戶設置.文字速度 / 800;
-      console.log(時間間隔);
       group = s.replace(/((<.*?>)|(.))/g, "$2$3\0").split('\0');
       動畫時間 = 時間間隔 * 8;
       時間 = 0;

@@ -80,7 +80,7 @@ window.演出 =
         for i in 可特效块
             if $('#'+i).attr('class')
                 $('#'+i).attr('class','')
-        for i in 特效表
+        for i of 特效表
             $('#' + i).addClass(特效表[i])
 
     選擇之刻: false,
