@@ -18,7 +18,6 @@ html:
         script src='./全局.js':
         script src='./演出.js':
         script src='./控制.js':
-        script src='./逐字打印.js':
         script src='./圖像融合.js':
         
     style#style:
