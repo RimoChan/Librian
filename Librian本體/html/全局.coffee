@@ -1,5 +1,6 @@
 $ ->
     if window.山彥
+        window.本地 = 
         console.log '在本地演出'
         本地運行()
     else
@@ -36,10 +37,31 @@ $ ->
     山彥.初始化()
 
 
+從虛擬核心提取資源 = (心)->
+    集合 = {}
+    步 = JSON.parse(JSON.stringify(心.演出步))
+    for data in 步
+        if data.背景
+            集合["#{v.圖片文件夾}/#{data.背景[0]}"] = true
+        if data.cg
+            集合["#{v.圖片文件夾}/#{data.cg[0]}"] = true
+        if data.背景音樂[0]!='None'
+            集合[v.音樂文件夾 + '/' + data.背景音樂[0]] = true
+        for 人 in data.立繪
+            for 圖層 in 人.圖層
+                集合["#{v.臨時立繪文件夾}/#{圖層.文件}"] = true
+    return (i for i of 集合)
+
+window.加載完成的初始化 = ->
+    $('#加載畫面').fadeOut()
+    山彥.初始化()
+
 在線運行 = ->
     if typeof(虛擬核心) == "undefined"
         alert '無法加載虛擬核心。'
         return
+        
+    $('#加載畫面').css('display', 'flex')
         
     window.山彥 =
         n: 0
@@ -54,7 +76,7 @@ $ ->
             0
         初始化: ->
             演出.準備工作()
-            
+    
     window.v = new Vue
         el: '#總畫面'
         data:
@@ -72,5 +94,14 @@ $ ->
                 自動收起控制面板: true
                 總體音量: 1
     
+    資源組 = 從虛擬核心提取資源(虛擬核心)
+    window.v加載 = new Vue
+        el: '#加載畫面'
+        data:
+            最大值: 資源組.length
+            計數: 0
+    for 資源 in 資源組
+        $.get(資源, ->
+            v加載.計數+=1
+        )
     $('title').html 虛擬核心.作品名
-    山彥.初始化()

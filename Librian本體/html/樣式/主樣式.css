@@ -16,6 +16,19 @@ body {
     overflow: hidden;
 }
 
+#加載畫面 {
+    color: 000;
+    display: none;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-image: url("../../../synthetic_css/紙背景花紋.jpg");
+    background-color: #dec6a1;
+    background-size: cover;
+}
+
 #總畫面 {
     position: relative;
 }

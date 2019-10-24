@@ -24,6 +24,14 @@ html:
     style#style:
 
     body oncontextmenu='window.event.returnValue=false;':
+        div#加載畫面:
+            div:
+                加載資源
+            div:    
+                progress.synth v-bind:value='計數' v-bind:max='最大值':
+            div v-if='計數 == 最大值':
+                a.synth onclick='加載完成的初始化()':
+                    開始
         div#總畫面:
             video width="1366" height="768" src="" autoplay="autoplay":
     

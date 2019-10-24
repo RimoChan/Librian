@@ -21,6 +21,19 @@
     </head>
     <style id="style"></style>
     <body oncontextmenu='window.event.returnValue=false;'>
+        <div id="加載畫面">
+            <div>
+                加載資源
+            </div>
+            <div>
+                <progress class="synth" v-bind:value='計數' v-bind:max='最大值'></progress>
+            </div>
+            <div v-if='計數 == 最大值'>
+                <a class="synth" onclick='加載完成的初始化()'>
+                    開始
+                </a>
+            </div>
+        </div>
         <div id="總畫面">
             <video width="1366" height="768" src="" autoplay="autoplay"></video>
             <audio id="bgm" autoplay='' loop='' src=''></audio>
