@@ -56,4 +56,4 @@ def 拆包(文件名, 目標文件夾):
 
 
 if __name__ == '__main__':
-    拆包('project/test/立繪/靈夢.psd', 目標文件夾='project/test/_臨時文件')
+    拆包('project/test/立繪/靈夢.psd', 目標文件夾='project/test/_臨時立繪')

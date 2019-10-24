@@ -18,19 +18,19 @@ def 取角色(名字):
 
 def 導入有立繪的角色():
     try:
-        with open(f'{虛擬機環境.psd路徑}/映射.yaml', encoding='utf8') as f:
+        with open(f'{虛擬機環境.psd立繪路徑}/映射.yaml', encoding='utf8') as f:
             映射 = yaml.load(f)
             if 映射:
                 for 角色名 in 映射:
-                    if not os.path.isdir('%s/%s' % (虛擬機環境.圖片路徑, 角色名)):
-                        psd拆包.拆包(f'{虛擬機環境.psd路徑}/{角色名}.psd', 虛擬機環境.圖片路徑)
+                    if not os.path.isdir('%s/%s' % (虛擬機環境.臨時立繪路徑, 角色名)):
+                        psd拆包.拆包(f'{虛擬機環境.psd立繪路徑}/{角色名}.psd', 虛擬機環境.臨時立繪路徑)
                     角色(角色名, 映射[角色名])
-            for i in os.listdir(虛擬機環境.psd路徑):
+            for i in os.listdir(虛擬機環境.psd立繪路徑):
                 if i.endswith('.png'):
                     前名 = os.path.basename(os.path.splitext(i)[0])
-                    if not os.path.isdir('%s/%s' % (虛擬機環境.圖片路徑, 前名)):
-                        全名 = os.path.join(虛擬機環境.psd路徑, i)
-                        psd拆包.png假裝拆包(全名, 虛擬機環境.圖片路徑)
+                    if not os.path.isdir('%s/%s' % (虛擬機環境.臨時立繪路徑, 前名)):
+                        全名 = os.path.join(虛擬機環境.psd立繪路徑, i)
+                        psd拆包.png假裝拆包(全名, 虛擬機環境.臨時立繪路徑)
                     角色(前名, {
                         '衣': {'_默認': ['_']},
                         '顏': {'_默認': []},
@@ -47,7 +47,7 @@ class 角色:
 
         self.有立繪 = bool(立繪表)
         if self.有立繪:
-            with open('%s/%s/位置.yaml' % (虛擬機環境.圖片路徑, self.名字), encoding='utf8') as f:
+            with open('%s/%s/位置.yaml' % (虛擬機環境.臨時立繪路徑, self.名字), encoding='utf8') as f:
                 self.圖層座標 = yaml.load(f)
 
             self.衣圖層 = 立繪表['衣']
