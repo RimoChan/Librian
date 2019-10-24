@@ -5,7 +5,7 @@ chardet==3.0.4
 wxPython==4.0.6
 cloudpickle==1.2.1
 AppKit==0.2.8
-Pillow==6.1.0
+Pillow==6.2.0
 opencc==0.2
 weasyprint==48
 PyYAML==5.1.1
