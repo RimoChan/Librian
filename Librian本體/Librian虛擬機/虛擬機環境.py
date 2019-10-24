@@ -18,8 +18,7 @@ class 假面:
                 self.配置.update(a[i])
         self.配置['工程路徑'] = 工程路徑
         self.配置['psd立繪路徑'] = os.path.join(工程路徑, self.配置['立繪文件夾'])
-        self.配置['臨時立繪路徑'] = f"./{工程路徑}/_臨時立繪"
-        self.配置['臨時立繪相對網頁路徑'] = os.path.relpath(self.配置['臨時立繪路徑'], f'{此處}/../html' ).replace('\\', '/')
+        self.配置['臨時立繪文件夾'] = '_臨時立繪'
 
     def __getattr__(self, x):
         return self.配置[x]

@@ -38,11 +38,28 @@
       return 山彥.更新();
     },
     信息預處理: function(data) {
+      var j, len, ref, results, 人, 圖層;
       data.背景[0] = `url(${v.圖片文件夾}/${data.背景[0]})`;
       data.cg[0] = `url(${v.圖片文件夾}/${data.cg[0]})`;
       if (data.背景音樂[0] !== 'None') {
-        return data.背景音樂[0] = v.音樂文件夾 + '/' + data.背景音樂[0];
+        data.背景音樂[0] = v.音樂文件夾 + '/' + data.背景音樂[0];
       }
+      ref = data.立繪;
+      results = [];
+      for (j = 0, len = ref.length; j < len; j++) {
+        人 = ref[j];
+        results.push((function() {
+          var k, len1, ref1, results1;
+          ref1 = 人.圖層;
+          results1 = [];
+          for (k = 0, len1 = ref1.length; k < len1; k++) {
+            圖層 = ref1[k];
+            results1.push(圖層.文件 = `${v.臨時立繪文件夾}/${圖層.文件}`);
+          }
+          return results1;
+        })());
+      }
+      return results;
     },
     改變演出狀態: function(data) {
       var cg, js, 名字, 特效表, 立繪, 背景, 背景音樂, 視頻, 話語, 語者, 選項, 額外信息;
@@ -75,9 +92,7 @@
       return this.換對話(話語, 名字);
     },
     特效處理: function(特效表) {
-      var i, j, len, 可特效块;
-      console.log('特效處理');
-      console.log(特效表);
+      var i, j, len, results, 可特效块;
       可特效块 = ['總畫面', 'adv畫面', '覆蓋', '選項', 'cg', 'bg', '立繪', '對話歷史', '對話框', '名字框', '名字', '名字框背景', '話語框', '話語', '話語框背景', '對話框背景'];
       for (j = 0, len = 可特效块.length; j < len; j++) {
         i = 可特效块[j];
@@ -85,11 +100,11 @@
           $('#' + i).attr('class', '');
         }
       }
+      results = [];
       for (i in 特效表) {
-        $('#' + i).addClass(特效表[i]);
-        console.log('特效', i, 特效表[i]);
+        results.push($('#' + i).addClass(特效表[i]));
       }
-      return console.log('特效處理結束');
+      return results;
     },
     選擇之刻: false,
     處理選項: function(選項) {

@@ -41,9 +41,11 @@ window.演出 =
     信息預處理: (data) ->
         data.背景[0] = "url(#{v.圖片文件夾}/#{data.背景[0]})"
         data.cg[0] = "url(#{v.圖片文件夾}/#{data.cg[0]})"
-
         if data.背景音樂[0]!='None'
             data.背景音樂[0] = v.音樂文件夾 + '/' + data.背景音樂[0]
+        for 人 in data.立繪
+            for 圖層 in 人.圖層
+                圖層.文件 = "#{v.臨時立繪文件夾}/#{圖層.文件}"
 
     改變演出狀態: (data) ->
         this.信息預處理 data
