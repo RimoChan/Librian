@@ -6,7 +6,6 @@
       var go, i, j, len, m, t, 圖片組, 緩存;
       緩存 = this.緩存;
       if (緩存[圖片名組.toString()]) {
-        console.log('用緩存');
         t = this.緩存[圖片名組.toString()];
         f(t[0], t[1]);
       }
@@ -29,7 +28,6 @@
       }
       return go = function(緩存) {
         var base64, canvas, context, k, len1, 圖片, 極x, 極y;
-        console.log(緩存);
         極x = Math.max.apply(Math, (function() {
           var k, len1, results;
           results = [];
@@ -48,7 +46,6 @@
           }
           return results;
         })());
-        console.log(極x, 極y);
         canvas = document.createElement("canvas");
         canvas.width = 極x;
         canvas.height = 極y;
@@ -62,9 +59,10 @@
         return f([極x, 極y], base64);
       };
     },
-    融合到div: function(圖片名組, 時間, dv) {
+    融合到div: function(圖片名組, 時間, div名) {
       return this.圖像融合(圖片名組, function(尺寸, base64) {
-        dv = document.getElementById(dv);
+        var dv;
+        dv = document.getElementById(div名);
         if (時間 > 0) {
           dv.style.transition = `background ${時間}s, width ${時間}s, height ${時間}s, top ${時間}s, left ${時間}s, transform ${時間}s`;
         } else {
@@ -76,17 +74,5 @@
       });
     }
   };
-
-  // window.onload = ->
-//     融合到div([
-//         ['體.png', 2, 156],
-//         ['0.png', 423, 338],
-//     ], 1)
-
-//     document.getElementById('avatar').onclick=->
-//         融合到div([
-//             ['體.png', 2, 156],
-//             ['1.png', 425, 336]
-//         ], 0.5)
 
 }).call(this);

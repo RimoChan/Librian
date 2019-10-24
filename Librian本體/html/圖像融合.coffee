@@ -3,7 +3,6 @@ window.圖像融合 =
     圖像融合: (圖片名組, f) ->
         緩存 = this.緩存
         if 緩存[圖片名組.toString()]
-            console.log '用緩存'
             t = this.緩存[圖片名組.toString()]
             f(t[0], t[1])
         m = 0
@@ -36,9 +35,9 @@ window.圖像融合 =
 
             f([極x, 極y], base64)
 
-    融合到div: (圖片名組, 時間, dv) ->
+    融合到div: (圖片名組, 時間, div名) ->
         this.圖像融合(圖片名組, (尺寸, base64) ->
-            dv = document.getElementById(dv)
+            dv = document.getElementById(div名)
             if 時間 > 0
                 dv.style.transition = "background #{時間}s, width #{時間}s, height #{時間}s, top #{時間}s, left #{時間}s, transform #{時間}s"
             else
@@ -47,16 +46,3 @@ window.圖像融合 =
             dv.style.height = 尺寸[1]
             dv.style.backgroundImage = "url(#{base64})"
         )
-
-
-# window.onload = ->
-#     融合到div([
-#         ['體.png', 2, 156],
-#         ['0.png', 423, 338],
-#     ], 1)
-#
-#     document.getElementById('avatar').onclick=->
-#         融合到div([
-#             ['體.png', 2, 156],
-#             ['1.png', 425, 336]
-#         ], 0.5)
