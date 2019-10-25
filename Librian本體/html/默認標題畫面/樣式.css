@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 源流明體SemiBold;
-    src: url('../樣式/static/GenRyuMinTW-SemiBold.ttf');
+    font-family: 思源宋體SemiBold;
+    src: url('../樣式/static/NotoSerifSC-SemiBold.otf');
 }
 @keyframes a {
     0% {
@@ -15,7 +15,7 @@
     --y: 0px;
 }
 body {
-    font-family: 源流明體SemiBold !important;
+    font-family: 思源宋體SemiBold !important;
     font-size: 1.6vw;
     text-shadow: 0px 0px 5px #FFF;
     overflow: hidden;
