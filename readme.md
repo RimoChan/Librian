@@ -24,9 +24,9 @@ Librian是面向劇本的引擎，賣點是:
 
 Librian由python和HTML編寫而成，基於CEFPython和wxPython前端。
 
-## 演示視頻
+## 一分鐘的演示視頻
 
-[![視頻佔位](./文檔/視頻佔位.png)](https://www.zhihu.com/video/1075418256290131968)  
+[![視頻佔位](./文檔/視頻佔位.jpg)](https://librian.it/視頻/轉.webm)  
 
 ## 劇本格式
 
