@@ -124,7 +124,7 @@ class 狀態:
             'js': self.js,
             '選項': [i[0] for i in self.選項],
             '語者': self.語者,
-            '特效表': self.特效表,
+            '特效表': copy.deepcopy(self.特效表),
         }
         self.清除臨時狀態()
         return 快照
