@@ -160,8 +160,12 @@ window.演出 =
                 console.log "去除 #{名字}"
         for 名字 in 名字組
             if this.當前人物.indexOf(名字) == - 1
-                $('#立繪').append($("<div id='立繪--#{名字}' class='淡入'></div>"))
+                $('#立繪').append($("<div id='立繪--#{名字}'></div>"))
                 console.log "加入 #{名字}"
+                for 立繪 in 立繪組
+                    if 立繪.名字 == 名字
+                        立繪.特效.push('淡入')
+                        
 
         for 立繪 in 立繪組
             組 = ([層.文件, 層.子位置[0], 層.子位置[1]] for 層 in 立繪.圖層)
@@ -172,7 +176,8 @@ window.演出 =
             t.css('left', "#{立繪.位置[0]}px")
             t.css('top', "#{立繪.位置[1]}px")
             t.css('transform', "scale(#{立繪.位置[2]})")
-
+            t.attr('class', 立繪.特效.join(" "))
+            
         this.當前人物 = 名字組
 
 

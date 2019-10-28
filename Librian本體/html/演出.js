@@ -183,7 +183,7 @@
     },
     當前人物: [],
     換立繪: function(立繪組) {
-      var j, k, l, len, len1, len2, len3, m, ref, t, 名字, 名字組, 層, 立繪, 組;
+      var j, k, l, len, len1, len2, len3, len4, m, n, ref, t, 名字, 名字組, 層, 立繪, 組;
       名字組 = (function() {
         var j, len, results;
         results = [];
@@ -204,30 +204,37 @@
       for (k = 0, len1 = 名字組.length; k < len1; k++) {
         名字 = 名字組[k];
         if (this.當前人物.indexOf(名字) === -1) {
-          $('#立繪').append($(`<div id='立繪--${名字}' class='淡入'></div>`));
+          $('#立繪').append($(`<div id='立繪--${名字}'></div>`));
           console.log(`加入 ${名字}`);
+          for (l = 0, len2 = 立繪組.length; l < len2; l++) {
+            立繪 = 立繪組[l];
+            if (立繪.名字 === 名字) {
+              立繪.特效.push('淡入');
+            }
+          }
         }
       }
-      for (l = 0, len2 = 立繪組.length; l < len2; l++) {
-        立繪 = 立繪組[l];
+      for (m = 0, len3 = 立繪組.length; m < len3; m++) {
+        立繪 = 立繪組[m];
         組 = (function() {
-          var len3, m, ref1, results;
+          var len4, n, ref1, results;
           ref1 = 立繪.圖層;
           results = [];
-          for (m = 0, len3 = ref1.length; m < len3; m++) {
-            層 = ref1[m];
+          for (n = 0, len4 = ref1.length; n < len4; n++) {
+            層 = ref1[n];
             results.push([層.文件, 層.子位置[0], 層.子位置[1]]);
           }
           return results;
         })();
         圖像融合.融合到div(組, 0.5, `立繪--${立繪.名字}`);
       }
-      for (m = 0, len3 = 立繪組.length; m < len3; m++) {
-        立繪 = 立繪組[m];
+      for (n = 0, len4 = 立繪組.length; n < len4; n++) {
+        立繪 = 立繪組[n];
         t = $(`#立繪--${立繪.名字}`);
         t.css('left', `${立繪.位置[0]}px`);
         t.css('top', `${立繪.位置[1]}px`);
         t.css('transform', `scale(${立繪.位置[2]})`);
+        t.attr('class', 立繪.特效.join(" "));
       }
       return this.當前人物 = 名字組;
     },
