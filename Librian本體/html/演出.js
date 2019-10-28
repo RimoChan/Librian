@@ -44,6 +44,9 @@
       if (data.背景音樂[0] !== 'None') {
         data.背景音樂[0] = v.音樂文件夾 + '/' + data.背景音樂[0];
       }
+      if (data.插入圖) {
+        data.插入圖 = `url(${v.圖片文件夾}/${data.插入圖})`;
+      }
       ref = data.立繪;
       results = [];
       for (j = 0, len = ref.length; j < len; j++) {
@@ -62,22 +65,22 @@
       return results;
     },
     改變演出狀態: function(data) {
-      var cg, js, 名字, 特效表, 立繪, 背景, 背景音樂, 視頻, 話語, 語者, 選項, 額外信息;
+      var cg, js, 名字, 插入圖, 特效表, 立繪, 背景, 背景音樂, 視頻, 話語, 語者, 選項, 額外信息;
       this.信息預處理(data);
       console.log(data);
-      ({特效表, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, 視頻} = data);
+      ({特效表, 插入圖, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, 視頻} = data);
       this.特效處理(特效表);
       if (選項.length > 0) {
         this.處理選項(選項);
         return;
       }
+      if (插入圖) {
+        名字 = '';
+        話語 = '';
+        背景音樂 = ['None', 0];
+        this.插入圖(插入圖);
+      }
       if (額外信息) {
-        if (額外信息[0] === 'cut') {
-          名字 = '';
-          話語 = '';
-          背景音樂 = ['None', 0];
-          this.插入圖(額外信息[1]);
-        }
         if (額外信息[0] === 'load') {
           this.load特效();
         }
@@ -124,30 +127,8 @@
       return this.選擇之刻 = false;
     },
     插入圖: function(圖) {
-      控制.左鍵屏蔽 = true;
-      $('#覆蓋').css('display', 'block');
-      $('#總畫面').fadeOut(1400);
-      setTimeout(function() {
-        return 演出.換圖('覆蓋', 'url(' + 演出.圖片文件夾 + '/' + 圖 + ')', 0);
-      }, 1500);
-      setTimeout(function() {
-        return 演出.步進更新();
-      }, 1500);
-      setTimeout(function() {
-        return $('#總畫面').fadeIn(1100);
-      }, 1500);
-      setTimeout(function() {
-        return 演出.換圖('覆蓋', 'url(static/None.png)', 1);
-      }, 4500);
-      setTimeout(function() {
-        return $('#覆蓋').css('animation', '');
-      }, 5550);
-      setTimeout(function() {
-        return $('#覆蓋').css('display', 'none');
-      }, 5600);
-      return setTimeout(function() {
-        return 控制.左鍵屏蔽 = false;
-      }, 5600);
+      演出.換圖('覆蓋', 圖, 0);
+      return $('#覆蓋').css('display', 'block');
     },
     放視頻: function(視頻) {
       var video, 可以跳過, 視頻文件;

@@ -99,7 +99,7 @@
 
   // 滚轮功能
   $(function() {
-    $('#adv畫面').mousewheel(function(event, delta) {
+    $('#主畫面').mousewheel(function(event, delta) {
       if (delta > 0) {
         控制.顯示履歷();
       }
@@ -109,11 +109,19 @@
         }
       }
     });
-    return $("#adv畫面").mousedown(function(e) {
+    $("#主畫面").mousedown(function(e) {
       if (e.which === 3) {
         return 控制.右鍵功能();
-      } else if (1 === e.which) {
+      } else if (e.which === 1) {
+        console.log(16);
         return 控制.左鍵功能();
+      }
+    });
+    return $("#覆蓋").mousedown(function(e) {
+      if (e.which === 1) {
+        console.log(32);
+        $("#覆蓋").hide();
+        return 演出.步進更新();
       }
     });
   });

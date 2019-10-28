@@ -43,6 +43,8 @@ window.演出 =
         data.cg[0] = "url(#{v.圖片文件夾}/#{data.cg[0]})"
         if data.背景音樂[0]!='None'
             data.背景音樂[0] = v.音樂文件夾 + '/' + data.背景音樂[0]
+        if data.插入圖
+            data.插入圖 = "url(#{v.圖片文件夾}/#{data.插入圖})"
         for 人 in data.立繪
             for 圖層 in 人.圖層
                 圖層.文件 = "#{v.臨時立繪文件夾}/#{圖層.文件}"
@@ -50,17 +52,17 @@ window.演出 =
     改變演出狀態: (data) ->
         this.信息預處理 data
         console.log data
-        {特效表, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, 視頻} = data
+        {特效表, 插入圖, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, 視頻} = data
         this.特效處理 特效表
         if 選項.length > 0
             this.處理選項 選項
             return
+        if 插入圖
+            名字 = ''
+            話語 = ''
+            背景音樂 = ['None', 0]
+            this.插入圖(插入圖)
         if 額外信息
-            if 額外信息[0] == 'cut'
-                名字 = ''
-                話語 = ''
-                背景音樂 = ['None', 0]
-                this.插入圖(額外信息[1])
             if 額外信息[0] == 'load'
                 this.load特效()
         eval(js)
@@ -99,30 +101,8 @@ window.演出 =
         this.選擇之刻 = false
 
     插入圖: (圖) ->
-        控制.左鍵屏蔽 = true
+        演出.換圖('覆蓋', 圖, 0)
         $('#覆蓋').css('display','block')
-        $('#總畫面').fadeOut(1400)
-        setTimeout ->
-            演出.換圖('覆蓋','url('+演出.圖片文件夾+'/'+圖+')', 0)
-        , 1500
-        setTimeout ->
-            演出.步進更新()
-        , 1500
-        setTimeout ->
-            $('#總畫面').fadeIn(1100)
-        , 1500
-        setTimeout ->
-            演出.換圖('覆蓋','url(static/None.png)', 1)
-        , 4500
-        setTimeout ->
-            $('#覆蓋').css('animation','')
-        , 5550
-        setTimeout ->
-            $('#覆蓋').css('display','none')
-        , 5600
-        setTimeout ->
-            控制.左鍵屏蔽 = false
-        , 5600
 
     放視頻: (視頻) ->
         if ! 視頻

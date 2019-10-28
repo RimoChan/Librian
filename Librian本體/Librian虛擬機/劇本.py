@@ -94,6 +94,7 @@ class 命令:
 class 狀態:
     def __init__(self):
         self.額外信息 = ''
+        self.插入圖 = ''
         self.話語 = ''
         self.名字 = ''
         self.人物 = ''
@@ -114,6 +115,7 @@ class 狀態:
             立繪 = []
         快照 = {
             '額外信息': self.額外信息,
+            '插入圖': self.插入圖,
             '話語': self.話語,
             '名字': self.名字,
             '立繪': 立繪,
@@ -134,6 +136,7 @@ class 狀態:
 
     def 清除臨時狀態(self):
         self.js = ''
+        self.插入圖 = ''
         self.額外信息 = ''
         self.視頻 = ''
 
@@ -312,7 +315,7 @@ class 讀者句控制:
     @staticmethod
     def 插入圖(讀者, 插入圖):
         logging.debug('插入圖: %s' % 插入圖)
-        讀者.狀態.額外信息 = ('cut', 插入圖)
+        讀者.狀態.插入圖 = 插入圖
 
     @staticmethod
     def 終焉(讀者, 旁白):

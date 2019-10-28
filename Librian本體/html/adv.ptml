@@ -89,20 +89,21 @@ html:
             div#adv畫面:
                 div#覆蓋:
                 div#選項:
-                div#cg:
-                div#bg:
-                div#立繪:
-                div.美麗滑條.scroll:
-                    div#對話歷史:
-    
-                div#對話框:
-                    div#名字框:
-                        div#名字:
-                        div#名字框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度}":
-                    div#話語框:
-                        div#話語:
-                        div#話語框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度}":
-                    div#對話框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度}":
+                div#主畫面:
+                    div#cg:
+                    div#bg:
+                    div#立繪:
+                    div.美麗滑條.scroll:
+                        div#對話歷史:
+        
+                    div#對話框:
+                        div#名字框:
+                            div#名字:
+                            div#名字框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度}":
+                        div#話語框:
+                            div#話語:
+                            div#話語框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度}":
+                        div#對話框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度}":
                     
             div#提示:
 
