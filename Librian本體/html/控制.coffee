@@ -92,11 +92,9 @@ $ ->
         if e.which == 3
             控制.右鍵功能()
         else if e.which == 1 
-            console.log 16
             控制.左鍵功能()
             
     $("#覆蓋").mousedown (e)->
         if e.which == 1
-            console.log 32
             $("#覆蓋").hide()
             演出.步進更新()
