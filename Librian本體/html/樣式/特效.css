@@ -1,59 +1,45 @@
-@keyframes _淡入{
-    0%{
-        opacity:0;
-    }
-    100%{
-        opacity:1;
-    }
-}
-@keyframes _下入{
-    0%{
-        position: relative;
-        top: 50px;
-        opacity:0;
-    }
-    100%{
-        opacity:1;
-        position: relative;
-        top: 0px;
-    }
-}
+@charset "UTF-8";
+@keyframes _淡入 {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@keyframes _下入 {
+  0% {
+    position: relative;
+    top: 50px;
+    opacity: 0; }
+  100% {
+    opacity: 1;
+    position: relative;
+    top: 0px; } }
+@keyframes _淡出 {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+@keyframes _黑出 {
+  0% {
+    opacity: 1;
+    filter: brightness(100%); }
+  50% {
+    opacity: 1;
+    filter: brightness(0%); }
+  100% {
+    opacity: 0;
+    filter: brightness(0%); } }
+.淡入 {
+  animation: _淡入 0.6s;
+  animation-fill-mode: forwards; }
 
+.下入 {
+  animation: _下入 0.6s;
+  animation-fill-mode: forwards; }
 
-@keyframes _淡出{
-    0%{
-        opacity:1;
-    }
-    100%{
-        opacity:0;
-    }
-}
-@keyframes _黑出{
-    0%{
-        opacity: 1;
-        filter: brightness(100%)
-    }
-    50%{
-        opacity: 1;
-        filter: brightness(0%)
-    }
-    100%{
-        opacity:0;
-        filter: brightness(0%)
-    }
-}
+.灰 {
+  filter: grayscale(1); }
 
-.淡入{
-    animation:_淡入 0.6s;
-    animation-fill-mode:forwards;
-}
-.下入{
-    animation:_下入 0.6s;
-    animation-fill-mode:forwards;
-}
-.灰{
-    filter: grayscale();
-}
-.透明{
-    opacity:0.5;
-}
+.透明 {
+  opacity: 0.5; }
+
+/*# sourceMappingURL=%E7%89%B9%E6%95%88.css.map */
