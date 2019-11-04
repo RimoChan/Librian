@@ -21,7 +21,7 @@ def 生成虛擬核心():
     
     演出步 = list(讀者.迭代器())
 
-    with open(Path(此處) / 'html/虛擬核心.js', 'w', encoding='utf-8') as f:
+    with open(Path(此處) / '前端/虛擬核心.js', 'w', encoding='utf-8') as f:
         虛擬核心 = {
             '作品名': 虛擬機環境.標題,
             '解析度': 虛擬機環境.主解析度,

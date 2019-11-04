@@ -12,11 +12,11 @@ from Librian虛擬機 import 虛擬機環境
 def app():
 
     if 配置['編寫模式']:
-        url = './html/adv.html'
+        url = './前端/adv.html'
     elif 虛擬機環境.標題畫面:
         url = f'{虛擬機環境.工程路徑}/{虛擬機環境.標題畫面}'
     else:
-        url = './html/默認標題畫面/標題.html'
+        url = './前端/默認標題畫面/標題.html'
 
     標題url = 文件.轉爲網址路徑(url)
 
