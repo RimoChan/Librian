@@ -42,7 +42,7 @@ a.synth {
     -webkit-mask-image: url('虛僞的假面.png');
     -webkit-mask-size: cover;
     filter: hue-rotate(var(--s));
-    background: url('../../../synthetic_css/紙背景花紋模糊.jpg');
+    background: url('../../../黑科技/synthetic_css/紙背景花紋模糊.jpg');
     background-size: cover;
     width: 100%;
     height: 100%;
