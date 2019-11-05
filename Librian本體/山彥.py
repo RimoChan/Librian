@@ -49,7 +49,7 @@ class 山彥(帶有vue的山彥):
         文件名 = self.選擇存檔文件()
         if 文件名:
             self.讀者.存檔(文件名)
-            self.js('演出.提示("存檔好了。")')
+            self.js('_py演出.提示("存檔好了。")')
 
     def 讀檔(self):
         文件名 = self.選擇讀檔文件()
@@ -59,7 +59,7 @@ class 山彥(帶有vue的山彥):
 
     def 快速存檔(self):
         self.讀者.存檔(f'{虛擬機環境.工程路徑}/存檔資料/快速存檔.pkl')
-        self.js('演出.提示("存檔好了。")')
+        self.js('_py演出.提示("存檔好了。")')
 
     def 快速讀檔(self):
         self.讀者.讀檔(f'{虛擬機環境.工程路徑}/存檔資料/快速存檔.pkl')
@@ -85,7 +85,7 @@ class 演出山彥(山彥):
 
     def 更新(self):
         狀態 = self.讀者.狀態.導出()
-        self.js(f'演出.改變演出狀態({json.dumps(狀態)})')
+        self.js(f'_py演出.改變演出狀態({json.dumps(狀態)})')
 
     def 步進(self):
         if 配置['編寫模式']:
@@ -114,7 +114,7 @@ class 演出山彥(山彥):
             except Exception as e:
                 logging.warning('用戶設置失效。')
             
-        self.js('演出.準備工作()')
+        self.js('_py演出.準備工作()')
 
     def 選(self, 參數):
         t = self.讀者.狀態.選項[參數][1]

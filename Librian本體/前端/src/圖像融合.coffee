@@ -1,4 +1,4 @@
-window.圖像融合 =
+export default 圖像融合 =
     緩存: {} ,
     圖像融合: (圖片名組, f) ->
         緩存 = this.緩存

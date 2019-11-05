@@ -4,11 +4,6 @@ html:
         meta charset='utf-8'; 
         link rel='stylesheet' href='../../黑科技/synthetic_css/synthetic_offline.css';
         link rel="stylesheet" href='../../黑科技/font-awesome-4.7.0/css/font-awesome.css';
-        link rel='stylesheet' href='./樣式/主樣式.css';
-        link rel='stylesheet' href='./樣式/配置面板的樣式.css';
-        link rel="stylesheet" href='./樣式/特效.css';
-        link rel="stylesheet" href='./樣式/按鈕.css';
-        link rel="stylesheet" href='./樣式/美麗滑條.css';
         
         script src='../../黑科技/vue.js':
         script src='../../黑科技/jquery-3.1.1.min.js':
@@ -16,10 +11,7 @@ html:
         script src='../../黑科技/jquery.mousewheel.js':
         
         script src='./虛擬核心.js':
-        script src='./全局.js':
-        script src='./演出.js':
-        script src='./控制.js':
-        script src='./圖像融合.js':
+        script src='./dist/束.js':
         
     style#style:
 
@@ -42,7 +34,7 @@ html:
                 span.按鈕組:
                     a.synth:
                         i.fa.fa-rotate-left:
-                    a.synth href='javascript:控制.退出設置();':
+                    a#退出設置.synth:
                         i.fa.fa-check:
                 div 名字='全屏幕':
                     a.synth href='javascript:山彥.切換全屏();':
@@ -65,26 +57,26 @@ html:
                     大聲(沒用)
                         
             div#工具欄 v-bind:class="{自動收起: 用戶設置.自動收起控制面板}":
-                a.hicon href='javascript:山彥.存檔();':
-                    <i class="fa fa-floppy-o"></i>
-                    <i class="fa fa-angle-double-down" style='text-shadow:0 0 4px #000;'></i>
-                a.hicon href='javascript:山彥.讀檔();':
-                    <i class="fa fa-floppy-o"></i>
-                    <i class="fa fa-angle-double-up" style='text-shadow:0 0 4px #000;'></i>
-                a.hicon href='javascript:山彥.快速存檔();':
-                    <i class="fa fa-floppy-o"></i>
-                    <i class="fa fa-angle-double-down" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
-                a.hicon href='javascript:山彥.快速讀檔();':
-                    <i class="fa fa-floppy-o"></i>
-                    <i class="fa fa-angle-double-up" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
-                a.hicon href='javascript:alert("沒做這個功能");':
-                    <i class="fa fa-forward"></i>
-                a.hicon href='javascript:控制.切換快進();':
-                    <i class="fa fa-fast-forward"></i>
-                a.hicon href='javascript:控制.進入設置();':
-                    <i class="fa fa-gear"></i>
-                a.hicon href='javascript:山彥.回標題();':
-                    <i class="fa fa-mail-reply"></i>
+                a#存檔:
+                    i.fa.fa-floppy-o:
+                    i.fa.fa-angle-double-down style='text-shadow:0 0 4px #000;':
+                a#讀檔:
+                    i.fa.fa-floppy-o:
+                    i.fa.fa-angle-double-up style='text-shadow:0 0 4px #000;':
+                a#快速存檔:
+                    i.fa.fa-floppy-o:
+                    i.fa.fa-angle-double-down style='color:#fd1; text-shadow:0 0 4px #000;':
+                a#快速讀檔:
+                    i.fa.fa-floppy-o:
+                    i.fa.fa-angle-double-up style='color:#fd1; text-shadow:0 0 4px #000;':
+                a#自動模式:
+                    i.fa.fa-forward:
+                a#切換快進:
+                    i.fa.fa-fast-forward:
+                a#進入設置:
+                    i.fa.fa-gear:
+                a#回標題:
+                    i.fa.fa-mail-reply:
     
             div#adv畫面:
                 div#覆蓋:

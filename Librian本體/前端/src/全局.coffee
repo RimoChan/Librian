@@ -1,4 +1,15 @@
-$ ->
+import 演出 from './演出.coffee'
+import 控制 from './控制.coffee'
+
+import './按鈕.sass'
+import './美麗滑條.sass'
+import './主樣式.sass'
+import './特效.sass'
+import './配置面板的樣式.sass'
+
+window._py演出 = 演出
+
+window.onload = ->
     if window.山彥
         window.本地 = 
         console.log '在本地演出'
@@ -6,7 +17,7 @@ $ ->
     else
         console.log '在瀏覽器上演出'
         在線運行()
-
+    控制.控制初始化()
 
 本地運行 = ->
     window.v = new Vue

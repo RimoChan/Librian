@@ -99,9 +99,9 @@ class 狀態:
         self.名字 = ''
         self.人物 = ''
         self.語者 = ''
-        self.背景 = ''
+        self.背景 = None
         self.背景音樂 = ('', 1)
-        self.CG = ''
+        self.CG = None
         self.js = ''
         self.特效表 = {}
         self.選項 = ()

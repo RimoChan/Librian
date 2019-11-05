@@ -1,4 +1,8 @@
-window.演出 = 
+import 控制 from './控制.coffee'
+import 圖像融合 from './圖像融合.coffee'
+
+
+export default 演出 = 
     準備工作: ->
         $ '<link>'
             .attr
@@ -39,8 +43,11 @@ window.演出 =
         山彥.更新()
 
     信息預處理: (data) ->
-        data.背景[0] = "url(#{v.圖片文件夾}/#{data.背景[0]})"
-        data.cg[0] = "url(#{v.圖片文件夾}/#{data.cg[0]})"
+        console.log data
+        if data.背景
+            data.背景[0] = "url(#{v.圖片文件夾}/#{data.背景[0]})"
+        if data.cg
+            data.cg[0] = "url(#{v.圖片文件夾}/#{data.cg[0]})"
         if data.背景音樂[0]!='None'
             data.背景音樂[0] = v.音樂文件夾 + '/' + data.背景音樂[0]
         if data.插入圖
@@ -143,9 +150,14 @@ window.演出 =
 
     現在cg: 'None',
     換cg: (cg) ->
-        cg圖片 = cg[0]
-        淡入時間 = cg[1]
-        漸變方法 = cg[2]
+        if cg
+            cg圖片 = cg[0]
+            淡入時間 = cg[1]
+            漸變方法 = cg[2]
+        else
+            cg圖片 = ''
+            淡入時間 = 0
+            漸變方法 = ''
         if cg圖片 == this.現在cg
             return
         this.現在cg = cg圖片

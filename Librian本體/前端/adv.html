@@ -4,20 +4,12 @@
         <meta charset='utf-8'/>
         <link rel='stylesheet' href='../../黑科技/synthetic_css/synthetic_offline.css'/>
         <link rel="stylesheet" href='../../黑科技/font-awesome-4.7.0/css/font-awesome.css'/>
-        <link rel='stylesheet' href='./樣式/主樣式.css'/>
-        <link rel='stylesheet' href='./樣式/配置面板的樣式.css'/>
-        <link rel="stylesheet" href='./樣式/特效.css'/>
-        <link rel="stylesheet" href='./樣式/按鈕.css'/>
-        <link rel="stylesheet" href='./樣式/美麗滑條.css'/>
         <script src='../../黑科技/vue.js'></script>
         <script src='../../黑科技/jquery-3.1.1.min.js'></script>
         <script src='../../黑科技/jquery-ui.min.js'></script>
         <script src='../../黑科技/jquery.mousewheel.js'></script>
         <script src='./虛擬核心.js'></script>
-        <script src='./全局.js'></script>
-        <script src='./演出.js'></script>
-        <script src='./控制.js'></script>
-        <script src='./圖像融合.js'></script>
+        <script src='./dist/束.js'></script>
     </head>
     <style id="style"></style>
     <body oncontextmenu='window.event.returnValue=false;'>
@@ -43,7 +35,7 @@
                     <a class="synth">
                         <i class="fa fa-rotate-left"></i>
                     </a>
-                    <a class="synth" href='javascript:控制.退出設置();'>
+                    <a class="synth" id="退出設置">
                         <i class="fa fa-check"></i>
                     </a>
                 </span>
@@ -75,32 +67,32 @@
                 </div>
             </div>
             <div id="工具欄" v-bind:class="{自動收起: 用戶設置.自動收起控制面板}">
-                <a class="hicon" href='javascript:山彥.存檔();'>
+                <a id="存檔">
                     <i class="fa fa-floppy-o"></i>
                     <i class="fa fa-angle-double-down" style='text-shadow:0 0 4px #000;'></i>
                 </a>
-                <a class="hicon" href='javascript:山彥.讀檔();'>
+                <a id="讀檔">
                     <i class="fa fa-floppy-o"></i>
                     <i class="fa fa-angle-double-up" style='text-shadow:0 0 4px #000;'></i>
                 </a>
-                <a class="hicon" href='javascript:山彥.快速存檔();'>
+                <a id="快速存檔">
                     <i class="fa fa-floppy-o"></i>
                     <i class="fa fa-angle-double-down" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
                 </a>
-                <a class="hicon" href='javascript:山彥.快速讀檔();'>
+                <a id="快速讀檔">
                     <i class="fa fa-floppy-o"></i>
                     <i class="fa fa-angle-double-up" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
                 </a>
-                <a class="hicon" href='javascript:alert("沒做這個功能");'>
+                <a id="自動模式">
                     <i class="fa fa-forward"></i>
                 </a>
-                <a class="hicon" href='javascript:控制.切換快進();'>
+                <a id="切換快進">
                     <i class="fa fa-fast-forward"></i>
                 </a>
-                <a class="hicon" href='javascript:控制.進入設置();'>
+                <a id="進入設置">
                     <i class="fa fa-gear"></i>
                 </a>
-                <a class="hicon" href='javascript:山彥.回標題();'>
+                <a id="回標題">
                     <i class="fa fa-mail-reply"></i>
                 </a>
             </div>
