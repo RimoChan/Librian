@@ -1,11 +1,11 @@
-# ![](./Librian本體/資源/Librian小.png)Librian: 简明强大的 Galgame | Visual Novel 引擎
+# Librian: 简明强大的 Galgame | Visual Novel 引擎
 
-![Librian2.jpg](./文檔/Librian2.jpg)
 [![](https://img.shields.io/github/stars/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/stargazers)
 [![](https://img.shields.io/badge/platform-windows%20%7C%20linux-%23989898)](https://en.wikipedia.org/wiki/Microsoft_Windows)
 [![](https://img.shields.io/github/release/RimoChan/librian.svg)](https://github.com/RimoChan/Librian/releases)
 [![](https://img.shields.io/github/downloads/RimoChan/librian/total.svg)](https://github.com/RimoChan/Librian/releases)
 [![](https://img.shields.io/github/license/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/blob/master/LICENSE)
+![Librian2.jpg](./文檔/Librian2.jpg)
 
 Librian是容易上手的 Galgame 引擎。   
 Librian由Python和JavaScript编写而成，基于CEFPython前端。  
