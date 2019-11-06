@@ -1,7 +1,6 @@
 # ![](./Librian本體/資源/Librian小.png)Librian: 簡明強大的 Galgame | Visual Novel 引擎
 
-![Librian2.jpg](./文檔/Librian2.jpg)
-
+![Librian2.jpg](./文檔/Librian2.jpg)  
 [![](https://img.shields.io/github/stars/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/stargazers)
 [![](https://img.shields.io/badge/platform-windows%20%7C%20linux-%23989898)](https://en.wikipedia.org/wiki/Microsoft_Windows)
 [![](https://img.shields.io/github/release/RimoChan/librian.svg)](https://github.com/RimoChan/Librian/releases)
