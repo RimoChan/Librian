@@ -45,35 +45,32 @@
                     </a>
                 </div>
                 <div v-for='(內容, 設置名) in 用戶設置' v-bind:名字='設置名'>
-                    <span v-if='內容.類型 === "number"'>
+                    <template v-if='內容.類型 === "number"'>
                         {{內容.提示[0]}}
                         <input class="synth" type="range"  v-bind:min="內容.範圍[0]" v-bind:max="內容.範圍[1]" v-bind:step='(內容.範圍[1]-內容.範圍[0])/32' v-model="內容['值']"></input>
                         {{內容.提示[1]}}
-                    </span>
-                    <span v-if='內容.類型 === "boolean"'>
+                    </template>
+                    <template v-if='內容.類型 === "boolean"'>
                         <input class="synth" type="checkbox" v-model="內容['值']"></input>
-                    </span>
+                    </template>
                 </div>
             </div>
             <div id="工具欄" v-bind:class="{自動收起: 用戶設置.自動收起控制面板.值}">
-                <a id="存檔">
+                <a id="存檔" v-if='本地運行'>
                     <i class="fa fa-floppy-o"></i>
                     <i class="fa fa-angle-double-down" style='text-shadow:0 0 4px #000;'></i>
                 </a>
-                <a id="讀檔">
+                <a id="讀檔" v-if='本地運行'>
                     <i class="fa fa-floppy-o"></i>
                     <i class="fa fa-angle-double-up" style='text-shadow:0 0 4px #000;'></i>
                 </a>
-                <a id="快速存檔">
+                <a id="快速存檔" v-if='本地運行'>
                     <i class="fa fa-floppy-o"></i>
                     <i class="fa fa-angle-double-down" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
                 </a>
-                <a id="快速讀檔">
+                <a id="快速讀檔" v-if='本地運行'>
                     <i class="fa fa-floppy-o"></i>
                     <i class="fa fa-angle-double-up" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
-                </a>
-                <a id="自動模式">
-                    <i class="fa fa-forward"></i>
                 </a>
                 <a id="切換快進">
                     <i class="fa fa-fast-forward"></i>
@@ -81,7 +78,7 @@
                 <a id="進入設置">
                     <i class="fa fa-gear"></i>
                 </a>
-                <a id="回標題">
+                <a id="回標題" v-if='本地運行'>
                     <i class="fa fa-mail-reply"></i>
                 </a>
             </div>

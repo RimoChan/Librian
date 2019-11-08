@@ -40,33 +40,31 @@ html:
                     a.synth href='javascript:山彥.切換全屏();':
                         i.fa.fa-arrows-alt:
                 div v-for='(內容, 設置名) in 用戶設置' v-bind:名字='設置名':
-                    span v-if='內容.類型 === "number"':
+                    template v-if='內容.類型 === "number"':
                         {{內容.提示[0]}}
                         input.synth type="range"  v-bind:min="內容.範圍[0]" v-bind:max="內容.範圍[1]" v-bind:step='(內容.範圍[1]-內容.範圍[0])/32' v-model="內容['值']":
                         {{內容.提示[1]}}
-                    span v-if='內容.類型 === "boolean"':
+                    template v-if='內容.類型 === "boolean"':
                         input.synth type="checkbox" v-model="內容['值']":
                         
             div#工具欄 v-bind:class="{自動收起: 用戶設置.自動收起控制面板.值}":
-                a#存檔:
+                a#存檔 v-if='本地運行':
                     i.fa.fa-floppy-o:
                     i.fa.fa-angle-double-down style='text-shadow:0 0 4px #000;':
-                a#讀檔:
+                a#讀檔 v-if='本地運行':
                     i.fa.fa-floppy-o:
                     i.fa.fa-angle-double-up style='text-shadow:0 0 4px #000;':
-                a#快速存檔:
+                a#快速存檔 v-if='本地運行':
                     i.fa.fa-floppy-o:
                     i.fa.fa-angle-double-down style='color:#fd1; text-shadow:0 0 4px #000;':
-                a#快速讀檔:
+                a#快速讀檔 v-if='本地運行':
                     i.fa.fa-floppy-o:
                     i.fa.fa-angle-double-up style='color:#fd1; text-shadow:0 0 4px #000;':
-                a#自動模式:
-                    i.fa.fa-forward:
                 a#切換快進:
                     i.fa.fa-fast-forward:
                 a#進入設置:
                     i.fa.fa-gear:
-                a#回標題:
+                a#回標題 v-if='本地運行':
                     i.fa.fa-mail-reply:
     
             div#adv畫面:

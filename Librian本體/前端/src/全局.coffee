@@ -23,6 +23,7 @@ window.onload = ->
     window.v = new Vue
         el: '#總畫面'
         data:
+            本地運行: true
             圖片文件夾: ''
             音樂文件夾: ''
             視頻文件夾: ''
@@ -49,7 +50,7 @@ window.onload = ->
                     提示: ['小聲', '大聲(沒用)']
                 自動收起控制面板: 
                     類型: 'boolean'
-                    值: true
+                    值: false
         watch:
             $data:
                 handler: (val, oldVal) ->
@@ -86,6 +87,12 @@ window.加載完成的初始化 = ->
         alert '無法加載虛擬核心。'
         return
         
+    ua = window.navigator.userAgent
+    isChrome = ua.indexOf("Chrome") && window.chrome;
+    if not isChrome
+        alert '只有chrome能用。'
+        return
+        
     $('#加載畫面').css('display', 'flex')
         
     window.山彥 =
@@ -101,10 +108,22 @@ window.加載完成的初始化 = ->
             0
         初始化: ->
             演出.準備工作()
+        切換全屏: ->
+            doc = window.document
+            docEl = doc.documentElement
+
+            requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+            cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+            if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) 
+                requestFullScreen.call(docEl)
+            else 
+                cancelFullScreen.call(doc)
     
     window.v = new Vue
         el: '#總畫面'
         data:
+            本地運行: false
             圖片文件夾: 虛擬核心.圖片文件夾
             音樂文件夾: 虛擬核心.音樂文件夾
             視頻文件夾: 虛擬核心.視頻文件夾
@@ -131,7 +150,7 @@ window.加載完成的初始化 = ->
                     提示: ['小聲', '大聲(沒用)']
                 自動收起控制面板: 
                     類型: 'boolean'
-                    值: true
+                    值: false
     
     資源組 = 從虛擬核心提取資源(虛擬核心)
     window.v加載 = new Vue
