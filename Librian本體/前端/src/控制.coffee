@@ -98,6 +98,7 @@ export default 控制 =
         $("#覆蓋").mousedown (e)->
             if e.which == 1
                 $("#覆蓋").hide()
+                演出.瞬間化 = true
                 演出.步進更新()
         
         $('#存檔').click ->

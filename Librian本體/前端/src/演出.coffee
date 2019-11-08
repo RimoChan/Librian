@@ -56,9 +56,9 @@ export default 演出 =
             for 圖層 in 人.圖層
                 圖層.文件 = "#{v.臨時立繪文件夾}/#{圖層.文件}"
 
+    瞬間化: false
     改變演出狀態: (data) ->
         this.信息預處理 data
-        console.log data
         {特效表, 插入圖, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, 視頻} = data
         this.特效處理 特效表
         if 選項.length > 0
@@ -76,11 +76,12 @@ export default 演出 =
         
         this.放視頻(視頻)
         this.換cg(cg)
-        this.換背景(背景)
-        this.換立繪(立繪)
+        this.換背景(背景, this.瞬間化)
+        this.換立繪(立繪, this.瞬間化)
         this.換背景音樂(背景音樂)
         this.換人名(語者, 名字)
         this.換對話(話語, 名字)
+        this.瞬間化 = false
 
     特效處理: (特效表) ->
         可特效块 = [
@@ -164,7 +165,7 @@ export default 演出 =
         this.換圖('cg', cg圖片, 淡入時間, 漸變方法)
 
     當前人物: []
-    換立繪: (立繪組) ->
+    換立繪: (立繪組, 瞬=false) ->
         名字組 = (立繪.名字 for 立繪 in 立繪組)
         for 名字 in this.當前人物
             if 名字組.indexOf(名字) == - 1
@@ -178,26 +179,33 @@ export default 演出 =
                     if 立繪.名字 == 名字
                         立繪.特效.push('淡入')
                         
-
-        for 立繪 in 立繪組
-            組 = ([層.文件, 層.子位置[0], 層.子位置[1]] for 層 in 立繪.圖層)
-            圖像融合.融合到div(組, 0.5, "立繪--#{立繪.名字}")
-        
         for 立繪 in 立繪組
             t = $("#立繪--#{立繪.名字}")
+            if 瞬
+                t.css('transition', '')
+            else
+                移動時間 = 0.5
+                t.css('transition', "top #{移動時間}s, left #{移動時間}s, transform #{移動時間}s")
             t.css('left', "#{立繪.位置[0]}px")
             t.css('top', "#{立繪.位置[1]}px")
             t.css('transform', "scale(#{立繪.位置[2]})")
             t.attr('class', 立繪.特效.join(" "))
+            
+        for 立繪 in 立繪組
+            組 = ([層.文件, 層.子位置[0], 層.子位置[1]] for 層 in 立繪.圖層)
+            圖像融合.融合到div(組, 0.5, "立繪--#{立繪.名字}")
+        
             
         this.當前人物 = 名字組
 
 
 
     現在背景: 'None',
-    換背景: (背景) ->
+    換背景: (背景, 瞬) ->
         背景圖片 = 背景[0]
         淡入時間 = 背景[1]
+        if 瞬
+            淡入時間 = 0
         漸變方法 = 背景[2]
         if 背景圖片 == this.現在背景
             return
@@ -238,16 +246,11 @@ export default 演出 =
             return
         this.當前曲名 = 曲名
         if this.當前曲名 == 'None'
-            au.stop()
-            au.animate({volume: 0} , 2000)
-            setTimeout ->
-                au.attr('src', 演出.當前曲名)
-            , 2000
+            # 淡出表現不對，先刪了
+            au.attr('src', 演出.當前曲名)
         else
-            au.stop()
             au.attr('src', this.當前曲名)
-            au.animate({volume: 0} , 0)
-            au.animate({volume: 音量} , 2000)
+            au[0].volume = 音量
 
     換圖: (目標, 新圖, 漸變時間, 漸變方法 = '_淡出') ->
         目標 = $('#'+目標)

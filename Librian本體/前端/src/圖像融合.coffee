@@ -38,10 +38,7 @@ export default 圖像融合 =
     融合到div: (圖片名組, 時間, div名) ->
         this.圖像融合(圖片名組, (尺寸, base64) ->
             dv = document.getElementById(div名)
-            if 時間 > 0
-                dv.style.transition = "background #{時間}s, width #{時間}s, height #{時間}s, top #{時間}s, left #{時間}s, transform #{時間}s"
-            else
-                dv.style.transition = ""
+            dv.style.transition += ", background #{時間}s, width #{時間}s, height #{時間}s"
             dv.style.width = 尺寸[0]
             dv.style.height = 尺寸[1]
             dv.style.backgroundImage = "url(#{base64})"
