@@ -265,7 +265,7 @@ export default 演出 =
             舊淡出.css('animation-play-state', 'running')
 
     文字淡入: (s, 動畫名 = '_淡入') ->
-        時間間隔 = v.用戶設置.文字速度 / 800
+        時間間隔 = v.用戶設置.文字速度.值 / 800
         group = s.replace(/((<.*?>)|(.))/g, "$2$3\0").split('\0')
         動畫時間 = 時間間隔 * 8
         時間 = 0

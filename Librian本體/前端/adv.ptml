@@ -39,24 +39,15 @@ html:
                 div 名字='全屏幕':
                     a.synth href='javascript:山彥.切換全屏();':
                         i.fa.fa-arrows-alt:
-                div 名字='文字速度':
-                    須臾
-                    input.synth type="range" min="0" max="100" v-model="用戶設置.文字速度": 
-                    永恆
-                div 名字='自動模式速度':
-                    哪有自動模式……
-                div 名字='對話框背景透明度':
-                    通透
-                    input.synth type="range" min="0" max="1" step='0.01' v-model="用戶設置.對話框背景透明度":
-                    固實
-                div 名字='自動收起控制面板':
-                    input.synth type="checkbox" v-model="用戶設置.自動收起控制面板":
-                div 名字='總體音量':
-                    小聲
-                    input.synth type="range" min="0" max="1" step='0.01' v-model="用戶設置.總體音量":
-                    大聲(沒用)
+                div v-for='(內容, 設置名) in 用戶設置' v-bind:名字='設置名':
+                    span v-if='內容.類型 === "number"':
+                        {{內容.提示[0]}}
+                        input.synth type="range"  v-bind:min="內容.範圍[0]" v-bind:max="內容.範圍[1]" v-bind:step='(內容.範圍[1]-內容.範圍[0])/32' v-model="內容['值']":
+                        {{內容.提示[1]}}
+                    span v-if='內容.類型 === "boolean"':
+                        input.synth type="checkbox" v-model="內容['值']":
                         
-            div#工具欄 v-bind:class="{自動收起: 用戶設置.自動收起控制面板}":
+            div#工具欄 v-bind:class="{自動收起: 用戶設置.自動收起控制面板.值}":
                 a#存檔:
                     i.fa.fa-floppy-o:
                     i.fa.fa-angle-double-down style='text-shadow:0 0 4px #000;':
@@ -91,11 +82,11 @@ html:
                     div#對話框:
                         div#名字框:
                             div#名字:
-                            div#名字框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度}":
+                            div#名字框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度.值}":
                         div#話語框:
                             div#話語:
-                            div#話語框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度}":
-                        div#對話框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度}":
+                            div#話語框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度.值}":
+                        div#對話框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度.值}":
                     
             div#提示:
 
