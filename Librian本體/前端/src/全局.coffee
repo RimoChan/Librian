@@ -6,6 +6,7 @@ import './美麗滑條.sass'
 import './主樣式.sass'
 import './特效.sass'
 import './配置面板的樣式.sass'
+import './狀態切換.sass'
 
 window._py演出 = 演出
 

@@ -1,0 +1,18 @@
+#總畫面
+    #配置面板
+        opacity: 0
+        visibility: hidden 
+        transition: visibility 0s 0.25s, opacity 0.25s
+    #adv畫面
+        transition: filter 0.25s
+    
+#總畫面[配置面板=on]
+    #配置面板
+        opacity: 1
+        visibility: visible
+        transition: opacity 0.25s
+    #adv畫面, #工具欄
+        pointer-events: none
+        filter: brightness(0.75)
+        
+        

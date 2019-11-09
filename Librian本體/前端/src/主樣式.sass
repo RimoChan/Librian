@@ -124,16 +124,17 @@ video
                 height: 100%
             #話語
                 white-space: pre-line
-                &.旁白:before
+            &[對話類型=旁白] #話語
+                &:before
                     content: '　　'
-                &.對話
-                    &:before
-                        content: '「'
-                        display: block
-                        height: 100%
-                        float: left
-                    &>span:nth-last-child(1):after
-                        content: '」'
+            &[對話類型=對話] #話語
+                &:before
+                    content: '「'
+                    display: block
+                    height: 100%
+                    float: left
+                &>span:nth-last-child(1):after
+                    content: '」'
             #名字框背景 
                 position: absolute
                 top: 0px
@@ -166,6 +167,12 @@ button
     margin: 5px
     position: absolute
     z-index: 10
+    &.自動收起 
+        opacity: 0.2
+        transition: opacity 4s
+        &:hover 
+            opacity: 1
+            transition: opacity 0.5s
 
 .scroll 
     display: none
@@ -194,12 +201,7 @@ button
     width: 200px
     display: none
 
-.自動收起 
-    opacity: 0.2
-    transition: opacity 4s
-    &:hover 
-        opacity: 1
-        transition: opacity 0.5s
+
 
 @keyframes _覆蓋變化
     0%

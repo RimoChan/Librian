@@ -52,11 +52,10 @@ export default 控制 =
             setTimeout(控制.快進輪迴, 75) ;
 
     進入設置: ->
-        $('#配置面板').fadeIn(300)
+        $('#總畫面').attr('配置面板', 'on')
 
     退出設置: ->
-        $('#配置面板').fadeOut(300)
-
+        $('#總畫面').attr('配置面板', 'off')
 
     控制初始化: ->
         window.document.onkeydown = (evt) ->
