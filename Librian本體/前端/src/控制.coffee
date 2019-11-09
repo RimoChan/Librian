@@ -92,13 +92,6 @@ export default 控制 =
                 控制.右鍵功能()
             else if e.which == 1 
                 控制.左鍵功能()
-        $("#主畫面").attr('hh','233')
-            
-        $("#覆蓋").mousedown (e)->
-            if e.which == 1
-                $("#覆蓋").fadeOut(400)
-                演出.瞬間化 = true
-                演出.步進更新()
         
         $('#存檔').click ->
             山彥.存檔()

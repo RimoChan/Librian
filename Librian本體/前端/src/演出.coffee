@@ -65,11 +65,18 @@ export default 演出 =
         if 選項.length > 0
             this.處理選項 選項
             return
+            
         if 插入圖
             名字 = ''
             話語 = ''
             背景音樂 = ['None', 0]
-            this.插入圖(插入圖)
+            this.換圖('覆蓋', 插入圖, 0)
+            $('#覆蓋').attr('顯現', 'true') 
+        else
+            if $('#覆蓋').attr('顯現') == 'true'
+                this.瞬間化 = true
+            $('#覆蓋').attr('顯現', 'false') 
+            
         if 額外信息
             if 額外信息[0] == 'load'
                 this.load特效()
@@ -108,10 +115,6 @@ export default 演出 =
         $('#選項').hide(250)
         山彥.選(x)
         this.選擇之刻 = false
-
-    插入圖: (圖) ->
-        演出.換圖('覆蓋', 圖, 0)
-        $('#覆蓋').css('display','block')
 
     放視頻: (視頻) ->
         if ! 視頻

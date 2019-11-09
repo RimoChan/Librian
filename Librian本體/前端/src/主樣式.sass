@@ -54,9 +54,16 @@ video
         position: absolute
         background-size: cover
         z-index: 99
-        display: none
-        animation: _覆蓋變化 4s
-        animation-iteration-count: 1
+        visibility: hidden
+        opacity: 0
+        transition: visibility 0s 0.3s, opacity 0.3s
+        &[顯現=true]
+            animation: _覆蓋變化 3s
+            animation-iteration-count: 1
+            visibility: visible
+            opacity: 1
+            transition: visibility 0s
+        
     #選項 
         position: absolute
         height: 220px

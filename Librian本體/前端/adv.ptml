@@ -68,9 +68,9 @@ html:
                     i.fa.fa-mail-reply:
     
             div#adv畫面:
-                div#覆蓋:
                 div#選項:
                 div#主畫面:
+                    div#覆蓋:
                     div#cg:
                     div#bg:
                     div#立繪:
