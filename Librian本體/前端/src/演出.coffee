@@ -8,14 +8,15 @@ export default 演出 =
             .attr
                 rel: 'stylesheet'
                 type: 'text/css'
-                href: v.自定css
-            .appendTo('head')
-        $ '<link>'
-            .attr
-                rel: 'stylesheet'
-                type: 'text/css'
                 href: v.主題css
             .appendTo("head")
+        for i in v.自定css
+            $ '<link>'
+                .attr
+                    rel: 'stylesheet'
+                    type: 'text/css'
+                    href: i
+                .appendTo('head')
 
         $('#總畫面').css 'width', v.解析度[0]
         $('#總畫面').css 'height', v.解析度[1]

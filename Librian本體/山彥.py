@@ -101,7 +101,7 @@ class 演出山彥(山彥):
         self.vue.音樂文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.音樂文件夾).replace('\\', '/')
         self.vue.視頻文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.視頻文件夾).replace('\\', '/')
         self.vue.臨時立繪文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.臨時立繪文件夾).replace('\\', '/')
-        self.vue.自定css = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.自定css).replace('\\', '/')
+        self.vue.自定css = [os.path.join(f'../{虛擬機環境.工程路徑}', i).replace('\\', '/') for i in 虛擬機環境.自定css]
         self.vue.主題css = os.path.join(f'主題', 虛擬機環境.主題css + '.css').replace('\\', '/')
         self.vue.解析度 = 虛擬機環境.主解析度
         self.vue.邊界 = 配置['顯示繪圖邊界']
