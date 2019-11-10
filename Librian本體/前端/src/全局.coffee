@@ -1,12 +1,7 @@
 import 演出 from './演出.coffee'
 import 控制 from './控制.coffee'
 
-import './按鈕.sass'
-import './美麗滑條.sass'
-import './主樣式.sass'
-import './特效.sass'
-import './配置面板的樣式.sass'
-import './狀態切換.sass'
+import './_統合.sass'
 
 window._py演出 = 演出
 

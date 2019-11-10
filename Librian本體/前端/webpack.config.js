@@ -15,9 +15,14 @@ module.exports = {
             }, {
                 test: /\.sass$/,
                 use: [
-                    'style-loader', 
-                    {loader: 'css-loader', options: {url: false}}, 
-                    'sass-loader',
+                    {loader: 'style-loader', options: {injectType: 'linkTag'}}, 
+                    {loader: 'file-loader', options: {
+                            name: function(file){return '[name].css'},
+                        }
+                    }, 
+                    // {loader: 'css-loader', options: {url: false}}, 
+                    {loader: 'resolve-url-loader', options: {}},
+                    {loader: 'sass-loader', options: {sourceMap: true}}
                 ]
             }, 
         ],

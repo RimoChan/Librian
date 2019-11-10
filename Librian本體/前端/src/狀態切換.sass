@@ -1,18 +1,52 @@
 #總畫面
-    #配置面板
+    #配置面板, #對話歷史
         opacity: 0
         visibility: hidden 
-        transition: visibility 0s 0.25s, opacity 0.25s
-    #adv畫面
+    #adv畫面, #工具欄
         transition: filter 0.25s
     
-#總畫面[配置面板=on]
-    #配置面板
-        opacity: 1
-        visibility: visible
-        transition: opacity 0.25s
-    #adv畫面, #工具欄
-        pointer-events: none
-        filter: brightness(0.75)
-        
+    &[配置面板=off]
+        #配置面板
+            transition: visibility 0s 0.25s, opacity 0.25s
+    &[配置面板=on]
+        #配置面板
+            opacity: 1
+            visibility: visible
+            transition: opacity 0.25s
+        #adv畫面, #工具欄
+            pointer-events: none
+            filter: brightness(0.6)
+            
+    &[歷史=off]
+        #對話歷史
+            transition: visibility 0s 0.25s, opacity 0.25s
+    &[歷史=on]
+        #對話歷史
+            opacity: 1
+            visibility: visible
+            transition: opacity 0.25s
+            
+    &[對話框=off]
+        #對話框
+            opacity: 0
+            visibility: hidden
+            transition: visibility 0s 0.25s, opacity 0.25s
+    &[對話框=on]
+        #對話框
+            opacity: 1
+            visibility: visible
+            transition: opacity 0.25s
+            
+
+#adv畫面 
+    #覆蓋
+        visibility: hidden
+        opacity: 0
+        filter: brightness(0)
+        transition: visibility 0s 0.4s, opacity 0.4s, filter 0s 0.4s
+        &[顯現=true]
+            visibility: visible
+            opacity: 1
+            filter: brightness(1)
+            transition: visibility 0s, opacity 1s, filter 2s 1s
         

@@ -1,0 +1,16 @@
+@import "../../../黑科技/synthetic_css/synthetic_offline.sass"
+
+#加載畫面
+    +bg('../../../黑科技/synthetic_css/紙背景花紋.jpg')
+    color: 000
+    display: none
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    height: 100%
+    width: 100%
+    a
+        @extend a, .synth
+    progress
+        @extend progress, .synth
+            

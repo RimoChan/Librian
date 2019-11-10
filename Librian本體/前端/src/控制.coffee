@@ -3,17 +3,22 @@ import 演出 from './演出.coffee'
 export default 控制 =
     右鍵功能: ->
         window.event.returnValue = false
-        $('#對話框').fadeToggle(250)
-        $('.scroll').fadeOut(200)
+        $('#總畫面').attr('歷史', 'off')
+        if $('#總畫面').attr('對話框') == 'off'
+            $('#總畫面').attr('對話框', 'on')
+        else
+            $('#總畫面').attr('對話框', 'off')
 
     左鍵屏蔽: false
     左鍵功能: ->
         if this.左鍵屏蔽 or 演出.選擇之刻
             return
 
-        if $('#對話框').is(':hidden')
-            $('.scroll').fadeOut(200)
-            $('#對話框').fadeIn(250)
+        if $('#總畫面').attr('歷史') == 'on'
+            $('#總畫面').attr('歷史', 'off')
+
+        if $('#總畫面').attr('對話框') == 'off'
+            $('#總畫面').attr('對話框', 'on')
         else
             if Date.now() < 演出.淡入過期時間
                 演出.淡入過期時間 = 0
@@ -22,11 +27,8 @@ export default 控制 =
                 演出.步進更新()
 
     顯示履歷: ->
-        if ! ($('.scroll').is(':hidden'))
-            return
-        $('#對話框').fadeOut(200)
-        $('.scroll').show(0)
-        $('.scroll').animate({scrollTop: 99999999} , 0)
+        $('#總畫面').attr('歷史', 'on')
+        $('#總畫面').attr('對話框', 'off')
 
     正在快進: false,
 
@@ -84,8 +86,7 @@ export default 控制 =
             if delta > 0
                 控制.顯示履歷()
             if delta < 0
-                if $('.scroll').is(':hidden')
-                    控制.左鍵功能()
+                控制.左鍵功能()
         
         $("#主畫面").mousedown (e)->
             if e.which == 3

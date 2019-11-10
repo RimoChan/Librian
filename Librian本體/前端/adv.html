@@ -2,7 +2,6 @@
     <head>
         <title></title>
         <meta charset='utf-8'/>
-        <link rel='stylesheet' href='../../黑科技/synthetic_css/synthetic_offline.css'/>
         <link rel="stylesheet" href='../../黑科技/font-awesome-4.7.0/css/font-awesome.css'/>
         <script src='../../黑科技/vue.js'></script>
         <script src='../../黑科技/jquery-3.1.1.min.js'></script>
@@ -18,10 +17,10 @@
                 加載資源
             </div>
             <div>
-                <progress class="synth" v-bind:value='計數' v-bind:max='最大值'></progress>
+                <progress v-bind:value='計數' v-bind:max='最大值'></progress>
             </div>
             <div v-if='計數 == 最大值'>
-                <a class="synth" onclick='加載完成的初始化()'>
+                <a onclick='加載完成的初始化()'>
                     開始
                 </a>
             </div>
@@ -32,26 +31,26 @@
             <audio id="嘀" autoplay='' loop='' src=''></audio>
             <div id="配置面板">
                 <span class="按鈕組">
-                    <a class="synth">
+                    <a id="重置設置">
                         <i class="fa fa-rotate-left"></i>
                     </a>
-                    <a class="synth" id="退出設置">
+                    <a id="退出設置">
                         <i class="fa fa-check"></i>
                     </a>
                 </span>
                 <div 名字='全屏幕'>
-                    <a class="synth" href='javascript:山彥.切換全屏();'>
+                    <a href='javascript:山彥.切換全屏();'>
                         <i class="fa fa-arrows-alt"></i>
                     </a>
                 </div>
                 <div v-for='(內容, 設置名) in 用戶設置' v-bind:名字='設置名'>
                     <template v-if='內容.類型 === "number"'>
                         {{內容.提示[0]}}
-                        <input class="synth" type="range"  v-bind:min="內容.範圍[0]" v-bind:max="內容.範圍[1]" v-bind:step='(內容.範圍[1]-內容.範圍[0])/32' v-model="內容['值']"></input>
+                        <input type="range"  v-bind:min="內容.範圍[0]" v-bind:max="內容.範圍[1]" v-bind:step='(內容.範圍[1]-內容.範圍[0])/32' v-model="內容['值']"></input>
                         {{內容.提示[1]}}
                     </template>
                     <template v-if='內容.類型 === "boolean"'>
-                        <input class="synth" type="checkbox" v-model="內容['值']"></input>
+                        <input type="checkbox" v-model="內容['值']"></input>
                     </template>
                 </div>
             </div>
@@ -84,14 +83,12 @@
             </div>
             <div id="adv畫面">
                 <div id="選項"></div>
+                <div id="對話歷史"></div>
                 <div id="主畫面">
                     <div id="覆蓋"></div>
                     <div id="cg"></div>
                     <div id="bg"></div>
                     <div id="立繪"></div>
-                    <div class="美麗滑條 scroll">
-                        <div id="對話歷史"></div>
-                    </div>
                     <div id="對話框">
                         <div id="名字框">
                             <div id="名字"></div>
