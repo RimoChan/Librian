@@ -1,0 +1,252 @@
+=bg($x)
+    background-color: #dec6a1
+    background-image: url($x)
+    background-size: cover
+    background-attachment: fixed
+        
+body
+    &.syn
+        +bg('紙背景花紋.jpg')
+        font-family: 'Noto Serif SC'
+        button, input, textarea
+            font-family: 'Noto Serif SC'
+            
+    &.synth
+        @extend .syn
+        margin: 0px
+        strong, b 
+            font-weight: normal
+            text-shadow: 0px 0px 2px rgba(0, 0, 0, 1)
+        h1, h2, h3, h4, h5 
+            font-weight: normal
+        hr
+            border: none
+            border-top: 1px solid rgba(120, 50 ,0 ,0.5)
+        ::-moz-focus-inner
+            border: none
+        ::-moz-focus-outer
+            border: none
+
+header
+    &.syn
+        background: rgba(0, 0, 0, 0.3)
+        box-shadow: 0px 0px 2vh rgba(0, 0, 0, 0.4)
+    &.synth
+        @extend .syn
+        display: flex
+        justify-content: center
+        align-items: center
+    
+div
+    &.syn
+        +bg('紙背景花紋模糊.jpg')
+        box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6)
+    &.synth
+        @extend .syn
+        margin: 0.5vw
+        padding: 0.5vw
+        border-radius: 0.5vw
+        overflow-y: auto
+        &::-webkit-scrollbar 
+            cursor: pointer
+            width: 20px
+            background-image: -webkit-linear-gradient(0deg, transparent 40%, rgba(0,0,0,0.2)40%,rgba(0,0,0,0.2)60%,transparent 60%, transparent)
+            border-radius: 16px
+        &::-webkit-scrollbar-thumb
+            border-radius: 0.5vw
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.35), 0px 0px 10px rgba(255, 255, 255, 1) inset
+            background: rgba(255,255,200,0.65)
+            backdrop-filter: blur(4px)
+        
+button, a
+    &.syn
+        $shadow_range: 0.8vw
+        
+        outline: none
+        border: none
+        -webkit-user-select: none
+        text-decoration: none
+
+        color: inherit
+        cursor: pointer
+
+        +bg('./紙背景花紋模糊.jpg')
+            
+        box-shadow: 0px 0px $shadow_range rgba(0, 0, 0, 0.6), 0px 0px $shadow_range/2 rgba(0, 0, 0, 0) inset
+        filter: brightness(1.05) hue-rotate(-6deg)
+        
+        transition: box-shadow 0.2s, filter 0.1s
+        &:hover
+            box-shadow: 0px 0px $shadow_range/2 rgba(0, 0, 0, 0.7), 0px 0px $shadow_range/2 rgba(0, 0, 0, 0) inset
+            filter: brightness(1.1) hue-rotate(-12deg)
+        &:active
+            box-shadow: 0px 0px $shadow_range/2 rgba(0, 0, 0, 0), 0px 0px $shadow_range/2 rgba(0, 0, 0, 0.6) inset
+            filter: blur(0.1vw)
+
+    &.synth
+        @extend .syn
+        font-size: inherit
+        display: inline-block
+        padding: 0.5vw
+        margin: 0.5vw
+        border-radius: 0.5vw
+        
+        
+blockquote
+    &.syn
+        color: rgba(0, 0, 60, 1)
+        border-left: 3px solid rgba(0, 0, 0, 0.4)
+    &.synth
+        @extend .syn
+        padding-left: 6px
+        margin-left: 6px
+    
+img 
+    &.syn
+        box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6)
+        border-radius: 0.5vw
+    &.synth
+        @extend .syn
+        margin: 0.5vw
+        
+        
+hr
+    &.syn
+        width: 90%
+    &.synth
+        border: none !important
+        height: 6px
+        border-radius: 40%
+        background: rgba(0, 0, 0, 0.2)
+    
+input[type="range"] 
+    &.syn
+        outline: none
+        -webkit-appearance: none
+        -moz-appearance: none
+        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2), rgba(0,0,0,0.3))
+        border-radius: 5px
+        height: 5px
+        transition: all 0.2s
+        &:hover
+            transform: scaleY(2)
+            // 其實乘好不總是1我也不知道怎麼辦……
+            &::-webkit-slider-thumb
+                transform: scaleY(0.5)
+            &::-moz-range-thumb
+                transform: scaleY(0.5)
+                
+        &::-webkit-slider-thumb
+            transition: all 0.2s
+            cursor: pointer
+            -webkit-appearance: none
+            height: 20px
+            width: 20px
+            border-radius: 100%
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px rgba(255, 255, 255, 1) inset
+            background: rgba(255,255,200,0.5)
+        &::-moz-range-thumb
+            transition: all 0.2s
+            cursor: pointer
+            height: 20px
+            width: 20px
+            border-radius: 100%
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px rgba(255, 255, 255, 1) inset
+            background: rgba(255,255,200,0.5)
+    &.synth
+        @extend .syn
+
+input[type="checkbox"]
+    &.syn
+        -webkit-appearance: none
+        -moz-appearance: none
+        outline: none
+        cursor: pointer
+        height: 20px
+        width: 20px
+        border-radius: 100%
+        background-color: rgba(0,0,0,0.15)
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 10px rgba(0, 0, 0, 0.4) inset
+        transition: all 0.2s
+        
+        display: flex
+        justify-content: center
+        align-items: center
+        &::before
+            font-size: 16px
+            content: '✗'
+            color: rgba(0,0,0,0)
+            text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.8)
+        &:checked
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px rgba(255, 255, 255, 1) inset
+            background: rgba(255,255,200,0.5)
+            &::before
+                content: '✓'
+                text-shadow: 0px 0px 2px rgba(255, 0, 0, 0.8)
+    &.synth
+        @extend .syn
+            
+input[type="text"], input[type="password"]
+    &.syn
+        background: rgba(0,0,0,0)
+        outline: none
+        border: solid 1px rgba(0,0,0,0.3)
+        border-radius: 2px 
+        padding: 2px
+            
+    &.synth
+        @extend .syn
+        border: none
+        border-radius: 0px 
+        border-bottom: solid 1px rgba(55,55,0,0.6)
+        border-top: solid 1px rgba(0,0,0,0)
+        text-align: center
+        &:hover
+            padding: 0px 2px
+            border-top: solid 3px rgba(0,0,0,0)
+            border-bottom: solid 3px rgba(55,55,0,0.4)
+
+textarea 
+    &.syn
+        background: rgba(0,0,0,0)
+        outline: none
+        border: solid 1px rgba(0,0,0,0.3)
+        border-radius: 2px 
+    
+progress
+    &.syn
+        -webkit-appearance: none
+        -moz-appearence: none
+        appearance: none
+        background: transparent
+        border: 1px solid rgba(0, 0, 0, 0.15)
+        border-radius: 3px
+        box-shadow: 0px 0px 8px rgba(0,0,0,0.3) inset
+        background: rgba(0,0,0,0.2)
+        &::-webkit-progress-bar
+            background: transparent
+        &::-webkit-progress-value
+            background: transparent
+            border-radius: 3px
+            border-right: 1px solid rgba(0, 0, 0, 0.3)
+            backdrop-filter: saturate(0.8) contrast(1.8) brightness(1.3)
+        
+        &::-moz-progress-bar
+            +bg('紙背景花紋模糊.jpg')
+            border-radius: 3px
+            filter: brightness(0.8) saturate(0.8) contrast(1.8) brightness(1.3)
+            
+    &.synth
+        @extend .syn
+        display: flex
+        justify-content: center
+        align-items: center
+        height: 24px
+        margin: 4px
+        &::after
+            content: attr(value)"/"attr(max)
+            position: absolute
+            opacity: 0.75
+            text-shadow: 0px 0px 3px rgba(0, 0, 0, 1)
+            color: #ffd
+            

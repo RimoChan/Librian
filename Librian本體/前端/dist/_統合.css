@@ -26,7 +26,7 @@
     background-color: rgba(255, 255, 255, 0.4);
     transform: scale(1.2);
     transition: background-color 0.1s, transform 0.1s; }
-  #工具欄 a > i, #工具欄 #配置面板 a > i, #工具欄 #加載畫面 a > i {
+  #工具欄 a > i, #工具欄 #加載畫面 a > i, #工具欄 #配置面板 a > i {
     display: block;
     position: absolute;
     top: 50%;
@@ -81,21 +81,6 @@
     filter: brightness(1);
     transition: visibility 0s, opacity 1s, filter 2s 1s; }
 
-#對話歷史 {
-  overflow-y: auto; }
-  #對話歷史::-webkit-scrollbar-track {
-    background-color: #FFF;
-    border: 1px solid #aaa;
-    border-radius: 10px; }
-  #對話歷史::-webkit-scrollbar {
-    width: 10px;
-    background-color: #555;
-    border-radius: 10px; }
-  #對話歷史::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #F90;
-    background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent); }
-
 @font-face {
   font-family: 思源宋體SemiBold;
   src: url("../素材/NotoSerifSC-SemiBold.otf"); }
@@ -110,7 +95,7 @@ body {
   color: #fff;
   overflow: hidden; }
 
-div {
+div, #配置面板, #對話歷史 {
   margin: 0px;
   padding: 0px; }
 
@@ -166,7 +151,7 @@ video {
       top: 0px;
       left: 0px;
       z-index: -2; }
-      #adv畫面 #主畫面 #立繪 > div {
+      #adv畫面 #主畫面 #立繪 > div, #adv畫面 #主畫面 #立繪 > #配置面板, #adv畫面 #主畫面 #立繪 > #對話歷史 {
         position: absolute;
         transform-origin: 0% 0%; }
     #adv畫面 #主畫面 #對話框 {
@@ -303,52 +288,63 @@ video {
 [特效~=透明] {
   opacity: 0.5; }
 
-body.syn, body.synth {
+body.syn, body.synth, body#配置面板, body#對話歷史 {
   background-color: #dec6a1;
   background-image: url("../../../黑科技/synthetic_css/紙背景花紋.jpg");
   background-size: cover;
   background-attachment: fixed;
   font-family: 'Noto Serif SC'; }
-  body.syn button, body.synth button, body.syn input, body.synth input, body.syn #配置面板 input, #配置面板 body.syn input, body.synth #配置面板 input, #配置面板 body.synth input, body.syn textarea, body.synth textarea {
+  body.syn button, body.synth button, body#配置面板 button, body#對話歷史 button, body.syn input, body.synth input, body#對話歷史 input, body.syn #配置面板 input, #配置面板 body.syn input, body.synth #配置面板 input, #配置面板 body.synth input, body#配置面板 input, body.syn textarea, body.synth textarea, body#配置面板 textarea, body#對話歷史 textarea {
     font-family: 'Noto Serif SC'; }
 
-body.synth {
+body.synth, body#配置面板, body#對話歷史 {
   margin: 0px; }
-  body.synth strong, body.synth b {
+  body.synth strong, body#配置面板 strong, body#對話歷史 strong, body.synth b, body#配置面板 b, body#對話歷史 b {
     font-weight: normal;
     text-shadow: 0px 0px 2px black; }
-  body.synth h1, body.synth h2, body.synth h3, body.synth h4, body.synth h5 {
+  body.synth h1, body#配置面板 h1, body#對話歷史 h1, body.synth h2, body#配置面板 h2, body#對話歷史 h2, body.synth h3, body#配置面板 h3, body#對話歷史 h3, body.synth h4, body#配置面板 h4, body#對話歷史 h4, body.synth h5, body#配置面板 h5, body#對話歷史 h5 {
     font-weight: normal; }
-  body.synth hr {
+  body.synth hr, body#配置面板 hr, body#對話歷史 hr {
     border: none;
     border-top: 1px solid rgba(120, 50, 0, 0.5); }
-  body.synth ::-moz-focus-inner {
+  body.synth ::-moz-focus-inner, body#配置面板 ::-moz-focus-inner, body#對話歷史 ::-moz-focus-inner {
     border: none; }
-  body.synth ::-moz-focus-outer {
+  body.synth ::-moz-focus-outer, body#配置面板 ::-moz-focus-outer, body#對話歷史 ::-moz-focus-outer {
     border: none; }
 
-header.syn, header.synth {
+header.syn, header.synth, header#配置面板, header#對話歷史 {
   background: rgba(0, 0, 0, 0.3);
   box-shadow: 0px 0px 2vh rgba(0, 0, 0, 0.4); }
 
-header.synth {
+header.synth, header#配置面板, header#對話歷史 {
   display: flex;
   justify-content: center;
   align-items: center; }
 
-div.syn, div.synth {
+div.syn, div.synth, #配置面板, #對話歷史 {
   background-color: #dec6a1;
   background-image: url("../../../黑科技/synthetic_css/紙背景花紋模糊.jpg");
   background-size: cover;
   background-attachment: fixed;
   box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6); }
 
-div.synth {
+div.synth, #配置面板, #對話歷史 {
   margin: 0.5vw;
   padding: 0.5vw;
-  border-radius: 0.5vw; }
+  border-radius: 0.5vw;
+  overflow-y: auto; }
+  div.synth::-webkit-scrollbar, #配置面板::-webkit-scrollbar, #對話歷史::-webkit-scrollbar {
+    cursor: pointer;
+    width: 20px;
+    background-image: -webkit-linear-gradient(0deg, transparent 40%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.2) 60%, transparent 60%, transparent);
+    border-radius: 16px; }
+  div.synth::-webkit-scrollbar-thumb, #配置面板::-webkit-scrollbar-thumb, #對話歷史::-webkit-scrollbar-thumb {
+    border-radius: 0.5vw;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.35), 0px 0px 10px white inset;
+    background: rgba(255, 255, 200, 0.65);
+    backdrop-filter: blur(4px); }
 
-button.syn, button.synth, a.syn, a.synth, #配置面板 a, #加載畫面 a {
+button.syn, button.synth, button#配置面板, button#對話歷史, a.syn, a.synth, #加載畫面 a, a#配置面板, #配置面板 a, a#對話歷史 {
   outline: none;
   border: none;
   -webkit-user-select: none;
@@ -362,45 +358,45 @@ button.syn, button.synth, a.syn, a.synth, #配置面板 a, #加載畫面 a {
   box-shadow: 0px 0px 0.8vw rgba(0, 0, 0, 0.6), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
   filter: brightness(1.05) hue-rotate(-6deg);
   transition: box-shadow 0.2s, filter 0.1s; }
-  button.syn:hover, button.synth:hover, a.syn:hover, a.synth:hover, #配置面板 a:hover, #加載畫面 a:hover {
+  button.syn:hover, button.synth:hover, button#配置面板:hover, button#對話歷史:hover, a.syn:hover, a.synth:hover, #加載畫面 a:hover, a#配置面板:hover, #配置面板 a:hover, a#對話歷史:hover {
     box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0.7), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
     filter: brightness(1.1) hue-rotate(-12deg); }
-  button.syn:active, button.synth:active, a.syn:active, a.synth:active, #配置面板 a:active, #加載畫面 a:active {
+  button.syn:active, button.synth:active, button#配置面板:active, button#對話歷史:active, a.syn:active, a.synth:active, #加載畫面 a:active, a#配置面板:active, #配置面板 a:active, a#對話歷史:active {
     box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0), 0px 0px 0.4vw rgba(0, 0, 0, 0.6) inset;
     filter: blur(0.1vw); }
 
-button.synth, a.synth, #配置面板 a, #加載畫面 a {
+button.synth, button#配置面板, button#對話歷史, a.synth, #加載畫面 a, a#配置面板, #配置面板 a, a#對話歷史 {
   font-size: inherit;
   display: inline-block;
   padding: 0.5vw;
   margin: 0.5vw;
   border-radius: 0.5vw; }
 
-blockquote.syn, blockquote.synth {
+blockquote.syn, blockquote.synth, blockquote#配置面板, blockquote#對話歷史 {
   color: #00003c;
   border-left: 3px solid rgba(0, 0, 0, 0.4); }
 
-blockquote.synth {
+blockquote.synth, blockquote#配置面板, blockquote#對話歷史 {
   padding-left: 6px;
   margin-left: 6px; }
 
-img.syn, img.synth {
+img.syn, img.synth, img#配置面板, img#對話歷史 {
   box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6);
   border-radius: 0.5vw; }
 
-img.synth {
+img.synth, img#配置面板, img#對話歷史 {
   margin: 0.5vw; }
 
 hr.syn {
   width: 90%; }
 
-hr.synth {
+hr.synth, hr#配置面板, hr#對話歷史 {
   border: none !important;
   height: 6px;
   border-radius: 40%;
   background: rgba(0, 0, 0, 0.2); }
 
-input[type="range"].syn, input.synth[type="range"], #配置面板 input[type="range"] {
+input[type="range"].syn, input.synth[type="range"], input#配置面板[type="range"], #配置面板 input[type="range"], input#對話歷史[type="range"] {
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -408,13 +404,13 @@ input[type="range"].syn, input.synth[type="range"], #配置面板 input[type="ra
   border-radius: 5px;
   height: 5px;
   transition: all 0.2s; }
-  input[type="range"].syn:hover, input.synth[type="range"]:hover, #配置面板 input[type="range"]:hover {
+  input[type="range"].syn:hover, input.synth[type="range"]:hover, input#配置面板[type="range"]:hover, #配置面板 input[type="range"]:hover, input#對話歷史[type="range"]:hover {
     transform: scaleY(2); }
-    input[type="range"].syn:hover::-webkit-slider-thumb, input.synth[type="range"]:hover::-webkit-slider-thumb, #配置面板 input[type="range"]:hover::-webkit-slider-thumb {
+    input[type="range"].syn:hover::-webkit-slider-thumb, input.synth[type="range"]:hover::-webkit-slider-thumb, input#配置面板[type="range"]:hover::-webkit-slider-thumb, #配置面板 input[type="range"]:hover::-webkit-slider-thumb, input#對話歷史[type="range"]:hover::-webkit-slider-thumb {
       transform: scaleY(0.5); }
-    input[type="range"].syn:hover::-moz-range-thumb, input.synth[type="range"]:hover::-moz-range-thumb, #配置面板 input[type="range"]:hover::-moz-range-thumb {
+    input[type="range"].syn:hover::-moz-range-thumb, input.synth[type="range"]:hover::-moz-range-thumb, input#配置面板[type="range"]:hover::-moz-range-thumb, #配置面板 input[type="range"]:hover::-moz-range-thumb, input#對話歷史[type="range"]:hover::-moz-range-thumb {
       transform: scaleY(0.5); }
-  input[type="range"].syn::-webkit-slider-thumb, input.synth[type="range"]::-webkit-slider-thumb, #配置面板 input[type="range"]::-webkit-slider-thumb {
+  input[type="range"].syn::-webkit-slider-thumb, input.synth[type="range"]::-webkit-slider-thumb, input#配置面板[type="range"]::-webkit-slider-thumb, #配置面板 input[type="range"]::-webkit-slider-thumb, input#對話歷史[type="range"]::-webkit-slider-thumb {
     transition: all 0.2s;
     cursor: pointer;
     -webkit-appearance: none;
@@ -423,7 +419,7 @@ input[type="range"].syn, input.synth[type="range"], #配置面板 input[type="ra
     border-radius: 100%;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px white inset;
     background: rgba(255, 255, 200, 0.5); }
-  input[type="range"].syn::-moz-range-thumb, input.synth[type="range"]::-moz-range-thumb, #配置面板 input[type="range"]::-moz-range-thumb {
+  input[type="range"].syn::-moz-range-thumb, input.synth[type="range"]::-moz-range-thumb, input#配置面板[type="range"]::-moz-range-thumb, #配置面板 input[type="range"]::-moz-range-thumb, input#對話歷史[type="range"]::-moz-range-thumb {
     transition: all 0.2s;
     cursor: pointer;
     height: 20px;
@@ -432,7 +428,7 @@ input[type="range"].syn, input.synth[type="range"], #配置面板 input[type="ra
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px white inset;
     background: rgba(255, 255, 200, 0.5); }
 
-input[type="checkbox"].syn, input.synth[type="checkbox"], #配置面板 input[type="checkbox"] {
+input[type="checkbox"].syn, input.synth[type="checkbox"], input#配置面板[type="checkbox"], #配置面板 input[type="checkbox"], input#對話歷史[type="checkbox"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   outline: none;
@@ -446,32 +442,32 @@ input[type="checkbox"].syn, input.synth[type="checkbox"], #配置面板 input[ty
   display: flex;
   justify-content: center;
   align-items: center; }
-  input[type="checkbox"].syn::before, input.synth[type="checkbox"]::before, #配置面板 input[type="checkbox"]::before {
+  input[type="checkbox"].syn::before, input.synth[type="checkbox"]::before, input#配置面板[type="checkbox"]::before, #配置面板 input[type="checkbox"]::before, input#對話歷史[type="checkbox"]::before {
     font-size: 16px;
     content: '✗';
     color: rgba(0, 0, 0, 0);
     text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.8); }
-  input[type="checkbox"].syn:checked, input.synth[type="checkbox"]:checked, #配置面板 input[type="checkbox"]:checked {
+  input[type="checkbox"].syn:checked, input.synth[type="checkbox"]:checked, input#配置面板[type="checkbox"]:checked, #配置面板 input[type="checkbox"]:checked, input#對話歷史[type="checkbox"]:checked {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px white inset;
     background: rgba(255, 255, 200, 0.5); }
-    input[type="checkbox"].syn:checked::before, input.synth[type="checkbox"]:checked::before, #配置面板 input[type="checkbox"]:checked::before {
+    input[type="checkbox"].syn:checked::before, input.synth[type="checkbox"]:checked::before, input#配置面板[type="checkbox"]:checked::before, #配置面板 input[type="checkbox"]:checked::before, input#對話歷史[type="checkbox"]:checked::before {
       content: '✓';
       text-shadow: 0px 0px 2px rgba(255, 0, 0, 0.8); }
 
-input[type="text"].syn, input.synth[type="text"], #配置面板 input[type="text"], input[type="password"].syn, input.synth[type="password"], #配置面板 input[type="password"] {
+input[type="text"].syn, input.synth[type="text"], input#配置面板[type="text"], #配置面板 input[type="text"], input#對話歷史[type="text"], input[type="password"].syn, input.synth[type="password"], input#配置面板[type="password"], #配置面板 input[type="password"], input#對話歷史[type="password"] {
   background: rgba(0, 0, 0, 0);
   outline: none;
   border: solid 1px rgba(0, 0, 0, 0.3);
   border-radius: 2px;
   padding: 2px; }
 
-input[type="text"].synth, #配置面板 input[type="text"], input[type="password"].synth, #配置面板 input[type="password"] {
+input[type="text"].synth, input#配置面板[type="text"], #配置面板 input[type="text"], input#對話歷史[type="text"], input[type="password"].synth, input#配置面板[type="password"], #配置面板 input[type="password"], input#對話歷史[type="password"] {
   border: none;
   border-radius: 0px;
   border-bottom: solid 1px rgba(55, 55, 0, 0.6);
   border-top: solid 1px rgba(0, 0, 0, 0);
   text-align: center; }
-  input[type="text"].synth:hover, #配置面板 input[type="text"]:hover, input[type="password"].synth:hover, #配置面板 input[type="password"]:hover {
+  input[type="text"].synth:hover, input#配置面板[type="text"]:hover, #配置面板 input[type="text"]:hover, input#對話歷史[type="text"]:hover, input[type="password"].synth:hover, input#配置面板[type="password"]:hover, #配置面板 input[type="password"]:hover, input#對話歷史[type="password"]:hover {
     padding: 0px 2px;
     border-top: solid 3px rgba(0, 0, 0, 0);
     border-bottom: solid 3px rgba(55, 55, 0, 0.4); }
@@ -482,7 +478,7 @@ textarea.syn {
   border: solid 1px rgba(0, 0, 0, 0.3);
   border-radius: 2px; }
 
-progress.syn, progress.synth, #加載畫面 progress {
+progress.syn, progress.synth, #加載畫面 progress, progress#配置面板, progress#對話歷史 {
   -webkit-appearance: none;
   -moz-appearence: none;
   appearance: none;
@@ -491,14 +487,14 @@ progress.syn, progress.synth, #加載畫面 progress {
   border-radius: 3px;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
   background: rgba(0, 0, 0, 0.2); }
-  progress.syn::-webkit-progress-bar, progress.synth::-webkit-progress-bar, #加載畫面 progress::-webkit-progress-bar {
+  progress.syn::-webkit-progress-bar, progress.synth::-webkit-progress-bar, #加載畫面 progress::-webkit-progress-bar, progress#配置面板::-webkit-progress-bar, progress#對話歷史::-webkit-progress-bar {
     background: transparent; }
-  progress.syn::-webkit-progress-value, progress.synth::-webkit-progress-value, #加載畫面 progress::-webkit-progress-value {
+  progress.syn::-webkit-progress-value, progress.synth::-webkit-progress-value, #加載畫面 progress::-webkit-progress-value, progress#配置面板::-webkit-progress-value, progress#對話歷史::-webkit-progress-value {
     background: transparent;
     border-radius: 3px;
     border-right: 1px solid rgba(0, 0, 0, 0.3);
     backdrop-filter: saturate(0.8) contrast(1.8) brightness(1.3); }
-  progress.syn::-moz-progress-bar, progress.synth::-moz-progress-bar, #加載畫面 progress::-moz-progress-bar {
+  progress.syn::-moz-progress-bar, progress.synth::-moz-progress-bar, #加載畫面 progress::-moz-progress-bar, progress#配置面板::-moz-progress-bar, progress#對話歷史::-moz-progress-bar {
     background-color: #dec6a1;
     background-image: url("../../../黑科技/synthetic_css/紙背景花紋模糊.jpg");
     background-size: cover;
@@ -506,273 +502,13 @@ progress.syn, progress.synth, #加載畫面 progress {
     border-radius: 3px;
     filter: brightness(0.8) saturate(0.8) contrast(1.8) brightness(1.3); }
 
-progress.synth, #加載畫面 progress {
+progress.synth, #加載畫面 progress, progress#配置面板, progress#對話歷史 {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 24px;
   margin: 4px; }
-  progress.synth::after, #加載畫面 progress::after {
-    content: attr(value) "/" attr(max);
-    position: absolute;
-    opacity: 0.75;
-    text-shadow: 0px 0px 3px black;
-    color: #ffd; }
-
-#配置面板 {
-  box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6);
-  border-radius: 2vw;
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  height: 74%;
-  width: 76%;
-  padding: 4% 2% 2% 2%;
-  background-image: url("../../../黑科技/synthetic_css/紙背景花紋.jpg");
-  background-size: cover;
-  color: #000;
-  z-index: 998; }
-  #配置面板 a {
-    padding: 8px;
-    margin: 8px;
-    border-radius: 8px; }
-  #配置面板 .按鈕組 {
-    position: absolute;
-    right: 2%;
-    top: 2%; }
-  #配置面板 > div {
-    font-size: 24px;
-    height: 80px;
-    display: flex;
-    align-items: center; }
-    #配置面板 > div::before {
-      content: "【" attr(名字) "】"; }
-
-#對話歷史 {
-  box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6);
-  border-radius: 2vw;
-  font-size: 24px;
-  position: absolute;
-  top: 10%;
-  left: 18%;
-  width: 60%;
-  height: 80%;
-  padding: 0 2%;
-  z-index: 10;
-  color: #000;
-  background-image: url("../../../黑科技/synthetic_css/紙背景花紋.jpg");
-  background-size: cover; }
-
-body.syn, body.synth {
-  background-color: #dec6a1;
-  background-image: url("../../../黑科技/synthetic_css/紙背景花紋.jpg");
-  background-size: cover;
-  background-attachment: fixed;
-  font-family: 'Noto Serif SC'; }
-  body.syn button, body.synth button, body.syn input, body.synth input, body.syn #配置面板 input, #配置面板 body.syn input, body.synth #配置面板 input, #配置面板 body.synth input, body.syn textarea, body.synth textarea {
-    font-family: 'Noto Serif SC'; }
-
-body.synth {
-  margin: 0px; }
-  body.synth strong, body.synth b {
-    font-weight: normal;
-    text-shadow: 0px 0px 2px black; }
-  body.synth h1, body.synth h2, body.synth h3, body.synth h4, body.synth h5 {
-    font-weight: normal; }
-  body.synth hr {
-    border: none;
-    border-top: 1px solid rgba(120, 50, 0, 0.5); }
-  body.synth ::-moz-focus-inner {
-    border: none; }
-  body.synth ::-moz-focus-outer {
-    border: none; }
-
-header.syn, header.synth {
-  background: rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 0px 2vh rgba(0, 0, 0, 0.4); }
-
-header.synth {
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-div.syn, div.synth {
-  background-color: #dec6a1;
-  background-image: url("../../../黑科技/synthetic_css/紙背景花紋模糊.jpg");
-  background-size: cover;
-  background-attachment: fixed;
-  box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6); }
-
-div.synth {
-  margin: 0.5vw;
-  padding: 0.5vw;
-  border-radius: 0.5vw; }
-
-button.syn, button.synth, a.syn, a.synth, #配置面板 a, #加載畫面 a {
-  outline: none;
-  border: none;
-  -webkit-user-select: none;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  background-color: #dec6a1;
-  background-image: url("../../../黑科技/synthetic_css/紙背景花紋模糊.jpg");
-  background-size: cover;
-  background-attachment: fixed;
-  box-shadow: 0px 0px 0.8vw rgba(0, 0, 0, 0.6), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
-  filter: brightness(1.05) hue-rotate(-6deg);
-  transition: box-shadow 0.2s, filter 0.1s; }
-  button.syn:hover, button.synth:hover, a.syn:hover, a.synth:hover, #配置面板 a:hover, #加載畫面 a:hover {
-    box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0.7), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
-    filter: brightness(1.1) hue-rotate(-12deg); }
-  button.syn:active, button.synth:active, a.syn:active, a.synth:active, #配置面板 a:active, #加載畫面 a:active {
-    box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0), 0px 0px 0.4vw rgba(0, 0, 0, 0.6) inset;
-    filter: blur(0.1vw); }
-
-button.synth, a.synth, #配置面板 a, #加載畫面 a {
-  font-size: inherit;
-  display: inline-block;
-  padding: 0.5vw;
-  margin: 0.5vw;
-  border-radius: 0.5vw; }
-
-blockquote.syn, blockquote.synth {
-  color: #00003c;
-  border-left: 3px solid rgba(0, 0, 0, 0.4); }
-
-blockquote.synth {
-  padding-left: 6px;
-  margin-left: 6px; }
-
-img.syn, img.synth {
-  box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6);
-  border-radius: 0.5vw; }
-
-img.synth {
-  margin: 0.5vw; }
-
-hr.syn {
-  width: 90%; }
-
-hr.synth {
-  border: none !important;
-  height: 6px;
-  border-radius: 40%;
-  background: rgba(0, 0, 0, 0.2); }
-
-input[type="range"].syn, input.synth[type="range"], #配置面板 input[type="range"] {
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
-  border-radius: 5px;
-  height: 5px;
-  transition: all 0.2s; }
-  input[type="range"].syn:hover, input.synth[type="range"]:hover, #配置面板 input[type="range"]:hover {
-    transform: scaleY(2); }
-    input[type="range"].syn:hover::-webkit-slider-thumb, input.synth[type="range"]:hover::-webkit-slider-thumb, #配置面板 input[type="range"]:hover::-webkit-slider-thumb {
-      transform: scaleY(0.5); }
-    input[type="range"].syn:hover::-moz-range-thumb, input.synth[type="range"]:hover::-moz-range-thumb, #配置面板 input[type="range"]:hover::-moz-range-thumb {
-      transform: scaleY(0.5); }
-  input[type="range"].syn::-webkit-slider-thumb, input.synth[type="range"]::-webkit-slider-thumb, #配置面板 input[type="range"]::-webkit-slider-thumb {
-    transition: all 0.2s;
-    cursor: pointer;
-    -webkit-appearance: none;
-    height: 20px;
-    width: 20px;
-    border-radius: 100%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px white inset;
-    background: rgba(255, 255, 200, 0.5); }
-  input[type="range"].syn::-moz-range-thumb, input.synth[type="range"]::-moz-range-thumb, #配置面板 input[type="range"]::-moz-range-thumb {
-    transition: all 0.2s;
-    cursor: pointer;
-    height: 20px;
-    width: 20px;
-    border-radius: 100%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px white inset;
-    background: rgba(255, 255, 200, 0.5); }
-
-input[type="checkbox"].syn, input.synth[type="checkbox"], #配置面板 input[type="checkbox"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  outline: none;
-  cursor: pointer;
-  height: 20px;
-  width: 20px;
-  border-radius: 100%;
-  background-color: rgba(0, 0, 0, 0.15);
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 10px rgba(0, 0, 0, 0.4) inset;
-  transition: all 0.2s;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-  input[type="checkbox"].syn::before, input.synth[type="checkbox"]::before, #配置面板 input[type="checkbox"]::before {
-    font-size: 16px;
-    content: '✗';
-    color: rgba(0, 0, 0, 0);
-    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.8); }
-  input[type="checkbox"].syn:checked, input.synth[type="checkbox"]:checked, #配置面板 input[type="checkbox"]:checked {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px white inset;
-    background: rgba(255, 255, 200, 0.5); }
-    input[type="checkbox"].syn:checked::before, input.synth[type="checkbox"]:checked::before, #配置面板 input[type="checkbox"]:checked::before {
-      content: '✓';
-      text-shadow: 0px 0px 2px rgba(255, 0, 0, 0.8); }
-
-input[type="text"].syn, input.synth[type="text"], #配置面板 input[type="text"], input[type="password"].syn, input.synth[type="password"], #配置面板 input[type="password"] {
-  background: rgba(0, 0, 0, 0);
-  outline: none;
-  border: solid 1px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  padding: 2px; }
-
-input[type="text"].synth, #配置面板 input[type="text"], input[type="password"].synth, #配置面板 input[type="password"] {
-  border: none;
-  border-radius: 0px;
-  border-bottom: solid 1px rgba(55, 55, 0, 0.6);
-  border-top: solid 1px rgba(0, 0, 0, 0);
-  text-align: center; }
-  input[type="text"].synth:hover, #配置面板 input[type="text"]:hover, input[type="password"].synth:hover, #配置面板 input[type="password"]:hover {
-    padding: 0px 2px;
-    border-top: solid 3px rgba(0, 0, 0, 0);
-    border-bottom: solid 3px rgba(55, 55, 0, 0.4); }
-
-textarea.syn {
-  background: rgba(0, 0, 0, 0);
-  outline: none;
-  border: solid 1px rgba(0, 0, 0, 0.3);
-  border-radius: 2px; }
-
-progress.syn, progress.synth, #加載畫面 progress {
-  -webkit-appearance: none;
-  -moz-appearence: none;
-  appearance: none;
-  background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 3px;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
-  background: rgba(0, 0, 0, 0.2); }
-  progress.syn::-webkit-progress-bar, progress.synth::-webkit-progress-bar, #加載畫面 progress::-webkit-progress-bar {
-    background: transparent; }
-  progress.syn::-webkit-progress-value, progress.synth::-webkit-progress-value, #加載畫面 progress::-webkit-progress-value {
-    background: transparent;
-    border-radius: 3px;
-    border-right: 1px solid rgba(0, 0, 0, 0.3);
-    backdrop-filter: saturate(0.8) contrast(1.8) brightness(1.3); }
-  progress.syn::-moz-progress-bar, progress.synth::-moz-progress-bar, #加載畫面 progress::-moz-progress-bar {
-    background-color: #dec6a1;
-    background-image: url("../../../黑科技/synthetic_css/紙背景花紋模糊.jpg");
-    background-size: cover;
-    background-attachment: fixed;
-    border-radius: 3px;
-    filter: brightness(0.8) saturate(0.8) contrast(1.8) brightness(1.3); }
-
-progress.synth, #加載畫面 progress {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 24px;
-  margin: 4px; }
-  progress.synth::after, #加載畫面 progress::after {
+  progress.synth::after, #加載畫面 progress::after, progress#配置面板::after, progress#對話歷史::after {
     content: attr(value) "/" attr(max);
     position: absolute;
     opacity: 0.75;
@@ -791,3 +527,272 @@ progress.synth, #加載畫面 progress {
   align-items: center;
   height: 100%;
   width: 100%; }
+
+body.syn, body.synth, body#配置面板, body#對話歷史 {
+  background-color: #dec6a1;
+  background-image: url("../../../黑科技/synthetic_css/紙背景花紋.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: 'Noto Serif SC'; }
+  body.syn button, body.synth button, body#配置面板 button, body#對話歷史 button, body.syn input, body.synth input, body#對話歷史 input, body.syn #配置面板 input, #配置面板 body.syn input, body.synth #配置面板 input, #配置面板 body.synth input, body#配置面板 input, body.syn textarea, body.synth textarea, body#配置面板 textarea, body#對話歷史 textarea {
+    font-family: 'Noto Serif SC'; }
+
+body.synth, body#配置面板, body#對話歷史 {
+  margin: 0px; }
+  body.synth strong, body#配置面板 strong, body#對話歷史 strong, body.synth b, body#配置面板 b, body#對話歷史 b {
+    font-weight: normal;
+    text-shadow: 0px 0px 2px black; }
+  body.synth h1, body#配置面板 h1, body#對話歷史 h1, body.synth h2, body#配置面板 h2, body#對話歷史 h2, body.synth h3, body#配置面板 h3, body#對話歷史 h3, body.synth h4, body#配置面板 h4, body#對話歷史 h4, body.synth h5, body#配置面板 h5, body#對話歷史 h5 {
+    font-weight: normal; }
+  body.synth hr, body#配置面板 hr, body#對話歷史 hr {
+    border: none;
+    border-top: 1px solid rgba(120, 50, 0, 0.5); }
+  body.synth ::-moz-focus-inner, body#配置面板 ::-moz-focus-inner, body#對話歷史 ::-moz-focus-inner {
+    border: none; }
+  body.synth ::-moz-focus-outer, body#配置面板 ::-moz-focus-outer, body#對話歷史 ::-moz-focus-outer {
+    border: none; }
+
+header.syn, header.synth, header#配置面板, header#對話歷史 {
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 2vh rgba(0, 0, 0, 0.4); }
+
+header.synth, header#配置面板, header#對話歷史 {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+div.syn, div.synth, #配置面板, #對話歷史 {
+  background-color: #dec6a1;
+  background-image: url("../../../黑科技/synthetic_css/紙背景花紋模糊.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6); }
+
+div.synth, #配置面板, #對話歷史 {
+  margin: 0.5vw;
+  padding: 0.5vw;
+  border-radius: 0.5vw;
+  overflow-y: auto; }
+  div.synth::-webkit-scrollbar, #配置面板::-webkit-scrollbar, #對話歷史::-webkit-scrollbar {
+    cursor: pointer;
+    width: 20px;
+    background-image: -webkit-linear-gradient(0deg, transparent 40%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.2) 60%, transparent 60%, transparent);
+    border-radius: 16px; }
+  div.synth::-webkit-scrollbar-thumb, #配置面板::-webkit-scrollbar-thumb, #對話歷史::-webkit-scrollbar-thumb {
+    border-radius: 0.5vw;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.35), 0px 0px 10px white inset;
+    background: rgba(255, 255, 200, 0.65);
+    backdrop-filter: blur(4px); }
+
+button.syn, button.synth, button#配置面板, button#對話歷史, a.syn, a.synth, #加載畫面 a, a#配置面板, #配置面板 a, a#對話歷史 {
+  outline: none;
+  border: none;
+  -webkit-user-select: none;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  background-color: #dec6a1;
+  background-image: url("../../../黑科技/synthetic_css/紙背景花紋模糊.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  box-shadow: 0px 0px 0.8vw rgba(0, 0, 0, 0.6), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
+  filter: brightness(1.05) hue-rotate(-6deg);
+  transition: box-shadow 0.2s, filter 0.1s; }
+  button.syn:hover, button.synth:hover, button#配置面板:hover, button#對話歷史:hover, a.syn:hover, a.synth:hover, #加載畫面 a:hover, a#配置面板:hover, #配置面板 a:hover, a#對話歷史:hover {
+    box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0.7), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
+    filter: brightness(1.1) hue-rotate(-12deg); }
+  button.syn:active, button.synth:active, button#配置面板:active, button#對話歷史:active, a.syn:active, a.synth:active, #加載畫面 a:active, a#配置面板:active, #配置面板 a:active, a#對話歷史:active {
+    box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0), 0px 0px 0.4vw rgba(0, 0, 0, 0.6) inset;
+    filter: blur(0.1vw); }
+
+button.synth, button#配置面板, button#對話歷史, a.synth, #加載畫面 a, a#配置面板, #配置面板 a, a#對話歷史 {
+  font-size: inherit;
+  display: inline-block;
+  padding: 0.5vw;
+  margin: 0.5vw;
+  border-radius: 0.5vw; }
+
+blockquote.syn, blockquote.synth, blockquote#配置面板, blockquote#對話歷史 {
+  color: #00003c;
+  border-left: 3px solid rgba(0, 0, 0, 0.4); }
+
+blockquote.synth, blockquote#配置面板, blockquote#對話歷史 {
+  padding-left: 6px;
+  margin-left: 6px; }
+
+img.syn, img.synth, img#配置面板, img#對話歷史 {
+  box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6);
+  border-radius: 0.5vw; }
+
+img.synth, img#配置面板, img#對話歷史 {
+  margin: 0.5vw; }
+
+hr.syn {
+  width: 90%; }
+
+hr.synth, hr#配置面板, hr#對話歷史 {
+  border: none !important;
+  height: 6px;
+  border-radius: 40%;
+  background: rgba(0, 0, 0, 0.2); }
+
+input[type="range"].syn, input.synth[type="range"], input#配置面板[type="range"], #配置面板 input[type="range"], input#對話歷史[type="range"] {
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
+  border-radius: 5px;
+  height: 5px;
+  transition: all 0.2s; }
+  input[type="range"].syn:hover, input.synth[type="range"]:hover, input#配置面板[type="range"]:hover, #配置面板 input[type="range"]:hover, input#對話歷史[type="range"]:hover {
+    transform: scaleY(2); }
+    input[type="range"].syn:hover::-webkit-slider-thumb, input.synth[type="range"]:hover::-webkit-slider-thumb, input#配置面板[type="range"]:hover::-webkit-slider-thumb, #配置面板 input[type="range"]:hover::-webkit-slider-thumb, input#對話歷史[type="range"]:hover::-webkit-slider-thumb {
+      transform: scaleY(0.5); }
+    input[type="range"].syn:hover::-moz-range-thumb, input.synth[type="range"]:hover::-moz-range-thumb, input#配置面板[type="range"]:hover::-moz-range-thumb, #配置面板 input[type="range"]:hover::-moz-range-thumb, input#對話歷史[type="range"]:hover::-moz-range-thumb {
+      transform: scaleY(0.5); }
+  input[type="range"].syn::-webkit-slider-thumb, input.synth[type="range"]::-webkit-slider-thumb, input#配置面板[type="range"]::-webkit-slider-thumb, #配置面板 input[type="range"]::-webkit-slider-thumb, input#對話歷史[type="range"]::-webkit-slider-thumb {
+    transition: all 0.2s;
+    cursor: pointer;
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px white inset;
+    background: rgba(255, 255, 200, 0.5); }
+  input[type="range"].syn::-moz-range-thumb, input.synth[type="range"]::-moz-range-thumb, input#配置面板[type="range"]::-moz-range-thumb, #配置面板 input[type="range"]::-moz-range-thumb, input#對話歷史[type="range"]::-moz-range-thumb {
+    transition: all 0.2s;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px white inset;
+    background: rgba(255, 255, 200, 0.5); }
+
+input[type="checkbox"].syn, input.synth[type="checkbox"], input#配置面板[type="checkbox"], #配置面板 input[type="checkbox"], input#對話歷史[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  background-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 10px rgba(0, 0, 0, 0.4) inset;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  input[type="checkbox"].syn::before, input.synth[type="checkbox"]::before, input#配置面板[type="checkbox"]::before, #配置面板 input[type="checkbox"]::before, input#對話歷史[type="checkbox"]::before {
+    font-size: 16px;
+    content: '✗';
+    color: rgba(0, 0, 0, 0);
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.8); }
+  input[type="checkbox"].syn:checked, input.synth[type="checkbox"]:checked, input#配置面板[type="checkbox"]:checked, #配置面板 input[type="checkbox"]:checked, input#對話歷史[type="checkbox"]:checked {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5), 0px 0px 10px white inset;
+    background: rgba(255, 255, 200, 0.5); }
+    input[type="checkbox"].syn:checked::before, input.synth[type="checkbox"]:checked::before, input#配置面板[type="checkbox"]:checked::before, #配置面板 input[type="checkbox"]:checked::before, input#對話歷史[type="checkbox"]:checked::before {
+      content: '✓';
+      text-shadow: 0px 0px 2px rgba(255, 0, 0, 0.8); }
+
+input[type="text"].syn, input.synth[type="text"], input#配置面板[type="text"], #配置面板 input[type="text"], input#對話歷史[type="text"], input[type="password"].syn, input.synth[type="password"], input#配置面板[type="password"], #配置面板 input[type="password"], input#對話歷史[type="password"] {
+  background: rgba(0, 0, 0, 0);
+  outline: none;
+  border: solid 1px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  padding: 2px; }
+
+input[type="text"].synth, input#配置面板[type="text"], #配置面板 input[type="text"], input#對話歷史[type="text"], input[type="password"].synth, input#配置面板[type="password"], #配置面板 input[type="password"], input#對話歷史[type="password"] {
+  border: none;
+  border-radius: 0px;
+  border-bottom: solid 1px rgba(55, 55, 0, 0.6);
+  border-top: solid 1px rgba(0, 0, 0, 0);
+  text-align: center; }
+  input[type="text"].synth:hover, input#配置面板[type="text"]:hover, #配置面板 input[type="text"]:hover, input#對話歷史[type="text"]:hover, input[type="password"].synth:hover, input#配置面板[type="password"]:hover, #配置面板 input[type="password"]:hover, input#對話歷史[type="password"]:hover {
+    padding: 0px 2px;
+    border-top: solid 3px rgba(0, 0, 0, 0);
+    border-bottom: solid 3px rgba(55, 55, 0, 0.4); }
+
+textarea.syn {
+  background: rgba(0, 0, 0, 0);
+  outline: none;
+  border: solid 1px rgba(0, 0, 0, 0.3);
+  border-radius: 2px; }
+
+progress.syn, progress.synth, #加載畫面 progress, progress#配置面板, progress#對話歷史 {
+  -webkit-appearance: none;
+  -moz-appearence: none;
+  appearance: none;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+  background: rgba(0, 0, 0, 0.2); }
+  progress.syn::-webkit-progress-bar, progress.synth::-webkit-progress-bar, #加載畫面 progress::-webkit-progress-bar, progress#配置面板::-webkit-progress-bar, progress#對話歷史::-webkit-progress-bar {
+    background: transparent; }
+  progress.syn::-webkit-progress-value, progress.synth::-webkit-progress-value, #加載畫面 progress::-webkit-progress-value, progress#配置面板::-webkit-progress-value, progress#對話歷史::-webkit-progress-value {
+    background: transparent;
+    border-radius: 3px;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    backdrop-filter: saturate(0.8) contrast(1.8) brightness(1.3); }
+  progress.syn::-moz-progress-bar, progress.synth::-moz-progress-bar, #加載畫面 progress::-moz-progress-bar, progress#配置面板::-moz-progress-bar, progress#對話歷史::-moz-progress-bar {
+    background-color: #dec6a1;
+    background-image: url("../../../黑科技/synthetic_css/紙背景花紋模糊.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    border-radius: 3px;
+    filter: brightness(0.8) saturate(0.8) contrast(1.8) brightness(1.3); }
+
+progress.synth, #加載畫面 progress, progress#配置面板, progress#對話歷史 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  margin: 4px; }
+  progress.synth::after, #加載畫面 progress::after, progress#配置面板::after, progress#對話歷史::after {
+    content: attr(value) "/" attr(max);
+    position: absolute;
+    opacity: 0.75;
+    text-shadow: 0px 0px 3px black;
+    color: #ffd; }
+
+#配置面板 {
+  background-image: url("../../../黑科技/synthetic_css/紙背景花紋.jpg");
+  background-attachment: scroll;
+  color: #000;
+  font-size: 24px;
+  border-radius: 1vw;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  height: 74%;
+  width: 76%;
+  padding: 4% 2% 2% 2%;
+  z-index: 998; }
+  #配置面板 a {
+    padding: 8px;
+    margin: 8px;
+    border-radius: 8px; }
+  #配置面板 .按鈕組 {
+    position: absolute;
+    right: 2%;
+    top: 2%; }
+  #配置面板 > div, #配置面板 > #配置面板, #配置面板 > #對話歷史 {
+    height: 80px;
+    display: flex;
+    align-items: center; }
+    #配置面板 > div::before, #配置面板 > #配置面板::before, #配置面板 > #對話歷史::before {
+      content: "【" attr(名字) "】"; }
+
+#對話歷史 {
+  background-image: url("../../../黑科技/synthetic_css/紙背景花紋.jpg");
+  background-attachment: scroll;
+  color: #000;
+  font-size: 24px;
+  border-radius: 1vw;
+  position: absolute;
+  top: 10%;
+  left: 18%;
+  width: 60%;
+  height: 80%;
+  padding: 0 2%;
+  z-index: 10; }
