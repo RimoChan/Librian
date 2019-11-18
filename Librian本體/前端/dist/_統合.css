@@ -160,7 +160,7 @@ video {
       color: #fff;
       font-size: 24px;
       margin: 0 auto;
-      text-shadow: -1px -1px 2px #000, 1px 1px 2px #000;
+      text-shadow: 0px 0px 3px #000, 0px 0px 3px #000;
       position: absolute;
       top: 528px;
       left: 185px; }
