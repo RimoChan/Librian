@@ -57,9 +57,9 @@ class 命令:
     # ——————————————————————————————
 
     @別名('背景')
-    def BG(self, 讀者, bg, 淡入時間=1, 漸變方法='_淡出'):
+    def BG(self, 讀者, bg, 淡入時間=1, 位置='0% 0%', 漸變方法='_淡出'):
         bg = 文件.補充擴展名(bg, ['webp', 'png', 'jpg'], f'./{虛擬機環境.工程路徑}/{虛擬機環境.圖片文件夾}')
-        讀者.狀態.背景 = bg, 淡入時間, 漸變方法
+        讀者.狀態.背景 = bg, 淡入時間, 位置, 漸變方法
 
     @別名('特效')
     def EF(self, 讀者, 標識, 類名=None):
@@ -69,15 +69,20 @@ class 命令:
             讀者.狀態.特效表[標識] = 類名
 
     @別名('背景音樂', '背景音乐')
-    def BGM(self, 讀者, bgm, 音量=1):
-        bgm = 文件.補充擴展名(bgm, ['opus', 'mp3', 'ogg'], f'./{虛擬機環境.工程路徑}/{虛擬機環境.音樂文件夾}')
-        讀者.狀態.背景音樂 = bgm, 音量
+    def BGM(self, 讀者, bgm=None, 音量=1):
+        if bgm is None:
+            讀者.狀態.背景音樂 = None
+        else:
+            bgm = 文件.補充擴展名(bgm, ['opus', 'mp3', 'ogg'], f'./{虛擬機環境.工程路徑}/{虛擬機環境.音樂文件夾}')
+            讀者.狀態.背景音樂 = bgm, 音量
 
     def CG(self, 讀者, cg=None, 淡入時間=1, 漸變方法='_淡出'):
-        if cg is not None:
+        if cg is None:
+            讀者.狀態.cg = None
+        else:
             cg = 文件.補充擴展名(cg, ['webp', 'png', 'jpg'], f'./{虛擬機環境.工程路徑}/{虛擬機環境.圖片文件夾}')
-        讀者.狀態.CG = cg, 淡入時間, 漸變方法
-
+            讀者.狀態.cg = cg, 淡入時間, 漸變方法
+            
     @別名('視頻', '视频')
     def VIDEO(self, 讀者, 文件名, 可以跳過=False):
         讀者.狀態.重置()
@@ -93,19 +98,19 @@ class 命令:
 
 class 狀態:
     def __init__(self):
-        self.額外信息 = ''
-        self.插入圖 = ''
-        self.話語 = ''
-        self.名字 = ''
-        self.人物 = ''
-        self.語者 = ''
-        self.背景 = None
-        self.背景音樂 = ('', 1)
-        self.CG = None
-        self.js = ''
-        self.特效表 = {}
+        self.話語 = None      # str
+        self.名字 = None      # str
+        self.語者 = None      # str
+        self.人物 = None      # str
+        self.背景 = None      # [圖名, 淡入時間, 位置, 漸變方法]
+        self.背景音樂 = None   # [音樂名, 音量]
+        self.插入圖 = None     # str
+        self.cg = None        # [圖名, 淡入時間, 漸變方法]
+        self.視頻 = None      # [視頻名, 可以跳過]
+        self.js = None        # str
         self.選項 = ()
-        self.視頻 = ''
+        self.特效表 = {}
+        self.額外信息 = ()
 
     def 導出(self, html=True):
         鏡頭.語者 = self.語者
@@ -114,19 +119,19 @@ class 狀態:
         else:
             立繪 = []
         快照 = {
-            '額外信息': self.額外信息,
-            '插入圖': self.插入圖,
             '話語': self.話語,
             '名字': self.名字,
             '立繪': 立繪,
-            '視頻': self.視頻,
+            '語者': self.語者,
             '背景': self.背景,
             '背景音樂': self.背景音樂,
-            'cg': self.CG,
+            '插入圖': self.插入圖,
+            'cg': self.cg,
+            '視頻': self.視頻,
             'js': self.js,
             '選項': [i[0] for i in self.選項],
-            '語者': self.語者,
             '特效表': copy.deepcopy(self.特效表),
+            '額外信息': self.額外信息,
         }
         self.清除臨時狀態()
         return 快照
@@ -135,10 +140,10 @@ class 狀態:
         self.__init__()
 
     def 清除臨時狀態(self):
-        self.js = ''
-        self.插入圖 = ''
-        self.額外信息 = ''
-        self.視頻 = ''
+        self.js = None
+        self.插入圖 = None
+        self.視頻 = None
+        self.額外信息 = ()
 
 
 class 劇本:

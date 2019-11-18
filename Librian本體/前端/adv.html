@@ -27,8 +27,6 @@
         </div>
         <div id="總畫面">
             <video width="1366" height="768" src="" autoplay="autoplay"></video>
-            <audio id="bgm" autoplay='' loop='' src=''></audio>
-            <audio id="嘀" autoplay='' loop='' src=''></audio>
             <div id="配置面板">
                 <span class="按鈕組">
                     <a id="重置設置">
@@ -38,11 +36,6 @@
                         <i class="fa fa-check"></i>
                     </a>
                 </span>
-                <div 名字='全屏幕'>
-                    <a href='javascript:山彥.切換全屏();'>
-                        <i class="fa fa-arrows-alt"></i>
-                    </a>
-                </div>
                 <div v-for='(內容, 設置名) in 用戶設置' v-bind:名字='設置名'>
                     <template v-if='內容.類型 === "number"'>
                         {{內容.提示[0]}}
@@ -74,6 +67,9 @@
                 <a id="切換快進">
                     <i class="fa fa-fast-forward"></i>
                 </a>
+                <a id="全屏" href='javascript:山彥.切換全屏();'>
+                    <i class="fa fa-arrows-alt"></i>
+                </a>
                 <a id="進入設置">
                     <i class="fa fa-gear"></i>
                 </a>
@@ -103,7 +99,7 @@
                 </div>
             </div>
             <div id="提示"></div>
+            <div id="墊底"></div>
         </div>
-        <div id="墊底"></div>
     </body>
 </html>

@@ -25,19 +25,12 @@ html:
                     開始
         div#總畫面:
             video width="1366" height="768" src="" autoplay="autoplay":
-    
-            audio#bgm autoplay='' loop='' src='':
-            audio#嘀 autoplay='' loop='' src='':
-    
             div#配置面板:
                 span.按鈕組:
                     a#重置設置:
                         i.fa.fa-rotate-left:
                     a#退出設置:
                         i.fa.fa-check:
-                div 名字='全屏幕':
-                    a href='javascript:山彥.切換全屏();':
-                        i.fa.fa-arrows-alt:
                 div v-for='(內容, 設置名) in 用戶設置' v-bind:名字='設置名':
                     template v-if='內容.類型 === "number"':
                         {{內容.提示[0]}}
@@ -61,6 +54,8 @@ html:
                     i.fa.fa-angle-double-up style='color:#fd1; text-shadow:0 0 4px #000;':
                 a#切換快進:
                     i.fa.fa-fast-forward:
+                a#全屏 href='javascript:山彥.切換全屏();':
+                    i.fa.fa-arrows-alt:
                 a#進入設置:
                     i.fa.fa-gear:
                 a#回標題 v-if='本地運行':
@@ -84,5 +79,5 @@ html:
                         div#對話框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度.值}":
                     
             div#提示:
-
-        div#墊底:
+            
+            div#墊底:

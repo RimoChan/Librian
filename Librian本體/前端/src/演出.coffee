@@ -32,7 +32,7 @@ export default 演出 =
         a = document.body.clientWidth / v.解析度[0]
         b = document.body.clientHeight / v.解析度[1]
         t = Math.min(a, b)
-        $('#總畫面 , #墊底').css({
+        $('#總畫面').css({
             "transform-origin": "0% 0%"
             "transform": "scale("+t+")"
         } )
@@ -49,7 +49,7 @@ export default 演出 =
             data.背景[0] = "url(#{v.圖片文件夾}/#{data.背景[0]})"
         if data.cg
             data.cg[0] = "url(#{v.圖片文件夾}/#{data.cg[0]})"
-        if data.背景音樂[0]!='None'
+        if data.背景音樂
             data.背景音樂[0] = v.音樂文件夾 + '/' + data.背景音樂[0]
         if data.插入圖
             data.插入圖 = "url(#{v.圖片文件夾}/#{data.插入圖})"
@@ -69,7 +69,7 @@ export default 演出 =
         if 插入圖
             名字 = ''
             話語 = ''
-            背景音樂 = ['None', 0]
+            背景音樂 = null
             this.換圖('覆蓋', 插入圖, 0)
             $('#覆蓋').attr('顯現', 'true') 
         else
@@ -93,7 +93,7 @@ export default 演出 =
 
     特效處理: (特效表) ->
         可特效块 = [
-            '總畫面','adv畫面','覆蓋','選項','cg','bg','立繪','對話歷史',
+            '總畫面','adv畫面','主畫面','覆蓋','選項','cg','bg','立繪','對話歷史',
             '對話框','名字框','名字','名字框背景','話語框','話語','話語框背景',
             '對話框背景'
         ]
@@ -119,8 +119,7 @@ export default 演出 =
     放視頻: (視頻) ->
         if ! 視頻
             return
-        視頻文件 = 視頻[0]
-        可以跳過 = 視頻[1]
+        [視頻文件, 可以跳過] = 視頻
         video = $('video')
         video.css('display', 'block')
         video.attr('src', v.視頻文件夾+'/' + 視頻文件)
@@ -153,16 +152,12 @@ export default 演出 =
         $('#提示').fadeIn(300)
         $('#提示').hide(1000)
 
-    現在cg: 'None',
+    現在cg: null,
     換cg: (cg) ->
         if cg
-            cg圖片 = cg[0]
-            淡入時間 = cg[1]
-            漸變方法 = cg[2]
+            [cg圖片, 淡入時間, 漸變方法] = cg
         else
-            cg圖片 = ''
-            淡入時間 = 0
-            漸變方法 = ''
+            [cg圖片, 淡入時間, 漸變方法] = ['', 0, '']
         if cg圖片 == this.現在cg
             return
         this.現在cg = cg圖片
@@ -177,7 +172,7 @@ export default 演出 =
                 console.log "去除 #{名字}"
         for 名字 in 名字組
             if this.當前人物.indexOf(名字) == - 1
-                $('#立繪').append($("<div id='立繪--#{名字}'></div>"))
+                $('#立繪').append($("<div id='立繪--#{名字}'><div id='立繪--#{名字}--圖像'></div></div>"))
                 console.log "加入 #{名字}"
                 for 立繪 in 立繪組
                     if 立繪.名字 == 名字
@@ -193,26 +188,26 @@ export default 演出 =
             t.css('left', "#{立繪.位置[0]}px")
             t.css('top', "#{立繪.位置[1]}px")
             t.css('transform', "scale(#{立繪.位置[2]})")
-            t.attr('特效', 立繪.特效.join(" "))
+            $("#立繪--#{立繪.名字}--圖像").attr('特效', 立繪.特效.join(" "))
             
         for 立繪 in 立繪組
             組 = ([層.文件, 層.子位置[0], 層.子位置[1]] for 層 in 立繪.圖層)
-            圖像融合.融合到div(組, 0.5, "立繪--#{立繪.名字}")
+            圖像融合.融合到div(組, 0.5, "立繪--#{立繪.名字}--圖像")
         
         this.當前人物 = 名字組
 
-    現在背景: 'None',
+    現在背景: null,
     換背景: (背景, 瞬) ->
-        背景圖片 = 背景[0]
-        淡入時間 = 背景[1]
+        if 背景
+            [背景圖片, 淡入時間, 位置, 漸變方法] = 背景
+        else
+            [背景圖片, 淡入時間, 位置, 漸變方法] = ['', 0, '']
         if 瞬
             淡入時間 = 0
-        漸變方法 = 背景[2]
         if 背景圖片 == this.現在背景
             return
         this.現在背景 = 背景圖片
-        if 背景圖片 == 'None'
-            背景圖片 = 'url(static/None.png)'
+        $('#bg').css('background-position', 位置)
         this.換圖('bg', 背景圖片, 淡入時間, 漸變方法)
 
     換人名: (語者, 名字) ->
@@ -238,20 +233,26 @@ export default 演出 =
         $('#話語 *').css('animation','None')
         $('#話語 *').css('opacity','1')
 
-    當前曲名: 'None',
+    當前曲名: null,
     換背景音樂: (背景音樂) ->
-        曲名 = 背景音樂[0]
-        音量 = 背景音樂[1]
-        au = $('#bgm')
+        if 背景音樂
+            [曲名, 音量] = 背景音樂
+        else
+            [曲名, 音量] = [null, 0]
+            
         if this.當前曲名 == 曲名
             return
         this.當前曲名 = 曲名
-        if this.當前曲名 == 'None'
-            # 淡出表現不對，先刪了
-            au.attr('src', 演出.當前曲名)
-        else
-            au.attr('src', this.當前曲名)
-            au[0].volume = 音量
+        
+        for i in $('#總畫面 > audio')
+            if i.volume==0
+                i.remove()
+        $('#總畫面 > audio').animate({volume: 0}, 500);
+        
+        音樂 = $("<audio src='#{曲名}' autoplay loop></audio>");
+        音樂.volume = 音量
+        $('#總畫面').append(音樂)
+        
 
     換圖: (目標, 新圖, 漸變時間, 漸變方法 = '_淡出') ->
         目標 = $('#'+目標)
