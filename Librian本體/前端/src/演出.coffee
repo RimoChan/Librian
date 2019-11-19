@@ -196,7 +196,7 @@ export default 演出 =
         
         this.當前人物 = 名字組
 
-    現在背景: null,
+    現在背景: [null, "0% 0%"],
     換背景: (背景, 瞬) ->
         if 背景
             [背景圖片, 淡入時間, 位置, 漸變方法] = 背景
@@ -204,11 +204,13 @@ export default 演出 =
             [背景圖片, 淡入時間, 位置, 漸變方法] = ['', 0, '']
         if 瞬
             淡入時間 = 0
-        if 背景圖片 == this.現在背景
-            return
-        this.現在背景 = 背景圖片
-        $('#bg').css('background-position', 位置)
-        this.換圖('bg', 背景圖片, 淡入時間, 漸變方法)
+        if 背景圖片 != this.現在背景[0]
+            $('#bg').css('background-position', 位置)
+            this.換圖('bg', 背景圖片, 淡入時間, 漸變方法)
+        else if 位置 != this.現在背景[1]
+            $('#bg').css('background-position', 位置)
+        this.現在背景 = [背景圖片, 位置]
+            
 
     換人名: (語者, 名字) ->
         if 名字
