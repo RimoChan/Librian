@@ -29,6 +29,7 @@ export default 控制 =
     顯示履歷: ->
         $('#總畫面').attr('歷史', 'on')
         $('#總畫面').attr('對話框', 'off')
+        $('#對話歷史').scrollTop($('#對話歷史')[0].scrollHeight)
 
     正在快進: false,
 
@@ -50,8 +51,8 @@ export default 控制 =
         if 控制.正在快進 == false
             return
         else
-            控制.左鍵功能() ;
-            setTimeout(控制.快進輪迴, 75) ;
+            控制.左鍵功能()
+            setTimeout(控制.快進輪迴, 50)
 
     進入設置: ->
         $('#總畫面').attr('配置面板', 'on')
