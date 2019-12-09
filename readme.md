@@ -48,7 +48,7 @@ Librian是面向劇本的引擎，賣點是:
 
 ## 中文文檔
 
-如果你想瞭解詳細的使用方法，可以直接閱讀Librian的中文文檔——<https://doc.librian.it>。
+如果你想瞭解詳細的使用方法，可以直接閱讀Librian的中文文檔——[https://doc.librian.it](https://doc.librian.it/site/主頁.html)。
 
 ## 快速上手
 
@@ -60,7 +60,7 @@ Librian是面向劇本的引擎，賣點是:
 2.  pip install -r requirements.txt
 3.  python3 librian_panel.py
 
-此外，你也可以根據[中文文檔](https://doc.librian.it)的指示來安裝。
+此外，你也可以根據[中文文檔](https://doc.librian.it/site/主頁.html)的指示來安裝。
 
 ## 援交～
 
