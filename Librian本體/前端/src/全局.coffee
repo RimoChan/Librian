@@ -86,7 +86,7 @@ window.加載完成的初始化 = ->
         return
         
     ua = window.navigator.userAgent
-    isChrome = ua.indexOf("Chrome") && window.chrome;
+    isChrome = ua.indexOf("Chrome") && window.chrome
     if not isChrome
         alert '只有chrome能用。'
         return
@@ -110,8 +110,8 @@ window.加載完成的初始化 = ->
             doc = window.document
             docEl = doc.documentElement
 
-            requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-            cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+            requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen
+            cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen
 
             if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) 
                 requestFullScreen.call(docEl)

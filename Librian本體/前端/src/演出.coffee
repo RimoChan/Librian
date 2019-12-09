@@ -249,9 +249,9 @@ export default 演出 =
         for i in $('#總畫面 > audio')
             if i.volume==0
                 i.remove()
-        $('#總畫面 > audio').animate({volume: 0}, 500);
+        $('#總畫面 > audio').animate({volume: 0}, 500)
         
-        音樂 = $("<audio src='#{曲名}' autoplay loop></audio>");
+        音樂 = $("<audio src='#{曲名}' autoplay loop></audio>")
         音樂.volume = 音量
         $('#總畫面').append(音樂)
         
