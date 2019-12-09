@@ -18,15 +18,3 @@ def 構建工程(工程路徑, 標題, 圖標=None):
     with open(f'_{標題}.kuzu', 'w') as f:
         f.write(f'cmd /c "cd Librian本體 & ..\\python36\\python.exe Librian.py --project {工程路徑}"')
     win32api.SetFileAttributes(f'_{標題}.kuzu', win32con.FILE_ATTRIBUTE_HIDDEN)
-
-
-def 構建Librian面板():
-    f = tempfile.NamedTemporaryFile(delete=False)
-    b = 'import os;os.system(\'\""./python36/python\"" -m librian_panel.py\');os.system("pause")'.encode('utf8')
-    f.write(b)
-    f.close()
-    os.system(f'pyinstaller {f.name} --name Librian面板.exe --distpath ./ -F -i 資源/librian.ico')
-
-
-if __name__ == '__main__':
-    構建Librian面板()
