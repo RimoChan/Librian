@@ -69,8 +69,8 @@ window.onload = ->
             集合["#{v.圖片文件夾}/#{data.cg[0]}"] = true
         if data.插入圖
             集合["#{v.圖片文件夾}/#{data.插入圖}"] = true
-        if data.背景音樂
-            集合[v.音樂文件夾 + '/' + data.背景音樂[0]] = true
+        # if data.背景音樂
+        #     集合[v.音樂文件夾 + '/' + data.背景音樂[0]] = true
         for 人 in data.立繪
             for 圖層 in 人.圖層
                 集合["#{v.臨時立繪文件夾}/#{圖層.文件}"] = true
