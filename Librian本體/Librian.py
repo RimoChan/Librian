@@ -15,10 +15,8 @@ def librian_main(project, config=None):
     if config:
         環境.導入全局配置(config)
 
-    try:
-        os.mkdir(f'{環境.工程路徑}/存檔資料')
-    except Exception as e:
-        logging.debug('已有存檔。')
+    if not os.path.isdir(f'{Librian虛擬機.虛擬機環境.工程路徑}/存檔資料'):
+        os.mkdir(f'{Librian虛擬機.虛擬機環境.工程路徑}/存檔資料')
 
     import 窗口
 
