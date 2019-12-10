@@ -52,7 +52,8 @@ class 命令:
                 raise AttributeError('沒有可用的函數「%s」。' % self.函數)
             except Exception as e:
                 s = '%s(%s)' % (self.函數, ', '.join(self.參數))
-                logging.warning('在劇本中執行方法「%s」時遇到了意外%s' % (s, e.__repr__()))
+                logging.warning(f'在劇本中執行方法「{s}」時遇到了意外。' )
+                logging.exception(e)
 
     # ——————————————————————————————
 

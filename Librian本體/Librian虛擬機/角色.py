@@ -37,8 +37,8 @@ def 導入有立繪的角色():
                         '顏': {'_默認': []},
                     })
     except Exception as e:
-        logging.warning(e.__repr__())
         logging.warning('角色立繪沒有導入。')
+        logging.exception(e)
 
 
 class 角色:
