@@ -6,7 +6,7 @@
 [![](https://img.shields.io/github/downloads/RimoChan/librian/total.svg)](https://github.com/RimoChan/Librian/releases)
 [![](https://img.shields.io/github/license/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/blob/master/LICENSE)
 ![Librian2.jpg](./文檔/Librian2.jpg)    
-[简体中文](readme_chs.md)
+[简体中文](readme-chs.md)
 
 Librian是容易上手的 Galgame 引擎。   
 Librian由Python和JavaScript編寫而成，基於CEFPython前端。  
@@ -25,7 +25,7 @@ Librian是面向劇本的引擎，賣點是:
 
 ## 劇本格式
 
-```
+```liber
 > BG 中庭.jpg
 + [舟舟, 潘大爺]
 中庭。潘大爺在散步。
