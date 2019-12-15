@@ -9,6 +9,7 @@ from Librian虛擬機 import 劇本
 from Librian虛擬機 import 虛擬機環境
 from Librian虛擬機.util import 讀txt
 from Librian虛擬機.util import 文件
+from Librian虛擬機.util import 加載器
 
 from 帶有vue的山彥 import 帶有vue的山彥
 from 環境 import 配置
@@ -106,13 +107,7 @@ class 演出山彥(山彥):
         self.vue.解析度 = 虛擬機環境.主解析度
         self.vue.邊界 = 配置['顯示繪圖邊界']
 
-        if os.path.isfile(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json'):
-            try:
-                with open(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json', encoding='utf8') as f:
-                    用戶設置 = json.loads(f.read())
-                self.vue.用戶設置 = 用戶設置
-            except Exception as e:
-                logging.warning('用戶設置失效。')
+        self.vue.用戶設置 = 加載器.json(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json')
             
         self.js('_py演出.準備工作()')
 

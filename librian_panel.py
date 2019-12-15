@@ -10,6 +10,7 @@ import yaml
 from Librian本體 import wxcef
 from Librian本體.帶有vue的山彥 import 帶有vue的山彥
 from Librian本體.Librian虛擬機 import 虛擬機環境
+from Librian本體.Librian虛擬機.util import 加載器
 
 
 def js(x):
@@ -20,32 +21,17 @@ def alert(s):
     js(f'alert("{s}")')
 
 
-if os.path.isfile('./存檔資料/存檔資料.yaml'):
-    with open('./存檔資料/存檔資料.yaml', encoding='utf8') as f:
-        存檔資料 = yaml.load(f)
-else:
-    存檔資料 = []
-
-
 class 山彥(帶有vue的山彥):
     def __init__(self, *li, **d):
         super().__init__(*li, **d)
-        if not os.path.isdir('./存檔資料'):
-            os.mkdir('./存檔資料')
-        if os.path.isfile('./存檔資料/存檔資料.yaml'):
-            try:
-                with open('./存檔資料/存檔資料.yaml', encoding='utf8') as f:
-                    存檔資料 = yaml.load(f)
-                self.vue.存檔資料 = 存檔資料
-            except Exception as e:
-                logging.warning('存檔資料失效。')
-                self.vue.存檔資料 = []
-        else:
-            self.vue.存檔資料 = []
+        
+        self.vue.存檔資料 = 加載器.yaml('./存檔資料/存檔資料.yaml')
 
     def vue更新(self, 內容):
         t = self.vue.用戶設置 if '用戶設置' in self.vue._內容 else None
         if t != 內容['存檔資料']:
+            if not os.path.isdir('./存檔資料'):
+                os.mkdir('./存檔資料')
             with open(f'./存檔資料/存檔資料.yaml', 'w', encoding='utf8') as f:
                 f.write(yaml.dump(內容['存檔資料']))
         super().vue更新(內容)
