@@ -24,7 +24,6 @@ def alert(s):
 class 山彥(帶有vue的山彥):
     def __init__(self, *li, **d):
         super().__init__(*li, **d)
-        
         self.vue.存檔資料 = 加載器.yaml('./存檔資料/存檔資料.yaml')
 
     def vue更新(self, 內容):
