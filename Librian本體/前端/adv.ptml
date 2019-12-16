@@ -3,14 +3,8 @@ html:
         title:
         meta charset='utf-8'; 
         link rel="stylesheet" href='../../黑科技/font-awesome-4.7.0/css/font-awesome.css';
-        
-        script src='../../黑科技/vue.js':
-        script src='../../黑科技/jquery-3.1.1.min.js':
-        script src='../../黑科技/jquery-ui.min.js':
-        script src='../../黑科技/jquery.mousewheel.js':
-        
         script src='./虛擬核心.js':
-        script src='./dist/束.js':
+        script src='./dist/bundle.js':
         
     style#style:
 

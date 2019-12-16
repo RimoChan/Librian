@@ -1,3 +1,6 @@
+import Vue from 'vue/dist/vue.esm.js'
+import $ from 'jquery'
+
 import 演出 from './演出.coffee'
 import 控制 from './控制.coffee'
 

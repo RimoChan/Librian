@@ -1,3 +1,5 @@
+import $ from 'jquery'
+
 import 控制 from './控制.coffee'
 import 圖像融合 from './圖像融合.coffee'
 
