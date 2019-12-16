@@ -79,6 +79,7 @@ class 山彥(帶有vue的山彥):
                 f.write(json.dumps(內容['用戶設置'], ensure_ascii=False))
         super().vue更新(內容)
 
+
 class 演出山彥(山彥):
     def 回標題(self):
         self.讀者.__init__(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}')
@@ -107,7 +108,9 @@ class 演出山彥(山彥):
         self.vue.解析度 = 虛擬機環境.主解析度
         self.vue.邊界 = 配置['顯示繪圖邊界']
 
-        self.vue.用戶設置 = 加載器.json(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json')
+        用戶設置 = 加載器.json(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json')
+        if 用戶設置: 
+            self.vue.用戶設置 = 用戶設置
             
         self.js('_py演出.準備工作()')
 
