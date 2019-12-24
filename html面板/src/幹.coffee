@@ -58,6 +58,17 @@ $ ->
             .then (result) ->
                 if result.value
                     山彥.生成html(result.value)
+        自我更新: ->
+            Swal.fire
+                icon: 'warning'
+                title: '真的要更新嗎'
+                text: 'Librian更新是激進的，\n可能會使你的電腦爆炸！'
+                showCancelButton: true,
+                confirmButtonText: '确定'
+                cancelButtonText: '取消'
+            .then (result) ->
+                if result.value
+                    山彥.自我更新()
         返回: ->
             window.返回()
     

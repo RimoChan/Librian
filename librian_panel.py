@@ -22,8 +22,8 @@ class 山彥(帶有vue的山彥):
     def js(self, x):
         self.窗口.browser.ExecuteJavascript(x)
         
-    def alert(self, title, icon=None):
-        msg = {"title": title, "icon": icon}
+    def alert(self, title, icon=None, text=None):
+        msg = {"title": title, "icon": icon, "text": text}
         self.js(f'Swal.fire({json.dumps(msg)})')
 
     def vue更新(self, 內容):
@@ -104,7 +104,20 @@ class 山彥(帶有vue的山彥):
         else:
             幻象.幻象化(目標路徑)
             self.alert('好了', 'success')
-
+            
+    def 自我更新(self):
+        import dulwich.porcelain
+        import urllib3.exceptions
+        try:
+            dulwich.porcelain.pull('.', remote_location='https://github.com/RimoChan/librian.git')
+            self.alert('好了', 'success', '自己重啓Librian。')
+        except urllib3.exceptions.HTTPError as e:
+            self.alert('沒能成功更新', 'error', '網絡出了問題。')
+        except PermissionError as e:
+            self.alert('沒能成功更新', 'error', '也許需要版本控制的文件被修改了')
+        except Exception as e:
+            logging.exception(e)
+            self.alert('失敗した失敗した失敗した', 'error')
 
 app, 瀏覽器 = wxcef.group(title='librian面板', url='file:///html面板/面板.html', icon='./Librian本體/資源/librian.ico', size=(800, 450))
 真山彥 = 山彥(app.frame)
