@@ -99,9 +99,15 @@ class 山彥(帶有vue的山彥):
         alert('好了。')
 
     def 生成html(self):
-        from Librian本體 import 虛擬演繹
-        虛擬演繹.生成虛擬核心()
-        alert('好了。')
+        from Librian本體 import 幻象
+        with wx.TextEntryDialog(self.窗口, '目标路径: ', '幻象') as dlg:
+            if dlg.ShowModal() == wx.ID_OK:
+                目標路徑 = Path(dlg.GetValue())
+                if 目標路徑.is_dir():
+                    alert('不行')
+                else:
+                    幻象.幻象化(目標路徑)
+                    alert('好了。')
 
 
 app, 瀏覽器 = wxcef.group(title='librian面板', url='file:///html面板/面板.html', icon='./Librian本體/資源/librian.ico', size=(800, 450))
