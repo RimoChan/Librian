@@ -1,5 +1,6 @@
 import logging
 import os
+import json
 import subprocess
 import shutil
 from pathlib import Path
@@ -13,18 +14,17 @@ from Librian本體.Librian虛擬機 import 虛擬機環境
 from Librian本體.Librian虛擬機.util import 加載器
 
 
-def js(x):
-    真山彥.窗口.browser.ExecuteJavascript(x)
-
-
-def alert(s):
-    js(f'alert("{s}")')
-
-
 class 山彥(帶有vue的山彥):
     def __init__(self, *li, **d):
         super().__init__(*li, **d)
         self.vue.存檔資料 = 加載器.yaml('./存檔資料/存檔資料.yaml')
+        
+    def js(self, x):
+        self.窗口.browser.ExecuteJavascript(x)
+        
+    def alert(self, title, icon=None):
+        msg = {"title": title, "icon": icon}
+        self.js(f'Swal.fire({json.dumps(msg)})')
 
     def vue更新(self, 內容):
         t = self.vue.用戶設置 if '用戶設置' in self.vue._內容 else None
@@ -54,8 +54,8 @@ class 山彥(帶有vue的山彥):
             v.圖標路徑, v.主解析度, v.標題 = self.讀取工程信息(工程路徑)
         except Exception as e:
             logging.warning(e.__repr__())
-            alert('工程配置文件不正確。')
-        js(f'進入工程()')
+            self.alert('工程配置文件不正確。', 'error')
+        self.js(f'進入工程()')
 
     def 開啓工程(self, 工程路徑=None):
         if 工程路徑:
@@ -66,15 +66,13 @@ class 山彥(帶有vue的山彥):
                 if dlg.ShowModal() == wx.ID_OK:
                     self.同調(dlg.GetPath())
 
-    def 建立工程(self):
-        with wx.TextEntryDialog(self.窗口, '工程名: ', '建立工程') as dlg:
-            if dlg.ShowModal() == wx.ID_OK:
-                新工程路徑 = (Path('Librian本體/project') / dlg.GetValue()).resolve()
-                if 新工程路徑.is_dir():
-                    alert('已經有這個工程了。')
-                    return
-                shutil.copytree('./Librian本體/模板/默認工程', 新工程路徑)
-                self.同調(新工程路徑)
+    def 建立工程(self, 新工程名):
+        新工程路徑 = (Path('Librian本體/project') / 新工程名).resolve()
+        if 新工程路徑.is_dir():
+            self.alert('已經有這個工程了。', 'error')
+            return
+        shutil.copytree('./Librian本體/模板/默認工程', 新工程路徑)
+        self.同調(新工程路徑)
 
     def 運行(self):
         subprocess.Popen(f'cmd /c cd Librian本體 & "../python36/python" librian.py --project {self.vue.工程路徑}')
@@ -96,18 +94,16 @@ class 山彥(帶有vue的山彥):
             構建.構建工程(self.vue.工程路徑, 虛擬機環境.標題, f'{self.vue.工程路徑}/{虛擬機環境.圖標}')
         else:
             構建.構建工程(self.vue.工程路徑, 虛擬機環境.標題)
-        alert('好了。')
+        self.alert('好了', 'success')
 
-    def 生成html(self):
+    def 生成html(self, 目標路徑):
         from Librian本體 import 幻象
-        with wx.TextEntryDialog(self.窗口, '目标路径: ', '幻象') as dlg:
-            if dlg.ShowModal() == wx.ID_OK:
-                目標路徑 = Path(dlg.GetValue())
-                if 目標路徑.is_dir():
-                    alert('不行')
-                else:
-                    幻象.幻象化(目標路徑)
-                    alert('好了。')
+        目標路徑 = Path(目標路徑)
+        if 目標路徑.is_dir():
+            self.alert('目录已经存在', 'error')
+        else:
+            幻象.幻象化(目標路徑)
+            self.alert('好了', 'success')
 
 
 app, 瀏覽器 = wxcef.group(title='librian面板', url='file:///html面板/面板.html', icon='./Librian本體/資源/librian.ico', size=(800, 450))

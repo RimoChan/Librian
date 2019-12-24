@@ -1,7 +1,10 @@
 import Vue from 'vue/dist/vue.esm.js'
+import Swal from 'sweetalert2'
 import $ from 'jquery'
 
 import './樣式.sass'
+
+window.Swal = Swal
 
 $ ->
     window.v = new Vue
@@ -26,7 +29,15 @@ $ ->
         開啓工程: ->
             山彥.開啓工程()
         建立工程: ->
-            山彥.建立工程()
+            Swal.fire
+                title: '工程名'
+                input: 'text'
+                showCancelButton: true,
+                confirmButtonText: '确定'
+                cancelButtonText: '取消'
+            .then (result) ->
+                if result.value
+                    山彥.建立工程(result.value)
         清除記錄: ->
             v.存檔資料 = []
         運行: ->
@@ -38,7 +49,15 @@ $ ->
         生成exe: ->
             山彥.生成exe()
         生成html: ->
-            山彥.生成html()
+            Swal.fire
+                title: '目标文件夹路径'
+                input: 'text'
+                showCancelButton: true,
+                confirmButtonText: '确定'
+                cancelButtonText: '取消'
+            .then (result) ->
+                if result.value
+                    山彥.生成html(result.value)
         返回: ->
             window.返回()
     
