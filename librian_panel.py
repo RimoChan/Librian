@@ -73,7 +73,7 @@ class 山彥(帶有vue的山彥):
                 if 新工程路徑.is_dir():
                     alert('已經有這個工程了。')
                     return
-                shutil.copytree('./Librian本體/project/_默認工程', 新工程路徑)
+                shutil.copytree('./Librian本體/模板/默認工程', 新工程路徑)
                 self.同調(新工程路徑)
 
     def 運行(self):
