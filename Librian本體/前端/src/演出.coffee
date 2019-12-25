@@ -107,14 +107,18 @@ export default 演出 =
 
     選擇之刻: false,
     處理選項: (選項) ->
-        tot = ''
+        $('#選項').html('')
         for i, p in 選項
-            tot += "<button onclick='演出.點選項(#{p});'>#{i}</botton>\n"
-        $('#選項').html(tot)
-        $('#選項').show(250)
+            t = $("<a>#{i}</a>")
+            $('#選項').append(t)
+            do ->
+                q = p
+                t.click () -> 
+                    演出.點選項(q)
+        $('#選項').fadeIn(200)
         this.選擇之刻 = true
     點選項: (x) ->
-        $('#選項').hide(250)
+        $('#選項').fadeOut(50)
         山彥.選(x)
         this.選擇之刻 = false
 

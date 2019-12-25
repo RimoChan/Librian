@@ -4,7 +4,7 @@ module.exports = {
     entry: './src/全局.coffee',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '束.js',
+        filename: 'bundle.js',
         publicPath: './dist/',
     },
     module: {

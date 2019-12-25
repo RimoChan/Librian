@@ -89,13 +89,6 @@ class 命令:
         讀者.狀態.重置()
         讀者.狀態.視頻 = 文件名, 可以跳過
 
-    @別名('快速選項', '快速选项')
-    def WRAP(self, 讀者, *li):
-        def 包(x): return (lambda: 讀者.棧跳轉(*x[1:]))
-        li = [yaml.load(i) for i in li]
-        li = [(i[0], 包(i)) for i in li]
-        讀者.產生選項(*li)
-
 
 class 狀態:
     def __init__(self):
@@ -109,7 +102,7 @@ class 狀態:
         self.cg = None        # [圖名, 淡入時間, 漸變方法]
         self.視頻 = None      # [視頻名, 可以跳過]
         self.js = None        # str
-        self.選項 = ()
+        self.選項 = []
         self.特效表 = {}
         self.額外信息 = ()
 
@@ -258,9 +251,6 @@ class 讀者:
 # ——————————————————————————————————————————————
 
     def 步進(self, 防止終焉=False):
-        if self.狀態.選項:
-            return
-
         s = self.下一句()
         if s['類型'] == '終焉' and 防止終焉:
             return True
@@ -374,6 +364,13 @@ class 讀者句控制:
         logging.debug([名, 代, 顏].__str__())
         讀者.步進()
 
+    @staticmethod
+    def 選項(讀者, 選項名, 文件, 位置):
+        讀者.狀態.選項.append([選項名, lambda: 讀者.棧跳轉(文件, 位置)])
+        if 讀者.劇本文件.指針<len(讀者.劇本文件.內容):
+            if 讀者.劇本文件.內容[讀者.劇本文件.指針]['類型'] == '選項':
+                讀者.步進()
+                    
     @staticmethod
     def _表情變化(讀者, 名, 顏, 代, 特效):
         人物 = 角色.取角色(名)

@@ -33,6 +33,17 @@
     left: 50%;
     transform: translate(-50%, -50%); }
 
+#選項 a {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6), 0px 0px 5px rgba(0, 0, 0, 0) inset;
+  cursor: pointer; }
+
 #總畫面 #配置面板, #總畫面 #對話歷史 {
   opacity: 0;
   visibility: hidden; }
@@ -121,14 +132,11 @@ video {
     z-index: 99; }
   #adv畫面 #選項 {
     position: absolute;
-    height: 220px;
-    width: 480px;
-    left: 400px;
-    top: 200px;
-    padding: 20px;
-    color: #fff;
+    width: 60%;
+    height: 60%;
+    left: 20%;
+    top: 20%;
     font-size: 27px;
-    border-radius: 10px;
     z-index: 20;
     display: None; }
   #adv畫面 #主畫面 {
