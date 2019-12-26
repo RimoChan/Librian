@@ -40,13 +40,15 @@ export default 演出 =
         } )
         setTimeout(演出.縮放調整, 200)
 
-    步進更新: ->
-        山彥.步進更新()
-    更新: ->
-        山彥.更新()
-
+    更新: (瞬間化=false)->
+        山彥.狀態回調 false, (狀態, 步進=false)->
+            演出.改變演出狀態(狀態, 瞬間化)
+            
+    步進更新: (瞬間化=false)->
+        山彥.狀態回調 true, (狀態)->
+            演出.改變演出狀態(狀態, 瞬間化)
+            
     信息預處理: (data) ->
-        console.log data
         if data.背景
             data.背景[0] = "url(#{v.圖片文件夾}/#{data.背景[0]})"
         if data.cg
@@ -59,8 +61,8 @@ export default 演出 =
             for 圖層 in 人.圖層
                 圖層.文件 = "#{v.臨時立繪文件夾}/#{圖層.文件}"
 
-    瞬間化: false
-    改變演出狀態: (data) ->
+    改變演出狀態: (data, 瞬間化=false) ->
+        console.log data
         this.信息預處理 data
         {特效表, 插入圖, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, 視頻} = data
         this.特效處理 特效表
@@ -74,9 +76,10 @@ export default 演出 =
             背景音樂 = null
             this.換圖('覆蓋', 插入圖, 0)
             $('#覆蓋').attr('顯現', 'true') 
+            return
         else
             if $('#覆蓋').attr('顯現') == 'true'
-                this.瞬間化 = true
+                瞬間化 = true
             $('#覆蓋').attr('顯現', 'false') 
             
         if 額外信息
@@ -86,12 +89,11 @@ export default 演出 =
         
         this.放視頻(視頻)
         this.換cg(cg)
-        this.換背景(背景, this.瞬間化)
-        this.換立繪(立繪, this.瞬間化)
+        this.換背景(背景, 瞬間化)
+        this.換立繪(立繪, 瞬間化)
         this.換背景音樂(背景音樂)
         this.換人名(語者, 名字)
-        this.換對話(話語, 名字)
-        this.瞬間化 = false
+        this.換對話(話語, 名字, 瞬間化)
 
     特效處理: (特效表) ->
         可特效块 = [
@@ -148,11 +150,11 @@ export default 演出 =
 
     load特效: ->
         控制.左鍵屏蔽 = true
-        $('#總畫面').fadeOut(0)
-        $('#總畫面').fadeIn(1200)
+        $('#adv畫面').fadeOut(0)
+        $('#adv畫面').fadeIn(400)
         setTimeout ->
             控制.左鍵屏蔽 = false
-        , 1000
+        , 300
     提示: (x) ->
         $('#提示').html(x)
         $('#提示').fadeIn(300)
@@ -228,14 +230,18 @@ export default 演出 =
         $('#對話框').attr('名字', 語者)
 
     淡入過期時間: 0,
-    換對話: (text, 名字) ->
+    換對話: (text, 名字, 瞬間化) ->
         if 名字 != ''
             $('#對話框').attr('對話類型','對話')
         else
             $('#對話框').attr('對話類型','旁白')
-        淡入字 = 演出.文字淡入(text)
-        $('#話語').html(淡入字.內容)
-        演出.淡入過期時間 = Date.now() + 淡入字.總時間 * 1000
+            
+        if 瞬間化
+            $('#話語').html(text + '<span></span>') 
+        else
+            淡入字 = 演出.文字淡入(text)
+            $('#話語').html(淡入字.內容)
+            演出.淡入過期時間 = Date.now() + 淡入字.文字時間 * 1000
         $('#對話歷史').append(text+'<br/><br/>')
     早泄: ->
         $('#話語 *').css('animation','None')
@@ -289,4 +295,4 @@ export default 演出 =
                 時間 += 時間間隔
                 "<span style='animation:#{動畫名} #{動畫時間}s;animation-fill-mode:forwards;animation-delay:#{時間}s;opacity:0;'>#{i}</span>"
         ).join('')
-        {內容, 總時間: 時間 + 動畫時間}
+        {內容, 文字時間: 時間, 總時間: 時間 + 動畫時間}

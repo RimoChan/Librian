@@ -56,7 +56,7 @@ class 山彥(帶有vue的山彥):
         文件名 = self.選擇讀檔文件()
         if 文件名:
             self.讀者.讀檔(文件名)
-            self.更新()
+            self.更新(瞬間化=True)
 
     def 快速存檔(self):
         self.讀者.存檔(f'{虛擬機環境.工程路徑}/存檔資料/快速存檔.pkl')
@@ -64,7 +64,7 @@ class 山彥(帶有vue的山彥):
 
     def 快速讀檔(self):
         self.讀者.讀檔(f'{虛擬機環境.工程路徑}/存檔資料/快速存檔.pkl')
-        self.更新()
+        self.更新(瞬間化=True)
 
     def 退出(self):
         exit()
@@ -85,18 +85,21 @@ class 演出山彥(山彥):
         self.讀者.__init__(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}')
         self.js(f'window.location.href={self.標題url.__repr__()}')
 
-    def 更新(self):
-        狀態 = self.讀者.狀態.導出()
-        self.js(f'_py演出.改變演出狀態({json.dumps(狀態)})')
-
+        
     def 步進(self):
         if 配置['編寫模式']:
             return
         self.讀者.步進()
 
-    def 步進更新(self):
-        self.步進()
-        self.更新()
+    def 更新(self, 瞬間化=False):
+        狀態 = self.讀者.狀態.導出()
+        self.js(f'_py演出.改變演出狀態({json.dumps(狀態)},{json.dumps(瞬間化)})')
+
+    def 狀態回調(self, 步進, callback):
+        if 步進:
+            self.步進()
+        狀態 = self.讀者.狀態.導出()
+        callback.Call(狀態)
 
     def 初始化(self):
         self.vue.圖片文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.圖片文件夾).replace('\\', '/')

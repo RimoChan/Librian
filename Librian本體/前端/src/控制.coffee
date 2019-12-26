@@ -51,11 +51,11 @@ export default 控制 =
             this.正在快進 = false
 
     快進輪迴: ->
-        if 控制.正在快進 == false
+        if not 控制.正在快進
             return
         else
             控制.左鍵功能()
-            setTimeout(控制.快進輪迴, 50)
+            setTimeout(控制.快進輪迴, 35)
 
     進入設置: ->
         $('#總畫面').attr('配置面板', 'on')
