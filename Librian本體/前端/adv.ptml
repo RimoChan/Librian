@@ -33,27 +33,28 @@ html:
                     template v-if='內容.類型 === "boolean"':
                         input type="checkbox" v-model="內容['值']":
                         
-            div#工具欄 v-bind:class="{自動收起: 用戶設置.自動收起控制面板.值}":
-                a#存檔 v-if='本地運行':
-                    i.fa.fa-floppy-o:
-                    i.fa.fa-angle-double-down style='text-shadow:0 0 4px #000;':
-                a#讀檔 v-if='本地運行':
-                    i.fa.fa-floppy-o:
-                    i.fa.fa-angle-double-up style='text-shadow:0 0 4px #000;':
-                a#快速存檔 v-if='本地運行':
-                    i.fa.fa-floppy-o:
-                    i.fa.fa-angle-double-down style='color:#fd1; text-shadow:0 0 4px #000;':
-                a#快速讀檔 v-if='本地運行':
-                    i.fa.fa-floppy-o:
-                    i.fa.fa-angle-double-up style='color:#fd1; text-shadow:0 0 4px #000;':
-                a#切換快進:
-                    i.fa.fa-fast-forward:
-                a#全屏 href='javascript:山彥.切換全屏();':
-                    i.fa.fa-arrows-alt:
-                a#進入設置:
-                    i.fa.fa-gear:
-                a#回標題 v-if='本地運行':
-                    i.fa.fa-mail-reply:
+            div#工具欄:
+                div#工具容器 v-bind:class="{自動收起: 用戶設置.自動收起控制面板.值}":
+                    a#存檔 v-if='本地運行':
+                        i.fa.fa-floppy-o:
+                        i.fa.fa-angle-double-down style='text-shadow:0 0 4px #000;':
+                    a#讀檔 v-if='本地運行':
+                        i.fa.fa-floppy-o:
+                        i.fa.fa-angle-double-up style='text-shadow:0 0 4px #000;':
+                    a#快速存檔 v-if='本地運行':
+                        i.fa.fa-floppy-o:
+                        i.fa.fa-angle-double-down style='color:#fd1; text-shadow:0 0 4px #000;':
+                    a#快速讀檔 v-if='本地運行':
+                        i.fa.fa-floppy-o:
+                        i.fa.fa-angle-double-up style='color:#fd1; text-shadow:0 0 4px #000;':
+                    a#切換快進:
+                        i.fa.fa-fast-forward:
+                    a#全屏 href='javascript:山彥.切換全屏();':
+                        i.fa.fa-arrows-alt:
+                    a#進入設置:
+                        i.fa.fa-gear:
+                    a#回標題 v-if='本地運行':
+                        i.fa.fa-mail-reply:
     
             div#adv畫面:
                 div#選項:

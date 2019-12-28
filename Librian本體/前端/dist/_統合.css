@@ -223,10 +223,10 @@ video {
   margin: 5px;
   position: absolute;
   z-index: 10; }
-  #工具欄.自動收起 {
+  #工具欄 #工具容器.自動收起 {
     opacity: 0.2;
     transition: opacity 4s; }
-    #工具欄.自動收起:hover {
+    #工具欄 #工具容器.自動收起:hover {
       opacity: 1;
       transition: opacity 0.5s; }
 

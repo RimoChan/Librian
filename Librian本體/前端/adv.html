@@ -43,35 +43,37 @@
                     </template>
                 </div>
             </div>
-            <div id="工具欄" v-bind:class="{自動收起: 用戶設置.自動收起控制面板.值}">
-                <a id="存檔" v-if='本地運行'>
-                    <i class="fa fa-floppy-o"></i>
-                    <i class="fa fa-angle-double-down" style='text-shadow:0 0 4px #000;'></i>
-                </a>
-                <a id="讀檔" v-if='本地運行'>
-                    <i class="fa fa-floppy-o"></i>
-                    <i class="fa fa-angle-double-up" style='text-shadow:0 0 4px #000;'></i>
-                </a>
-                <a id="快速存檔" v-if='本地運行'>
-                    <i class="fa fa-floppy-o"></i>
-                    <i class="fa fa-angle-double-down" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
-                </a>
-                <a id="快速讀檔" v-if='本地運行'>
-                    <i class="fa fa-floppy-o"></i>
-                    <i class="fa fa-angle-double-up" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
-                </a>
-                <a id="切換快進">
-                    <i class="fa fa-fast-forward"></i>
-                </a>
-                <a id="全屏" href='javascript:山彥.切換全屏();'>
-                    <i class="fa fa-arrows-alt"></i>
-                </a>
-                <a id="進入設置">
-                    <i class="fa fa-gear"></i>
-                </a>
-                <a id="回標題" v-if='本地運行'>
-                    <i class="fa fa-mail-reply"></i>
-                </a>
+            <div id="工具欄">
+                <div id="工具容器" v-bind:class="{自動收起: 用戶設置.自動收起控制面板.值}">
+                    <a id="存檔" v-if='本地運行'>
+                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-angle-double-down" style='text-shadow:0 0 4px #000;'></i>
+                    </a>
+                    <a id="讀檔" v-if='本地運行'>
+                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-angle-double-up" style='text-shadow:0 0 4px #000;'></i>
+                    </a>
+                    <a id="快速存檔" v-if='本地運行'>
+                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-angle-double-down" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
+                    </a>
+                    <a id="快速讀檔" v-if='本地運行'>
+                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-angle-double-up" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
+                    </a>
+                    <a id="切換快進">
+                        <i class="fa fa-fast-forward"></i>
+                    </a>
+                    <a id="全屏" href='javascript:山彥.切換全屏();'>
+                        <i class="fa fa-arrows-alt"></i>
+                    </a>
+                    <a id="進入設置">
+                        <i class="fa fa-gear"></i>
+                    </a>
+                    <a id="回標題" v-if='本地運行'>
+                        <i class="fa fa-mail-reply"></i>
+                    </a>
+                </div>
             </div>
             <div id="adv畫面">
                 <div id="選項"></div>
