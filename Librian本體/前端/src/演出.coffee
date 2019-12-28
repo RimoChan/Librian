@@ -71,9 +71,7 @@ export default 演出 =
             return
             
         if 插入圖
-            名字 = ''
-            話語 = ''
-            背景音樂 = null
+            this.換背景音樂(null)
             this.換圖('覆蓋', 插入圖, 0)
             $('#覆蓋').attr('顯現', 'true') 
             return
@@ -171,20 +169,22 @@ export default 演出 =
         this.現在cg = cg圖片
         this.換圖('cg', cg圖片, 淡入時間, 漸變方法)
 
-    當前人物: []
+    當前人物組: []
     換立繪: (立繪組, 瞬=false) ->
         名字組 = (立繪.名字 for 立繪 in 立繪組)
-        for 名字 in this.當前人物
+        for 名字 in this.當前人物組
             if 名字組.indexOf(名字) == - 1
                 $("#立繪--#{名字}").remove()
                 console.log "去除 #{名字}"
+            else
+                $("#立繪--#{名字}").attr('特效', '')
+                
         for 名字 in 名字組
-            if this.當前人物.indexOf(名字) == - 1
+            if this.當前人物組.indexOf(名字) == - 1
                 $('#立繪').append($("<div id='立繪--#{名字}'><div id='立繪--#{名字}--圖像'></div></div>"))
                 console.log "加入 #{名字}"
-                for 立繪 in 立繪組
-                    if 立繪.名字 == 名字
-                        立繪.特效.push('淡入')
+                $("#立繪--#{名字}").attr('特效','淡入')
+                
                         
         for 立繪 in 立繪組
             t = $("#立繪--#{立繪.名字}")
@@ -202,7 +202,7 @@ export default 演出 =
             組 = ([層.文件, 層.子位置[0], 層.子位置[1]] for 層 in 立繪.圖層)
             圖像融合.融合到div(組, 0.5, "立繪--#{立繪.名字}--圖像")
         
-        this.當前人物 = 名字組
+        this.當前人物組 = 名字組
 
     現在背景: [null, "0% 0%"],
     換背景: (背景, 瞬) ->
