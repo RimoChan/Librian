@@ -119,7 +119,7 @@ class 山彥(帶有vue的山彥):
             logging.exception(e)
             self.alert('失敗した失敗した失敗した', 'error')
 
-app, 瀏覽器 = wxcef.group(title='librian面板', url='file:///html面板/面板.html', icon='./Librian本體/資源/librian.ico', size=(800, 450))
+app, 瀏覽器 = wxcef.group(title='librian面板', url='file:///html面板/面板.html', icon='./Librian本體/資源/librian.ico', size=(960, 540))
 真山彥 = 山彥(app.frame)
 app.frame.set_browser_object("山彥", 真山彥)
 app.MainLoop()
