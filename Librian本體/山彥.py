@@ -138,9 +138,9 @@ class 帶標題山彥(演出山彥):
             self.js(f'window.location.href={文件.轉爲網址路徑("./前端/adv.html").__repr__()};')
 
     def 從劇本開始(self, 劇本):
-        入口 = f'{工程路徑}/{配置["劇本入口"]}'
+        入口 = f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}'
         self.讀者.__init__(f'{os.path.dirname(入口)}/{劇本}')
-        self.js('開始();')
+        self.開始()
 
 
 class 極山彥(帶標題山彥):
