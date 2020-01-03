@@ -50,13 +50,13 @@ export default 演出 =
             
     信息預處理: (data) ->
         if data.背景
-            data.背景[0] = "url(#{v.圖片文件夾}/#{data.背景[0]})"
+            data.背景[0] = "url('#{v.圖片文件夾}/#{data.背景[0]}')"
         if data.cg
-            data.cg[0] = "url(#{v.圖片文件夾}/#{data.cg[0]})"
+            data.cg[0] = "url('#{v.圖片文件夾}/#{data.cg[0]}')"
         if data.背景音樂
             data.背景音樂[0] = v.音樂文件夾 + '/' + data.背景音樂[0]
         if data.插入圖
-            data.插入圖 = "url(#{v.圖片文件夾}/#{data.插入圖})"
+            data.插入圖 = "url('#{v.圖片文件夾}/#{data.插入圖}')"
         for 人 in data.立繪
             for 圖層 in 人.圖層
                 圖層.文件 = "#{v.臨時立繪文件夾}/#{圖層.文件}"
@@ -271,7 +271,6 @@ export default 演出 =
     換圖: (目標, 新圖, 漸變時間, 漸變方法 = '_淡出') ->
         目標 = $('#'+目標)
         原背景 = 目標.css('background-image')
-
         目標.css('background-image', 新圖)
 
         目標.html('<div class="舊淡出"></div>')

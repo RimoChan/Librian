@@ -75,7 +75,7 @@ class 山彥(帶有vue的山彥):
         self.同調(新工程路徑)
 
     def 運行(self):
-        subprocess.Popen(f'cmd /c cd Librian本體 & "../python36/python" librian.py --project {self.vue.工程路徑}')
+        subprocess.run(['cmd', '/c', 'cd', 'Librian本體', '&', '..\python36\python', 'librian.py', '--project', self.vue.工程路徑])
 
     def 運行同時編寫(self):
         subprocess.Popen(
