@@ -2,6 +2,7 @@ import yaml
 import os
 import logging
 
+from .util import 讀txt
 
 from . import psd拆包
 from . import 虛擬機環境
@@ -19,7 +20,7 @@ def 取角色(名字):
 def 導入有立繪的角色():
     try:
         工程路徑, 臨時立繪文件夾, psd立繪路徑 = 虛擬機環境.工程路徑, 虛擬機環境.臨時立繪文件夾, 虛擬機環境.psd立繪路徑
-        with open(f'{虛擬機環境.psd立繪路徑}/映射.yaml', encoding='utf8') as f:
+        with 讀txt.讀(f'{虛擬機環境.psd立繪路徑}/映射.yaml') as f:
             映射 = yaml.load(f)
             if 映射:
                 for 角色名 in 映射:
