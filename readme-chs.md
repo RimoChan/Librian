@@ -8,10 +8,11 @@
 [![](https://img.shields.io/github/license/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/blob/master/LICENSE)
 ![Librian2.jpg](./文檔/Librian2.jpg)
 
-Librian是容易上手的 Galgame 引擎。   
-Librian由Python和JavaScript编写而成，基于CEFPython前端。  
+——来像Markdown一样写Galgame剧本吧！
 
-Librian适用于快速高效的adv实现，能将你的奇思妙想迅速转换为成果——你只需提供素材文件和简单的剧本就能观赏adv演出！
+Librian是容易上手的Galgame引擎，Librian由Python和JavaScript编写而成，基于CEFPython前端。
+
+Librian适用于快速高效的ADV实现，能将你的奇思妙想迅速转换为成果——你只需提供素材文件和简单的剧本就能做出Galgame！
 
 Librian是面向剧本的引擎，卖点是:
 
@@ -35,26 +36,22 @@ Librian是面向剧本的引擎，卖点是:
 舟舟 (惊)「真有这种发明！？」
 ```
 
-不需要任何其他标记或代码，一小段剧本就完成了。  
+不需要任何其他标记或代码，一小段剧本就完成了。
 
 准备好立绘和背景后，运行Librian主程序并启动工程——演出是这样的效果。  
 ![圖1](文檔/樣例_潘大爺.jpg)
-
-## 扩展功能
-
-你可以轻松自定义你的游戏，包括鼠标，界面，标题画面等。
-
-不只是adv，你甚至可以嵌入线上交互等功能！
 
 ## 中文文档
 
 如果你想了解详细的使用方法，可以直接阅读Librian的中文文档——[https://doc.librian.it](https://doc.librian.it/site/主頁.html)。
 
+你可以轻松定制你的游戏，包括特效、画面样式、甚至联网，快来探索吧！
+
 ## 快速上手
 
 方便起见的话，Windows用户可以直接下载打包的[release版本](https://github.com/RimoChan/Librian/releases)使用。
 
-如果你持「不读说明书主义」，也可以:
+如果你持「不读说明书主义」，可以:
 
 1.  安装python3.6
 2.  pip install -r requirements.txt
@@ -62,9 +59,16 @@ Librian是面向剧本的引擎，卖点是:
 
 此外，你也可以根据[中文文档](https://doc.librian.it/site/主頁.html)的指示来安装。
 
+## Liber分析器
+
+Liber分析器是Librian用来分析剧本语言Liber的工具。  
+如果你想要开发自己的Galgame引擎或者做一些很酷的事情，它会有所助益。
+
+你可以直接用 `pip install liber` 来安装它。
+
 ## 援交～
 
-试着建了QQ讨论组: 618775838。
+试着建了QQ群: 618775838。
 
 如果你需要使用帮助，或者对Librian和galgame制作有兴趣，<sub>或者想观看萝莉图片</sub>，都可以来这里讨论。  
 总之，一起玩就行啦。

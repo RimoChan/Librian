@@ -9,10 +9,11 @@
 ![Librian2.jpg](./文檔/Librian2.jpg)    
 [简体中文](readme-chs.md)
 
-Librian是容易上手的 Galgame 引擎。   
-Librian由Python和JavaScript編寫而成，基於CEFPython前端。  
+——來像Markdown一樣寫Galgame劇本吧！
 
-Librian適用於快速高效的adv實現，能將你的奇思妙想迅速轉換爲成果——你只需提供素材文件和简单的劇本就能觀賞adv演出！
+Librian是容易上手的Galgame引擎，Librian由Python和JavaScript編寫而成，基於CEFPython前端。  
+
+Librian適用於快速高效的ADV實現，能將你的奇思妙想迅速轉換爲成果——你只需提供素材文件和简单的劇本就能做出Galgame！
 
 Librian是面向劇本的引擎，賣點是: 
 
@@ -22,7 +23,7 @@ Librian是面向劇本的引擎，賣點是:
 
 ## 一分鐘的演示視頻
 
-[![視頻佔位](./文檔/視頻佔位.jpg)](https://librian.it/視頻/轉.webm)  
+[![視頻佔位](./文檔/視頻佔位.jpg)](https://librian.it/視頻/轉.webm)
 
 ## 劇本格式
 
@@ -41,27 +42,30 @@ Librian是面向劇本的引擎，賣點是:
 準備好立繪和背景後，運行Librian主程序並啓動工程——演出是這樣的效果。  
 ![圖1](文檔/樣例_潘大爺.jpg)
 
-## 擴展功能
-
-你可以輕鬆客製化你的遊戲，包括遊標，界面，標題畫面等。
-
-不只是adv，你甚至可以嵌入線上交互等功能！
-
 ## 中文文檔
 
 如果你想瞭解詳細的使用方法，可以直接閱讀Librian的中文文檔——[https://doc.librian.it](https://doc.librian.it/site/主頁.html)。
+
+你可以輕鬆定製你的遊戲，包括特效、畫面樣式、甚至聯網，快來探索吧！
 
 ## 快速上手
 
 方便起見的話，Windows用戶可以直接下載打包的[release版本](https://github.com/RimoChan/Librian/releases)使用。
 
-如果你持「不讀說明書主義」，也可以: 
+如果你持「不讀說明書主義」，可以: 
 
 1.  安裝python3.6
 2.  pip install -r requirements.txt
 3.  python3 librian_panel.py
 
 此外，你也可以根據[中文文檔](https://doc.librian.it/site/主頁.html)的指示來安裝。
+
+## Liber分析器
+
+Liber分析器是Librian用來分析劇本語言Liber的工具。  
+如果你想要開發自己的Galgame引擎或者做一些很酷的事情，它會有所助益。
+
+你可以直接用 `pip install liber` 來安裝它。
 
 ## 援交～
 
