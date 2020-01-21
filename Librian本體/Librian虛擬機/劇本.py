@@ -1,13 +1,14 @@
 import os
 import logging
 import copy
+
 import cloudpickle as pickle
 import yaml
+import liber
 
 from .util import 讀txt
 
 from . import 鏡頭
-from . import 編譯
 from . import 角色
 from . import 命令
 from . import 虛擬機環境
@@ -108,7 +109,7 @@ class 讀者:
 
     def 編譯(self, s):
         with 讀txt.讀(s) as f:
-            return 劇本(編譯.編譯(f), s)
+            return 劇本(liber.load(f), s)
 
     @property
     def 劇本文件(self):
@@ -166,7 +167,7 @@ class 讀者:
         self.狀態.選項 = d
 
     def 同化(self, s):
-        self.劇本棧.append(劇本(編譯.生編譯(iter([s])), '_字串'))
+        self.劇本棧.append(劇本(liber.load(s), '_字串'))
 
     def 演出終了(self):
         self.劇本棧 = []
