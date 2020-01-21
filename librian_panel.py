@@ -3,27 +3,29 @@ import os
 import json
 import subprocess
 import shutil
+import datetime
 from pathlib import Path
 
 import wx
 import yaml
-import dulwich
+import dulwich.repo
 
 from Librian本體 import wxcef
 from Librian本體.帶有vue的山彥 import 帶有vue的山彥
 from Librian本體.Librian虛擬機 import 虛擬機環境
 from Librian本體.Librian虛擬機.util import 加載器
+ 
 
-from dulwich.repo import Repo
-r = Repo('.')
-commit數 = len(tuple(r.get_walker(include=[r[b'refs/heads/master'].id])))
+r = dulwich.repo.Repo('.')
+最後提交unix時間 = r[r.head()].author_time
+最後提交時間 = datetime.datetime.fromtimestamp(最後提交unix時間)
 
 
 class 山彥(帶有vue的山彥):
     def __init__(self, *li, **d):
         super().__init__(*li, **d)
         self.vue.存檔資料 = 加載器.yaml('./存檔資料/存檔資料.yaml')
-        self.vue.commit數 = commit數
+        self.vue.最後提交時間 = 最後提交時間.strftime('%y-%m-%d')
         
     def js(self, x):
         self.窗口.browser.ExecuteJavascript(x)

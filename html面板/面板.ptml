@@ -33,7 +33,7 @@ html:
                                     {{工程.標題}}
             div.右下角:
                 small:
-                    commit {{commit數}}
+                    commit {{最後提交時間}}
                                 
         div.頁#工程編輯:
             header.synth:
