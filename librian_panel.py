@@ -7,17 +7,23 @@ from pathlib import Path
 
 import wx
 import yaml
+import dulwich
 
 from Librian本體 import wxcef
 from Librian本體.帶有vue的山彥 import 帶有vue的山彥
 from Librian本體.Librian虛擬機 import 虛擬機環境
 from Librian本體.Librian虛擬機.util import 加載器
 
+from dulwich.repo import Repo
+r = Repo('.')
+commit數 = len(tuple(r.get_walker(include=[r[b'refs/heads/master'].id])))
+
 
 class 山彥(帶有vue的山彥):
     def __init__(self, *li, **d):
         super().__init__(*li, **d)
         self.vue.存檔資料 = 加載器.yaml('./存檔資料/存檔資料.yaml')
+        self.vue.commit數 = commit數
         
     def js(self, x):
         self.窗口.browser.ExecuteJavascript(x)

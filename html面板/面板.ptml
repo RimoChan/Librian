@@ -31,6 +31,9 @@ html:
                                 img.圖標 v-bind:src='工程.圖標路徑';
                                 small:
                                     {{工程.標題}}
+            div.右下角:
+                small:
+                    commit {{commit數}}
                                 
         div.頁#工程編輯:
             header.synth:
