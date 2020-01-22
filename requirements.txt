@@ -11,3 +11,4 @@ weasyprint==48
 PyYAML==5.1.1
 fire==0.2.1
 liber==0.0.1
+dulwich==0.19.14
