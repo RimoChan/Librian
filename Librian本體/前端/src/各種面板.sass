@@ -2,7 +2,8 @@
 
 =面板
     @extend div, .synth
-    background-image: url('../../../黑科技/synthetic_css/紙背景花紋.jpg')
+    // 這個路徑其實是錯的，少了一級，但是resolve-url-loader突然出了奇怪的bug會讓它多一個../，我也不知道怎麼辦。
+    background-image: url('../../黑科技/synthetic_css/紙背景花紋.jpg')
     background-attachment: scroll
     color: #000
     font-size: 24px

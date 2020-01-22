@@ -64,7 +64,7 @@ export default 演出 =
     改變演出狀態: (data, 瞬間化=false) ->
         console.log data
         this.信息預處理 data
-        {特效表, 插入圖, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, 視頻} = data
+        {特效表, 插入圖, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, html, 視頻} = data
         this.特效處理 特效表
         if 選項.length > 0
             this.處理選項 選項
@@ -84,7 +84,7 @@ export default 演出 =
             if 額外信息[0] == 'load'
                 this.load特效()
         eval(js)
-        
+        $('#html疊加').html(html)
         this.放視頻(視頻)
         this.換cg(cg)
         this.換背景(背景, 瞬間化)
@@ -126,7 +126,7 @@ export default 演出 =
         if ! 視頻
             return
         [視頻文件, 可以跳過] = 視頻
-        video = $('video')
+        video = $('#視頻')
         video.css('display', 'block')
         video.attr('src', v.視頻文件夾+'/' + 視頻文件)
         video.click if 可以跳過

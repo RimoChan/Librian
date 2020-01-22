@@ -26,6 +26,7 @@ class 狀態:
         self.cg = None        # [圖名, 淡入時間, 漸變方法]
         self.視頻 = None      # [視頻名, 可以跳過]
         self.js = None        # str
+        self.html = None      # str
         self.選項 = []
         self.特效表 = {}
         self.額外信息 = ()
@@ -47,6 +48,7 @@ class 狀態:
             'cg': self.cg,
             '視頻': self.視頻,
             'js': self.js,
+            'html': self.html,
             '選項': [i[0] for i in self.選項],
             '特效表': copy.deepcopy(self.特效表),
             '額外信息': self.額外信息,
@@ -228,6 +230,8 @@ class 讀者句控制:
             exec(代碼內容, 讀者.箱庭)
         elif 代碼類型 in ['js', 'javascript']:
             讀者.狀態.js = 代碼內容
+        elif 代碼類型 in ['html']:
+            讀者.狀態.html = 代碼內容
         else:
             raise Exception(f'『{代碼類型}』代碼類型不明白。')
         讀者.步進()
