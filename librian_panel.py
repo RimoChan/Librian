@@ -113,6 +113,10 @@ class 山彥(帶有vue的山彥):
             幻象.幻象化(目標路徑)
             self.alert('好了', 'success')
             
+    def 瀏覽器打開(self, s):
+        import webbrowser
+        webbrowser.open(s)
+        
     def 自我更新(self):
         import dulwich.porcelain
         import urllib3.exceptions

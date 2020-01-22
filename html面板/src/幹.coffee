@@ -58,6 +58,15 @@ $ ->
             .then (result) ->
                 if result.value
                     山彥.生成html(result.value)
+        讀文檔: ->
+            Swal.fire
+                title: '在外部瀏覽器打開Librian文檔？'
+                showCancelButton: true,
+                confirmButtonText: '确定'
+                cancelButtonText: '取消'
+            .then (result) ->
+                if result.value
+                    山彥.瀏覽器打開("https://gate.librian.it/?a=Librian&b=https://doc.librian.it")
         自我更新: ->
             Swal.fire
                 icon: 'warning'
