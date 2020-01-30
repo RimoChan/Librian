@@ -8,7 +8,44 @@
     color: #000
     font-size: 24px
     border-radius: 1vw
-    
+    .按鈕組
+        position: absolute
+        right: 2%
+        top: 2%
+        
+#存檔讀檔面板
+    +面板
+    position: absolute
+    top: 12%
+    left: 12%
+    height: 70%
+    width: 72%
+    padding: 2% 2% 2% 2%
+    z-index: 999
+    a
+        @extend a, .synth
+        padding: 8px
+        margin: 8px
+        border-radius: 8px
+
+    hr
+        width: 90%
+        border: none
+        border-top: 1px solid rgba(120, 50 ,0 ,0.5)
+    .檔
+        display: flex
+        justify-content: space-between
+        align-items: center
+        width: 100%
+        .截圖
+            width: 160px
+            height: 90px
+            border: 1px solid rgba(0,0,0,0.34)
+            border-radius: 3px
+            margin: 15px
+        .信息
+            flex-grow: 999
+        
 #配置面板 
     +面板
     position: absolute
@@ -25,10 +62,6 @@
         border-radius: 8px
     input
         @extend input, .synth
-    .按鈕組
-        position: absolute
-        right: 2%
-        top: 2%
     &>div 
         height: 80px
         display: flex

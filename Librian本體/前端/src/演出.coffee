@@ -60,10 +60,12 @@ export default 演出 =
         for 人 in data.立繪
             for 圖層 in 人.圖層
                 圖層.文件 = "#{v.臨時立繪文件夾}/#{圖層.文件}"
-
+    
+    當前狀態: {}
     改變演出狀態: (data, 瞬間化=false) ->
         console.log data
         this.信息預處理 data
+        this.當前狀態 = data
         {特效表, 插入圖, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, html, 視頻} = data
         this.特效處理 特效表
         if 選項.length > 0

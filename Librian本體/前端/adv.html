@@ -43,13 +43,46 @@
                     </template>
                 </div>
             </div>
+            <div id="存檔讀檔面板">
+                <span class="按鈕組">
+                    <a id="新建存檔" v-if='存檔讀檔.啓動功能 === "存檔"'>
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <a id="退出存檔讀檔">
+                        <i class="fa fa-close"></i>
+                    </a>
+                </span>
+                {{存檔讀檔.啓動功能}}
+                <hr/>
+                <div id="檔表">
+                    <template v-for='檔 in 存檔讀檔.檔表'>
+                        <div class="檔" v-bind:名字='檔.名字'>
+                            <img class="截圖" v-bind:src='檔.截圖'/>
+                            <div class="信息">
+                                {{檔.名字}}
+                                <br/>
+                                {{檔.描述}}
+                                <br/>
+                                {{檔.時間}}
+                            </div>
+                            <a class="讀取" v-if='存檔讀檔.啓動功能 === "讀檔"'>
+                                讀取
+                            </a>
+                            <a class="覆蓋" v-if='存檔讀檔.啓動功能 === "存檔"'>
+                                覆蓋
+                            </a>
+                        </div>
+                        <hr/>
+                    </template>
+                </div>
+            </div>
             <div id="工具欄">
                 <div id="工具容器" v-bind:class="{自動收起: 用戶設置.自動收起控制面板.值}">
-                    <a id="存檔" v-if='本地運行'>
+                    <a id="存檔準備" v-if='本地運行'>
                         <i class="fa fa-floppy-o"></i>
                         <i class="fa fa-angle-double-down" style='text-shadow:0 0 4px #000;'></i>
                     </a>
-                    <a id="讀檔" v-if='本地運行'>
+                    <a id="讀檔準備" v-if='本地運行'>
                         <i class="fa fa-floppy-o"></i>
                         <i class="fa fa-angle-double-up" style='text-shadow:0 0 4px #000;'></i>
                     </a>

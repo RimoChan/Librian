@@ -3,8 +3,10 @@ import $ from 'jquery'
 
 import 演出 from './演出.coffee'
 import 控制 from './控制.coffee'
+import 存檔讀檔 from './存檔讀檔.coffee'
 
 import './_統合.sass'
+
 
 window._py演出 = 演出
 
@@ -31,6 +33,9 @@ window.onload = ->
             主題css: ''
             解析度: ''
             邊界: ''
+            存檔讀檔:
+                啓動功能: '？？？'
+                檔表: []
             用戶設置: 
                 文字速度: 
                     類型: 'number'
@@ -50,6 +55,7 @@ window.onload = ->
                 自動收起控制面板: 
                     類型: 'boolean'
                     值: false
+                
         watch:
             $data:
                 handler: (val, oldVal) ->

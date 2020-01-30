@@ -2,6 +2,8 @@ $ = require('jquery-browserify')
 require("imports-loader?define=>false!jquery-mousewheel")($)
 
 import 演出 from './演出.coffee'
+import 存檔讀檔 from './存檔讀檔.coffee'
+
 
 export default 控制 =
     右鍵功能: ->
@@ -62,6 +64,9 @@ export default 控制 =
 
     退出設置: ->
         $('#總畫面').attr('配置面板', 'off')
+        
+    退出存檔讀檔: ->
+        $('#總畫面').attr('存檔讀檔面板', 'off')
 
     控制初始化: ->
         window.document.onkeydown = (evt) ->
@@ -98,14 +103,14 @@ export default 控制 =
             else if e.which == 1 
                 控制.左鍵功能()
         
-        $('#存檔').click ->
-            山彥.存檔()
-        $('#讀檔').click ->
-            山彥.讀檔()
+        $('#存檔準備').click ->
+            存檔讀檔.存檔準備()
+        $('#讀檔準備').click ->
+            存檔讀檔.讀檔準備()
         $('#快速存檔').click ->
-            山彥.快速存檔()
+            存檔讀檔.快速存檔()
         $('#快速讀檔').click ->
-            山彥.快速讀檔()
+            存檔讀檔.快速讀檔()
         $('#自動模式').click ->
             alert("沒做這個功能")
         $('#切換快進').click ->
@@ -117,5 +122,20 @@ export default 控制 =
             
         $('#退出設置').click ->
             控制.退出設置()
-
+        $('#退出存檔讀檔').click ->
+            控制.退出存檔讀檔()
+        
+        $('body').on 'click','.檔 > .讀取', (event)->
+            名字 = $(this).parent().attr('名字')
+            存檔讀檔.讀檔(名字)
+            
+        $('body').on 'click','.檔 > .覆蓋', (event)->
+            名字 = $(this).parent().attr('名字')
+            描述 = 演出.當前狀態.話語
+            存檔讀檔.存檔(名字, 描述)
                 
+        $('body').on 'click','#新建存檔', (event)->
+            名字 = '存檔' + new Date().getTime()
+            描述 = 演出.當前狀態.話語
+            存檔讀檔.存檔(名字, 描述)
+        

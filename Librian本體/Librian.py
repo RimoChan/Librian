@@ -17,7 +17,9 @@ def librian_main(project, config=None):
 
     if not os.path.isdir(f'{Librian虛擬機.虛擬機環境.工程路徑}/存檔資料'):
         os.mkdir(f'{Librian虛擬機.虛擬機環境.工程路徑}/存檔資料')
-
+    if not os.path.isdir(f'{Librian虛擬機.虛擬機環境.工程路徑}/存檔資料/手動存檔'):
+        os.mkdir(f'{Librian虛擬機.虛擬機環境.工程路徑}/存檔資料/手動存檔')
+        
     import 窗口
 
     app = 窗口.app()

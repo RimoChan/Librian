@@ -1,6 +1,9 @@
 import os
 import json
 import logging
+import time
+import datetime
+import pickle
 
 import wx
 from cefpython3 import cefpython as cef
@@ -30,33 +33,36 @@ class 山彥(帶有vue的山彥):
     def js(self, x):
         self.瀏覽器.ExecuteJavascript(x)
 
-    def 選擇讀檔文件(self):
-        with wx.FileDialog(self.窗口, '讀檔', wildcard='pickle 文件 (*.pkl)|*.pkl',
-                           style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
-            fileDialog.SetPath(f'{虛擬機環境.工程路徑}/存檔資料/')
-            if fileDialog.ShowModal() == wx.ID_CANCEL:
-                return None
-            return fileDialog.GetPath()
+    def 取檔(self, callback):
+        檔表 = os.listdir(f'{虛擬機環境.工程路徑}/存檔資料/手動存檔')
+        檔表 = sorted(檔表, reverse=True)
+        檔信息表 = []
+        for i in 檔表: 
+            try:
+                with open(f'{虛擬機環境.工程路徑}/存檔資料/手動存檔/{i}', 'rb') as f:
+                    存檔信息 = pickle.load(f)['存檔信息']
+                    檔信息表.append({
+                        '名字': i,
+                        '描述': 存檔信息['描述'],
+                        '截圖': 存檔信息['截圖'],
+                        '時間': datetime.datetime.fromtimestamp(存檔信息['存檔時間']).strftime('%Y-%m-%d %H:%M'),
+                    })
+            except Exception as e:
+                logging.exception(e)
+                logging.warning(f'存檔「{i}」有問題。')
+        callback.Call(檔信息表)
+        
+    def 存檔(self, 文件名, 描述, 截圖):
+        存檔信息 = {
+            '描述': 描述,
+            '截圖': 截圖,
+            '存檔時間': time.time(),
+        }
+        self.讀者.存檔(f'{虛擬機環境.工程路徑}/存檔資料/手動存檔/{文件名}', 存檔信息)
 
-    def 選擇存檔文件(self):
-        with wx.FileDialog(self.窗口, '存檔', wildcard='pickle 文件 (*.pkl)|*.pkl',
-                           style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT) as fileDialog:
-            fileDialog.SetPath(f'{虛擬機環境.工程路徑}/存檔資料/')
-            if fileDialog.ShowModal() == wx.ID_CANCEL:
-                return None
-            return fileDialog.GetPath()
-
-    def 存檔(self):
-        文件名 = self.選擇存檔文件()
-        if 文件名:
-            self.讀者.存檔(文件名)
-            self.js('_py演出.提示("存檔好了。")')
-
-    def 讀檔(self):
-        文件名 = self.選擇讀檔文件()
-        if 文件名:
-            self.讀者.讀檔(文件名)
-            self.更新(瞬間化=True)
+    def 讀檔(self, 文件名):
+        self.讀者.讀檔(f'{虛擬機環境.工程路徑}/存檔資料/手動存檔/{文件名}')
+        self.更新(瞬間化=True)
 
     def 快速存檔(self):
         self.讀者.存檔(f'{虛擬機環境.工程路徑}/存檔資料/快速存檔.pkl')
@@ -84,7 +90,6 @@ class 演出山彥(山彥):
     def 回標題(self):
         self.讀者.__init__(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}')
         self.js(f'window.location.href={self.標題url.__repr__()}')
-
         
     def 步進(self):
         if 配置['編寫模式']:

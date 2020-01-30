@@ -1,5 +1,5 @@
 #總畫面
-    #配置面板, #對話歷史
+    #配置面板, #對話歷史, #存檔讀檔面板
         opacity: 0
         visibility: hidden 
     #adv畫面, #工具欄
@@ -10,6 +10,18 @@
             transition: visibility 0s 0.25s, opacity 0.25s
     &[配置面板=on]
         #配置面板
+            opacity: 1
+            visibility: visible
+            transition: opacity 0.25s
+        #adv畫面, #工具欄
+            pointer-events: none
+            filter: brightness(0.6)
+            
+    &[存檔讀檔面板=off]
+        #存檔讀檔面板
+            transition: visibility 0s 0.25s, opacity 0.25s
+    &[存檔讀檔面板=on]
+        #存檔讀檔面板
             opacity: 1
             visibility: visible
             transition: opacity 0.25s

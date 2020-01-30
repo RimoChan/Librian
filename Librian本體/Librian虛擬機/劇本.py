@@ -119,22 +119,27 @@ class 讀者:
 
 # ————————————————————————————
 # S/L方法
-    def 存檔(self, path):
-        with open(path, 'wb') as f:
-            pickle.dump({'狀態': self.狀態,
-                         '角色表': 角色.角色表,
-                         '鏡頭對應': 鏡頭.鏡頭對應,
-                         '劇本棧': self.劇本棧,
-                         '箱庭': self.箱庭,
-                         }, f)
+    def 存檔(self, 路徑, 存檔信息=None):
+        虛擬機狀態 = {
+            '讀者狀態': self.狀態,
+            '角色表': 角色.角色表,
+            '鏡頭對應': 鏡頭.鏡頭對應,
+            '劇本棧': self.劇本棧,
+            '箱庭': self.箱庭,
+        }
+        with open(路徑, 'wb') as f:
+            pickle.dump({
+                '虛擬機狀態': 虛擬機狀態,
+                '存檔信息': 存檔信息
+            }, f)
 
-    def 讀檔(self, path):
+    def 讀檔(self, 路徑):
         try:
-            with open(path, 'rb') as f:
-                data = pickle.load(f)
+            with open(路徑, 'rb') as f:
+                data = pickle.load(f)['虛擬機狀態']
                 角色.角色表 = data['角色表']
                 鏡頭.鏡頭對應 = data['鏡頭對應']
-                self.狀態 = data['狀態']
+                self.狀態 = data['讀者狀態']
                 self.狀態.額外信息 = ('load',)
                 self.劇本棧 = data['劇本棧']
                 self.箱庭 = data['箱庭']

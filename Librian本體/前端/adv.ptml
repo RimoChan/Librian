@@ -33,12 +33,36 @@ html:
                     template v-if='內容.類型 === "boolean"':
                         input type="checkbox" v-model="內容['值']":
                         
+            div#存檔讀檔面板:
+                span.按鈕組:
+                    a#新建存檔 v-if='存檔讀檔.啓動功能 === "存檔"':
+                        i.fa.fa-plus:
+                    a#退出存檔讀檔:
+                        i.fa.fa-close:
+                {{存檔讀檔.啓動功能}}
+                hr;
+                div#檔表:
+                    template v-for='檔 in 存檔讀檔.檔表':
+                        div.檔 v-bind:名字='檔.名字':
+                            img.截圖 v-bind:src='檔.截圖';
+                            div.信息:
+                                {{檔.名字}}
+                                br;
+                                {{檔.描述}}
+                                br;
+                                {{檔.時間}}
+                            a.讀取 v-if='存檔讀檔.啓動功能 === "讀檔"':
+                                讀取
+                            a.覆蓋 v-if='存檔讀檔.啓動功能 === "存檔"':
+                                覆蓋
+                        hr;
+                
             div#工具欄:
                 div#工具容器 v-bind:class="{自動收起: 用戶設置.自動收起控制面板.值}":
-                    a#存檔 v-if='本地運行':
+                    a#存檔準備 v-if='本地運行':
                         i.fa.fa-floppy-o:
                         i.fa.fa-angle-double-down style='text-shadow:0 0 4px #000;':
-                    a#讀檔 v-if='本地運行':
+                    a#讀檔準備 v-if='本地運行':
                         i.fa.fa-floppy-o:
                         i.fa.fa-angle-double-up style='text-shadow:0 0 4px #000;':
                     a#快速存檔 v-if='本地運行':
