@@ -5,7 +5,7 @@ import time
 import datetime
 import pickle
 
-from Librian虛擬機 import 劇本
+from Librian虛擬機 import 讀者
 from Librian虛擬機 import 虛擬機環境
 from Librian虛擬機.util import 讀txt
 from Librian虛擬機.util import 文件
@@ -16,8 +16,8 @@ from 環境 import 配置
 
 
 def 綁定(app, 標題url):
-    讀者 = 劇本.讀者(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}')
-    app.frame.set_browser_object("山彥", 極山彥(app.frame, app.frame.browser, 讀者, 標題url))
+    讀者實例 = 讀者.讀者(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}')
+    app.frame.set_browser_object("山彥", 極山彥(app.frame, app.frame.browser, 讀者實例, 標題url))
 
 
 class 山彥(帶有vue的山彥):

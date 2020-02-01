@@ -5,13 +5,13 @@ import shutil
 from .環境 import 配置
 
 from .Librian虛擬機 import 虛擬機環境
-from .Librian虛擬機 import 劇本
+from .Librian虛擬機 import 讀者
 
 此處 = os.path.dirname(os.path.abspath(__file__))
 
 
 def 虛擬核心():
-    讀者 = 劇本.讀者(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}')
+    讀者實例 = 讀者.讀者(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}')
 
     圖片文件夾 = os.path.join(f'../../{虛擬機環境.工程路徑}', 虛擬機環境.圖片文件夾).replace('\\', '/')
     音樂文件夾 = os.path.join(f'../../{虛擬機環境.工程路徑}', 虛擬機環境.音樂文件夾).replace('\\', '/')
@@ -21,7 +21,7 @@ def 虛擬核心():
 
     主題css = os.path.join(f'主題', 虛擬機環境.主題css + '.css').replace('\\', '/')
 
-    演出步 = list(讀者.迭代器())
+    演出步 = list(讀者實例.迭代器())
 
     虛擬核心 = {
         '作品名': 虛擬機環境.標題,

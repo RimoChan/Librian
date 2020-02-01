@@ -5,7 +5,7 @@ import logging
 
 import opencc
 
-from Librian虛擬機 import 劇本
+from Librian虛擬機 import 讀者
 from Librian虛擬機 import 角色
 
 cc = opencc.OpenCC('t2s')
@@ -22,7 +22,7 @@ class 虛狀態:
         return {'內容': self.內容, '額外信息': self.額外信息}
 
 
-class 虛讀者(劇本.讀者):
+class 虛讀者(讀者.讀者):
     def __init__(self, 初始劇本, 簡化字=False):
         super().__init__(初始劇本)
         self.簡化字 = 簡化字

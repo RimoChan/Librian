@@ -11,6 +11,7 @@ from .util import 讀txt
 from . import 鏡頭
 from . import 角色
 from . import 命令
+from . import 箱庭
 from . import 虛擬機環境
 
 
@@ -85,19 +86,12 @@ class 讀者:
         self.劇本棧 = [self.編譯(初始劇本)]
         self.狀態 = 狀態()
         self.狀態.重置()
-        self.箱庭 = {
-            'goto': self.跳轉,
-            'call': self.棧跳轉,
-            'choice': self.產生選項,
-            'fusion': self.同化,
-            'adv_end': self.演出終了,
-            '跳轉': self.跳轉,
-            '調用': self.棧跳轉,
-            '產生選項': self.產生選項,
-            '同化': self.同化,
-            '演出終了': self.演出終了,
-        }
+        self.箱庭 = 箱庭.箱庭(self)
         鏡頭.鏡頭對應 = {}
+
+    @property
+    def 劇本文件(self):
+        return self.劇本棧[-1]
 
     def 下一句(self):
         if not self.劇本棧:
@@ -113,12 +107,28 @@ class 讀者:
         with 讀txt.讀(s) as f:
             return 劇本(liber.load(f), s)
 
-    @property
-    def 劇本文件(self):
-        return self.劇本棧[-1]
+    def 步進(self, 防止終焉=False):
+        s = self.下一句()
+        if s['類型'] == '終焉' and 防止終焉:
+            return True
+        讀者句控制(self, s['類型'], s)
 
-# ————————————————————————————
-# S/L方法
+    def 迭代器(self):
+        while True:
+            self.步進()
+            s = self.狀態.導出()
+            if s['額外信息'] and s['額外信息'][0] == '終焉':
+                break
+            else:
+                yield s
+
+    def 從一而終(self, 劇本):
+        self.__init__(劇本)
+        logging.debug(self.劇本文件.內容)
+        while True:
+            if self.步進(防止終焉=True):
+                break
+
     def 存檔(self, 路徑, 存檔信息=None):
         虛擬機狀態 = {
             '讀者狀態': self.狀態,
@@ -145,63 +155,6 @@ class 讀者:
                 self.箱庭 = data['箱庭']
         except Exception as e:
             logging.warning('讀檔失敗……因爲%s' % e)
-
-# ——————————————————————————————————————————————
-# 劇本控制
-    def 跳轉(self, path=None, lable=None, 彈=True):
-        現名 = self.劇本文件.名
-        if not path:
-            path = 現名
-        else:
-            path = '%s/%s' % (os.path.dirname(現名), path)
-
-        if 彈:
-            self.劇本棧.pop()
-        self.劇本棧.append(self.編譯(path))
-        if lable:
-            while True:
-                t = self.劇本文件.下一句()
-                if t is None:
-                    raise Exception(f'沒有找到躍點「{lable}」')
-                if '躍點' in t and t['躍點'] == lable:
-                    break
-
-    def 棧跳轉(self, path=None, lable=None):
-        self.跳轉(path, lable, 彈=False)
-
-    def 產生選項(self, *d):
-        d = [(i[0], i[1]) for i in d]
-        self.狀態.選項 = d
-
-    def 同化(self, s):
-        self.劇本棧.append(劇本(liber.load(s), '_字串'))
-
-    def 演出終了(self):
-        self.劇本棧 = []
-
-# ——————————————————————————————————————————————
-
-    def 步進(self, 防止終焉=False):
-        s = self.下一句()
-        if s['類型'] == '終焉' and 防止終焉:
-            return True
-        讀者句控制(self, s['類型'], s)
-
-    def 迭代器(self):
-        while True:
-            self.步進()
-            s = self.狀態.導出()
-            if s['額外信息'] and s['額外信息'][0] == '終焉':
-                break
-            else:
-                yield s
-
-    def 從一而終(self, 劇本):
-        self.__init__(劇本)
-        logging.debug(self.劇本文件.內容)
-        while True:
-            if self.步進(防止終焉=True):
-                break
 
 
 class 讀者句控制:
@@ -232,7 +185,7 @@ class 讀者句控制:
     @staticmethod
     def 插入代碼(讀者, 代碼類型, 代碼內容):
         if 代碼類型 in ['', 'py', 'python']:
-            exec(代碼內容, 讀者.箱庭)
+            exec(代碼內容, 讀者.箱庭.箱庭內容)
         elif 代碼類型 in ['js', 'javascript']:
             讀者.狀態.js = 代碼內容
         elif 代碼類型 in ['html']:
@@ -299,7 +252,7 @@ class 讀者句控制:
 
     @staticmethod
     def 選項(讀者, 選項名, 文件, 位置):
-        讀者.狀態.選項.append([選項名, lambda: 讀者.棧跳轉(文件, 位置)])
+        讀者.狀態.選項.append([選項名, lambda: 讀者.箱庭.棧跳轉(文件, 位置)])
         if 讀者.劇本文件.指針 < len(讀者.劇本文件.內容):
             if 讀者.劇本文件.內容[讀者.劇本文件.指針]['類型'] == '選項':
                 讀者.步進()
