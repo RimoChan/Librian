@@ -1,5 +1,6 @@
 import logging
 import os
+import sys
 import json
 import subprocess
 import shutil
@@ -83,18 +84,18 @@ class 山彥(帶有vue的山彥):
         self.同調(新工程路徑)
 
     def 運行(self):
-        subprocess.Popen(['cmd', '/c', 'cd', 'Librian本體', '&', '..\python36\python', 'librian.py', '--project', self.vue.工程路徑])
+        subprocess.Popen(['cd', 'Librian本體', '&', sys.executable, 'librian.py', '--project', self.vue.工程路徑], shell=True)
 
     def 運行同時編寫(self):
-        subprocess.Popen(
-            'cmd /c cd Librian本體 & ' +
-            f'"../python36/python" librian.py --project {self.vue.工程路徑} ' +
-            '--config "{編寫模式: True}"'
-        )
+        subprocess.Popen([
+            'cd', 'Librian本體', '&',
+            sys.executable, 'librian.py', '--project', self.vue.工程路徑,
+            '--config', '{編寫模式: True}'
+        ], shell=True)
         os.system(f'"{self.vue.工程路徑}/{虛擬機環境.劇本入口}"')
 
     def 打開文件夾(self):
-        os.system(f'start {self.vue.工程路徑}')
+        subprocess.Popen(['start', self.vue.工程路徑])
 
     def 生成exe(self):
         from Librian本體 import 構建
