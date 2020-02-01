@@ -14,7 +14,7 @@ from Librian本體 import wxcef
 from Librian本體.帶有vue的山彥 import 帶有vue的山彥
 from Librian本體.Librian虛擬機 import 虛擬機環境
 from Librian本體.Librian虛擬機.util import 加載器
- 
+
 
 r = dulwich.repo.Repo('.')
 最後提交unix時間 = r[r.head()].author_time
@@ -26,10 +26,10 @@ class 山彥(帶有vue的山彥):
         super().__init__(*li, **d)
         self.vue.存檔資料 = 加載器.yaml('./存檔資料/存檔資料.yaml')
         self.vue.最後提交時間 = 最後提交時間.strftime('%y-%m-%d')
-        
+
     def js(self, x):
         self.窗口.browser.ExecuteJavascript(x)
-        
+
     def alert(self, title, icon=None, text=None):
         msg = {"title": title, "icon": icon, "text": text}
         self.js(f'Swal.fire({json.dumps(msg)})')
@@ -61,7 +61,7 @@ class 山彥(帶有vue的山彥):
             v.工程路徑 = 工程路徑
             v.圖標路徑, v.主解析度, v.標題 = self.讀取工程信息(工程路徑)
         except Exception as e:
-            logging.warning(e.__repr__())
+            logging.exception(e)
             self.alert('工程配置文件不正確。', 'error')
         self.js(f'進入工程()')
 
@@ -112,11 +112,11 @@ class 山彥(帶有vue的山彥):
         else:
             幻象.幻象化(目標路徑)
             self.alert('好了', 'success')
-            
+
     def 瀏覽器打開(self, s):
         import webbrowser
         webbrowser.open(s)
-        
+
     def 自我更新(self):
         import dulwich.porcelain
         import urllib3.exceptions
@@ -132,7 +132,7 @@ class 山彥(帶有vue的山彥):
             self.alert('失敗した失敗した失敗した', 'error')
 
 
-if any([ord(i)>255 for i in os.getcwd()]):
+if any([ord(i) > 255 for i in os.getcwd()]):
     logging.warning('Librian在python路徑有漢字(非ACSII字符)的場合可能出問題。')
 
 app, 瀏覽器 = wxcef.group(title='librian面板', url='file:///html面板/面板.html', icon='./Librian本體/資源/librian.ico', size=(960, 540))

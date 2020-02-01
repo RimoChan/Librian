@@ -5,9 +5,6 @@ import time
 import datetime
 import pickle
 
-import wx
-from cefpython3 import cefpython as cef
-
 from Librian虛擬機 import 劇本
 from Librian虛擬機 import 虛擬機環境
 from Librian虛擬機.util import 讀txt
@@ -37,7 +34,7 @@ class 山彥(帶有vue的山彥):
         檔表 = os.listdir(f'{虛擬機環境.工程路徑}/存檔資料/手動存檔')
         檔表 = sorted(檔表, reverse=True)
         檔信息表 = []
-        for i in 檔表: 
+        for i in 檔表:
             try:
                 with open(f'{虛擬機環境.工程路徑}/存檔資料/手動存檔/{i}', 'rb') as f:
                     存檔信息 = pickle.load(f)['存檔信息']
@@ -51,7 +48,7 @@ class 山彥(帶有vue的山彥):
                 logging.exception(e)
                 logging.warning(f'存檔「{i}」有問題。')
         callback.Call(檔信息表)
-        
+
     def 存檔(self, 文件名, 描述, 截圖):
         存檔信息 = {
             '描述': 描述,
@@ -72,15 +69,15 @@ class 山彥(帶有vue的山彥):
         self.讀者.讀檔(f'{虛擬機環境.工程路徑}/存檔資料/快速存檔.pkl')
         self.更新(瞬間化=True)
 
+    def 切換全屏(self):
+        self.窗口.toggleFullScreen()
+        
     def 退出(self):
         exit()
 
-    def 切換全屏(self):
-        self.窗口.toggleFullScreen()
-
     def vue更新(self, 內容):
         t = self.vue.用戶設置 if '用戶設置' in self.vue._內容 else None
-        if t!=內容['用戶設置']:
+        if t != 內容['用戶設置']:
             with open(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json', 'w', encoding='utf8') as f:
                 f.write(json.dumps(內容['用戶設置'], ensure_ascii=False))
         super().vue更新(內容)
@@ -90,7 +87,7 @@ class 演出山彥(山彥):
     def 回標題(self):
         self.讀者.__init__(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}')
         self.js(f'window.location.href={self.標題url.__repr__()}')
-        
+
     def 步進(self):
         if 配置['編寫模式']:
             return
@@ -117,9 +114,9 @@ class 演出山彥(山彥):
         self.vue.邊界 = 配置['顯示繪圖邊界']
 
         用戶設置 = 加載器.json(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json')
-        if 用戶設置: 
+        if 用戶設置:
             self.vue.用戶設置 = 用戶設置
-            
+
         self.js('_py演出.準備工作()')
 
     def 選(self, 參數):
