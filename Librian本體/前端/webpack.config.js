@@ -20,12 +20,13 @@ module.exports = {
                             name: function(file){return '[name].css'},
                         }
                     }, 
-                    // {loader: 'css-loader', options: {url: false}}, 
                     {loader: 'resolve-url-loader', options: {}},
                     {loader: 'sass-loader', options: {sourceMap: true}}
                 ]
             }, 
         ],
     },
-    mode: 'development',
+    node: { fs: 'empty' },
+    // mode: 'development',
+    mode: 'production',
 };

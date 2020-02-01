@@ -112,6 +112,7 @@ class 演出山彥(山彥):
         self.vue.主題css = os.path.join(f'主題', 虛擬機環境.主題css + '.css').replace('\\', '/')
         self.vue.解析度 = 虛擬機環境.主解析度
         self.vue.邊界 = 配置['顯示繪圖邊界']
+        self.vue.翻譯 = 虛擬機環境.翻譯
 
         用戶設置 = 加載器.json(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json')
         if 用戶設置:

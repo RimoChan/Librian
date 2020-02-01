@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import opencc from 'node-opencc'
 
 import 控制 from './控制.coffee'
 import 圖像融合 from './圖像融合.coffee'
@@ -47,6 +48,11 @@ export default 演出 =
     步進更新: (瞬間化=false)->
         山彥.狀態回調 true, (狀態)->
             演出.改變演出狀態(狀態, 瞬間化)
+            
+    翻譯: (s)->
+        if not v.翻譯
+            return s
+        return opencc[v.翻譯](s)
             
     信息預處理: (data) ->
         if data.背景
@@ -223,6 +229,7 @@ export default 演出 =
             
 
     換人名: (語者, 名字) ->
+        名字 = this.翻譯(名字)
         if 名字
             $('#名字').html(名字)
             $('#名字框').css('opacity', 1)
@@ -232,19 +239,21 @@ export default 演出 =
         $('#對話框').attr('名字', 語者)
 
     淡入過期時間: 0,
-    換對話: (text, 名字, 瞬間化) ->
+    換對話: (話語, 名字, 瞬間化) ->
+        話語 = this.翻譯(話語)
+        名字 = this.翻譯(名字)
         if 名字 != ''
             $('#對話框').attr('對話類型','對話')
         else
             $('#對話框').attr('對話類型','旁白')
             
         if 瞬間化
-            $('#話語').html(text + '<span></span>') 
+            $('#話語').html(話語 + '<span></span>') 
         else
-            淡入字 = 演出.文字淡入(text)
+            淡入字 = 演出.文字淡入(話語)
             $('#話語').html(淡入字.內容)
             演出.淡入過期時間 = Date.now() + 淡入字.文字時間 * 1000
-        $('#對話歷史').append(text+'<br/><br/>')
+        $('#對話歷史').append(話語+'<br/><br/>')
     早泄: ->
         $('#話語 *').css('animation','None')
         $('#話語 *').css('opacity','1')
