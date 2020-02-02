@@ -117,12 +117,10 @@ export default 演出 =
     處理選項: (選項) ->
         $('#選項').html('')
         for i, p in 選項
-            t = $("<a>#{i}</a>")
+            t = $("<a 選項號='#{p}'>#{i}</a>")
             $('#選項').append(t)
-            do ->
-                q = p
-                t.click () -> 
-                    演出.點選項(q)
+            t.click () -> 
+                演出.點選項(parseInt($(this).attr('選項號')))
         $('#選項').fadeIn(200)
         this.選擇之刻 = true
     點選項: (x) ->
