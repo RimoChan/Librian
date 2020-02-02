@@ -15,6 +15,7 @@ from Librian本體 import wxcef
 from Librian本體.帶有vue的山彥 import 帶有vue的山彥
 from Librian本體.Librian虛擬機 import 虛擬機環境
 from Librian本體.Librian虛擬機.util import 加載器
+from Librian本體.Librian虛擬機.util import 文件
 
 
 r = dulwich.repo.Repo('.')
@@ -136,7 +137,7 @@ class 山彥(帶有vue的山彥):
 if any([ord(i) > 255 for i in os.getcwd()]):
     logging.warning('Librian在python路徑有漢字(非ACSII字符)的場合可能出問題。')
 
-app, 瀏覽器 = wxcef.group(title='librian面板', url='file:///html面板/面板.html', icon='./Librian本體/資源/librian.ico', size=(960, 540))
+app, 瀏覽器 = wxcef.group(title='librian面板', url=文件.轉爲網址路徑('./html面板/面板.html'), icon='./Librian本體/資源/librian.ico', size=(960, 540))
 真山彥 = 山彥(app.frame)
 app.frame.set_browser_object("山彥", 真山彥)
 app.MainLoop()

@@ -91,7 +91,11 @@ export default 演出 =
         if 額外信息
             if 額外信息[0] == 'load'
                 this.load特效()
-        eval(js)
+        try
+            eval(js)
+        catch e
+            console.log e
+        
         $('#html疊加').html(html)
         this.放視頻(視頻)
         this.換cg(cg)

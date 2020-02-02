@@ -192,7 +192,8 @@ class 讀者句控制:
             讀者.狀態.html = 代碼內容
         else:
             raise Exception(f'『{代碼類型}』代碼類型不明白。')
-        讀者.步進()
+        if not 讀者.狀態.選項:
+            讀者.步進()
 
     @staticmethod
     def 插入圖(讀者, 插入圖):
