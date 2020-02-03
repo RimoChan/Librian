@@ -1,6 +1,11 @@
 import logging
 
-import wxcef
+try:
+    import wx
+    from Librian本體 import wxcef
+except:
+    from Librian本體 import qtcef as wxcef
+
 import 山彥
 from 環境 import 配置
 
