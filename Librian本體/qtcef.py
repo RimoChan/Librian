@@ -42,9 +42,6 @@ WINDOWS = (platform.system() == "Windows")
 LINUX = (platform.system() == "Linux")
 MAC = (platform.system() == "Darwin")
 
-# OS differences
-CefWidgetParent = QWidget
-
 
 def main():
     check_versions()
@@ -157,7 +154,7 @@ class MainWindow(QMainWindow):
         return self.cef_widget.browser
 
 
-class CefWidget(CefWidgetParent):
+class CefWidget(QWidget):
     def __init__(self, parent=None):
         # noinspection PyArgumentList
         super(CefWidget, self).__init__(parent)
@@ -205,23 +202,11 @@ class CefWidget(CefWidgetParent):
             # PySide:
             # | QWidget.winId() returns <PyCObject object at 0x02FD8788>
             # | Converting it to int using ctypes.
-            if sys.version_info[0] == 2:
-                # Python 2
-                ctypes.pythonapi.PyCObject_AsVoidPtr.restype = (
-                    ctypes.c_void_p)
-                ctypes.pythonapi.PyCObject_AsVoidPtr.argtypes = ([
-                    ctypes.py_object
-                ])
-                return ctypes.pythonapi.PyCObject_AsVoidPtr(self.winId())
-            else:
-                # Python 3
-                ctypes.pythonapi.PyCapsule_GetPointer.restype = (
-                    ctypes.c_void_p)
-                ctypes.pythonapi.PyCapsule_GetPointer.argtypes = ([
-                    ctypes.py_object
-                ])
-                return ctypes.pythonapi.PyCapsule_GetPointer(
-                    self.winId(), None)
+            ctypes.pythonapi.PyCapsule_GetPointer.restype = (ctypes.c_void_p)
+            ctypes.pythonapi.PyCapsule_GetPointer.argtypes = ([
+                ctypes.py_object
+            ])
+            return ctypes.pythonapi.PyCapsule_GetPointer(self.winId(), None)
 
     def moveEvent(self, _):
         self.x = 0
