@@ -188,7 +188,7 @@ class CefWidget(QWidget):
         window_info = cef.WindowInfo()
         rect = [0, 0, self.width(), self.height()]
         window_info.SetAsChild(self.getHandle(), rect)
-        self.browser = cef.CreateBrowserSync(window_info, url=url)
+        self.browser = cef.CreateBrowserSync(window_info, url=url, browserSettings={'web_security_disabled': True})
         self.browser.SetClientHandler(FocusHandler(self))
 
     def getHandle(self):

@@ -4,6 +4,7 @@ try:
     import wx
     import wxcef
 except ModuleNotFoundError:
+    logging.warning('沒能import wx，改爲使用pyside2。')
     import qtcef as wxcef
 
 import 山彥

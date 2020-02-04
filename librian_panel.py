@@ -14,6 +14,7 @@ try:
     import wx
     from Librian本體 import wxcef
 except ModuleNotFoundError:
+    logging.warning('沒能import wx，改爲使用pyside2。')
     import fake_wx as wx
     from Librian本體 import qtcef as wxcef
 
