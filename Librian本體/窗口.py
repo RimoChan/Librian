@@ -1,6 +1,11 @@
 import logging
 
-import wxcef
+try:
+    import wx
+    import wxcef
+except ModuleNotFoundError:
+    import qtcef as wxcef
+
 import 山彥
 from 環境 import 配置
 
