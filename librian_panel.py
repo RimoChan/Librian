@@ -13,7 +13,7 @@ import dulwich.repo
 try:
     import wx
     from Librian本體 import wxcef
-except:
+except ModuleNotFoundError:
     import fake_wx as wx
     from Librian本體 import qtcef as wxcef
 

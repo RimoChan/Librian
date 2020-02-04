@@ -3,7 +3,7 @@ import logging
 try:
     import wx
     import wxcef
-except:
+except ModuleNotFoundError:
     import qtcef as wxcef
 
 import 山彥
