@@ -20,7 +20,9 @@ from cefpython3 import cefpython as cef
 def group(url, icon, title, size):
     sys.excepthook = cef.ExceptHook
     settings = {}
-    if MAC:
+    if WINDOWS:
+        settings["external_message_pump"] = True
+    elif MAC:
         # Issue #442 requires enabling message pump on Mac
         # in Qt example. Calling cef.DoMessageLoopWork in a timer
         # doesn't work anymore.
@@ -47,7 +49,9 @@ def main():
     check_versions()
     sys.excepthook = cef.ExceptHook  # To shutdown all CEF processes on error
     settings = {}
-    if MAC:
+    if WINDOWS:
+        settings["external_message_pump"] = True
+    elif MAC:
         # Issue #442 requires enabling message pump on Mac
         # in Qt example. Calling cef.DoMessageLoopWork in a timer
         # doesn't work anymore.
@@ -55,9 +59,7 @@ def main():
 
     cef.Initialize(settings)
     app = CefApp("http://localhost:8080", None, "localhost", (800, 600))
-    app.exec_()
-    if not cef.GetAppSetting("external_message_pump"):
-        app.stopTimer()
+    app.MainLoop()
     del app.main_window  # Just to be safe, similarly to "del app"
     del app  # Must destroy app object before calling Shutdown
     cef.Shutdown()
@@ -233,7 +235,10 @@ class CefWidget(QWidget):
 class CefApp(QApplication):
     def __init__(self, url, icon, title, size):
         super(CefApp, self).__init__([])
-        if not cef.GetAppSetting("external_message_pump"):
+        if cef.GetAppSetting("external_message_pump") or \
+                cef.GetAppSetting("multi_threaded_message_loop"):
+            self.timer = None
+        else:
             self.timer = self.createTimer()
 
         self.url, self.icon, self.title, self.size = url, icon, title, size
@@ -246,6 +251,8 @@ class CefApp(QApplication):
 
     def MainLoop(self):
         self.exec_()
+        if self.timer is not None:
+            self.stopTimer()
 
     def createTimer(self):
         timer = QTimer()
