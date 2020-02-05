@@ -12,16 +12,16 @@ import dulwich.repo
 
 try:
     import wx
-    from Librian本體 import wxcef
+    import Librian_util.wxcef as wxcef
 except ModuleNotFoundError:
     logging.warning('沒能import wx，改爲使用pyside2。')
-    import fake_wx as wx
-    from Librian本體 import qtcef as wxcef
+    import Librian_util.fake_wx as wx
+    import Librian_util.qtcef as wxcef
 
 from Librian本體.帶有vue的山彥 import 帶有vue的山彥
 from Librian本體.Librian虛擬機 import 虛擬機環境
-from Librian本體.Librian虛擬機.util import 加載器
-from Librian本體.Librian虛擬機.util import 文件
+
+from Librian_util import 加載器, 文件
 
 
 r = dulwich.repo.Repo('.')

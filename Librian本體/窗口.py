@@ -1,17 +1,19 @@
 import logging
-
-try:
-    import wx
-    import wxcef
-except ModuleNotFoundError:
-    logging.warning('沒能import wx，改爲使用pyside2。')
-    import qtcef as wxcef
+import sys
+import os
 
 import 山彥
 from 環境 import 配置
 
-from Librian虛擬機.util import 文件
 from Librian虛擬機 import 虛擬機環境
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
+from Librian_util import 文件
+try:
+    from Librian_util import wxcef
+except ModuleNotFoundError:
+    logging.warning('沒能import wx，改爲使用pyside2。')
+    from Librian_util import qtcef as wxcef
 
 
 def app():

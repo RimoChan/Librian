@@ -1,18 +1,20 @@
 import os
 import logging
 import copy
+import sys
 
 import cloudpickle as pickle
 import yaml
 import liber
-
-from .util import 讀txt
 
 from . import 鏡頭
 from . import 角色
 from . import 命令
 from . import 箱庭
 from . import 虛擬機環境
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../..')
+from Librian_util import 讀txt
 
 
 class 狀態:

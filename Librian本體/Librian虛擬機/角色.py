@@ -1,11 +1,13 @@
 import yaml
 import os
 import logging
-
-from .util import 讀txt
+import sys
 
 from . import psd拆包
 from . import 虛擬機環境
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../..')
+from Librian_util import 讀txt
 
 角色表 = {}
 

@@ -1,8 +1,11 @@
 import logging
-
-from .util import 文件
+import sys
+import os
 
 from . import 虛擬機環境
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../..')
+from Librian_util import 文件
 
 
 def 別名適用(x):

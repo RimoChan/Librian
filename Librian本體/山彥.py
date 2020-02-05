@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import logging
 import time
@@ -7,12 +8,12 @@ import pickle
 
 from Librian虛擬機 import 讀者
 from Librian虛擬機 import 虛擬機環境
-from Librian虛擬機.util import 讀txt
-from Librian虛擬機.util import 文件
-from Librian虛擬機.util import 加載器
 
 from 帶有vue的山彥 import 帶有vue的山彥
 from 環境 import 配置
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
+from Librian_util import 讀txt, 文件, 加載器
 
 
 def 綁定(app, 標題url):
