@@ -33,6 +33,7 @@ class 狀態:
         self.選項 = []
         self.特效表 = {}
         self.額外信息 = ()
+        self.源 = []
 
     def 導出(self, html=True):
         鏡頭.語者 = self.語者
@@ -40,10 +41,15 @@ class 狀態:
             立繪 = 鏡頭.查詢(self.人物).拆解()
         else:
             立繪 = []
+        if self.語者:
+            表情 = 角色.取角色(self.語者).現顏
+        else:
+            表情 = ''
         快照 = {
             '話語': self.話語,
             '名字': self.名字,
             '立繪': 立繪,
+            '表情': 表情,
             '語者': self.語者,
             '背景': self.背景,
             '背景音樂': self.背景音樂,
@@ -55,6 +61,7 @@ class 狀態:
             '選項': [i[0] for i in self.選項],
             '特效表': copy.deepcopy(self.特效表),
             '額外信息': self.額外信息,
+            '源': self.源,
         }
         self.清除臨時狀態()
         return 快照
@@ -67,6 +74,7 @@ class 狀態:
         self.插入圖 = None
         self.視頻 = None
         self.額外信息 = ()
+        self.源 = []
 
 
 class 劇本:
@@ -113,6 +121,7 @@ class 讀者:
         s = self.下一句()
         if s['類型'] == '終焉' and 防止終焉:
             return True
+        self.狀態.源.append(copy.copy(s))
         讀者句控制(self, s['類型'], s)
 
     def 迭代器(self):
