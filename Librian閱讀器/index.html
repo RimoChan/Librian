@@ -36,7 +36,7 @@
             <div class="內容">
                 <template v-for='步 in 當前內容'>
                     <div class="插入" v-if='步["插入圖"] !== null' v-html='簡化字(步["插入圖"])'></div>
-                    <p v-else-if='步["語者"]'>
+                    <p class="人物對話" v-else-if='步["語者"]'>
                         <span v-bind:class='"代 "+步["語者"]' v-html='簡化字(步["名字"])'></span>
                         <span class="顏" v-html='簡化字(步["表情"])'></span>
                         <span class="語" v-html='簡化字(步["話語"])'></span>
