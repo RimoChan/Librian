@@ -2,7 +2,7 @@ import Vue from 'vue/dist/vue.esm.js'
 import Swal from 'sweetalert2'
 import $ from 'jquery'
 
-import './樣式.sass'
+import './_統合.sass'
 
 window.Swal = Swal
 
