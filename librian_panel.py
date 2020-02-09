@@ -102,7 +102,7 @@ class 山彥(帶有vue的山彥):
         os.system(f'"{self.vue.工程路徑}/{虛擬機環境.劇本入口}"')
 
     def 打開文件夾(self):
-        subprocess.Popen(['start', self.vue.工程路徑])
+        subprocess.Popen(['start', self.vue.工程路徑], shell=True)
 
     def 生成exe(self):
         from Librian本體 import 構建
