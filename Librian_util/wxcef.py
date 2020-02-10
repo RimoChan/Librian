@@ -4,6 +4,7 @@ import sys
 import os
 
 import wx
+ld_library_path = os.environ["LD_LIBRARY_PATH"]
 from cefpython3 import cefpython as cef
 
 
