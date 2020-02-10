@@ -3,3 +3,6 @@ node_modules/
 .idea/
 .vim/
 *.swp
+error.log
+/存檔資料/
+/Librian本體/project/

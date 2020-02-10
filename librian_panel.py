@@ -91,18 +91,51 @@ class 山彥(帶有vue的山彥):
         self.同調(新工程路徑)
 
     def 運行(self):
-        subprocess.Popen(['cd', 'Librian本體', '&', sys.executable, 'librian.py', '--project', self.vue.工程路徑], shell=True)
+        if wxcef.WINDOWS:
+            subprocess.Popen(['cd', 'Librian本體', '&', sys.executable, 'librian.py', '--project', self.vue.工程路徑], shell=True)
+        else:
+            env = dict()
+            env.update(os.environ)
+            env['LD_LIBRARY_PATH'] = wxcef.ld_library_path
+            subprocess.Popen(
+                [sys.executable, 'Librian.py', '--project', self.vue.工程路徑],
+                shell=False,
+                cwd='Librian本體',
+                env=env)
 
     def 運行同時編寫(self):
-        subprocess.Popen([
-            'cd', 'Librian本體', '&',
-            sys.executable, 'librian.py', '--project', self.vue.工程路徑,
-            '--config', '{編寫模式: True}'
-        ], shell=True)
-        os.system(f'"{self.vue.工程路徑}/{虛擬機環境.劇本入口}"')
+        if wxcef.WINDOWS:
+            subprocess.Popen([
+                'cd', 'Librian本體', '&',
+                sys.executable, 'librian.py', '--project', self.vue.工程路徑,
+                '--config', '{編寫模式: True}'
+            ], shell=True)
+            os.system(f'"{self.vue.工程路徑}/{虛擬機環境.劇本入口}"')
+        else:
+            env = dict()
+            env.update(os.environ)
+            env['LD_LIBRARY_PATH'] = wxcef.ld_library_path
+            subprocess.Popen(
+                [sys.executable, 'Librian.py', '--project', self.vue.工程路徑,
+                 '--config', '{編寫模式: True}'],
+                shell=False,
+                cwd='Librian本體',
+                env=env)
+            if wxcef.MAC:
+                subprocess.Popen(['open', f'{self.vue.工程路徑}/{虛擬機環境.劇本入口}'],
+                                 shell=False)
+            elif wxcef.LINUX:
+                subprocess.Popen(
+                    ['xdg-open', f'{self.vue.工程路徑}/{虛擬機環境.劇本入口}'],
+                    shell=False)
 
     def 打開文件夾(self):
-        subprocess.Popen(['start', self.vue.工程路徑], shell=True)
+        if wxcef.WINDOWS:
+            subprocess.Popen(['start', self.vue.工程路徑], shell=True)
+        elif wxcef.MAC:
+            subprocess.Popen(['open', self.vue.工程路徑], shell=False)
+        elif wxcef.LINUX:
+            subprocess.Popen(['xdg-open', self.vue.工程路徑], shell=False)
 
     def 生成exe(self):
         from Librian本體 import 構建
