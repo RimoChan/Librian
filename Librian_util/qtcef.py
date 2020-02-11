@@ -14,7 +14,7 @@ from PySide2.QtGui import *
 from PySide2.QtCore import *
 from PySide2.QtWidgets import *
 
-ld_library_path = os.environ["LD_LIBRARY_PATH"]
+ld_library_path = os.environ.get("LD_LIBRARY_PATH")
 from cefpython3 import cefpython as cef
 
 
