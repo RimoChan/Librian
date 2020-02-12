@@ -73,7 +73,11 @@ export default function transverter(){
         '祗':'只',
         '衹':'只',
         '硃':'朱',
-        '埰':'采'
+        '埰':'采',
+        '牀':'床',
+        '飢':'饥',
+        '託':'讬',
+        '髮':'发',
     };
     return function(parameter){
         var options = {

@@ -21,6 +21,7 @@ html:
                 i.fa.fa-file-text-o:
                 a v-bind:onclick='"load("+index+")"':
                     {{簡化字(文件['名字'])}}
+                hr;
         div.右板 v-bind:class="{位置調整: 鎖}":
             h1 v-if='文件號 !== null':
                 {{簡化字(文件列表[文件號]['名字'])}}
