@@ -27,6 +27,6 @@ module.exports = {
         ],
     },
     node: { fs: 'empty' },
-    mode: 'development',
-    // mode: 'production',
+    // mode: 'development',
+    mode: 'production',
 };
