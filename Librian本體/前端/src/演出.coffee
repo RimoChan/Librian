@@ -61,6 +61,8 @@ export default 演出 =
             data.cg[0] = "url('#{v.圖片文件夾}/#{data.cg[0]}')"
         if data.背景音樂
             data.背景音樂[0] = v.音樂文件夾 + '/' + data.背景音樂[0]
+        if data.效果音
+            data.效果音[0] = v.音樂文件夾 + '/' + data.效果音[0]
         if data.插入圖
             data.插入圖 = "url('#{v.圖片文件夾}/#{data.插入圖}')"
         for 人 in data.立繪
@@ -72,7 +74,7 @@ export default 演出 =
         console.log data
         this.信息預處理 data
         this.當前狀態 = data
-        {特效表, 插入圖, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, cg, 選項, js, html, 視頻} = data
+        {特效表, 插入圖, 立繪, 名字, 話語, 額外信息, 語者, 背景, 背景音樂, 效果音, cg, 選項, js, html, 視頻} = data
         this.特效處理 特效表
         if 選項.length > 0
             this.處理選項 選項
@@ -102,6 +104,7 @@ export default 演出 =
         this.換背景(背景, 瞬間化)
         this.換立繪(立繪, 瞬間化)
         this.換背景音樂(背景音樂)
+        this.放效果音(效果音)
         this.換人名(語者, 名字)
         this.換對話(話語, 名字, 瞬間化)
 
@@ -271,16 +274,26 @@ export default 演出 =
             return
         this.當前曲名 = 曲名
         
-        for i in $('#總畫面 > audio')
+        for i in $('#總畫面 > audio.背景音樂')
             if i.volume==0
                 i.remove()
-        $('#總畫面 > audio').animate({volume: 0}, 500)
+        $('#總畫面 > audio.背景音樂').animate({volume: 0}, 500)
         
-        音樂 = $("<audio src='#{曲名}' autoplay loop></audio>")
+        音樂 = $("<audio src='#{曲名}' class='背景音樂' autoplay loop></audio>")
         音樂.volume = 音量
         $('#總畫面').append(音樂)
         
-
+    放效果音: (效果音) ->
+        if ! 效果音
+            return
+        [曲名, 音量] = 效果音
+        音樂 = $("<audio src='#{曲名}' class='效果音' autoplay></audio>")
+        音樂.volume = 音量
+        音樂[0].addEventListener('ended', ->
+            音樂.remove()
+        , false)
+        $('#總畫面').append(音樂)
+        
     換圖: (目標, 新圖, 漸變時間, 漸變方法 = '_淡出') ->
         目標 = $('#'+目標)
         原背景 = 目標.css('background-image')

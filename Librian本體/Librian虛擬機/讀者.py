@@ -25,6 +25,7 @@ class 狀態:
         self.人物 = None      # str
         self.背景 = None      # [圖名, 淡入時間, 位置, 漸變方法]
         self.背景音樂 = None   # [音樂名, 音量]
+        self.效果音 = None    # [音樂名, 音量]
         self.插入圖 = None     # str
         self.cg = None        # [圖名, 淡入時間, 漸變方法]
         self.視頻 = None      # [視頻名, 可以跳過]
@@ -35,7 +36,7 @@ class 狀態:
         self.額外信息 = ()
         self.源 = []
 
-    def 導出(self, html=True):
+    def 導出(self):
         鏡頭.語者 = self.語者
         if self.人物:
             立繪 = 鏡頭.查詢(self.人物).拆解()
@@ -53,6 +54,7 @@ class 狀態:
             '語者': self.語者,
             '背景': self.背景,
             '背景音樂': self.背景音樂,
+            '效果音': self.效果音,
             '插入圖': self.插入圖,
             'cg': self.cg,
             '視頻': self.視頻,
@@ -72,6 +74,7 @@ class 狀態:
     def 清除臨時狀態(self):
         self.js = None
         self.插入圖 = None
+        self.效果音 = None
         self.視頻 = None
         self.額外信息 = ()
         self.源 = []
