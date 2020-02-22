@@ -165,9 +165,11 @@ class 山彥(帶有vue的山彥):
             dulwich.porcelain.pull('.', remote_location='https://github.com/RimoChan/librian.git')
             self.alert('好了', 'success', '自己重啓Librian。')
         except urllib3.exceptions.HTTPError as e:
+            logging.exception(e)
             self.alert('沒能成功更新', 'error', '網絡出了問題。')
         except PermissionError as e:
-            self.alert('沒能成功更新', 'error', '也許需要版本控制的文件被修改了')
+            logging.exception(e)
+            self.alert('沒能成功更新', 'error', '也許需要版本控制的文件被修改了。')
         except Exception as e:
             logging.exception(e)
             self.alert('失敗した失敗した失敗した', 'error')
