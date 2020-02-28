@@ -71,13 +71,26 @@ $ ->
             Swal.fire
                 icon: 'warning'
                 title: '真的要更新嗎'
-                text: 'Librian更新是激進的，\n可能會使你的電腦爆炸！'
+                text: 'Librian的最新版本並不穩定，\n可能會使你的電腦爆炸！'
                 showCancelButton: true,
                 confirmButtonText: '确定'
                 cancelButtonText: '取消'
-            .then (result) ->
-                if result.value
-                    山彥.自我更新()
+                showLoaderOnConfirm: true,
+                preConfirm: () -> 
+                    [returncode, stderr] = await new Promise (resolve) ->
+                        山彥.自我更新(resolve)
+                    if returncode==0
+                        Swal.fire
+                            icon: 'success'
+                            title: '好了'
+                            text: '自己重啓Librian。'
+                        .then () ->
+                            山彥.退出()
+                    else
+                        Swal.fire
+                            icon: 'error'
+                            title: '失敗了'
+                            text: stderr
         返回: ->
             window.返回()
     

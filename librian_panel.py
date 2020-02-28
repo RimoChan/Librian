@@ -3,6 +3,7 @@ import os
 import sys
 import json
 import subprocess
+import threading
 import shutil
 import datetime
 from pathlib import Path
@@ -157,23 +158,26 @@ class 山彥(帶有vue的山彥):
     def 瀏覽器打開(self, s):
         import webbrowser
         webbrowser.open(s)
-
-    def 自我更新(self):
-        import dulwich.porcelain
-        import urllib3.exceptions
+    
+    def 自我更新(self, callback):
+        git路徑 = 'git'
         try:
-            dulwich.porcelain.pull('.', remote_location='https://github.com/RimoChan/librian.git')
-            self.alert('好了', 'success', '自己重啓Librian。')
-        except urllib3.exceptions.HTTPError as e:
-            logging.exception(e)
-            self.alert('沒能成功更新', 'error', '網絡出了問題。')
-        except PermissionError as e:
-            logging.exception(e)
-            self.alert('沒能成功更新', 'error', '也許需要版本控制的文件被修改了。')
+            subprocess.check_call('git --version', stdout=subprocess.DEVNULL)
         except Exception as e:
-            logging.exception(e)
-            self.alert('失敗した失敗した失敗した', 'error')
-
+            嵌入的git路徑 = './MinGit-2.25.0-busybox-64-bit/cmd/git.exe'
+            if Path(嵌入的git路徑).is_file():
+                git路徑 = 嵌入的git路徑
+            else:
+                self.alert('需要一個Git', 'info', '更新功能需要你有Git命令可用，或者使用relase版本中嵌入的Git。')
+                return
+        def t():
+            r = subprocess.run(f'{git路徑} pull origin master', stderr=subprocess.PIPE, encoding='utf8')
+            callback.Call([r.returncode, r.stderr])
+        l = threading.Thread(target=t).start()
+        
+    def 退出(self):
+        exit()
+        
 
 if any([ord(i) > 255 for i in os.getcwd()]):
     logging.warning('Librian在python路徑有漢字(非ACSII字符)的場合可能出問題。')
