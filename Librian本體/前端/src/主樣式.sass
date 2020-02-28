@@ -90,8 +90,8 @@ div
             #話語
                 white-space: pre-line
             &[對話類型=旁白] #話語
-                &:before
-                    content: '　　'
+                // text-indent: 2em each-line
+                --幹你娘老子就是要每行都縮進: 2
             &[對話類型=對話] #話語
                 &:before
                     content: '「'
