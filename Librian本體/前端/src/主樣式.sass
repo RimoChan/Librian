@@ -7,10 +7,13 @@ body
     line-height: 1.5
     margin: 0px
     padding: 0px
-    background: url('../素材/塊.png')
     -webkit-user-select: none
     color: #fff
     overflow: hidden
+    background-color: #fff
+    background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee), linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee)
+    background-size: 24px 24px
+    background-position: 0px 0px, 12px 12px
 
 div 
     margin: 0px
@@ -129,7 +132,7 @@ div
     position: absolute
     z-index: 10
     #工具容器.自動收起 
-        opacity: 0.2
+        opacity: 0
         transition: opacity 4s
         &:hover 
             opacity: 1
