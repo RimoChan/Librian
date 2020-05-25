@@ -43,7 +43,7 @@
                     </template>
                 </div>
             </div>
-            <div id="存檔讀檔面板">
+            <div id="存檔讀檔面板" v-if='本地運行'>
                 <span class="按鈕組">
                     <a id="新建存檔" v-if='存檔讀檔.啓動功能 === "存檔"'>
                         <i class="fa fa-plus"></i>

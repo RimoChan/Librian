@@ -33,7 +33,7 @@ html:
                     template v-if='內容.類型 === "boolean"':
                         input type="checkbox" v-model="內容['值']":
                         
-            div#存檔讀檔面板:
+            div#存檔讀檔面板 v-if='本地運行':
                 span.按鈕組:
                     a#新建存檔 v-if='存檔讀檔.啓動功能 === "存檔"':
                         i.fa.fa-plus:
