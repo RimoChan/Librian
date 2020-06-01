@@ -83,12 +83,15 @@ class 山彥(帶有vue的山彥):
                 if dlg.ShowModal() == wx.ID_OK:
                     self.同調(dlg.GetPath())
 
-    def 建立工程(self, 新工程名):
+    def 建立工程(self, 新工程名, 使用潘大爺的模板):
         新工程路徑 = (Path('Librian本體/project') / 新工程名).resolve()
         if 新工程路徑.is_dir():
             self.alert('已經有這個工程了。', 'error')
             return
-        shutil.copytree('./Librian本體/模板/默認工程', 新工程路徑)
+        if 使用潘大爺的模板:
+            shutil.copytree('./Librian本體/模板/潘大爺的模板', 新工程路徑)
+        else:
+            shutil.copytree('./Librian本體/模板/默認模板', 新工程路徑)
         self.同調(新工程路徑)
 
     def 運行(self):

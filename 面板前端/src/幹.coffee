@@ -30,14 +30,21 @@ $ ->
             山彥.開啓工程()
         建立工程: ->
             Swal.fire
-                title: '工程名'
-                input: 'text'
+                title: '建立工程'
+                html: '''
+                    <input class="swal2-input" placeholder="工程名" type="text" style="display: flex;" id="swal2-q-input">
+                    <input type="checkbox" value="1" id="swal2-q-checkbox" checked>
+                    <span class="swal2-label">使用潘大爺的模板</span>
+                ''',
                 showCancelButton: true,
                 confirmButtonText: '确定'
                 cancelButtonText: '取消'
             .then (result) ->
                 if result.value
-                    山彥.建立工程(result.value)
+                    山彥.建立工程(
+                        document.getElementById('swal2-q-input').value, 
+                        document.getElementById('swal2-q-checkbox').checked
+                    )
         清除記錄: ->
             v.存檔資料 = []
         運行: ->
