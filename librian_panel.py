@@ -111,7 +111,11 @@ class 山彥(帶有vue的山彥):
                 sys.executable, 'librian.py', '--project', self.vue.工程路徑,
                 '--config', '{編寫模式: True}'
             ], shell=True)
-            os.system(f'"{self.vue.工程路徑}/{虛擬機環境.劇本入口}"')
+            劇本文件名 = f'{self.vue.工程路徑}/{虛擬機環境.劇本入口}'
+            if 文件.查詢文件打開方式(劇本文件名):
+                os.system(f'"{劇本文件名}"')
+            else:
+                os.system(f'notepad "{劇本文件名}"')
         else:
             env = dict()
             env.update(os.environ)
