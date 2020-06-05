@@ -3,6 +3,8 @@
 #include <cstring>
 #include <cstdio>
 #include <cassert>
+#include <unistd.h>
+#include <process.h>
 
 char *join(const char *s1, const char *s2) {
     char *result = (char *)malloc(strlen(s1) + strlen(s2) + 1);
@@ -34,6 +36,8 @@ int main(int argc, char *argv[]) {
     fclose(f);
 
     printf("%s\n", data);
-
-    system(data);
+    
+    // chdir("Librian本體")
+    chdir("Librian\xb1\xbe\xf3w");
+    execl("..\\python36\\pythonw.exe", "pythonw.exe", data, (void*)0);
 }
