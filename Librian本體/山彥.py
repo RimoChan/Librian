@@ -104,7 +104,7 @@ class 演出山彥(山彥):
         狀態 = self.讀者.狀態.導出()
         callback.Call(狀態)
 
-    def 初始化(self):
+    def 初始化(self, callback):
         self.vue.圖片文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.圖片文件夾).replace('\\', '/')
         self.vue.音樂文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.音樂文件夾).replace('\\', '/')
         self.vue.視頻文件夾 = os.path.join(f'../{虛擬機環境.工程路徑}', 虛擬機環境.視頻文件夾).replace('\\', '/')
@@ -118,8 +118,7 @@ class 演出山彥(山彥):
         用戶設置 = 加載器.json(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json')
         if 用戶設置:
             self.vue.用戶設置 = 用戶設置
-
-        self.js('_py演出.準備工作()')
+        callback.Call()
 
     def 選(self, 參數):
         t = self.讀者.狀態.選項[參數][1]
@@ -135,11 +134,8 @@ class 帶標題山彥(演出山彥):
         self.步進()
         self.js(f'window.location.href={文件.轉爲網址路徑("./前端/adv.html").__repr__()};')
 
-    def 從title讀檔(self):
-        文件名 = self.選擇讀檔文件()
-        if 文件名:
-            self.讀者.讀檔(文件名)
-            self.js(f'window.location.href={文件.轉爲網址路徑("./前端/adv.html").__repr__()};')
+    def 讀檔畫面(self):
+        self.js(f'window.location.href={(文件.轉爲網址路徑("./前端/adv.html")+"?入口=讀檔").__repr__()};')
 
     def 從劇本開始(self, 劇本):
         入口 = f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}'
@@ -152,7 +148,7 @@ class 極山彥(帶標題山彥):
         super().__init__(*li, **d)
         if 配置['編寫模式']:
             import threading
-
+            
             def 監視():
                 原字 = ''
                 while True:
@@ -169,7 +165,7 @@ class 極山彥(帶標題山彥):
         self.讀者.從一而終(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}')
         self.更新()
 
-    def 初始化(self):
-        super().初始化()
+    def 初始化(self, *li, **d):
+        super().初始化(*li, **d)
         if 配置['編寫模式']:
             self.更新終態()

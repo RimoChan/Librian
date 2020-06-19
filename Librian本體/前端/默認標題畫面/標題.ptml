@@ -12,7 +12,7 @@ html:
                 a.synth href='javascript:山彥.開始();':
                     開始遊戲
             div:
-                a.synth href='javascript:山彥.從title讀檔();':
+                a.synth href='javascript:山彥.讀檔畫面();':
                     繼續遊戲
             div:
                 a.synth href='javascript:山彥.退出();':

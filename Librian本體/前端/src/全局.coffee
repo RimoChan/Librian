@@ -11,16 +11,18 @@ import './_統合.sass'
 window._py演出 = 演出
 
 window.onload = ->
+    查詢參數 = {}
+    new URLSearchParams(window.location.search).forEach (value, key)->
+        查詢參數[key] = value
     if window.山彥
-        window.本地 = 
         console.log '在本地演出'
-        本地運行()
+        本地運行(查詢參數['入口'])
     else
         console.log '在瀏覽器上演出'
         在線運行()
     控制.控制初始化()
 
-本地運行 = ->
+本地運行 = (入口)->
     window.v = new Vue
         el: '#總畫面'
         data:
@@ -56,7 +58,6 @@ window.onload = ->
                 自動收起控制面板: 
                     類型: 'boolean'
                     值: false
-                
         watch:
             $data:
                 handler: (val, oldVal) ->
@@ -66,7 +67,13 @@ window.onload = ->
         for a,b of x
             v[a]=b
     )
-    山彥.初始化()
+    if 入口=='讀檔'
+        山彥.初始化 ->
+            存檔讀檔.讀檔準備()
+    else
+        山彥.初始化 ->
+            演出.準備工作()
+        
 
 
 從虛擬核心提取資源 = (心)->
@@ -86,7 +93,8 @@ window.onload = ->
 
 window.加載完成的初始化 = ->
     $('#加載畫面').fadeOut()
-    山彥.初始化()
+    山彥.初始化 ->
+        演出.準備工作()
 
 在線運行 = ->
     if typeof(虛擬核心) == "undefined"
@@ -111,8 +119,8 @@ window.加載完成的初始化 = ->
             if 步進
                 this.步進()
             callback(虛擬核心.演出步[this.n])
-        初始化: ->
-            演出.準備工作()
+        初始化: (callback)->
+            callback()
         切換全屏: ->
             doc = window.document
             docEl = doc.documentElement
