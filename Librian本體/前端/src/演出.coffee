@@ -29,7 +29,6 @@ export default 演出 =
                 .css 'border','1px solid #22f'
 
         this.縮放調整()
-        this.更新()
 
     縮放調整: ->
         a = document.body.clientWidth / v.解析度[0]
