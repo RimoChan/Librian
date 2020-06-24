@@ -6,7 +6,7 @@
 [![](https://img.shields.io/github/downloads/RimoChan/librian/total.svg)](https://github.com/RimoChan/Librian/releases)
 [![](https://img.shields.io/codacy/grade/cc567bfd3e374eb494825aae3ce3e7cf)](https://www.codacy.com/manual/s60481235/Librian?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RimoChan/Librian&amp;utm_campaign=Badge_Grade)
 [![](https://img.shields.io/github/license/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/blob/master/LICENSE)
-![Librian2.jpg](./文檔/Librian2.jpg)    
+![Librian2.jpg](https://cdn.jsdelivr.net/gh/RimoChan/librian/文檔/Librian2.jpg)    
 
 ——來像Markdown一樣寫Galgame劇本吧！
 
@@ -22,7 +22,7 @@ Librian是面向劇本的引擎，賣點是:
 
 ## 一分鐘的演示視頻
 
-[![視頻佔位](./文檔/視頻佔位.jpg)](https://librian.it/視頻/轉.webm)
+[![視頻佔位](https://cdn.jsdelivr.net/gh/RimoChan/librian/文檔/視頻佔位.jpg)](https://librian.it/視頻/轉.webm)
 
 ## 劇本格式
 
@@ -39,7 +39,7 @@ Librian是面向劇本的引擎，賣點是:
 不需要任何其他標記或代碼，一小段劇本就完成了。  
 
 準備好立繪和背景後，運行Librian主程序並啓動工程——演出是這樣的效果。  
-![圖1](文檔/樣例_潘大爺.jpg)
+![圖1](https://cdn.jsdelivr.net/gh/RimoChan/librian/文檔/樣例_潘大爺.jpg)
 
 ## 中文文檔
 
