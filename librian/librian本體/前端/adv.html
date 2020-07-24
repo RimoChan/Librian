@@ -1,0 +1,137 @@
+<html>
+    <head>
+        <title></title>
+        <meta charset='utf-8'/>
+        <link rel="stylesheet" href='../../../黑科技/font-awesome-4.7.0/css/font-awesome.css'/>
+        <script src='./虛擬核心.js'></script>
+        <script src='./dist/bundle.js'></script>
+    </head>
+    <style id="style"></style>
+    <body oncontextmenu='window.event.returnValue=false;'>
+        <div id="加載畫面">
+            <div>
+                加載資源
+            </div>
+            <div>
+                <progress v-bind:value='計數' v-bind:max='最大值'></progress>
+            </div>
+            <div v-if='計數 == 最大值'>
+                <a onclick='加載完成的初始化()'>
+                    開始
+                </a>
+            </div>
+        </div>
+        <div id="總畫面">
+            <video id="視頻" width="1366" height="768" src="" autoplay="autoplay"></video>
+            <div id="配置面板">
+                <span class="按鈕組">
+                    <a id="重置設置">
+                        <i class="fa fa-rotate-left"></i>
+                    </a>
+                    <a id="退出設置">
+                        <i class="fa fa-check"></i>
+                    </a>
+                </span>
+                <div v-for='(內容, 設置名) in 用戶設置' v-bind:名字='設置名'>
+                    <template v-if='內容.類型 === "number"'>
+                        {{內容.提示[0]}}
+                        <input type="range"  v-bind:min="內容.範圍[0]" v-bind:max="內容.範圍[1]" v-bind:step='(內容.範圍[1]-內容.範圍[0])/32' v-model="內容['值']"></input>
+                        {{內容.提示[1]}}
+                    </template>
+                    <template v-if='內容.類型 === "boolean"'>
+                        <input type="checkbox" v-model="內容['值']"></input>
+                    </template>
+                </div>
+            </div>
+            <div id="存檔讀檔面板" v-if='本地運行'>
+                <span class="按鈕組">
+                    <a id="新建存檔" v-if='存檔讀檔.啓動功能 === "存檔"'>
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <a id="退出存檔讀檔">
+                        <i class="fa fa-close"></i>
+                    </a>
+                </span>
+                {{存檔讀檔.啓動功能}}
+                <hr/>
+                <div id="檔表">
+                    <template v-for='檔 in 存檔讀檔.檔表'>
+                        <div class="檔" v-bind:名字='檔.名字'>
+                            <img class="截圖" v-bind:src='檔.截圖'/>
+                            <div class="信息">
+                                {{檔.名字}}
+                                <br/>
+                                {{檔.描述}}
+                                <br/>
+                                {{檔.時間}}
+                            </div>
+                            <a class="讀取" v-if='存檔讀檔.啓動功能 === "讀檔"'>
+                                讀取
+                            </a>
+                            <a class="覆蓋" v-if='存檔讀檔.啓動功能 === "存檔"'>
+                                覆蓋
+                            </a>
+                        </div>
+                        <hr/>
+                    </template>
+                </div>
+            </div>
+            <div id="工具欄">
+                <div id="工具容器" v-bind:class="{自動收起: 用戶設置.自動收起控制面板.值}">
+                    <a id="存檔準備" v-if='本地運行'>
+                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-angle-double-down" style='text-shadow:0 0 4px #000;'></i>
+                    </a>
+                    <a id="讀檔準備" v-if='本地運行'>
+                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-angle-double-up" style='text-shadow:0 0 4px #000;'></i>
+                    </a>
+                    <a id="快速存檔" v-if='本地運行'>
+                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-angle-double-down" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
+                    </a>
+                    <a id="快速讀檔" v-if='本地運行'>
+                        <i class="fa fa-floppy-o"></i>
+                        <i class="fa fa-angle-double-up" style='color:#fd1; text-shadow:0 0 4px #000;'></i>
+                    </a>
+                    <a id="切換快進">
+                        <i class="fa fa-fast-forward"></i>
+                    </a>
+                    <a id="全屏" href='javascript:山彥.切換全屏();'>
+                        <i class="fa fa-arrows-alt"></i>
+                    </a>
+                    <a id="進入設置">
+                        <i class="fa fa-gear"></i>
+                    </a>
+                    <a id="回標題" v-if='本地運行'>
+                        <i class="fa fa-mail-reply"></i>
+                    </a>
+                </div>
+            </div>
+            <div id="adv畫面">
+                <div id="選項"></div>
+                <div id="對話歷史"></div>
+                <div id="主畫面">
+                    <div id="覆蓋"></div>
+                    <div id="html疊加"></div>
+                    <div id="cg"></div>
+                    <div id="bg"></div>
+                    <div id="立繪"></div>
+                    <div id="對話框">
+                        <div id="名字框">
+                            <div id="名字"></div>
+                            <div id="名字框背景" v-bind:style="{opacity: 用戶設置.對話框背景透明度.值}"></div>
+                        </div>
+                        <div id="話語框">
+                            <div id="話語"></div>
+                            <div id="話語框背景" v-bind:style="{opacity: 用戶設置.對話框背景透明度.值}"></div>
+                        </div>
+                        <div id="對話框背景" v-bind:style="{opacity: 用戶設置.對話框背景透明度.值}"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="提示"></div>
+            <div id="墊底"></div>
+        </div>
+    </body>
+</html>

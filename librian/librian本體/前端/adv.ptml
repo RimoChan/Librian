@@ -1,0 +1,103 @@
+html:
+    head:
+        title:
+        meta charset='utf-8'; 
+        link rel="stylesheet" href='../../../黑科技/font-awesome-4.7.0/css/font-awesome.css';
+        script src='./虛擬核心.js':
+        script src='./dist/bundle.js':
+        
+    style#style:
+
+    body oncontextmenu='window.event.returnValue=false;':
+        div#加載畫面:
+            div:
+                加載資源
+            div:    
+                progress v-bind:value='計數' v-bind:max='最大值':
+            div v-if='計數 == 最大值':
+                a onclick='加載完成的初始化()':
+                    開始
+        div#總畫面:
+            video#視頻 width="1366" height="768" src="" autoplay="autoplay":
+            div#配置面板:
+                span.按鈕組:
+                    a#重置設置:
+                        i.fa.fa-rotate-left:
+                    a#退出設置:
+                        i.fa.fa-check:
+                div v-for='(內容, 設置名) in 用戶設置' v-bind:名字='設置名':
+                    template v-if='內容.類型 === "number"':
+                        {{內容.提示[0]}}
+                        input type="range"  v-bind:min="內容.範圍[0]" v-bind:max="內容.範圍[1]" v-bind:step='(內容.範圍[1]-內容.範圍[0])/32' v-model="內容['值']":
+                        {{內容.提示[1]}}
+                    template v-if='內容.類型 === "boolean"':
+                        input type="checkbox" v-model="內容['值']":
+                        
+            div#存檔讀檔面板 v-if='本地運行':
+                span.按鈕組:
+                    a#新建存檔 v-if='存檔讀檔.啓動功能 === "存檔"':
+                        i.fa.fa-plus:
+                    a#退出存檔讀檔:
+                        i.fa.fa-close:
+                {{存檔讀檔.啓動功能}}
+                hr;
+                div#檔表:
+                    template v-for='檔 in 存檔讀檔.檔表':
+                        div.檔 v-bind:名字='檔.名字':
+                            img.截圖 v-bind:src='檔.截圖';
+                            div.信息:
+                                {{檔.名字}}
+                                br;
+                                {{檔.描述}}
+                                br;
+                                {{檔.時間}}
+                            a.讀取 v-if='存檔讀檔.啓動功能 === "讀檔"':
+                                讀取
+                            a.覆蓋 v-if='存檔讀檔.啓動功能 === "存檔"':
+                                覆蓋
+                        hr;
+                
+            div#工具欄:
+                div#工具容器 v-bind:class="{自動收起: 用戶設置.自動收起控制面板.值}":
+                    a#存檔準備 v-if='本地運行':
+                        i.fa.fa-floppy-o:
+                        i.fa.fa-angle-double-down style='text-shadow:0 0 4px #000;':
+                    a#讀檔準備 v-if='本地運行':
+                        i.fa.fa-floppy-o:
+                        i.fa.fa-angle-double-up style='text-shadow:0 0 4px #000;':
+                    a#快速存檔 v-if='本地運行':
+                        i.fa.fa-floppy-o:
+                        i.fa.fa-angle-double-down style='color:#fd1; text-shadow:0 0 4px #000;':
+                    a#快速讀檔 v-if='本地運行':
+                        i.fa.fa-floppy-o:
+                        i.fa.fa-angle-double-up style='color:#fd1; text-shadow:0 0 4px #000;':
+                    a#切換快進:
+                        i.fa.fa-fast-forward:
+                    a#全屏 href='javascript:山彥.切換全屏();':
+                        i.fa.fa-arrows-alt:
+                    a#進入設置:
+                        i.fa.fa-gear:
+                    a#回標題 v-if='本地運行':
+                        i.fa.fa-mail-reply:
+    
+            div#adv畫面:
+                div#選項:
+                div#對話歷史:
+                div#主畫面:
+                    div#覆蓋:
+                    div#html疊加:
+                    div#cg:
+                    div#bg:
+                    div#立繪:
+                    div#對話框:
+                        div#名字框:
+                            div#名字:
+                            div#名字框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度.值}":
+                        div#話語框:
+                            div#話語:
+                            div#話語框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度.值}":
+                        div#對話框背景 v-bind:style="{opacity: 用戶設置.對話框背景透明度.值}":
+                    
+            div#提示:
+            
+            div#墊底:

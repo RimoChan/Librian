@@ -53,9 +53,9 @@ Librian是面向劇本的引擎，賣點是:
 
 如果你持「不讀說明書主義」，可以: 
 
-1.  安裝python3.6
+1.  安裝python3.6或者3.7 (但是3.8不行)
 2.  pip install -r requirements.txt
-3.  python3 librian_panel.py
+3.  python3 -m librian.librian面板.librian_panel
 
 此外，你也可以根據[中文文檔](https://doc.librian.it/site/主頁.html)的指示來安裝。
 
@@ -68,9 +68,9 @@ Liber分析器是Librian用來分析劇本語言Liber的工具。
 
 ## 援交～
 
-試着建了QQ群: 618775838。
+QQ群「Librian蘿莉會所」: 618775838。
 
-如果你需要使用幫助，或者對Librian和galgame製作有興趣，<sub>或者想觀看蘿莉圖片</sub>，都可以來這裏討論。  
+如果你需要使用幫助，或者對Librian和Galgame製作有興趣，或者想觀看蘿莉色圖，都可以來這裏討論。  
 總之，一起玩就行啦。
 
 ## 贊助
