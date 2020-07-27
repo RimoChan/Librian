@@ -73,7 +73,7 @@ $ ->
                 cancelButtonText: '取消'
             .then (result) ->
                 if result.value
-                    山彥.瀏覽器打開("https://gate.librian.it/?a=Librian&b=https://doc.librian.it")
+                    山彥.瀏覽器打開("https://gate.librian.net/?a=Librian&b=https://doc.librian.net")
         自我更新: ->
             Swal.fire
                 icon: 'warning'

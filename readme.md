@@ -22,7 +22,7 @@ Librian是面向劇本的引擎，賣點是:
 
 ## 一分鐘的演示視頻
 
-[![視頻佔位](https://cdn.jsdelivr.net/gh/RimoChan/librian/文檔/視頻佔位.jpg)](https://librian.it/視頻/轉.webm)
+[![視頻佔位](https://cdn.jsdelivr.net/gh/RimoChan/librian/文檔/視頻佔位.jpg)](https://librian.net/視頻/轉.webm)
 
 ## 劇本格式
 
@@ -43,7 +43,7 @@ Librian是面向劇本的引擎，賣點是:
 
 ## 中文文檔
 
-如果你想瞭解詳細的使用方法，可以直接閱讀Librian的中文文檔——[https://doc.librian.it](https://doc.librian.it/site/主頁.html)。
+如果你想瞭解詳細的使用方法，可以直接閱讀Librian的中文文檔——[https://doc.librian.net](https://doc.librian.net/site/主頁.html)。
 
 你可以輕鬆定製你的遊戲，包括特效、畫面樣式、甚至聯網，快來探索吧！
 
@@ -57,7 +57,7 @@ Librian是面向劇本的引擎，賣點是:
 2.  pip install -r requirements.txt
 3.  python3 -m librian.librian面板.librian_panel
 
-此外，你也可以根據[中文文檔](https://doc.librian.it/site/主頁.html)的指示來安裝。
+此外，你也可以根據[中文文檔](https://doc.librian.net/site/主頁.html)的指示來安裝。
 
 ## Liber分析器
 

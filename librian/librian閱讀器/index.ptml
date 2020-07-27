@@ -1,7 +1,7 @@
 html: 
     head: 
         meta charset="utf8"; 
-        link href="https://synthetic.librian.it/synthetic.css" rel="stylesheet";
+        link href="https://synthetic.librian.net/synthetic.css" rel="stylesheet";
         link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet";
 
         script src='./dist/bundle.js':
