@@ -22,7 +22,7 @@ except ModuleNotFoundError:
 from librian.librian本體.帶有vue的山彥 import 帶有vue的山彥
 from librian.librian本體.librian虛擬機 import 虛擬機環境
 
-from librian.librian_util import 加載器, 文件, 路徑
+from librian.librian_util import 加載器, 文件, 路徑, 更新器
 
 
 rp = dulwich.repo.Repo('.')
@@ -169,19 +169,14 @@ class 山彥(帶有vue的山彥):
         webbrowser.open(s)
     
     def 自我更新(self, callback):
-        git路徑 = 'git'
-        try:
-            subprocess.check_call('git --version', stdout=subprocess.DEVNULL)
-        except FileNotFoundError:
-            嵌入的git路徑 = 路徑.librian外層 / 'MinGit-2.25.0-busybox-64-bit/cmd/git.exe'
-            if Path(嵌入的git路徑).is_file():
-                git路徑 = 嵌入的git路徑
-            else:
-                self.alert('需要一個Git', 'info', '更新功能需要你有Git命令可用，或者使用release版本中嵌入的Git。')
-                return
         def t():
-            r = subprocess.run(f'{git路徑} pull origin master', stderr=subprocess.PIPE, encoding='utf8', check=False)
-            callback.Call([r.returncode, r.stderr])
+            try:
+                更新器.自我更新()
+            except subprocess.CalledProcessError as e:
+                callback.Call([e.returncode, e.stderr.decode('gbk')])
+            except Exception as e:
+                callback.Call([1, e.__repr__()])
+            callback.Call([0, ''])
         threading.Thread(target=t).start()
 
     def 退出(self):

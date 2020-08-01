@@ -9,3 +9,4 @@ opencc==1.1.1
 PyYAML==5.1
 fire==0.2.1
 dulwich==0.19.14
+requests==2.24.0

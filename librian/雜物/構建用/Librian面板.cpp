@@ -5,6 +5,6 @@
 #include <cassert>
 
 int main(int argc, char *argv[]) {
-    system("\"\"./python36/python\"\" -m librian.librian面板.librian_panel");
-    system("pause");
+    // system("\"\"./python36/python\"\" -m librian.librian面板.librian_panel");
+    system("start \"Librian面板\" cmd /C \"\"./python36/python.exe\" -m librian.librian面板.librian_panel & pause\"");
 }

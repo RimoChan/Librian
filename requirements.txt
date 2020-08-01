@@ -10,4 +10,5 @@ weasyprint>=50
 PyYAML>=5.2
 fire>=0.2.1
 dulwich>=0.19.14
-AppKit==0.2.8 ; sys_platform == 'darwin'
+requests>=2.24.0
+AppKit>=0.2.8 ; sys_platform == 'darwin'
