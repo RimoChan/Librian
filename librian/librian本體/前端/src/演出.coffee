@@ -57,7 +57,6 @@ export default 演出 =
         console.log v.圖片文件夾
         if data.背景
             data.背景[0] = "url('#{v.圖片文件夾}/#{data.背景[0]}')".replace(/(\\)/g, '/')
-        console.log data.背景[0]
         if data.cg
             data.cg[0] = "url('#{v.圖片文件夾}/#{data.cg[0]}')".replace(/\\/g, '/')
         if data.背景音樂
