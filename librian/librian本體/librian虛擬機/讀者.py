@@ -3,6 +3,7 @@ import copy
 
 import cloudpickle as pickle
 import yaml
+import sass
 import liber
 
 from librian.librian_util import 讀txt
@@ -202,6 +203,12 @@ class 讀者句控制:
             讀者.狀態.js = 代碼內容
         elif 代碼類型 in ['html']:
             讀者.狀態.html = 代碼內容
+        elif 代碼類型 in ['css']:
+            讀者.狀態.html = f'<style>{代碼內容}</style>'
+        elif 代碼類型 in ['sass']:
+            讀者.狀態.html = f'<style>{sass.compile(string=代碼內容, indented=True)}</style>'
+        elif 代碼類型 in ['scss']:
+            讀者.狀態.html = f'<style>{sass.compile(string=代碼內容)}</style>'
         else:
             raise Exception(f'『{代碼類型}』代碼類型不明白。')
         if not 讀者.狀態.選項:
