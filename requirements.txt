@@ -11,4 +11,5 @@ PyYAML>=5.2
 fire>=0.2.1
 dulwich>=0.19.14
 requests>=2.24.0
+libsass>=0.20.0
 AppKit>=0.2.8 ; sys_platform == 'darwin'
