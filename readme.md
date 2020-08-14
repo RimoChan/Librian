@@ -3,7 +3,6 @@
 [![](https://img.shields.io/github/stars/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/stargazers)
 [![](https://img.shields.io/badge/platform-windows%20%7C%20linux-%23989898)](https://en.wikipedia.org/wiki/Microsoft_Windows)
 [![](https://img.shields.io/github/release/RimoChan/librian.svg)](https://github.com/RimoChan/Librian/releases)
-[![](https://img.shields.io/github/downloads/RimoChan/librian/total.svg)](https://github.com/RimoChan/Librian/releases)
 [![](https://img.shields.io/codacy/grade/cc567bfd3e374eb494825aae3ce3e7cf)](https://www.codacy.com/manual/s60481235/Librian?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RimoChan/Librian&amp;utm_campaign=Badge_Grade)
 [![](https://img.shields.io/github/license/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/blob/master/LICENSE)
 ![Librian2.jpg](https://cdn.jsdelivr.net/gh/RimoChan/librian/文檔/Librian2.jpg)    
@@ -63,6 +62,8 @@ Librian是面向劇本的引擎，賣點是:
 
 Liber分析器是Librian用來分析劇本語言Liber的工具。  
 如果你想要開發自己的Galgame引擎或者做一些很酷的事情，它會有所助益。
+
+它的倉庫在<https://github.com/librian-center/liber-language>
 
 你可以直接用 `pip install liber` 來安裝它。
 
