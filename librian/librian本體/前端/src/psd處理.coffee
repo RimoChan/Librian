@@ -2,6 +2,7 @@ import PSD from 'psd.js'
 
 
 psd緩存 = {}
+圖層緩存 = {}
 圖緩存 = {}
 
 export default psd拆包 = 
@@ -11,11 +12,14 @@ export default psd拆包 =
             psd緩存[psd路徑] = await PSD.fromURL(psd路徑)
         psd = psd緩存[psd路徑]
 
-        現層 = psd.tree().childrenAtPath(圖層名)[0]
-        return {
-            '位置': 現層.coords
-            'img': 現層.layer.image.toPng()
-        }
+        key = [psd路徑, 圖層名].toString()
+        if not 圖層緩存[key]
+            現層 = psd.tree().childrenAtPath(圖層名)[0]
+            圖層緩存[key] = {
+                '位置': 現層.coords
+                'img': 現層.layer.image.toPng()
+            }
+        return 圖層緩存[key]
 
     獲取圖層組: (psd路徑, 圖層名組) ->
         return (
@@ -24,7 +28,6 @@ export default psd拆包 =
         )
 
     圖層融合: (圖層組) ->
-        console.log 圖層組
         m = 0
         
         極x = Math.max.apply(Math, (圖層.位置.right for 圖層 in 圖層組))
@@ -40,7 +43,6 @@ export default psd拆包 =
             context.drawImage(圖層.img, left, top)
 
         base64 = canvas.toDataURL('image/png')
-        console.log base64
 
         return [極x, 極y, base64]
 

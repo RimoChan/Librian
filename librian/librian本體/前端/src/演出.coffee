@@ -195,7 +195,6 @@ export default 演出 =
             if this.當前人物組.indexOf(名字) == - 1
                 $('#立繪').append($("<div id='立繪--#{名字}'><div id='立繪--#{名字}--圖像'></div></div>"))
                 console.log "加入 #{名字}"
-                $("#立繪--#{名字}").attr('特效','淡入')
                 
         # 設定位置          
         for 立繪 in 立繪組
@@ -214,10 +213,12 @@ export default 演出 =
         for 立繪 in 立繪組
             if 立繪.使用png
                 png名 = "#{v.psd立繪路徑}/#{立繪.名字}.png"
-                psd處理.渲染png到div(png名, "立繪--#{立繪.名字}--圖像")
+                await psd處理.渲染png到div(png名, "立繪--#{立繪.名字}--圖像")
             else
                 psd名 = "#{v.psd立繪路徑}/#{立繪.名字}.psd"
-                psd處理.渲染圖層組到div(psd名, 立繪.圖層, "立繪--#{立繪.名字}--圖像")
+                await psd處理.渲染圖層組到div(psd名, 立繪.圖層, "立繪--#{立繪.名字}--圖像")
+                if this.當前人物組.indexOf(立繪.名字) == -1
+                    $("#立繪--#{立繪.名字}").attr('特效','淡入')
 
         this.當前人物組 = 名字組
 
