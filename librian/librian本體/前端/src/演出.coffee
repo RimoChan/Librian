@@ -2,7 +2,7 @@ import $ from 'jquery'
 import opencc from 'node-opencc'
 
 import 控制 from './控制.coffee'
-import 圖像融合 from './圖像融合.coffee'
+import psd處理 from './psd處理.coffee'
 
 
 export default 演出 = 
@@ -34,10 +34,10 @@ export default 演出 =
         a = document.body.clientWidth / v.解析度[0]
         b = document.body.clientHeight / v.解析度[1]
         t = Math.min(a, b)
-        $('#總畫面').css({
+        $('#總畫面').css(
             "transform-origin": "0% 0%"
             "transform": "scale("+t+")"
-        } )
+        )
         setTimeout(演出.縮放調整, 200)
 
     更新: (瞬間化=false)->
@@ -54,7 +54,6 @@ export default 演出 =
         return opencc[v.翻譯](s)
             
     信息預處理: (data) ->
-        console.log v.圖片文件夾
         if data.背景
             data.背景[0] = "url('#{v.圖片文件夾}/#{data.背景[0]}')".replace(/(\\)/g, '/')
         if data.cg
@@ -65,9 +64,6 @@ export default 演出 =
             data.效果音[0] = v.音樂文件夾 + '/' + data.效果音[0]
         if data.插入圖
             data.插入圖 = "url('#{v.圖片文件夾}/#{data.插入圖}')".replace(/\\/g, '/')
-        for 人 in data.立繪
-            for 圖層 in 人.圖層
-                圖層.文件 = "#{v.臨時立繪文件夾}/#{圖層.文件}"
     
     當前狀態: {}
     改變演出狀態: (data, 瞬間化=false) ->
@@ -185,20 +181,23 @@ export default 演出 =
     當前人物組: []
     換立繪: (立繪組, 瞬=false) ->
         名字組 = (立繪.名字 for 立繪 in 立繪組)
+        
+        # 垃圾回收
         for 名字 in this.當前人物組
             if 名字組.indexOf(名字) == - 1
                 $("#立繪--#{名字}").remove()
                 console.log "去除 #{名字}"
             else
                 $("#立繪--#{名字}").attr('特效', '')
-                
+
+        # 新建        
         for 名字 in 名字組
             if this.當前人物組.indexOf(名字) == - 1
                 $('#立繪').append($("<div id='立繪--#{名字}'><div id='立繪--#{名字}--圖像'></div></div>"))
                 console.log "加入 #{名字}"
                 $("#立繪--#{名字}").attr('特效','淡入')
                 
-                        
+        # 設定位置          
         for 立繪 in 立繪組
             t = $("#立繪--#{立繪.名字}")
             if 瞬
@@ -209,12 +208,17 @@ export default 演出 =
             t.css('left', "#{立繪.位置[0]}px")
             t.css('top', "#{立繪.位置[1]}px")
             t.css('transform', "scale(#{立繪.位置[2]})")
-            $("#立繪--#{立繪.名字}--圖像").attr('特效', 立繪.特效.join(" "))
+            $("#立繪--#{立繪.名字}--圖像").attr('特效', 立繪.特效.join(' '))
             
+        # 貼圖
         for 立繪 in 立繪組
-            組 = ([層.文件, 層.子位置[0], 層.子位置[1]] for 層 in 立繪.圖層)
-            圖像融合.融合到div(組, 0.5, "立繪--#{立繪.名字}--圖像")
-        
+            if 立繪.使用png
+                png名 = "#{v.psd立繪路徑}/#{立繪.名字}.png"
+                psd處理.渲染png到div(png名, "立繪--#{立繪.名字}--圖像")
+            else
+                psd名 = "#{v.psd立繪路徑}/#{立繪.名字}.psd"
+                psd處理.渲染圖層組到div(psd名, 立繪.圖層, "立繪--#{立繪.名字}--圖像")
+
         this.當前人物組 = 名字組
 
     現在背景: [null, "0% 0%"],

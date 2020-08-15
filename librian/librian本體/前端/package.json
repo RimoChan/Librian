@@ -18,11 +18,13 @@
     "jquery-mousewheel": "^3.1.13",
     "node-opencc": "^2.0.1",
     "node-sass": "^4.13.0",
+    "psd.js": "^3.3.12",
     "resolve-url-loader": "^3.1.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
     "vue": "^2.6.11",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpackbar": "^4.0.0"
   }
 }

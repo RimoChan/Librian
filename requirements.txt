@@ -1,5 +1,4 @@
 liber==0.0.6
-psd-tools>=1.4
 cefpython3>=66.0
 chardet>=3.0.4
 wxPython>=4.0.4

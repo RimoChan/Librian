@@ -1,4 +1,5 @@
 const path = require('path');
+const WebpackBar = require('webpackbar');
 
 module.exports = {
     entry: './src/全局.coffee',
@@ -26,6 +27,9 @@ module.exports = {
             }, 
         ],
     },
+    plugins: [
+        new WebpackBar()
+    ],
     node: { fs: 'empty' },
     // mode: 'development',
     mode: 'production',
