@@ -113,7 +113,7 @@ class 山彥(帶有vue的山彥):
     def 運行同時編寫(self):
         if wxcef.WINDOWS:
             subprocess.Popen(
-                [sys.executable, '-m', 'librian.librian本體.librian', '--project', self.vue.工程路徑, '--config', '{編寫模式: True}'],
+                [sys.executable, '-m', 'librian.librian本體.librian', '--project', self.vue.工程路徑, '--編寫模式', 'True'],
                 shell=True
             )
             劇本文件名 = f'{self.vue.工程路徑}/{虛擬機環境.劇本入口}'

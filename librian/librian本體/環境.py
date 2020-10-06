@@ -6,7 +6,6 @@ yaml.warnings({'YAMLLoadWarning': False})
 
 
 def 導入全局配置(a):
-    global 配置
     配置.update(a)
     logging.debug(配置)
 

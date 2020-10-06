@@ -8,11 +8,12 @@ from . import librian虛擬機
 from .librian虛擬機 import 虛擬機環境
 
 
-def librian_main(project, config=None):
+def librian_main(project, 編寫模式=False):
     logging.info('librian_main啓動。')
     librian虛擬機.虛擬機環境.加載配置(project)
-    if config:
-        環境.導入全局配置(config)
+    環境.導入全局配置({
+        '編寫模式': 編寫模式
+    })
 
     os.makedirs(f'{虛擬機環境.工程路徑}/存檔資料/手動存檔', exist_ok=True)
         
