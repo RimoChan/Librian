@@ -5,14 +5,16 @@ import time
 import datetime
 import pickle
 
-from librian.librian_util import 讀txt, 文件, 加載器, 路徑
+import yaml
+from rimo_utils import good_open
+from rimo_utils.cef_tools.vue_ob import vue_ob
+
+from librian.librian_util import 文件, 加載器, 路徑
 
 from .librian虛擬機 import 讀者
 from .librian虛擬機 import 虛擬機環境
 
-from .帶有vue的山彥 import 帶有vue的山彥
 from .環境 import 配置
-
 
 
 def 綁定(app, 標題url):
@@ -20,9 +22,10 @@ def 綁定(app, 標題url):
     app.frame.set_browser_object("山彥", 極山彥(app.frame, app.frame.browser, 讀者實例, 標題url))
 
 
-class 山彥(帶有vue的山彥):
+class 山彥(vue_ob):
     def __init__(self, 窗口, 瀏覽器, 讀者, 標題url):
-        super().__init__(窗口)
+        super().__init__()
+        self.窗口 = 窗口
         self.瀏覽器 = 瀏覽器
         self.讀者 = 讀者
         self.標題url = 標題url
@@ -78,8 +81,8 @@ class 山彥(帶有vue的山彥):
     def vue更新(self, 內容):
         t = self.vue.用戶設置 if '用戶設置' in self.vue._內容 else None
         if t != 內容['用戶設置']:
-            with open(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json', 'w', encoding='utf8') as f:
-                f.write(json.dumps(內容['用戶設置'], ensure_ascii=False))
+            with open(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.yaml', 'w', encoding='utf8') as f:
+                f.write(yaml.dump(內容['用戶設置']))
         super().vue更新(內容)
 
 
@@ -104,17 +107,17 @@ class 演出山彥(山彥):
         callback.Call(狀態)
 
     def 初始化(self, callback):
-        self.vue.圖片文件夾 = 路徑.相對adv網頁處(虛擬機環境.工程路徑 / 虛擬機環境.圖片文件夾)
-        self.vue.音樂文件夾 = 路徑.相對adv網頁處(虛擬機環境.工程路徑 / 虛擬機環境.音樂文件夾)
-        self.vue.視頻文件夾 = 路徑.相對adv網頁處(虛擬機環境.工程路徑 / 虛擬機環境.視頻文件夾)
-        self.vue.psd立繪路徑 = 路徑.相對adv網頁處(虛擬機環境.psd立繪路徑)
-        self.vue.自定css = [路徑.相對adv網頁處(虛擬機環境.工程路徑 / i) for i in 虛擬機環境.自定css]
+        self.vue.圖片文件夾 = 虛擬機環境.工程路徑 / 虛擬機環境.圖片文件夾
+        self.vue.音樂文件夾 = 虛擬機環境.工程路徑 / 虛擬機環境.音樂文件夾
+        self.vue.視頻文件夾 = 虛擬機環境.工程路徑 / 虛擬機環境.視頻文件夾
+        self.vue.psd立繪路徑 = 虛擬機環境.psd立繪路徑
+        self.vue.自定css = [虛擬機環境.工程路徑 / i for i in 虛擬機環境.自定css]
         self.vue.主題css = os.path.join('主題', 虛擬機環境.主題css + '.css').replace('\\', '/')
         self.vue.解析度 = 虛擬機環境.主解析度
         self.vue.邊界 = 配置['顯示繪圖邊界']
         self.vue.翻譯 = 虛擬機環境.翻譯
 
-        用戶設置 = 加載器.json(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.json')
+        用戶設置 = 加載器.yaml(f'{虛擬機環境.工程路徑}/存檔資料/用戶設置.yaml')
         if 用戶設置:
             self.vue.用戶設置 = 用戶設置
         callback.Call()
@@ -130,7 +133,6 @@ class 演出山彥(山彥):
 
 class 帶標題山彥(演出山彥):
     def 開始(self):
-        print(虛擬機環境.工程路徑)
         self.步進()
         self.js(f'window.location.href={文件.轉爲網址路徑(路徑.librian本體 / "前端/adv.html").__repr__()};')
 
@@ -152,7 +154,7 @@ class 極山彥(帶標題山彥):
             def 監視():
                 原字 = ''
                 while True:
-                    with 讀txt.讀(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}') as f:
+                    with good_open(f'{虛擬機環境.工程路徑}/{虛擬機環境.劇本入口}') as f:
                         字 = f.read()
                         if 字 != 原字:
                             self.更新終態()

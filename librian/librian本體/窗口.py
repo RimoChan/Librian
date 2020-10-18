@@ -2,10 +2,10 @@ import logging
 
 from librian.librian_util import 文件
 try:
-    from librian.librian_util import wxcef
+    from rimo_utils.cef_tools import wxcef
 except ModuleNotFoundError:
     logging.warning('沒能import wx，改爲使用pyside2。')
-    from librian.librian_util import qtcef as wxcef
+    from rimo_utils.cef_tools import qtcef as wxcef
 
 from librian.librian_util import 路徑
 
@@ -17,7 +17,6 @@ from .librian虛擬機 import 虛擬機環境
 
 
 def 啓動app():
-
     if 配置['編寫模式']:
         url = 路徑.librian本體 / '前端/adv.html'
     elif 虛擬機環境.標題畫面:

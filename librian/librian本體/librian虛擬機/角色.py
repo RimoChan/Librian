@@ -2,8 +2,7 @@ import os
 import logging
 
 import yaml
-
-from librian.librian_util import 讀txt
+from rimo_utils import good_open
 
 from . import 虛擬機環境
 
@@ -11,7 +10,15 @@ from . import 虛擬機環境
 角色表 = {}
 
 
+def 初始化():    
+    if '了' in dir(初始化):
+        return
+    初始化.了 = True
+    導入有立繪的角色()
+
+
 def 取角色(名字):
+    初始化()
     if 名字 in 角色表:
         return 角色表[名字]
     else:
@@ -20,7 +27,7 @@ def 取角色(名字):
 
 def 導入有立繪的角色():
     try:
-        with 讀txt.讀(虛擬機環境.psd立繪路徑 / '映射.yaml') as f:
+        with good_open(虛擬機環境.psd立繪路徑 / '映射.yaml') as f:
             映射表 = yaml.load(f, Loader=yaml.BaseLoader)
             if 映射表:
                 for 角色名 in 映射表:
@@ -71,6 +78,3 @@ class 角色:
 
     def __repr__(self):
         return f'角色{"|"+self.顯示名字 if self.顯示名字 else ""}({self.名字}->[衣:{self.衣圖層}],[顏:{self.顏圖層}])'
-
-
-導入有立繪的角色()

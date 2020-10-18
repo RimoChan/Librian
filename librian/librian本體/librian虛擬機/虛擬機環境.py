@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 import yaml
-yaml.warnings({'YAMLLoadWarning': False})
+
 
 class 假面:
     配置 = {}
@@ -11,7 +11,7 @@ class 假面:
     def 加載配置(self, 工程路徑):
         工程路徑 = Path(工程路徑)
         with open(工程路徑 / '工程配置.yaml', encoding='utf8') as f:
-            a = yaml.load(f)
+            a = yaml.safe_load(f)
             for i in a:
                 self.配置.update(a[i])
         self.配置['工程路徑'] = 工程路徑

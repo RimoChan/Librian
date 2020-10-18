@@ -1,10 +1,5 @@
 import os
 import logging
-
-
-def json(文件名, 默認=[]):
-    import json
-    return 加載(文件名, json.load, 默認)
     
 
 def yaml(文件名, 默認=[]):

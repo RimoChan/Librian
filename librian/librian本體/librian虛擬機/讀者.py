@@ -5,8 +5,7 @@ import cloudpickle as pickle
 import yaml
 import sass
 import liber
-
-from librian.librian_util import 讀txt
+from rimo_utils import good_open
 
 from . import 鏡頭
 from . import 角色
@@ -115,7 +114,7 @@ class 讀者:
             return self.下一句()
 
     def 編譯(self, s):
-        with 讀txt.讀(s) as f:
+        with good_open(s) as f:
             return 劇本(liber.load(f), s)
 
     def 步進(self, 防止終焉=False):

@@ -1,12 +1,12 @@
 liber==1.0.1
+rimo_utils==1.4.1
 cefpython3==66.0
-chardet==3.0.4
 wxPython==4.0.4
 cloudpickle==0.8.1
-Pillow==5.2.0
 opencc==1.1.1
 PyYAML==5.1
 fire==0.2.1
 dulwich==0.19.14
 requests==2.24.0
 libsass==0.20.0
+git+https://github.com/RimoChan/rimo_utils.git

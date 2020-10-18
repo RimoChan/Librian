@@ -48,15 +48,12 @@ Librian是面向劇本的引擎，賣點是:
 
 ## 快速上手
 
-方便起見的話，Windows用戶可以直接下載打包的[release版本](https://github.com/RimoChan/Librian/releases)使用。
++ 直接下載打包的[release版本](https://github.com/RimoChan/Librian/releases) <sub>(推薦)</sub>。
+    - release版本也附帶了[librian面板](https://github.com/RimoChan/Librian)。
 
-如果你持「不讀說明書主義」，可以: 
-
-1.  安裝python3.6或者3.7 (但是3.8不行)
-2.  pip install -r requirements.txt
-3.  python3 -m librian.librian面板.librian_panel
-
-此外，你也可以根據[中文文檔](https://doc.librian.net/site/主頁.html)的指示來安裝。
++ 或者使用 `pip install librian` 來安裝librian。
+    - 這需要本地Python爲3.6或3.7版本
+    - 它不太穩定，所以最好先更新一下pip和setuptools，要是裝不上我也沒辦法……
 
 ## Liber分析器
 
