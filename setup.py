@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name='librian',
-    version='0.0.1',
+    version='0.0.2',
     author='RimoChan',
     author_email='the@librian.net',
     description='librian',
