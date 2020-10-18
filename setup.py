@@ -7,7 +7,7 @@ setuptools.setup(
     author='RimoChan',
     author_email='the@librian.net',
     description='librian',
-    long_description='喵喵喵！',
+    long_description=open('readme.md', encoding='utf8').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/RimoChan/librian',
     packages=[
@@ -18,7 +18,7 @@ setuptools.setup(
     ],
     package_data={
         'librian.librian本體': [
-            '前端/*', '前端/dist/*', '前端/默認標題畫面/*', '前端/素材/*', '前端/主題/*', 
+            '前端/*', '前端/dist/*', '前端/默認標題畫面/*',
             '資源', '資源/導出pdf用',
             '配置.yaml',
         ],
@@ -36,9 +36,9 @@ setuptools.setup(
         'opencc>=1.1.1',
         'PyYAML>=5.2',
         'fire>=0.2.1',
-        'dulwich>=0.19.14',
         'requests>=2.24.0',
         'libsass>=0.20.0',
+        'AppKit>=0.2.8 ; sys_platform == "darwin"',
     ],
     python_requires='>=3.6, <=3.7',
 )

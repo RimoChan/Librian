@@ -1,7 +1,8 @@
 @font-face {
     font-family: 思源宋體SemiBold;
-    src: url('../素材/NotoSerifSC-SemiBold.otf');
+    src: url('../dist/NotoSerifSC-SemiBold.otf');
 }
+
 @keyframes a {
     0% {
         opacity: 0;
@@ -10,20 +11,55 @@
         opacity: 1;
     }
 }
+
 :root {
     --x: 0px;
     --y: 0px;
 }
+
 body {
     font-family: 思源宋體SemiBold !important;
     font-size: 1.6vw;
     text-shadow: 0px 0px 5px #FFF;
     overflow: hidden;
-    animation: a 2s;
+    animation-name: a;
+    animation-duration: 1s;
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
+    background-color: #dec6a1;
+    background-image: url('../dist/紙背景花紋.jpg');
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-a.synth {
+a {
     padding: 1vw 1.5vw;
+    display: inline-block;
+    outline: none;
+    border: none;
+    -webkit-user-select: none;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    background-image: url('../dist/紙背景花紋模糊.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    box-shadow: 0px 0px 0.8vw rgba(0, 0, 0, 0.6), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
+    filter: brightness(1.05) hue-rotate(-6deg);
+    transition: box-shadow 0.2s, filter 0.1s;
+    font-size: inherit;
+    margin: 0.5vw;
+    border-radius: 0.5vw;
+}
+
+a:hover {
+    box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0.7), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
+    filter: brightness(1.1) hue-rotate(-12deg);
+}
+
+a:active {
+    box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0), 0px 0px 0.4vw rgba(0, 0, 0, 0.6) inset;
+    filter: blur(0.1vw);
 }
 
 #bb {
@@ -42,7 +78,7 @@ a.synth {
     -webkit-mask-image: url('虛僞的假面.png');
     -webkit-mask-size: cover;
     filter: hue-rotate(var(--s));
-    background: url('../../../../黑科技/synthetic_css/紙背景花紋模糊.jpg');
+    background: url('../dist/紙背景花紋模糊.jpg');
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -53,7 +89,6 @@ a.synth {
     line-height: 150%;
     margin-left: 50%;
     margin-top: 10%;
-    
 }
 
 .主>div {

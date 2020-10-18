@@ -16,21 +16,27 @@ module.exports = {
             }, {
                 test: /\.sass$/,
                 use: [
-                    {loader: 'style-loader', options: {injectType: 'linkTag'}}, 
-                    {loader: 'file-loader', options: {
-                            name: function(file){return '[name].css'},
-                        }
-                    }, 
-                    {loader: 'resolve-url-loader', options: {}},
-                    {loader: 'sass-loader', options: {sourceMap: true}}
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' },
+                    { loader: 'resolve-url-loader' },
+                    { loader: 'sass-loader', options: { sourceMap: true } }
                 ]
-            }, 
+            }, {
+                test: /\.(otf|png|jpg|webp|svg)$/,
+                use: [
+                    {
+                        loader: 'file-loader', options: {
+                            name: () => '[name].[ext]',
+                        }
+                    },
+                ]
+            },
         ],
     },
     plugins: [
         new WebpackBar()
     ],
     node: { fs: 'empty' },
-    // mode: 'development',
-    mode: 'production',
+    mode: 'development',
+    // mode: 'production',
 };

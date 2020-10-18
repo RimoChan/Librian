@@ -5,8 +5,8 @@ import 演出 from './演出.coffee'
 import 控制 from './控制.coffee'
 import 存檔讀檔 from './存檔讀檔.coffee'
 
-import './_統合.sass'
-
+cccc = require('./_統合.sass')
+console.log cccc
 
 window._py演出 = 演出
 
