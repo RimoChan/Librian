@@ -1,7 +1,7 @@
 import os
 import re
-import argparse
 import logging
+import argparse
 
 import opencc
 
