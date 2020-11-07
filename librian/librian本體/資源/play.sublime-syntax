@@ -4,104 +4,172 @@
 file_extensions:
   - play
   - liber
-scope: source.example-c
+scope: source.liber
 
 contexts:
-  # The prototype context is prepended to all contexts but those setting
-  # meta_include_prototype: false.
-  prototype:
-    - include: 嵌入py
-    - include: 嵌入js
+  main:
     - include: 註釋
+    - include: 對話
+    - include: 嵌入py
+    - include: 嵌入html
+    - include: 嵌入js
     - include: 躍點
-    - include: 關鍵字
     - include: 功能
     - include: 鏡頭
     - include: 鏡頭
-
-  main:
-    # The main context is the initial starting point of our syntax.
-    # Include other contexts from here (or specify them directly).
-    - include: 對話
+    - include: 跳轉
+    - include: 圖片
+    - include: 持續
     - include: 旁白
-
-
-  關鍵字:
-    - match: '\b(if|else|for|while)\b'
-      scope: keyword.control.example-c
-
 
   註釋:
     - match: '^[#*]'
-      scope: punctuation.definition.comment.example-c
+      scope: punctuation.definition.comment.liber
       push:
-        - meta_scope: comment.line.double-slash.example-c
-        - match: $\n?
+        - meta_scope: comment.line.double-slash.liber
+        - match: $
           pop: true
 
   躍點:
     - match: '\*'
-      scope: punctuation.definition.comment.example-c
+      scope: punctuation.definition.comment.liber
       push:
-        - meta_scope: comment.line.double-slash.example-c
+        - meta_scope: comment.line.double-slash.liber
         - match: $\n?
           pop: true
 
   功能:
     - match: '^>'
-      scope: punctuation
+      scope: support.function.builtin.liber
       push:
         - match: '\w+\b'
-          scope: variable.function
+          scope: variable.function.liber
           push:
             - meta_include_prototype: true
-            - meta_scope: variable.parameter
+            - meta_scope: variable.parameter.liber
             - match: '$'
               pop: true
         - match: '$'
           pop: true
 
   對話:
-    - match: (^\S+(?=(\|\S)? (\(\S*\))?(「.*」)?))
-      scope: entity.name.tag
+    - match: (^[^:]\S*?)(?=(?=[ :：\|｜🐴\(\[「])(?:\s*[\|｜🐴]\s*(\S*?))?\s*(?:(\[\S*?\])?|(\(\S*?\))?)*(\s*(?:[:：].*)|\s*(?:[「"].*)?$))
+      scope: entity.name.tag.liber
       push:
+        - include: 文本
+        - match: '(\[\S*\]|\(\S*\)){3,}'
+          push:
+            - meta_scope: invalid.illegal.unexpected-attribute.liber
+            - match: ''
+              pop: true
+        - match: '\[\S*\]\(\S*\)'
+          push:
+            - meta_scope: invalid.illegal.attribute-order.liber
+            - match: ''
+              pop: true
         - match: '\('
-          scope: punctuation
+          scope: punctuation.definition.delimeter.parenthesis.liber
           push:
-            - meta_scope: entity.other.attribute-name
+            - meta_scope: entity.other.attribute-name.liber
             - match: '\)'
-              scope: punctuation
               pop: true
-
-        - match: '「'
-          scope: punctuation
+        - match: '\['
+          scope: punctuation.definition.delimeter.brackets.liber
           push:
-            - meta_scope: string
-            - match: '」'
-              scope: punctuation
+            - meta_scope: entity.other.attribute-name.liber
+            - match: '\]'
               pop: true
-
-        - match: '(?<=(」))'
+        - match: '\s+[\|｜🐴]\s+|\s+[\|｜🐴]|[\|｜🐴]\s+'
+          scope: invalid.illegal.extra-spaces.liber
+        - match: '[\|｜🐴]'
+          scope: keyword.operator.binary.liber
+        - match: '(?<=.)[:：]'
+          scope: keyword.operator.binary.liber
+        - match: '[\)\]]'
+          scope: invalid.illegal.stray-bracket-end.liber
+        - match: '(?<=(」|"))'
+          pop: true
+        - match: '$'
           pop: true
 
   鏡頭:
     - match: '^[+-]'
-      scope: punctuation
+      scope: support.function.builtin.liber
       push:
-        - meta_scope: variable.parameter
+        - meta_scope: variable.parameter.liber
         - match: $\n?
           pop: true
 
   旁白:
-    - match: ^.+$
-      scope: text.plain
+    - match: ^.+
+      push:
+        - meta_scope: text.plain.liber
+        - match: $
+          pop: true
 
-  嵌入py:
-    - match: '^(```(py|python)?)$'
-      scope: support.function
+  文本:
+    - match: '「[\s\S]*?'
+      scope: punctuation.definition.string.liber
+      push:
+        - meta_scope: string.quoted.ideographic.liber
+        - match: '」'
+          scope: punctuation.definition.string.liber
+          pop: true
+    - match: '"[\s\S]*?'
+      scope: punctuation.definition.string.liber
+      push:
+        - meta_scope: string.quoted.double.liber
+        - match: '"'
+          scope: punctuation.definition.string.liber
+          pop: true  
+    - match: '(?<=[:：]).+'
+      push:
+        - meta_scope: string.quoted.liber
+        - match: '$'
+          pop: true
+
+  跳轉:
+    - match: ^(\?)(.+?)(->)(.+)$
+      captures:
+        1: support.function.builtin.liber
+        2: variable.parameter.liber
+        3: keyword.operator.binary.liber
+        4: variable.function.liber
+
+  圖片:
+    - match: ^(={3,})(.+)$$
+      captures:
+        1: support.function.builtin.liber
+        2: variable.parameter.liber
+
+  持續:
+    - match: ^(@)\s*(\S+?)([\|+-])?([^\|+-]+?)$
+      captures:
+        1: support.function.builtin.liber
+        2: variable.parameter.liber
+        3: keyword.operator.binary.liber
+        4: variable.function.liber
+
+  嵌入html:
+    - match: '^(```(HTML|html)?)$'
+      scope: support.function.liber
       push:
         - match: '```'
-          scope: support.function
+          scope: support.function.liber
+          pop: true
+
+        - match: '\s*'
+          push:
+            - include: 'scope:text.html.basic'
+          with_prototype:
+             - match: '(?=(```))'
+               pop: true
+  嵌入py:
+    - match: '^(```(py|python)?)$'
+      scope: support.function.liber
+      push:
+        - match: '```'
+          scope: support.function.liber
           pop: true
 
         - match: '\s*'
@@ -112,10 +180,10 @@ contexts:
                pop: true
   嵌入js:
     - match: '^(```(js|javascript)?)$'
-      scope: support.function
+      scope: support.function.liber
       push:
         - match: '```'
-          scope: support.function
+          scope: support.function.liber
           pop: true
 
         - match: '\s*'
@@ -124,6 +192,4 @@ contexts:
           with_prototype:
              - match: '(?=(```))'
                pop: true
-
-
 
