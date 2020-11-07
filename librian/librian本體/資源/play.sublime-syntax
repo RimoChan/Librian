@@ -53,11 +53,16 @@ contexts:
           pop: true
 
   對話:
-    - match: (^[^:]\S*?)(?=(?=[ :：\|｜🐴\(\[「])(?:\s*[\|｜🐴]\s*(\S*?))?\s*(\[\S*?\])?\s*(\(\S*\))?(\s*(?:[:：].*)|\s*(?:[「"].*)?$))
+    - match: (^[^:]\S*?)(?=(?=[ :：\|｜🐴\(\[「])(?:\s*[\|｜🐴]\s*(\S*?))?\s*(?:(\[\S*?\])?|(\(\S*?\))?)*(\s*(?:[:：].*)|\s*(?:[「"].*)?$))
       scope: entity.name.tag.liber
       push:
         - include: 文本
-        - match: '\(\S*\)\[\S*\]'
+        - match: '(\[\S*\]|\(\S*\)){3,}'
+          push:
+            - meta_scope: invalid.illegal.unexpected-attribute.liber
+            - match: ''
+              pop: true
+        - match: '\[\S*\]\(\S*\)'
           push:
             - meta_scope: invalid.illegal.attribute-order.liber
             - match: ''
