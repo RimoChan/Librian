@@ -23,7 +23,7 @@ contexts:
     - include: 旁白
 
   註釋:
-    - match: '^[#*]'
+    - match: '^#'
       scope: punctuation.definition.comment.liber
       push:
         - meta_scope: comment.line.double-slash.liber
@@ -32,16 +32,23 @@ contexts:
 
   躍點:
     - match: '\*'
-      scope: punctuation.definition.comment.liber
       push:
-        - meta_scope: comment.line.double-slash.liber
-        - match: $\n?
+        - meta_scope: keyword.control.label.liber
+        - match: $
           pop: true
 
   功能:
     - match: '^>'
       scope: support.function.builtin.liber
       push:
+        - match: '$'
+          pop: true
+        - match: '(?=\S+\(.*\))'
+          push:
+            - include: 'scope:source.python'
+          with_prototype:
+            - match: $
+              pop: true
         - match: '\w+\b'
           scope: variable.function.liber
           push:
@@ -53,30 +60,39 @@ contexts:
           pop: true
 
   對話:
-    - match: (^[^:]\S*?)(?=(?=[ :：\|｜🐴\(\[「])(?:\s*[\|｜🐴]\s*(\S*?))?\s*(?:(\[\S*?\])?|(\(\S*?\))?)*(\s*(?:[:：].*)|\s*(?:[「"].*)?$))
+    - match: '(^[^\)]+?)(?=(?=[ :：\|｜🐴\(\[「"])(?:\s*[\|｜🐴]\s*([^\s\)]*?))?\s*\[[^\]\s]*?\]\s*?(?![\(「":：])$)'
+      scope: entity.name.tag.liber
+      push:
+        - match: '[\|｜🐴]'
+          scope: keyword.operator.binary.liber
+        - match: '\[\S*\]'
+          scope: invalid.illegal.missing-attribute.liber
+        - match: $
+          pop: true
+    - match: (^[^>+-?"「 ]\S*?)(?=(?=[ :：\|｜🐴\(\[「"])(?:[\|｜🐴]\s*(\S*?))?(?:\s*(\(.+?)?|\s*(\[.+?)?)*(\s*(?:[:：].*)|\s*(?:[「"].*)?$))
       scope: entity.name.tag.liber
       push:
         - include: 文本
-        - match: '(\[\S*\]|\(\S*\)){3,}'
-          push:
-            - meta_scope: invalid.illegal.unexpected-attribute.liber
-            - match: ''
-              pop: true
-        - match: '\[\S*\]\(\S*\)'
-          push:
-            - meta_scope: invalid.illegal.attribute-order.liber
-            - match: ''
-              pop: true
+        - match: '(?:\[\S*\]|\(\S*\))\s*(?:\[\S*\]|\(\S*\))\s*(?:\[\S*\]|\(\S*\))+'
+          scope: invalid.illegal.unexpected-attribute.liber
+        - match: '(\[\S*\]\s*\(\S*\))'
+          scope: invalid.illegal.attribute-order.liber
+        - match: '[\)\]]'
+          scope: invalid.illegal.stray-bracket-end.liber
         - match: '\('
           scope: punctuation.definition.delimeter.parenthesis.liber
           push:
             - meta_scope: entity.other.attribute-name.liber
+            - match: '\s'
+              pop: true
             - match: '\)'
               pop: true
         - match: '\['
           scope: punctuation.definition.delimeter.brackets.liber
           push:
             - meta_scope: entity.other.attribute-name.liber
+            - match: \s
+              pop: true
             - match: '\]'
               pop: true
         - match: '\s+[\|｜🐴]\s+|\s+[\|｜🐴]|[\|｜🐴]\s+'
@@ -85,8 +101,6 @@ contexts:
           scope: keyword.operator.binary.liber
         - match: '(?<=.)[:：]'
           scope: keyword.operator.binary.liber
-        - match: '[\)\]]'
-          scope: invalid.illegal.stray-bracket-end.liber
         - match: '(?<=(」|"))'
           pop: true
         - match: '$'
@@ -96,16 +110,18 @@ contexts:
     - match: '^[+-]'
       scope: support.function.builtin.liber
       push:
-        - meta_scope: variable.parameter.liber
-        - match: $\n?
+        - match: '$'
           pop: true
+        - match: ''
+          push:
+            - include: 'scope:source.yaml'
+          with_prototype:
+            - match: $
+              pop: true
 
   旁白:
     - match: ^.+
-      push:
-        - meta_scope: text.plain.liber
-        - match: $
-          pop: true
+      scope: text.plain.liber
 
   文本:
     - match: '「[\s\S]*?'
@@ -129,12 +145,15 @@ contexts:
           pop: true
 
   跳轉:
-    - match: ^(\?)(.+?)(->)(.+)$
+    - match: ^(\?)\s*(.+?)\s*(->)\s*(\S+?)\s*(,?)\s*(\S+)$
       captures:
         1: support.function.builtin.liber
         2: variable.parameter.liber
         3: keyword.operator.binary.liber
         4: variable.function.liber
+        5: punctuation.separator.liber
+        6: variable.function.liber
+
 
   圖片:
     - match: ^(={3,})(.+)$$
@@ -143,7 +162,7 @@ contexts:
         2: variable.parameter.liber
 
   持續:
-    - match: ^(@)\s*(\S+?)([\|+-])?([^\|+-]+?)$
+    - match: ^(@)\s*(\S+?)\s*([\|+-])?\s*([^\|+-]+?)$
       captures:
         1: support.function.builtin.liber
         2: variable.parameter.liber
