@@ -93,12 +93,13 @@ button, a
         filter: brightness(1.05) hue-rotate(-6deg)
         
         transition: box-shadow 0.2s, filter 0.1s
-        &:hover:not(:disabled)
-            box-shadow: 0px 0px $shadow_range/2 rgba(0, 0, 0, 0.7), 0px 0px $shadow_range/2 rgba(0, 0, 0, 0) inset
-            filter: brightness(1.1) hue-rotate(-12deg)
-        &:active
-            box-shadow: 0px 0px $shadow_range/2 rgba(0, 0, 0, 0), 0px 0px $shadow_range/2 rgba(0, 0, 0, 0.6) inset
-            filter: blur(0.1vw)
+        &:enabled
+            &:hover
+                box-shadow: 0px 0px $shadow_range/2 rgba(0, 0, 0, 0.7), 0px 0px $shadow_range/2 rgba(0, 0, 0, 0) inset
+                    filter: brightness(1.1) hue-rotate(-12deg)
+            &:active
+                box-shadow: 0px 0px $shadow_range/2 rgba(0, 0, 0, 0), 0px 0px $shadow_range/2 rgba(0, 0, 0, 0.6) inset
+                filter: blur(0.1vw)
         &:disabled
             cursor: not-allowed
             color: rgba(0, 0, 0, 0.6)

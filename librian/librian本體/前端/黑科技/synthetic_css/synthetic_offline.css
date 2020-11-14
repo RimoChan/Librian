@@ -79,10 +79,10 @@ button.syn, button.synth, a.syn, a.synth {
   box-shadow: 0px 0px 0.8vw rgba(0, 0, 0, 0.6), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
   filter: brightness(1.05) hue-rotate(-6deg);
   transition: box-shadow 0.2s, filter 0.1s; }
-  button.syn:hover:not(:disabled), button.synth:hover:not(:disabled), a.syn:hover:not(:disabled), a.synth:hover:not(:disabled) {
+  button.syn:enabled:hover, button.synth:enabled:hover, a.syn:enabled:hover, a.synth:enabled:hover {
     box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0.7), 0px 0px 0.4vw rgba(0, 0, 0, 0) inset;
-    filter: brightness(1.1) hue-rotate(-12deg); }
-  button.syn:active, button.synth:active, a.syn:active, a.synth:active {
+      box-shadow-filter: brightness(1.1) hue-rotate(-12deg); }
+  button.syn:enabled:active, button.synth:enabled:active, a.syn:enabled:active, a.synth:enabled:active {
     box-shadow: 0px 0px 0.4vw rgba(0, 0, 0, 0), 0px 0px 0.4vw rgba(0, 0, 0, 0.6) inset;
     filter: blur(0.1vw); }
   button.syn:disabled, button.synth:disabled, a.syn:disabled, a.synth:disabled {
@@ -233,4 +233,4 @@ progress.synth {
     text-shadow: 0px 0px 3px black;
     color: #ffd; }
 
-/*# sourceMappingURL=_synthetic_offline.css.map */
+/*# sourceMappingURL=synthetic.css.map */

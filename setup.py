@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name='librian',
-    version='0.0.3',
+    version='0.0.4',
     author='RimoChan',
     author_email='the@librian.net',
     description='librian',
@@ -18,7 +18,7 @@ setuptools.setup(
     ],
     package_data={
         'librian.librian本體': [
-            '前端/*', '前端/dist/*', '前端/默認標題畫面/*',
+            '前端/*', '前端/dist/*', '前端/默認標題畫面/*', '前端/黑科技/**/*', '前端/黑科技/**/**/*',
             '資源', '資源/導出pdf用',
             '配置.yaml',
         ],
