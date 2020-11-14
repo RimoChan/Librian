@@ -3,10 +3,11 @@
     background-image: url($x)
     background-size: cover
     background-attachment: fixed
-        
+
+
 body
     &.syn
-        +bg('紙背景花紋.jpg')
+        +bg('紙背景花紋.webp')
         font-family: 'Noto Serif SC'
         button, input, textarea
             font-family: 'Noto Serif SC'
@@ -39,7 +40,7 @@ header
     
 div
     &.syn
-        +bg('紙背景花紋模糊.jpg')
+        +bg('紙背景花紋模糊.webp')
         box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.6)
     &.synth
         @extend .syn
@@ -58,6 +59,22 @@ div
             background: rgba(255,255,200,0.65)
             backdrop-filter: blur(4px)
         
+table
+    &.syn
+        border-radius: 2px
+        border-collapse: collapse
+        border-style: hidden
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5)
+        th
+            background-color: rgba(0, 0, 0, 0.08)
+        td,th
+            padding: 0.2em 1em
+            text-align: center
+            vertical-align: center
+            border: 1px solid rgba(0, 0, 0, 0.5)
+    &.synth
+        @extend .syn
+        
 button, a
     &.syn
         $shadow_range: 0.8vw
@@ -70,18 +87,21 @@ button, a
         color: inherit
         cursor: pointer
 
-        +bg('./紙背景花紋模糊.jpg')
+        +bg('./紙背景花紋模糊.webp')
             
         box-shadow: 0px 0px $shadow_range rgba(0, 0, 0, 0.6), 0px 0px $shadow_range/2 rgba(0, 0, 0, 0) inset
         filter: brightness(1.05) hue-rotate(-6deg)
         
         transition: box-shadow 0.2s, filter 0.1s
-        &:hover
+        &:hover:not(:disabled)
             box-shadow: 0px 0px $shadow_range/2 rgba(0, 0, 0, 0.7), 0px 0px $shadow_range/2 rgba(0, 0, 0, 0) inset
             filter: brightness(1.1) hue-rotate(-12deg)
         &:active
             box-shadow: 0px 0px $shadow_range/2 rgba(0, 0, 0, 0), 0px 0px $shadow_range/2 rgba(0, 0, 0, 0.6) inset
             filter: blur(0.1vw)
+        &:disabled
+            cursor: not-allowed
+            color: rgba(0, 0, 0, 0.6)
 
     &.synth
         @extend .syn
@@ -186,7 +206,7 @@ input[type="checkbox"]
     &.synth
         @extend .syn
             
-input[type="text"], input[type="password"]
+input[type="text"], input[type="password"], input[type="number"]
     &.syn
         background: rgba(0,0,0,0)
         outline: none
@@ -232,7 +252,7 @@ progress
             backdrop-filter: saturate(0.8) contrast(1.8) brightness(1.3)
         
         &::-moz-progress-bar
-            +bg('紙背景花紋模糊.jpg')
+            +bg('紙背景花紋模糊.webp')
             border-radius: 3px
             filter: brightness(0.8) saturate(0.8) contrast(1.8) brightness(1.3)
             

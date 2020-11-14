@@ -11,7 +11,7 @@ small {
     size: A4;
     margin: 1.5cm;
     margin-bottom: 2cm;
-    background: url('./紙背景花紋印刷.jpg');
+    background: url('./紙背景花紋印刷.webp');
     background-size: 125%;
     background-position: 50% 50%;
     counter-increment: page;
@@ -84,7 +84,7 @@ p>* {
 }
 
 .代, .插入 {
-    background: url('./紙背景插入.jpg');
+    background: url('./紙背景插入.webp');
     background-size: cover;
     background-position: fixed;
     border: 1px solid rgba(0, 0, 0, 0.4);
