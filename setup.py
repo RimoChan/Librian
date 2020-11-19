@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type='text/markdown',
     url='https://github.com/RimoChan/librian',
     packages=[
-        'librian', 
+        'librian',
         'librian.librian_util',
         'librian.librian本體',
         'librian.librian本體.librian虛擬機',
@@ -21,7 +21,7 @@ setuptools.setup(
     package_data={
         'librian.librian本體': [
             '前端/*', '前端/dist/*', '前端/默認標題畫面/*', '前端/黑科技/**/*', '前端/黑科技/**/**/*',
-            '資源/*', 
+            '資源/*',
             '配置.yaml',
         ],
     },
