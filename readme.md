@@ -1,7 +1,7 @@
 # Librian: 簡明強大的 Galgame | Visual Novel 引擎
 
 [![](https://img.shields.io/github/stars/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/stargazers)
-[![](https://img.shields.io/badge/platform-windows%20%7C%20linux-%23989898)](https://en.wikipedia.org/wiki/Microsoft_Windows)
+[![](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macOS-%23989898)](https://en.wikipedia.org/wiki/Microsoft_Windows)
 [![](https://img.shields.io/github/release/RimoChan/librian.svg)](https://github.com/RimoChan/Librian/releases)
 [![](https://img.shields.io/codacy/grade/cc567bfd3e374eb494825aae3ce3e7cf)](https://www.codacy.com/manual/s60481235/Librian?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RimoChan/Librian&amp;utm_campaign=Badge_Grade)
 [![](https://img.shields.io/github/license/RimoChan/Librian.svg)](https://github.com/RimoChan/Librian/blob/master/LICENSE)
@@ -9,7 +9,7 @@
 
 ——來像 Markdown 一樣寫 Galgame 劇本吧！
 
-Librian 是容易上手的 Galgame 引擎，Librian 由 Python 和 JavaScript 編寫而成，基於 CEFPython 前端。  
+Librian 是容易上手的 Galgame 引擎，Librian 由 Python 和 JavaScript 編寫而成，基於 pywebview 前端。
 
 Librian 適用於快速高效的 ADV 實現，能將你的奇思妙想迅速轉換爲成果——你只需提供素材文件和简单的劇本就能做出 Galgame！
 

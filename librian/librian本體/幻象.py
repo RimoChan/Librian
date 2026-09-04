@@ -52,6 +52,7 @@ def 幻象化(目標路徑):
         'librian/librian本體/前端/素材',
         'librian/librian本體/前端/主題',
         'librian/librian本體/前端/adv.html',
+        'librian/librian本體/前端/pywebview橋.js',
         虛擬機環境.工程路徑.relative_to(路徑.librian外層),
     ]
     for i in 依賴:

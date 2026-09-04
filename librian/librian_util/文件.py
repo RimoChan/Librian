@@ -1,5 +1,6 @@
 import os
 import logging
+from pathlib import Path
 
 
 def 補充擴展名(文件名, 擴展名表, 路徑='./'):
@@ -14,5 +15,4 @@ def 補充擴展名(文件名, 擴展名表, 路徑='./'):
     return 文件名
 
 def 轉爲網址路徑(路徑):
-    絕對路徑 = os.path.abspath(路徑)
-    return f'file:///{絕對路徑}'
+    return Path(路徑).resolve().as_uri()

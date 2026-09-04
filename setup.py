@@ -31,15 +31,14 @@ setuptools.setup(
     install_requires=[
         'liber>=1.0.1',
         'rimo_utils>=1.9.0',
-        'cefpython3>=66.1',
-        'wxPython>=4.0.4',
+        'pywebview>=6.0 ; sys_platform != "linux"',
+        'pywebview[qt]>=6.0 ; sys_platform == "linux"',
         'cloudpickle>=1.2.2',
         'opencc>=1.1.1',
         'PyYAML>=6.0',
         'fire>=0.2.1',
         'requests>=2.24.0',
         'libsass>=0.20.0',
-        'AppKit>=0.2.8 ; sys_platform == "darwin"',
     ],
-    python_requires='>=3.6,<3.10',  # cefpython3只支持到3.9
+    python_requires='>=3.7',
 )

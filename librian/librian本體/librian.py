@@ -23,4 +23,4 @@ def ember(project, 編寫模式=False, 跳過標題畫面=False, 監聽模式=Fa
         from . import 監聽服務
         監聽服務.啓動服務(端口)
     app = 窗口.啓動app()
-    app.MainLoop()
+    app.運行()
