@@ -11,3 +11,4 @@ dist
 *.kuzu
 *.cmd
 *.egg-info
+*.log

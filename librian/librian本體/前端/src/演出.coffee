@@ -262,12 +262,19 @@ export default 演出 =
             縮進 = '　'.repeat(parseInt($("#話語").css("--幹你娘老子就是要每行都縮進")))
             話語 = 話語.replace(/(^|\n)/g, "$1#{縮進}")
         
+        $('#話語').css('font-size', '')
         if 瞬間化
             $('#話語').html(話語 + '<span></span>') 
         else
             淡入字 = 演出.文字淡入(話語)
             $('#話語').html(淡入字.內容)
             演出.淡入過期時間 = Date.now() + 淡入字.文字時間 * 1000
+
+        字號 = parseInt($('#話語').css('font-size'))
+        上限高度 = $('#對話框')[0].clientHeight - $('#話語框')[0].offsetTop
+        while $('#話語')[0].offsetHeight > 上限高度 and 字號 > 1
+            字號 -= 0.5
+            $('#話語').css('font-size', "#{字號}px")
     早泄: ->
         $('#話語 *').css('animation','None')
         $('#話語 *').css('opacity','1')
