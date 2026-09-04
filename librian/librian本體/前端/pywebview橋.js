@@ -1,9 +1,6 @@
 (function () {
     'use strict';
 
-    if (new URLSearchParams(window.location.search).get('_librian_webview') !== '1') {
-        return;
-    }
     if (window.山彥 && window.山彥.傳輸 === 'promise') {
         return;
     }
@@ -19,14 +16,7 @@
     });
     var 調用隊列 = Promise.resolve();
     function 導航(網址) {
-        var 目標 = new URL(網址, window.location.href);
-        目標.searchParams.set('_librian_webview', '1');
-        window.location.href = 目標.href;
-    }
-    function 退出() {
-        var 目標 = new URL(window.location.href);
-        目標.searchParams.set('_librian_exit', '1');
-        window.location.href = 目標.href;
+        window.location.href = 網址;
     }
     async function 忽略錯誤(結果) {
         try {
@@ -49,7 +39,7 @@
         return 返回值;
     }
 
-    window.山彥 = new Proxy({ 傳輸: 'promise', 退出: 退出 }, {
+    window.山彥 = new Proxy({ 傳輸: 'promise' }, {
         get: function (目標, 方法) {
             if (方法 in 目標) {
                 return 目標[方法];

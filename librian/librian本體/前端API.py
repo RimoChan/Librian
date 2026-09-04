@@ -25,6 +25,9 @@ class 山彥API:
     def 切換全屏(self):
         return self._山彥.切換全屏()
 
+    def 退出(self):
+        return self._山彥.退出()
+
     def 回標題(self):
         return self._山彥.回標題()
 

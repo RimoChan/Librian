@@ -1,7 +1,7 @@
 liber>=1.0.1
 rimo_utils>=1.4.1
-pywebview>=6.0 ; sys_platform != "linux"
-pywebview[qt]>=6.0 ; sys_platform == "linux"
+pywebview>=6.0
+pywebview[qt]>=6.0
 cloudpickle>=1.2.2
 opencc>=1.1.1
 PyYAML>=5.2

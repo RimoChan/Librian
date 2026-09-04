@@ -47,7 +47,7 @@ class WebViewTests(unittest.TestCase):
         self.assertFalse(hasattr(api, '讀者'))
 
     def test_windows_and_linux_share_the_public_pywebview_adapter(self):
-        for system in ('Windows', 'Linux'):
+        for system, expected_size in (('Windows', (816, 639)), ('Linux', (800, 600))):
             with self.subTest(system=system):
                 fake_webview, native_window = self._fake_webview()
                 with patch('platform.system', return_value=system), patch.dict(
@@ -58,11 +58,11 @@ class WebViewTests(unittest.TestCase):
                     window.運行()
 
                 create_kwargs = fake_webview.create_window.call_args.kwargs
-                self.assertEqual(create_kwargs['width'], 800)
-                self.assertEqual(create_kwargs['height'], 600)
+                self.assertEqual(create_kwargs['width'], expected_size[0])
+                self.assertEqual(create_kwargs['height'], expected_size[1])
                 self.assertEqual(
                     create_kwargs['url'],
-                    'file:///tmp/custom-title.html?_librian_webview=1',
+                    'file:///tmp/custom-title.html',
                 )
                 self.assertNotIn('gui', fake_webview.start.call_args.kwargs)
                 self._assert_bridge_was_injected(fake_webview, native_window)

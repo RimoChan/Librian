@@ -1,6 +1,5 @@
 import platform
 from pathlib import Path
-from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from .前端API import 山彥API
 
@@ -11,7 +10,7 @@ from .前端API import 山彥API
 class WebView窗口:
     def __init__(self, webview, url, icon, title, size, storage_path):
         self._webview = webview
-        self._url = _本地網址(url)
+        self._url = str(url)
         self._icon = str(icon) if icon else None
         self._title = title
         self._size = tuple(size)
@@ -28,10 +27,11 @@ class WebView窗口:
     def 切換全屏(self):
         return self._window.toggle_fullscreen()
 
-    def 運行(self):
-        if self._api is None:
-            raise RuntimeError('啓動窗口前必須綁定山彥')
+    def 關閉(self):
+        if self._window:
+            self._window.destroy()
 
+    def 運行(self):
         width, height = self._窗口尺寸()
         self._window = self._webview.create_window(
             title=self._title,
@@ -48,35 +48,41 @@ class WebView窗口:
         )
 
     def _窗口尺寸(self):
-        if platform.system() != 'Darwin':
-            return self._size
+        if platform.system() == 'Darwin':
+            import AppKit
 
-        import AppKit
+            內容寬, 內容高 = self._size
+            樣式 = (
+                AppKit.NSWindowStyleMaskTitled
+                | AppKit.NSWindowStyleMaskClosable
+                | AppKit.NSWindowStyleMaskMiniaturizable
+                | AppKit.NSWindowStyleMaskResizable
+            )
+            內容矩形 = AppKit.NSMakeRect(0, 0, 內容寬, 內容高)
+            外框矩形 = AppKit.NSWindow.frameRectForContentRect_styleMask_(內容矩形, 樣式)
+            return round(外框矩形.size.width), round(外框矩形.size.height)
 
-        內容寬, 內容高 = self._size
-        樣式 = (
-            AppKit.NSWindowStyleMaskTitled
-            | AppKit.NSWindowStyleMaskClosable
-            | AppKit.NSWindowStyleMaskMiniaturizable
-            | AppKit.NSWindowStyleMaskResizable
-        )
-        內容矩形 = AppKit.NSMakeRect(0, 0, 內容寬, 內容高)
-        外框矩形 = AppKit.NSWindow.frameRectForContentRect_styleMask_(內容矩形, 樣式)
-        return round(外框矩形.size.width), round(外框矩形.size.height)
+        if platform.system() == 'Windows':
+            import ctypes
+            from ctypes import wintypes
+
+            class RECT(ctypes.Structure):
+                _fields_ = [
+                    ('left', wintypes.LONG),
+                    ('top', wintypes.LONG),
+                    ('right', wintypes.LONG),
+                    ('bottom', wintypes.LONG),
+                ]
+
+            內容寬, 內容高 = self._size
+            rect = RECT(0, 0, 內容寬, 內容高)
+            ctypes.windll.user32.AdjustWindowRectEx(ctypes.byref(rect), 0x00CF0000, False, 0)
+            return rect.right - rect.left, rect.bottom - rect.top
+
+        return self._size
 
     def _注入橋(self):
-        當前網址 = urlsplit(self._window.get_current_url())
-        if dict(parse_qsl(當前網址.query)).get('_librian_exit') == '1':
-            self._window.destroy()
-        else:
-            self._window.run_js(橋腳本.read_text(encoding='utf8'))
-
-
-def _本地網址(url):
-    區段 = urlsplit(str(url))
-    查詢 = parse_qsl(區段.query, keep_blank_values=True)
-    查詢.append(('_librian_webview', '1'))
-    return urlunsplit(區段._replace(query=urlencode(查詢)))
+        self._window.run_js(橋腳本.read_text(encoding='utf8'))
 
 
 def 創建窗口(url, icon, title, size, storage_path):

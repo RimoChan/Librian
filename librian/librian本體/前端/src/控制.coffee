@@ -1,5 +1,5 @@
-$ = require('jquery-browserify')
-require("imports-loader?define=>false!jquery-mousewheel")($)
+import $ from 'jquery'
+import 'jquery-mousewheel'
 
 import 演出 from './演出.coffee'
 import 存檔讀檔 from './存檔讀檔.coffee'

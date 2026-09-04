@@ -80,6 +80,9 @@ class 山彥:
 
     def 切換全屏(self):
         self.窗口.切換全屏()
+
+    def 退出(self):
+        self.窗口.關閉()
         
     def vue更新(self, 內容):
         t = self._vue狀態.get('用戶設置')
