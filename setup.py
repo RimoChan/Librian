@@ -4,7 +4,7 @@ from pathlib import Path
 
 setuptools.setup(
     name='librian',
-    version='2.2.0',
+    version='2.3.0',
     author='RimoChan',
     author_email='the@librian.net',
     description='librian',
@@ -29,5 +29,5 @@ setuptools.setup(
         'Operating System :: OS Independent',
     ],
     install_requires=open('requirements.txt', encoding='utf8').read().splitlines(),
-    python_requires='>=3.6',
+    python_requires='>=3.8',
 )
